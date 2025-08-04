@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soia - Like Protocol Buffer, but better</title>
+    <meta name="description" content="Soia is a language for representing data types, constants and RPC interfaces. Generate type-safe code in multiple programming languages.">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="./assets/logo.svg" alt="Soia Logo" class="logo" width="32" height="32">
+                <span class="brand-text">Soia</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="./docs/">Documentation</a>
+                <a href="./playground/">Playground</a>
+                <a href="https://github.com/gepheum/soia" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        Like Protocol Buffer,<br>
+                        <span class="gradient-text">but better.</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        Soia is a language for representing data types, constants and RPC interfaces. 
+                        Generate type-safe code in multiple programming languages with backward compatibility built-in.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="./docs/getting-started/" class="btn btn-primary">Get Started</a>
+                        <a href="./playground/" class="btn btn-secondary">Try Online</a>
+                    </div>
+                </div>
+                <div class="hero-code">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="code-title">shapes.soia</span>
+                        </div>
+                        <pre class="code-content"><code class="language-soia">// Define your data structures
+struct Point {
+  x: int32;
+  y: int32;
+  label: string;
+}
+
+struct Polyline {
+  points: [Point];
+  label: string;
+}
+
+const TOP_RIGHT_CORNER: Point = {
+  x = 600,
+  y = 400,
+  label = "top-right corner",
+};
+
+// RPC interface methods
+method IsPalindrome(string): bool;</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Why Choose Soia?</h2>
+                    <p>Built for modern development workflows with type safety and compatibility in mind.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Multi-Language Support</h3>
+                        <p>Generate code for JavaScript/TypeScript, Python, C++, and more. Perfect for polyglot systems.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <h3>Type Safety</h3>
+                        <p>Generated code makes no compromises with type safety. Catch errors at compile time, not runtime.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <h3>Future-Proof</h3>
+                        <p>Serialize now, deserialize in 100 years. Built-in backward and forward compatibility.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Zero Boilerplate</h3>
+                        <p>Add new methods to services without writing boilerplate code. Focus on your business logic.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📦</div>
+                        <h3>Multiple Formats</h3>
+                        <p>Serialize to JSON for debugging or binary format for performance. You choose what works best.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛠️</div>
+                        <h3>Rich Tooling</h3>
+                        <p>VS Code extension with syntax highlighting, go-to-definition, and more developer tools.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Code Examples Section -->
+        <section class="examples">
+            <div class="container">
+                <div class="section-header">
+                    <h2>See Soia in Action</h2>
+                    <p>Define once, use everywhere with type-safe generated code.</p>
+                </div>
+                <div class="example-tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-tab="python">Python</button>
+                        <button class="tab-btn" data-tab="typescript">TypeScript</button>
+                        <button class="tab-btn" data-tab="cpp">C++</button>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="python">
+                            <pre class="code-block"><code class="language-python">from soiagen import shapes
+
+# Create type-safe objects
+point = shapes.Point(x=3, y=4, label="P")
+
+# Serialize to JSON
+json_data = shapes.Point.SERIALIZER.to_json(point)
+
+# Deserialize back
+restored_point = shapes.Point.SERIALIZER.from_json(json_data)
+
+# Type safety guaranteed
+assert(restored_point == shapes.Point(x=3, y=4, label="P"))</code></pre>
+                        </div>
+                        <div class="tab-pane" id="typescript">
+                            <pre class="code-block"><code class="language-typescript">import { Point, Serializer } from './generated/shapes';
+
+// TypeScript types are generated automatically
+const point: Point = {
+  x: 3,
+  y: 4,
+  label: "P"
+};
+
+// Full type checking at compile time
+const json = Serializer.toJson(point);
+const restored = Serializer.fromJson(json);</code></pre>
+                        </div>
+                        <div class="tab-pane" id="cpp">
+                            <pre class="code-block"><code class="language-cpp">#include "shapes.h"
+
+// C++ with full type safety
+auto point = shapes::Point{
+  .x = 3,
+  .y = 4,
+  .label = "P"
+};
+
+// Efficient binary serialization
+auto binary = shapes::Point::serialize(point);
+auto restored = shapes::Point::deserialize(binary);</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Getting Started Section -->
+        <section class="getting-started">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Get Started in Minutes</h2>
+                    <p>Install the compiler and start building type-safe APIs.</p>
+                </div>
+                <div class="install-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Install the Compiler</h3>
+                            <pre class="install-code"><code>npm install -g soiac</code></pre>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Define Your Schema</h3>
+                            <pre class="install-code"><code>// api.soia
+struct User {
+  id: int64;
+  name: string;
+  email: string;
+}</code></pre>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Generate Code</h3>
+                            <pre class="install-code"><code>soiac --python --typescript api.soia</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tools Section -->
+        <section class="tools">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Rich Development Experience</h2>
+                    <p>Comprehensive tooling to boost your productivity.</p>
+                </div>
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <div class="tool-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M9 9h6m-6 4h4" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>VS Code Extension</h3>
+                        <p>Syntax highlighting, go-to-definition, hover information, and more.</p>
+                        <a href="./docs/vscode/" class="tool-link">Learn more →</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M7 15l3-3-3-3m5 6h4" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>Interactive Playground</h3>
+                        <p>Try Soia in your browser with live code generation and syntax checking.</p>
+                        <a href="./playground/" class="tool-link">Try now →</a>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor" stroke-width="2"/>
+                                <polyline points="14,2 14,8 20,8" stroke="currentColor" stroke-width="2"/>
+                                <line x1="16" y1="13" x2="8" y2="13" stroke="currentColor" stroke-width="2"/>
+                                <line x1="16" y1="17" x2="8" y2="17" stroke="currentColor" stroke-width="2"/>
+                                <polyline points="10,9 9,9 8,9" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>Comprehensive Docs</h3>
+                        <p>Complete language reference, tutorials, and best practices.</p>
+                        <a href="./docs/" class="tool-link">Read docs →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="nav-brand">
+                        <img src="./assets/logo.svg" alt="Soia Logo" class="logo" width="24" height="24">
+                        <span class="brand-text">Soia</span>
+                    </div>
+                    <p class="footer-description">
+                        Like Protocol Buffer, but better. Generate type-safe code in multiple languages.
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h4>Documentation</h4>
+                        <a href="./docs/getting-started/">Getting Started</a>
+                        <a href="./docs/language-reference/">Language Reference</a>
+                        <a href="./docs/examples/">Examples</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Tools</h4>
+                        <a href="./docs/vscode/">VS Code Extension</a>
+                        <a href="./playground/">Playground</a>
+                        <a href="./docs/cli/">CLI Reference</a>
+                    </div>
+                    <div class="link-group">
+                        <h4>Community</h4>
+                        <a href="https://github.com/gepheum/soia" target="_blank">GitHub</a>
+                        <a href="https://github.com/gepheum/soia/issues" target="_blank">Issues</a>
+                        <a href="https://github.com/gepheum/soia/discussions" target="_blank">Discussions</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Soia. Open source under the MIT License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./scripts/main.js"></script>
+</body>
+</html>
