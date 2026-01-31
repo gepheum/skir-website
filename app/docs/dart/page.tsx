@@ -11,7 +11,7 @@ export default function DartPage() {
     <Prose>
       <H1>Dart</H1>
       <P>
-        Official plugin for generating Dart code from .skir files. Targets Dart 3.0 and higher.
+        This guide covers how to use Dart code generated from Skir. Targets Dart 3.0 and higher.
       </P>
 
       <H2>Set up</H2>

@@ -11,7 +11,7 @@ export default function TypeScriptPage() {
     <Prose>
       <H1>TypeScript</H1>
       <P>
-        Official plugin for generating TypeScript/JavaScript code from .skir files.
+        This guide covers how to use TypeScript/JavaScript code generated from Skir.
         Generated code can run on Node, Deno or in the browser.
       </P>
 

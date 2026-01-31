@@ -11,7 +11,7 @@ export default function KotlinPage() {
     <Prose>
       <H1>Kotlin</H1>
       <P>
-        Official plugin for generating Kotlin code from .skir files.
+        This guide covers how to use Kotlin code generated from Skir.
       </P>
 
       <H2>Set up</H2>

@@ -11,7 +11,7 @@ export default function CppPage() {
     <Prose>
       <H1>C++</H1>
       <P>
-        Official plugin for generating C++ code from .skir files. Targets C++17 and higher.
+        This guide covers how to use C++ code generated from Skir. Targets C++17 and higher.
       </P>
 
       <H2>Set up</H2>

@@ -11,7 +11,7 @@ export default function JavaPage() {
     <Prose>
       <H1>Java</H1>
       <P>
-        Official plugin for generating Java code from .skir files.
+        This guide covers how to use Java code generated from Skir.
       </P>
 
       <H2>Set up</H2>
