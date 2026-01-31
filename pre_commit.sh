@@ -4,6 +4,10 @@ set -e
 
 echo "🔍 Running pre-commit checks..."
 
+# Format code
+echo "🎨 Formatting code..."
+npm run format
+
 # Check for TypeScript type errors
 echo "📝 Checking TypeScript types..."
 npx tsc --noEmit

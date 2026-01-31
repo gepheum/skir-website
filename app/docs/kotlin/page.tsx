@@ -10,7 +10,7 @@ export default function KotlinPage() {
   return (
     <Prose>
       <H1>Kotlin</H1>
-      <P>This guide covers how to use Kotlin code generated from Skir.</P>
+      <P>This guide explains how to use Skir in a Kotlin project.</P>
 
       <H2>Set up</H2>
       <P>

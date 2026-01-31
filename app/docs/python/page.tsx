@@ -11,8 +11,7 @@ export default function PythonPage() {
     <Prose>
       <H1>Python</H1>
       <P>
-        This guide covers how to use Python code generated from Skir. Targets Python 3.10 and
-        higher.
+        This guide explains how to use Skir in a Python project. Targets Python 3.10 and higher.
       </P>
 
       <H2>Set up</H2>

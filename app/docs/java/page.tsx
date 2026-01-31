@@ -10,7 +10,7 @@ export default function JavaPage() {
   return (
     <Prose>
       <H1>Java</H1>
-      <P>This guide covers how to use Java code generated from Skir.</P>
+      <P>This guide explains how to use Skir in a Java project.</P>
 
       <H2>Set up</H2>
       <P>

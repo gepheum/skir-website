@@ -11,8 +11,8 @@ export default function TypeScriptPage() {
     <Prose>
       <H1>TypeScript</H1>
       <P>
-        This guide covers how to use TypeScript/JavaScript code generated from Skir. Generated code
-        can run on Node, Deno or in the browser.
+        This guide explains how to use Skir in a TypeScript/JavaScript project. Generated code can
+        run on Node, Deno or in the browser.
       </P>
 
       <H2>Set up</H2>

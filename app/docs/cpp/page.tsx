@@ -10,7 +10,7 @@ export default function CppPage() {
   return (
     <Prose>
       <H1>C++</H1>
-      <P>This guide covers how to use C++ code generated from Skir. Targets C++17 and higher.</P>
+      <P>This guide explains how to use Skir in a C++ project. Targets C++17 and higher.</P>
 
       <H2>Set up</H2>
       <P>
