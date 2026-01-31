@@ -18,7 +18,7 @@ export default function SerializationPage() {
       <p>
         Structs are serialized as JSON arrays, where the field numbers in the index definition match the indexes in the array. Enum constants are serialized as numbers.
       </p>
-      <CodeBlock language="d">{`struct User {
+      <CodeBlock language="skir">{`struct User {
   user_id: int32;
   removed;
   name: string;

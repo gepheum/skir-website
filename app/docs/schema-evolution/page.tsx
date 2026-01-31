@@ -103,7 +103,7 @@ export default function SchemaEvolutionPage() {
       <p>
         To track compatibility across renames, Skir needs a stable identifier for your types. You can assign a random integer ID to any struct or enum:
       </p>
-      <CodeBlock language="d">{`// "User" is now tracked by ID 500996846
+      <CodeBlock language="skir">{`// "User" is now tracked by ID 500996846
 struct User(500996846) {
   name: string;
 }`}</CodeBlock>
@@ -133,14 +133,14 @@ struct User(500996846) {
 
       <h3>Example</h3>
       <p>Consider a schema evolution where a field and an enum variant are added:</p>
-      <CodeBlock language="d" filename="Version 1">{`struct UserBefore(999) {
+      <CodeBlock language="skir" filename="Version 1">{`struct UserBefore(999) {
   id: int64;
   subscription_status: enum {
     FREE;
     PREMIUM;
   };
 }`}</CodeBlock>
-      <CodeBlock language="d" filename="Version 2">{`struct UserAfter(999) {
+      <CodeBlock language="skir" filename="Version 2">{`struct UserAfter(999) {
   id: int64;
   subscription_status: enum {
     FREE;

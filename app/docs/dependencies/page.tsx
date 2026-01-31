@@ -41,7 +41,7 @@ export default function DependenciesPage() {
       <p>
         Once a dependency is configured, you can import types from it using the <code>import</code> statement in your <code>.skir</code> files. The import path is the full path to the file within the dependency, prefixed with the package identifier.
       </p>
-      <CodeBlock language="d">{`import Quest from "@gepheum/fantasy-game-skir-example/fantasy_game.skir";
+      <CodeBlock language="skir">{`import Quest from "@gepheum/fantasy-game-skir-example/fantasy_game.skir";
 
 struct QuestCollection {
   collection_name: string;

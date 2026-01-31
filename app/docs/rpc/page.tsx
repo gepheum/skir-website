@@ -52,7 +52,7 @@ export default function RpcPage() {
       <p>
         In Skir, a service is simply a collection of methods. You define methods in your <code>.skir</code> files using the <code>method</code> keyword.
       </p>
-      <CodeBlock language="d">{`// Defines a method named 'GetUser' which takes a GetUserRequest and returns a GetUserResponse
+      <CodeBlock language="skir">{`// Defines a method named 'GetUser' which takes a GetUserRequest and returns a GetUserResponse
 method GetUser(GetUserRequest): GetUserResponse = 12345;`}</CodeBlock>
       <p>
         A method definition specifies the <strong>request</strong> type, the <strong>response</strong> type, and a stable numeric identifier.

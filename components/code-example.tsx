@@ -1,7 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
+import SyntaxHighlighter from 'react-syntax-highlighter'
+import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import { skirLanguage } from '@/lib/skir-language'
 
 const tabs = [
   { id: "skir", label: ".skir" },
@@ -69,6 +72,13 @@ print(restored.label)  # "P"`,
 export function CodeExample() {
   const [activeTab, setActiveTab] = useState("skir")
 
+  // Register Skir language
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).hljs) {
+      (window as any).hljs.registerLanguage('skir', skirLanguage);
+    }
+  }, []);
+
   return (
     <div className="rounded-lg border border-border overflow-hidden bg-card">
       {/* Tabs */}
@@ -91,10 +101,24 @@ export function CodeExample() {
       </div>
 
       {/* Code content */}
-      <div className="p-4 overflow-x-auto">
-        <pre className="text-sm font-mono text-foreground">
-          <code>{codeExamples[activeTab as keyof typeof codeExamples]}</code>
-        </pre>
+      <div className="overflow-x-auto">
+        <SyntaxHighlighter
+          language={activeTab}
+          style={atomOneDark}
+          customStyle={{
+            margin: 0,
+            borderRadius: 0,
+            background: 'transparent',
+          }}
+          codeTagProps={{
+            style: {
+              fontSize: '0.875rem',
+              fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+            }
+          }}
+        >
+          {codeExamples[activeTab as keyof typeof codeExamples]}
+        </SyntaxHighlighter>
       </div>
     </div>
   )

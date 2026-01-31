@@ -20,13 +20,13 @@ export default function LanguageReferencePage() {
       <p>
         The fields of a struct have a name, but during serialization they are actually identified by a number, which can either be set explicitly:
       </p>
-      <CodeBlock language="d">{`struct Point {
+      <CodeBlock language="skir">{`struct Point {
   x: int32 = 0;
   y: int32 = 1;
   label: string = 2;
 }`}</CodeBlock>
       <p>or implicitly:</p>
-      <CodeBlock language="d">{`struct Point {
+      <CodeBlock language="skir">{`struct Point {
   x: int32;     // implicitly set to 0
   y: int32;     // implicitly set to 1
   label: string; // implicitly set to 2
@@ -34,7 +34,7 @@ export default function LanguageReferencePage() {
       <p>
         If you're not explicitly specifying the field numbers, you must be careful not to change the order of the fields or else you won't be able to deserialize old values.
       </p>
-      <CodeBlock language="d">{`// BAD: you can't reorder the fields and keep implicit numbering
+      <CodeBlock language="skir">{`// BAD: you can't reorder the fields and keep implicit numbering
 // struct Point {
 //   label: string;
 //   x: int32;
@@ -57,7 +57,7 @@ struct Point {
       <p>
         Enums in Skir are similar to enums in Rust. An enum value is one of several possible variants, and each variant can optionally have data associated with it.
       </p>
-      <CodeBlock language="d">{`// Indicates whether an operation succeeded or failed.
+      <CodeBlock language="skir">{`// Indicates whether an operation succeeded or failed.
 enum OperationStatus {
   SUCCESS;        // a constant variant
   error: string;  // a wrapper variant
@@ -69,7 +69,7 @@ enum OperationStatus {
         <li><code>UNKNOWN</code>: a special implicit variant common to all enums</li>
       </ul>
       <p>If you need a variant to hold multiple values, wrap them inside a struct:</p>
-      <CodeBlock language="d">{`struct MoveAction {
+      <CodeBlock language="skir">{`struct MoveAction {
   x: int32;
   y: int32;
 }
@@ -79,7 +79,7 @@ enum BoardGameTurn {
   move: MoveAction;
 }`}</CodeBlock>
       <p>Like the fields of a struct, the variants of an enum have a number, and the numbering can be explicit or implicit.</p>
-      <CodeBlock language="d">{`enum ExplicitNumbering {
+      <CodeBlock language="skir">{`enum ExplicitNumbering {
   // The numbers don't need to be consecutive.
   FOO = 10;
   bar: string = 2;
@@ -101,7 +101,7 @@ enum ImplicitNumbering {
       <p>
         You can define a record (struct or enum) within the definition of another record. This is simply for namespacing, and it can help make your <code>.skir</code> files more organized.
       </p>
-      <CodeBlock language="d">{`enum Status {
+      <CodeBlock language="skir">{`enum Status {
   OK;
 
   struct Error {
@@ -122,7 +122,7 @@ struct Foo {
       <p>
         When you use an inline record, the Skir compiler automatically infers the name of the record by converting the <code>snake_case</code> field name into <code>PascalCase</code>.
       </p>
-      <CodeBlock language="d">{`// Using inline records
+      <CodeBlock language="skir">{`// Using inline records
 
 struct Notification {
   metadata: struct {
@@ -143,7 +143,7 @@ struct Notification {
       <p>
         When removing a field from a struct or a variant from an enum, you must mark the removed number in the record definition using the <code>removed</code> keyword. The syntax is different whether you're using explicit or implicit numbering:
       </p>
-      <CodeBlock language="d">{`struct ExplicitNumbering {
+      <CodeBlock language="skir">{`struct ExplicitNumbering {
   a: string = 0;
   b: string = 1;
   f: string = 5;
@@ -164,7 +164,7 @@ struct ImplicitNumbering {
       <p>
         You can assign a numeric stable identifier to a struct or an enum by specifying it in parentheses after the record name:
       </p>
-      <CodeBlock language="d">{`struct Point(23456) { ... }`}</CodeBlock>
+      <CodeBlock language="skir">{`struct Point(23456) { ... }`}</CodeBlock>
       <p>
         This identifier is used by the <code>npx skir snapshot</code> command to track record identity across renames and detect breaking changes.
       </p>
@@ -179,7 +179,7 @@ struct ImplicitNumbering {
       <p>
         Records can be recursive, meaning a record can contain a field of its own type, either directly or indirectly. This feature is essential for defining recursive data structures such as trees.
       </p>
-      <CodeBlock language="d">{`struct DecisionNode {
+      <CodeBlock language="skir">{`struct DecisionNode {
   question: string;
   yes: DecisionTree;
   no: DecisionTree;
@@ -214,7 +214,7 @@ enum DecisionTree {
       <p>
         If the items are structs and one of the struct fields can be used to identify every item in the array, you can add the field name next to a pipe character: <code>[Item|key_field]</code>.
       </p>
-      <CodeBlock language="d">{`struct User {
+      <CodeBlock language="skir">{`struct User {
   id: int32;
   name: string;
 }
@@ -247,7 +247,7 @@ if user:
         <li>strings can be single-quoted or double-quoted</li>
         <li>strings can span multiple lines by escaping new line characters</li>
       </ul>
-      <CodeBlock language="d">{`const PI: float64 = 3.14159;
+      <CodeBlock language="skir">{`const PI: float64 = 3.14159;
 
 const LARGE_CIRCLE: Circle = {
   center: {
@@ -283,7 +283,7 @@ const NOT_IMPLEMENTED_ERROR: OperationStatus = {
 
       <h2>Methods (RPCs)</h2>
       <p>The <code>method</code> keyword allows you to define the signature of a remote method.</p>
-      <CodeBlock language="d">{`struct GetUserProfileRequest {
+      <CodeBlock language="skir">{`struct GetUserProfileRequest {
   user_id: int32;
 }
 
@@ -304,7 +304,7 @@ method GetUserProfile(GetUserProfileRequest): GetUserProfileResponse = 12345;`}<
       <p>
         Just as you can define structs and enums inline for fields, Skir supports inline record definitions for RPC methods. This allows you to define the request and response structures directly within the method signature.
       </p>
-      <CodeBlock language="d">{`// Using inline records
+      <CodeBlock language="skir">{`// Using inline records
 
 method GetUserProfile(struct {
   user_id: int32;
@@ -316,7 +316,7 @@ method GetUserProfile(struct {
       <p>
         The <code>import</code> statement allows you to import types from another module. You can either specify the names to import, or import the whole module with an alias using the <code>as</code> keyword.
       </p>
-      <CodeBlock language="d">{`import Point, Circle from "geometry/geometry.skir";
+      <CodeBlock language="skir">{`import Point, Circle from "geometry/geometry.skir";
 import * as color from "color.skir";
 
 struct Rectangle {
@@ -339,7 +339,7 @@ struct Disk {
       <p>
         Doc comments can contain references to other symbols within your schema by enclosing them in square brackets. If a symbol referenced in square brackets is missing or misspelled, the Skir compiler will trigger a compilation error. This ensures that your documentation never becomes <em>stale</em> or refers to fields that no longer exist.
       </p>
-      <CodeBlock language="d">{`struct Account {
+      <CodeBlock language="skir">{`struct Account {
   /// Same as [User.email]
   email: string;
   /// True if the [email] has been confirmed via a verification link.

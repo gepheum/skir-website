@@ -1,5 +1,11 @@
+"use client"
+
 import type { ReactNode } from "react"
+import React from "react"
 import { cn } from "@/lib/utils"
+import SyntaxHighlighter from 'react-syntax-highlighter'
+import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import { skirLanguage } from '@/lib/skir-language'
 
 interface ProseProps {
   children: ReactNode
@@ -23,16 +29,6 @@ export function Prose({ children, className }: ProseProps) {
       "[&_li]:leading-7",
       // Links
       "[&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary/80",
-      // Code
-      "[&_code]:font-mono [&_code]:text-sm [&_code]:bg-secondary [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:rounded",
-      "[&_pre]:bg-secondary [&_pre]:rounded-lg [&_pre]:p-4 [&_pre]:overflow-x-auto [&_pre]:mb-4",
-      "[&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-foreground",
-      // Blockquotes / Notes
-      "[&_blockquote]:border-l-4 [&_blockquote]:border-primary/50 [&_blockquote]:pl-4 [&_blockquote]:italic [&_blockquote]:text-muted-foreground [&_blockquote]:my-4",
-      // Tables
-      "[&_table]:w-full [&_table]:border-collapse [&_table]:mb-4",
-      "[&_th]:border [&_th]:border-border [&_th]:px-4 [&_th]:py-2 [&_th]:text-left [&_th]:font-semibold [&_th]:bg-secondary",
-      "[&_td]:border [&_td]:border-border [&_td]:px-4 [&_td]:py-2",
       // Strong / Bold
       "[&_strong]:text-foreground [&_strong]:font-semibold",
       className
@@ -49,17 +45,44 @@ interface CodeBlockProps {
 }
 
 export function CodeBlock({ children, language, filename }: CodeBlockProps) {
+  // Register Skir language
+  React.useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).hljs) {
+      (window as any).hljs.registerLanguage('skir', skirLanguage);
+    }
+  }, []);
+
+  // Use Skir highlighting for Skir code
+  const highlightLanguage = language === 'skir' ? 'skir' : language || 'plaintext'
+  
+  // Display name mapping for the language label
+  const displayLanguage = language === 'skir' ? 'Skir' : language
+  
   return (
     <div className="mb-4 rounded-lg border border-border overflow-hidden">
       {(filename || language) && (
         <div className="px-4 py-2 bg-secondary/50 border-b border-border text-sm text-muted-foreground flex items-center gap-2">
           {filename && <span className="font-medium">{filename}</span>}
-          {language && !filename && <span>{language}</span>}
+          {displayLanguage && !filename && <span>{displayLanguage}</span>}
         </div>
       )}
-      <pre className="p-4 overflow-x-auto bg-card">
-        <code className="text-sm font-mono text-foreground">{children}</code>
-      </pre>
+      <SyntaxHighlighter
+        language={highlightLanguage}
+        style={atomOneDark}
+        customStyle={{
+          margin: 0,
+          borderRadius: 0,
+          background: 'transparent',
+        }}
+        codeTagProps={{
+          style: {
+            fontSize: '0.875rem',
+            fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+          }
+        }}
+      >
+        {children}
+      </SyntaxHighlighter>
     </div>
   )
 }

@@ -22,7 +22,7 @@ export default function ProtobufPage() {
       <p>
         Skir lets you define constants directly in your schema files. You can define complex values (structs, lists, maps, primitives) in your <code>.skir</code> file and they will be compiled into native code constants in your target language.
       </p>
-      <CodeBlock language="d" filename="config.skir">{`struct Config {
+      <CodeBlock language="skir" filename="config.skir">{`struct Config {
   timeout_ms: int32;
   retries: int32;
   supported_locales: [string];
@@ -59,7 +59,7 @@ message PokerAction {
       <p>
         Skir unifies these two concepts into a specific "Rust-like" enum. Variants can be stateless (like a standard enum) or stateful (holding data), and you can mix them freely.
       </p>
-      <CodeBlock language="d">{`enum PokerAction {
+      <CodeBlock language="skir">{`enum PokerAction {
   CHECK;           // Stateless variant
   bet: int32;      // Stateful variant (holds the amount)
   FOLD;
@@ -97,7 +97,7 @@ message UserRegistry {
       <p>
         Skir introduces <em>Keyed Arrays</em> to solve this problem. You define an array and tell the compiler which field of the value acts as the key.
       </p>
-      <CodeBlock language="d" filename="Skir">{`struct User {
+      <CodeBlock language="skir" filename="Skir">{`struct User {
   id: string;
   name: string;
 }
