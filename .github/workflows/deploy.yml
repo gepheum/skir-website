@@ -36,8 +36,6 @@ jobs:
       
       - name: Build with Next.js
         run: pnpm run build
-        env:
-          GITHUB_PAGES: true
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
