@@ -1,0 +1,286 @@
+import { Prose, H1, H2, H3, P, CodeBlock, InlineCode, List } from "@/components/prose"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Dart - Skir Documentation",
+  description: "Learn how to use Skir-generated Dart code in your projects",
+}
+
+export default function DartPage() {
+  return (
+    <Prose>
+      <H1>Dart</H1>
+      <P>
+        This guide explains how to use Skir-generated Dart code in your projects.
+        The Dart plugin generates immutable classes with copyWith methods that
+        integrate seamlessly with Flutter and Dart applications.
+      </P>
+
+      <H2>Installation</H2>
+      <P>
+        First, add the Dart plugin to your <InlineCode>skir.yml</InlineCode> configuration:
+      </P>
+      <CodeBlock language="yaml">{`plugins:
+  - name: dart
+    out: lib/generated`}</CodeBlock>
+      <P>
+        Then add the runtime library to your <InlineCode>pubspec.yaml</InlineCode>:
+      </P>
+      <CodeBlock language="yaml">{`dependencies:
+  skir_dart_runtime: ^1.0.0`}</CodeBlock>
+
+      <H2>Generated Code</H2>
+      <P>
+        For each Skir file, the Dart plugin generates a corresponding <InlineCode>.dart</InlineCode> file
+        containing immutable classes and utility functions for working with your data types.
+      </P>
+
+      <H3>Structs</H3>
+      <P>
+        Each Skir struct becomes an immutable Dart class with a copyWith method:
+      </P>
+      <CodeBlock language="skir">{`struct User {
+  name: string @1
+  age: int32 @2
+  email?: string @3
+}`}</CodeBlock>
+      <P>becomes:</P>
+      <CodeBlock language="dart">{`class User {
+  final String name;
+  final int age;
+  final String? email;
+  
+  const User({
+    this.name = '',
+    this.age = 0,
+    this.email,
+  });
+  
+  static const User defaultValue = User();
+  
+  User copyWith({
+    String? name,
+    int? age,
+    String? email,
+  }) {
+    return User(
+      name: name ?? this.name,
+      age: age ?? this.age,
+      email: email ?? this.email,
+    );
+  }
+  
+  @override
+  bool operator ==(Object other) { ... }
+  
+  @override
+  int get hashCode { ... }
+}`}</CodeBlock>
+
+      <H3>Enums</H3>
+      <P>
+        Skir enums become Dart enum classes:
+      </P>
+      <CodeBlock language="skir">{`enum Status {
+  pending @1
+  approved @2
+  rejected @3
+}`}</CodeBlock>
+      <P>becomes:</P>
+      <CodeBlock language="dart">{`enum Status {
+  pending(1),
+  approved(2),
+  rejected(3);
+  
+  final int value;
+  const Status(this.value);
+  
+  static Status? fromValue(int value) {
+    return Status.values.cast<Status?>().firstWhere(
+      (s) => s?.value == value,
+      orElse: () => null,
+    );
+  }
+}`}</CodeBlock>
+
+      <H3>Oneofs (Union Types)</H3>
+      <P>
+        Skir oneofs become sealed classes (Dart 3.0+):
+      </P>
+      <CodeBlock language="skir">{`oneof Result {
+  success: SuccessData @1
+  error: ErrorData @2
+}`}</CodeBlock>
+      <P>becomes:</P>
+      <CodeBlock language="dart">{`sealed class Result {
+  const Result();
+  
+  static Result success(SuccessData value) => ResultSuccess(value);
+  static Result error(ErrorData value) => ResultError(value);
+}
+
+final class ResultSuccess extends Result {
+  final SuccessData value;
+  const ResultSuccess(this.value);
+}
+
+final class ResultError extends Result {
+  final ErrorData value;
+  const ResultError(this.value);
+}`}</CodeBlock>
+
+      <H2>Serialization</H2>
+      <P>
+        The generated code includes serializers for converting between
+        Dart objects and binary format:
+      </P>
+      <CodeBlock language="dart">{`import 'package:myapp/generated/user.dart';
+
+// Serialize to bytes
+final Uint8List bytes = userSerializer.toBytes(user);
+
+// Deserialize from bytes
+final User user = userSerializer.fromBytes(bytes);
+
+// Serialize to JSON map
+final Map<String, dynamic> json = userSerializer.toJson(user);
+
+// Deserialize from JSON
+final User user2 = userSerializer.fromJson(json);`}</CodeBlock>
+
+      <H2>Working with Generated Types</H2>
+
+      <H3>Creating Instances</H3>
+      <P>
+        Use the constructor with named parameters:
+      </P>
+      <CodeBlock language="dart">{`final user = User(
+  name: 'Alice',
+  age: 30,
+  email: 'alice@example.com',
+);
+
+// Using defaults
+final user2 = User(name: 'Bob', age: 25);
+
+// Using const for compile-time constants
+const user3 = User(name: 'Charlie', age: 35);`}</CodeBlock>
+
+      <H3>Updating Instances</H3>
+      <P>
+        Use the <InlineCode>copyWith()</InlineCode> method to create modified copies:
+      </P>
+      <CodeBlock language="dart">{`final updated = user.copyWith(
+  age: 31,
+  email: 'newemail@example.com',
+);
+
+// Original is unchanged
+print(user.age);    // 30
+print(updated.age); // 31
+
+// Set a field to null explicitly
+final cleared = user.copyWith(email: null);`}</CodeBlock>
+
+      <H3>Pattern Matching on Oneofs</H3>
+      <P>
+        Use Dart 3.0&apos;s pattern matching with sealed classes:
+      </P>
+      <CodeBlock language="dart">{`String handleResult(Result result) {
+  return switch (result) {
+    ResultSuccess(:final value) => 'Success: \${value.message}',
+    ResultError(:final value) => 'Error: \${value.code}',
+  };
+}
+
+// Or using if-case
+String handleResultVerbose(Result result) {
+  if (result case ResultSuccess(:final value)) {
+    return 'Success: \${value.message}';
+  } else if (result case ResultError(:final value)) {
+    return 'Error: \${value.code}';
+  }
+  throw StateError('Unreachable');
+}`}</CodeBlock>
+
+      <H2>RPC Services</H2>
+      <P>
+        For Skir services, the Dart plugin generates abstract classes for both
+        client and server implementations:
+      </P>
+      <CodeBlock language="skir">{`service UserService {
+  getUser(GetUserRequest): GetUserResponse
+  createUser(CreateUserRequest): CreateUserResponse
+}`}</CodeBlock>
+      <P>generates:</P>
+      <CodeBlock language="dart">{`abstract class UserServiceClient {
+  Future<GetUserResponse> getUser(GetUserRequest request);
+  Future<CreateUserResponse> createUser(CreateUserRequest request);
+}
+
+abstract class UserServiceHandler {
+  Future<GetUserResponse> getUser(
+    GetUserRequest request,
+    Context context,
+  );
+  
+  Future<CreateUserResponse> createUser(
+    CreateUserRequest request,
+    Context context,
+  );
+}`}</CodeBlock>
+
+      <H2>Flutter Integration</H2>
+      <P>
+        The generated Dart code works seamlessly with Flutter. Here&apos;s how to use
+        it with common Flutter patterns:
+      </P>
+      <CodeBlock language="dart">{`// With Provider
+class UserProvider extends ChangeNotifier {
+  User _user = User.defaultValue;
+  User get user => _user;
+  
+  void updateUser(User newUser) {
+    _user = newUser;
+    notifyListeners();
+  }
+  
+  void updateEmail(String email) {
+    _user = _user.copyWith(email: email);
+    notifyListeners();
+  }
+}
+
+// With Riverpod
+final userProvider = StateProvider<User>((ref) => User.defaultValue);
+
+// With BLoC
+class UserState {
+  final User user;
+  final bool isLoading;
+  
+  const UserState({
+    this.user = User.defaultValue,
+    this.isLoading = false,
+  });
+  
+  UserState copyWith({User? user, bool? isLoading}) {
+    return UserState(
+      user: user ?? this.user,
+      isLoading: isLoading ?? this.isLoading,
+    );
+  }
+}`}</CodeBlock>
+
+      <H2>Best Practices</H2>
+      <List items={[
+        "Use const constructors for compile-time constants",
+        "Leverage copyWith() for immutable state updates",
+        "Use sealed classes with pattern matching for exhaustive checks (Dart 3.0+)",
+        "Take advantage of null safety with nullable fields",
+        "Use async/await for RPC operations",
+        "Keep generated code in a separate directory and don't modify it manually",
+      ]} />
+    </Prose>
+  )
+}
