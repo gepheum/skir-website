@@ -2,9 +2,17 @@
 
 import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
-import SyntaxHighlighter from 'react-syntax-highlighter'
+// Use Light build to allow custom language registration
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import typescript from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript'
+import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python'
 import { skirLanguage } from '@/lib/skir-language'
+
+// Register languages
+SyntaxHighlighter.registerLanguage('skir', skirLanguage)
+SyntaxHighlighter.registerLanguage('typescript', typescript)
+SyntaxHighlighter.registerLanguage('python', python)
 
 const tabs = [
   { id: "skir", label: ".skir" },
@@ -71,13 +79,6 @@ print(restored.label)  # "P"`,
 
 export function CodeExample() {
   const [activeTab, setActiveTab] = useState("skir")
-
-  // Register Skir language
-  useEffect(() => {
-    if (typeof window !== 'undefined' && (window as any).hljs) {
-      (window as any).hljs.registerLanguage('skir', skirLanguage);
-    }
-  }, []);
 
   return (
     <div className="rounded-lg border border-border overflow-hidden bg-card">

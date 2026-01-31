@@ -3,9 +3,33 @@
 import type { ReactNode } from "react"
 import React from "react"
 import { cn } from "@/lib/utils"
-import SyntaxHighlighter from 'react-syntax-highlighter'
+// Use Light build to allow custom language registration
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import typescript from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript'
+import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python'
+import cpp from 'react-syntax-highlighter/dist/esm/languages/hljs/cpp'
+import java from 'react-syntax-highlighter/dist/esm/languages/hljs/java'
+import kotlin from 'react-syntax-highlighter/dist/esm/languages/hljs/kotlin'
+import dart from 'react-syntax-highlighter/dist/esm/languages/hljs/dart'
+import yaml from 'react-syntax-highlighter/dist/esm/languages/hljs/yaml'
+import bash from 'react-syntax-highlighter/dist/esm/languages/hljs/bash'
+import cmake from 'react-syntax-highlighter/dist/esm/languages/hljs/cmake'
+import json from 'react-syntax-highlighter/dist/esm/languages/hljs/json'
 import { skirLanguage } from '@/lib/skir-language'
+
+// Register all languages used in docs
+SyntaxHighlighter.registerLanguage('skir', skirLanguage)
+SyntaxHighlighter.registerLanguage('typescript', typescript)
+SyntaxHighlighter.registerLanguage('python', python)
+SyntaxHighlighter.registerLanguage('cpp', cpp)
+SyntaxHighlighter.registerLanguage('java', java)
+SyntaxHighlighter.registerLanguage('kotlin', kotlin)
+SyntaxHighlighter.registerLanguage('dart', dart)
+SyntaxHighlighter.registerLanguage('yaml', yaml)
+SyntaxHighlighter.registerLanguage('bash', bash)
+SyntaxHighlighter.registerLanguage('cmake', cmake)
+SyntaxHighlighter.registerLanguage('json', json)
 
 interface ProseProps {
   children: ReactNode
@@ -45,13 +69,6 @@ interface CodeBlockProps {
 }
 
 export function CodeBlock({ children, language, filename }: CodeBlockProps) {
-  // Register Skir language
-  React.useEffect(() => {
-    if (typeof window !== 'undefined' && (window as any).hljs) {
-      (window as any).hljs.registerLanguage('skir', skirLanguage);
-    }
-  }, []);
-
   // Use Skir highlighting for Skir code
   const highlightLanguage = language === 'skir' ? 'skir' : language || 'plaintext'
   
