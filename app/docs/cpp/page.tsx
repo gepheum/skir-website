@@ -1,22 +1,21 @@
-import { Prose, H1, H2, H3, P, CodeBlock, InlineCode } from "@/components/prose"
-import type { Metadata } from "next"
+import { CodeBlock, H1, H2, H3, InlineCode, P, Prose } from '@/components/prose'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "C++ - Skir Documentation",
-  description: "Learn how to use Skir-generated C++ code in your projects",
+  title: 'C++ - Skir Documentation',
+  description: 'Learn how to use Skir-generated C++ code in your projects',
 }
 
 export default function CppPage() {
   return (
     <Prose>
       <H1>C++</H1>
-      <P>
-        This guide covers how to use C++ code generated from Skir. Targets C++17 and higher.
-      </P>
+      <P>This guide covers how to use C++ code generated from Skir. Targets C++17 and higher.</P>
 
       <H2>Set up</H2>
       <P>
-        In your <InlineCode>skir.yml</InlineCode> file, add the following snippet under <InlineCode>generators</InlineCode>:
+        In your <InlineCode>skir.yml</InlineCode> file, add the following snippet under{' '}
+        <InlineCode>generators</InlineCode>:
       </P>
       <CodeBlock language="yaml">{`- mod: skir-cc-gen
   outDir: ./src/skirout
@@ -25,17 +24,23 @@ export default function CppPage() {
 
       <H2>Runtime dependencies</H2>
       <P>
-        The generated C++ code depends on the{" "}
-        <a href="https://github.com/gepheum/skir-cc-gen/tree/main/client" target="_blank" rel="noopener noreferrer">
+        The generated C++ code depends on the{' '}
+        <a
+          href="https://github.com/gepheum/skir-cc-gen/tree/main/client"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           skir client library
-        </a>,{" "}
+        </a>
+        ,{' '}
         <a href="https://abseil.io/" target="_blank" rel="noopener noreferrer">
           absl
-        </a>{" "}
-        and optionally{" "}
+        </a>{' '}
+        and optionally{' '}
         <a href="https://github.com/google/googletest" target="_blank" rel="noopener noreferrer">
           GoogleTest
-        </a>.
+        </a>
+        .
       </P>
       <P>
         Add this to your <InlineCode>CMakeLists.txt</InlineCode>:
@@ -50,26 +55,37 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(skir-client)`}</CodeBlock>
       <P>
-        See this{" "}
-        <a href="https://github.com/gepheum/skir-cc-example/blob/main/CMakeLists.txt" target="_blank" rel="noopener noreferrer">
+        See this{' '}
+        <a
+          href="https://github.com/gepheum/skir-cc-example/blob/main/CMakeLists.txt"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           example
-        </a>.
+        </a>
+        .
       </P>
 
       <H2>C++ generated code guide</H2>
       <P>
-        The examples below are for the code generated from{" "}
-        <a href="https://github.com/gepheum/skir-cc-example/blob/main/skir_src/user.skir" target="_blank" rel="noopener noreferrer">
+        The examples below are for the code generated from{' '}
+        <a
+          href="https://github.com/gepheum/skir-cc-example/blob/main/skir_src/user.skir"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           this
-        </a>{" "}
+        </a>{' '}
         .skir file.
       </P>
 
       <H3>Referring to generated symbols</H3>
       <P>
-        Every generated symbol lives in a namespace called <InlineCode>skirout_$&#123;path&#125;</InlineCode>, where{" "}
-        <InlineCode>$&#123;path&#125;</InlineCode> is the path to the .skir file relative from the root of the skir source
-        directory, with the ".skir" extension removed, and slashes replaced with underscores.
+        Every generated symbol lives in a namespace called{' '}
+        <InlineCode>skirout_$&#123;path&#125;</InlineCode>, where{' '}
+        <InlineCode>$&#123;path&#125;</InlineCode> is the path to the .skir file relative from the
+        root of the skir source directory, with the ".skir" extension removed, and slashes replaced
+        with underscores.
       </P>
       <CodeBlock language="cpp">{`#include "skirout/user.h"
 
@@ -184,7 +200,8 @@ lara_status.visit(Visitor());`}</CodeBlock>
 
       <H3>Serialization</H3>
       <P>
-        Use <InlineCode>ToDenseJson</InlineCode>, <InlineCode>ToReadableJson</InlineCode> or <InlineCode>ToBytes</InlineCode> to serialize a skir value.
+        Use <InlineCode>ToDenseJson</InlineCode>, <InlineCode>ToReadableJson</InlineCode> or{' '}
+        <InlineCode>ToBytes</InlineCode> to serialize a skir value.
       </P>
       <CodeBlock language="cpp">{`// Serialize a skir value to JSON with ToDenseJson or ToReadableJson.
 std::cout << skir::ToDenseJson(john) << "\\n";
@@ -217,8 +234,8 @@ assert(maybe_john.ok() && *maybe_john == john);`}</CodeBlock>
 
       <H3>Keyed arrays</H3>
       <P>
-        A <InlineCode>keyed_items&lt;T, get_key&gt;</InlineCode> is a container that stores items of type T and allows for fast lookups by key
-        using a hash table.
+        A <InlineCode>keyed_items&lt;T, get_key&gt;</InlineCode> is a container that stores items of
+        type T and allows for fast lookups by key using a hash table.
       </P>
       <CodeBlock language="cpp">{`UserRegistry user_registry;
 skir::keyed_items<User, skirout::get_user_id<>>&
@@ -259,16 +276,26 @@ assert(tarzan.name == "Tarzan");`}</CodeBlock>
 
       <H3>Skir services</H3>
       <P>
-        <strong>Starting a skir service on an HTTP server</strong> - full example{" "}
-        <a href="https://github.com/gepheum/skir-cc-example/blob/main/service_start.cc" target="_blank" rel="noopener noreferrer">
+        <strong>Starting a skir service on an HTTP server</strong> - full example{' '}
+        <a
+          href="https://github.com/gepheum/skir-cc-example/blob/main/service_start.cc"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           here
-        </a>.
+        </a>
+        .
       </P>
       <P>
-        <strong>Sending RPCs to a skir service</strong> - full example{" "}
-        <a href="https://github.com/gepheum/skir-cc-example/blob/main/service_client.cc" target="_blank" rel="noopener noreferrer">
+        <strong>Sending RPCs to a skir service</strong> - full example{' '}
+        <a
+          href="https://github.com/gepheum/skir-cc-example/blob/main/service_client.cc"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           here
-        </a>.
+        </a>
+        .
       </P>
 
       <H3>Dynamic reflection</H3>
@@ -286,14 +313,19 @@ assert(reserialized_type_descriptor.ok());`}</CodeBlock>
 
       <H3>Static reflection</H3>
       <P>
-        Static reflection allows you to inspect and modify values of generated skir
-        types in a typesafe manner.
+        Static reflection allows you to inspect and modify values of generated skir types in a
+        typesafe manner.
       </P>
       <P>
-        See{" "}
-        <a href="https://github.com/gepheum/skir-cc-example/blob/main/string_capitalizer.h" target="_blank" rel="noopener noreferrer">
+        See{' '}
+        <a
+          href="https://github.com/gepheum/skir-cc-example/blob/main/string_capitalizer.h"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           string_capitalizer.h
-        </a>.
+        </a>
+        .
       </P>
       <CodeBlock language="cpp">{`User tarzan_copy = skirout_user::k_tarzan();
 // CapitalizeStrings recursively capitalizes all the strings found within a
@@ -319,10 +351,15 @@ std::cout << tarzan_copy << "\\n";
 
       <H3>Writing unit tests with GoogleTest</H3>
       <P>
-        Full example{" "}
-        <a href="https://github.com/gepheum/skir-cc-example/blob/main/example.test.cc" target="_blank" rel="noopener noreferrer">
+        Full example{' '}
+        <a
+          href="https://github.com/gepheum/skir-cc-example/blob/main/example.test.cc"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           here
-        </a>.
+        </a>
+        .
       </P>
 
       <H3>Struct matchers</H3>

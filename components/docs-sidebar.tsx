@@ -1,59 +1,55 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { cn } from "@/lib/utils"
-import { ChevronDown, ChevronRight } from "lucide-react"
-import { useState } from "react"
+import { cn } from '@/lib/utils'
+import { ChevronDown, ChevronRight } from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useState } from 'react'
 
 const navigation = [
   {
-    title: "Getting Started",
+    title: 'Getting Started',
     items: [
-      { title: "Introduction", href: "/docs" },
-      { title: "Setup & Workflow", href: "/docs/getting-started" },
+      { title: 'Introduction', href: '/docs' },
+      { title: 'Setup & Workflow', href: '/docs/getting-started' },
     ],
   },
   {
-    title: "Core Concepts",
+    title: 'Core Concepts',
     items: [
-      { title: "Language Reference", href: "/docs/language-reference" },
-      { title: "Serialization Formats", href: "/docs/serialization" },
-      { title: "Schema Evolution", href: "/docs/schema-evolution" },
-      { title: "RPC Interfaces", href: "/docs/rpc" },
-      { title: "External Dependencies", href: "/docs/dependencies" },
+      { title: 'Language Reference', href: '/docs/language-reference' },
+      { title: 'Serialization Formats', href: '/docs/serialization' },
+      { title: 'Schema Evolution', href: '/docs/schema-evolution' },
+      { title: 'RPC Interfaces', href: '/docs/rpc' },
+      { title: 'External Dependencies', href: '/docs/dependencies' },
     ],
   },
   {
-    title: "Languages",
+    title: 'Languages',
     items: [
-      { title: "TypeScript", href: "/docs/typescript" },
-      { title: "Python", href: "/docs/python" },
-      { title: "C++", href: "/docs/cpp" },
-      { title: "Java", href: "/docs/java" },
-      { title: "Kotlin", href: "/docs/kotlin" },
-      { title: "Dart", href: "/docs/dart" },
+      { title: 'TypeScript', href: '/docs/typescript' },
+      { title: 'Python', href: '/docs/python' },
+      { title: 'C++', href: '/docs/cpp' },
+      { title: 'Java', href: '/docs/java' },
+      { title: 'Kotlin', href: '/docs/kotlin' },
+      { title: 'Dart', href: '/docs/dart' },
     ],
   },
   {
-    title: "Migration",
-    items: [
-      { title: "Coming from Protobuf", href: "/docs/protobuf" },
-    ],
+    title: 'Migration',
+    items: [{ title: 'Coming from Protobuf', href: '/docs/protobuf' }],
   },
 ]
 
 export function DocsSidebar() {
   const pathname = usePathname()
   const [openSections, setOpenSections] = useState<string[]>(
-    navigation.map((section) => section.title)
+    navigation.map((section) => section.title),
   )
 
   const toggleSection = (title: string) => {
     setOpenSections((prev) =>
-      prev.includes(title)
-        ? prev.filter((t) => t !== title)
-        : [...prev, title]
+      prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title],
     )
   }
 
@@ -82,10 +78,10 @@ export function DocsSidebar() {
                       <Link
                         href={item.href}
                         className={cn(
-                          "block text-sm py-1 transition-colors",
+                          'block text-sm py-1 transition-colors',
                           pathname === item.href
-                            ? "text-primary font-medium"
-                            : "text-muted-foreground hover:text-foreground"
+                            ? 'text-primary font-medium'
+                            : 'text-muted-foreground hover:text-foreground',
                         )}
                       >
                         {item.title}

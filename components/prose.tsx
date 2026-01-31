@@ -1,22 +1,21 @@
-"use client"
+'use client'
 
-import type { ReactNode } from "react"
-import React from "react"
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils'
+import type { ReactNode } from 'react'
 // Use Light build to allow custom language registration
+import { skirLanguage } from '@/lib/skir-language'
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
-import typescript from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript'
-import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python'
-import cpp from 'react-syntax-highlighter/dist/esm/languages/hljs/cpp'
-import java from 'react-syntax-highlighter/dist/esm/languages/hljs/java'
-import kotlin from 'react-syntax-highlighter/dist/esm/languages/hljs/kotlin'
-import dart from 'react-syntax-highlighter/dist/esm/languages/hljs/dart'
-import yaml from 'react-syntax-highlighter/dist/esm/languages/hljs/yaml'
 import bash from 'react-syntax-highlighter/dist/esm/languages/hljs/bash'
 import cmake from 'react-syntax-highlighter/dist/esm/languages/hljs/cmake'
+import cpp from 'react-syntax-highlighter/dist/esm/languages/hljs/cpp'
+import dart from 'react-syntax-highlighter/dist/esm/languages/hljs/dart'
+import java from 'react-syntax-highlighter/dist/esm/languages/hljs/java'
 import json from 'react-syntax-highlighter/dist/esm/languages/hljs/json'
-import { skirLanguage } from '@/lib/skir-language'
+import kotlin from 'react-syntax-highlighter/dist/esm/languages/hljs/kotlin'
+import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python'
+import typescript from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript'
+import yaml from 'react-syntax-highlighter/dist/esm/languages/hljs/yaml'
+import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
 // Register all languages used in docs
 SyntaxHighlighter.registerLanguage('skir', skirLanguage)
@@ -38,25 +37,27 @@ interface ProseProps {
 
 export function Prose({ children, className }: ProseProps) {
   return (
-    <div className={cn(
-      "max-w-none",
-      // Headings
-      "[&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mb-6 [&_h1]:mt-8 [&_h1]:first:mt-0",
-      "[&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:mb-4 [&_h2]:mt-10 [&_h2]:pt-6 [&_h2]:border-t [&_h2]:border-border [&_h2]:first:border-0 [&_h2]:first:pt-0",
-      "[&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mb-3 [&_h3]:mt-8",
-      "[&_h4]:text-lg [&_h4]:font-semibold [&_h4]:mb-2 [&_h4]:mt-6",
-      // Paragraphs
-      "[&_p]:text-muted-foreground [&_p]:leading-7 [&_p]:mb-4",
-      // Lists
-      "[&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_ul]:space-y-2 [&_ul]:text-muted-foreground",
-      "[&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_ol]:space-y-2 [&_ol]:text-muted-foreground",
-      "[&_li]:leading-7",
-      // Links
-      "[&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary/80",
-      // Strong / Bold
-      "[&_strong]:text-foreground [&_strong]:font-semibold",
-      className
-    )}>
+    <div
+      className={cn(
+        'max-w-none',
+        // Headings
+        '[&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mb-6 [&_h1]:mt-8 [&_h1]:first:mt-0',
+        '[&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:mb-4 [&_h2]:mt-10 [&_h2]:pt-6 [&_h2]:border-t [&_h2]:border-border [&_h2]:first:border-0 [&_h2]:first:pt-0',
+        '[&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mb-3 [&_h3]:mt-8',
+        '[&_h4]:text-lg [&_h4]:font-semibold [&_h4]:mb-2 [&_h4]:mt-6',
+        // Paragraphs
+        '[&_p]:text-muted-foreground [&_p]:leading-7 [&_p]:mb-4',
+        // Lists
+        '[&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-4 [&_ul]:space-y-2 [&_ul]:text-muted-foreground',
+        '[&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-4 [&_ol]:space-y-2 [&_ol]:text-muted-foreground',
+        '[&_li]:leading-7',
+        // Links
+        '[&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary/80',
+        // Strong / Bold
+        '[&_strong]:text-foreground [&_strong]:font-semibold',
+        className,
+      )}
+    >
       {children}
     </div>
   )
@@ -71,10 +72,10 @@ interface CodeBlockProps {
 export function CodeBlock({ children, language, filename }: CodeBlockProps) {
   // Use Skir highlighting for Skir code
   const highlightLanguage = language === 'skir' ? 'skir' : language || 'plaintext'
-  
+
   // Display name mapping for the language label
   const displayLanguage = language === 'skir' ? 'Skir' : language
-  
+
   return (
     <div className="mb-4 rounded-lg border border-border overflow-hidden">
       {(filename || language) && (
@@ -94,8 +95,9 @@ export function CodeBlock({ children, language, filename }: CodeBlockProps) {
         codeTagProps={{
           style: {
             fontSize: '0.875rem',
-            fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-          }
+            fontFamily:
+              'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+          },
         }}
       >
         {children}
@@ -106,24 +108,24 @@ export function CodeBlock({ children, language, filename }: CodeBlockProps) {
 
 interface NoteProps {
   children: ReactNode
-  type?: "info" | "warning" | "tip"
+  type?: 'info' | 'warning' | 'tip'
 }
 
-export function Note({ children, type = "info" }: NoteProps) {
+export function Note({ children, type = 'info' }: NoteProps) {
   const styles = {
-    info: "border-primary/50 bg-primary/5",
-    warning: "border-yellow-500/50 bg-yellow-500/5",
-    tip: "border-green-500/50 bg-green-500/5",
+    info: 'border-primary/50 bg-primary/5',
+    warning: 'border-yellow-500/50 bg-yellow-500/5',
+    tip: 'border-green-500/50 bg-green-500/5',
   }
 
   const labels = {
-    info: "Note",
-    warning: "Warning",
-    tip: "Tip",
+    info: 'Note',
+    warning: 'Warning',
+    tip: 'Tip',
   }
 
   return (
-    <div className={cn("rounded-lg border-l-4 p-4 mb-4", styles[type])}>
+    <div className={cn('rounded-lg border-l-4 p-4 mb-4', styles[type])}>
       <p className="font-semibold text-foreground mb-1">{labels[type]}</p>
       <div className="text-sm text-muted-foreground [&_p]:mb-0">{children}</div>
     </div>
@@ -136,7 +138,11 @@ export function H1({ children }: { children: ReactNode }) {
 }
 
 export function H2({ children }: { children: ReactNode }) {
-  return <h2 className="text-2xl font-semibold mb-4 mt-10 pt-6 border-t border-border first:border-0 first:pt-0">{children}</h2>
+  return (
+    <h2 className="text-2xl font-semibold mb-4 mt-10 pt-6 border-t border-border first:border-0 first:pt-0">
+      {children}
+    </h2>
+  )
 }
 
 export function H3({ children }: { children: ReactNode }) {
@@ -157,11 +163,11 @@ export function InlineCode({ children }: { children: ReactNode }) {
 }
 
 // List components
-export function List({ children, ordered = false }: { children: ReactNode, ordered?: boolean }) {
+export function List({ children, ordered = false }: { children: ReactNode; ordered?: boolean }) {
   const Component = ordered ? 'ol' : 'ul'
   const listStyle = ordered ? 'list-decimal' : 'list-disc'
   return (
-    <Component className={cn(listStyle, "pl-6 mb-4 space-y-2 text-muted-foreground")}>
+    <Component className={cn(listStyle, 'pl-6 mb-4 space-y-2 text-muted-foreground')}>
       {children}
     </Component>
   )

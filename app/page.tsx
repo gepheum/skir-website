@@ -1,42 +1,53 @@
-import Link from "next/link"
-import { ArrowRight, Github, FileCode2, Zap, Shield, Globe, Package, RefreshCw, Terminal, Layers } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { CodeExample } from "@/components/code-example"
-import { FeatureCard } from "@/components/feature-card"
-import { LanguageCard } from "@/components/language-card"
-import { Header } from "@/components/header"
-import { Footer } from "@/components/footer"
+import { CodeExample } from '@/components/code-example'
+import { FeatureCard } from '@/components/feature-card'
+import { Footer } from '@/components/footer'
+import { Header } from '@/components/header'
+import { LanguageCard } from '@/components/language-card'
+import { Button } from '@/components/ui/button'
+import {
+  ArrowRight,
+  FileCode2,
+  Github,
+  Globe,
+  Layers,
+  Package,
+  RefreshCw,
+  Shield,
+  Terminal,
+  Zap,
+} from 'lucide-react'
+import Link from 'next/link'
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      
+
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-24 pb-16 md:pt-32 md:pb-24">
         {/* Background gradient effect */}
         <div className="absolute inset-0 -z-10">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-primary/10 rounded-full blur-[120px]" />
         </div>
-        
+
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card mb-8">
               <span className="text-primary font-medium">v1.0</span>
               <span className="text-muted-foreground">Like Protocol Buffer, but better</span>
             </div>
-            
+
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-balance">
-              Define once, generate for{" "}
-              <span className="text-primary">every language</span>
+              Define once, generate for <span className="text-primary">every language</span>
             </h1>
-            
+
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 text-pretty">
-              Skir is a universal language for representing data types, constants, and RPC interfaces. 
-              Define your schema once in a <code className="text-primary font-mono">.skir</code> file and generate 
-              idiomatic, type-safe code for TypeScript, Python, Java, C++, and more.
+              Skir is a universal language for representing data types, constants, and RPC
+              interfaces. Define your schema once in a{' '}
+              <code className="text-primary font-mono">.skir</code> file and generate idiomatic,
+              type-safe code for TypeScript, Python, Java, C++, and more.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
               <Button asChild size="lg" className="text-base">
                 <Link href="/docs/getting-started">
@@ -75,10 +86,11 @@ export default function HomePage() {
                 One schema, many languages
               </h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Define your data structures once and compile them into idiomatic code for any supported language.
+                Define your data structures once and compile them into idiomatic code for any
+                supported language.
               </p>
             </div>
-            
+
             <CodeExample />
           </div>
         </div>
@@ -88,14 +100,12 @@ export default function HomePage() {
       <section className="py-16 md:py-24 border-t border-border bg-card/50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Why choose Skir?
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why choose Skir?</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Built for modern development with a focus on developer experience and type safety.
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             <FeatureCard
               icon={<Globe className="h-6 w-6" />}
@@ -135,14 +145,12 @@ export default function HomePage() {
       <section className="py-16 md:py-24 border-t border-border">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Supported Languages
-            </h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Supported Languages</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Generate production-ready code for all major programming languages.
             </p>
           </div>
-          
+
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
             <LanguageCard name="TypeScript" icon="🟦" href="/docs/typescript" />
             <LanguageCard name="Python" icon="🐍" href="/docs/python" />
@@ -162,7 +170,8 @@ export default function HomePage() {
               Ready to get started?
             </h2>
             <p className="text-muted-foreground text-lg mb-8">
-              Set up your first Skir project in minutes. Manage your entire project configuration from a single YAML file.
+              Set up your first Skir project in minutes. Manage your entire project configuration
+              from a single YAML file.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg">

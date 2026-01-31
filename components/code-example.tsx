@@ -1,13 +1,13 @@
-"use client"
+'use client'
 
-import { useState, useEffect } from "react"
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils'
+import { useState } from 'react'
 // Use Light build to allow custom language registration
-import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
-import typescript from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript'
-import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python'
 import { skirLanguage } from '@/lib/skir-language'
+import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
+import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python'
+import typescript from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript'
+import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
 // Register languages
 SyntaxHighlighter.registerLanguage('skir', skirLanguage)
@@ -15,9 +15,9 @@ SyntaxHighlighter.registerLanguage('typescript', typescript)
 SyntaxHighlighter.registerLanguage('python', python)
 
 const tabs = [
-  { id: "skir", label: ".skir" },
-  { id: "typescript", label: "TypeScript" },
-  { id: "python", label: "Python" },
+  { id: 'skir', label: '.skir' },
+  { id: 'typescript', label: 'TypeScript' },
+  { id: 'python', label: 'Python' },
 ]
 
 const codeExamples = {
@@ -78,7 +78,7 @@ print(restored.label)  # "P"`,
 }
 
 export function CodeExample() {
-  const [activeTab, setActiveTab] = useState("skir")
+  const [activeTab, setActiveTab] = useState('skir')
 
   return (
     <div className="rounded-lg border border-border overflow-hidden bg-card">
@@ -90,10 +90,10 @@ export function CodeExample() {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={cn(
-              "px-4 py-3 text-sm font-medium transition-colors",
+              'px-4 py-3 text-sm font-medium transition-colors',
               activeTab === tab.id
-                ? "text-primary border-b-2 border-primary bg-card"
-                : "text-muted-foreground hover:text-foreground"
+                ? 'text-primary border-b-2 border-primary bg-card'
+                : 'text-muted-foreground hover:text-foreground',
             )}
           >
             {tab.label}
@@ -114,8 +114,9 @@ export function CodeExample() {
           codeTagProps={{
             style: {
               fontSize: '0.875rem',
-              fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-            }
+              fontFamily:
+                'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+            },
           }}
         >
           {codeExamples[activeTab as keyof typeof codeExamples]}

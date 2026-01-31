@@ -1,46 +1,46 @@
-import Link from "next/link"
-import { ArrowRight, BookOpen, Globe, Zap, RefreshCw, Layers, Package } from "lucide-react"
+import { ArrowRight, BookOpen, Globe, Layers, Package, RefreshCw, Zap } from 'lucide-react'
+import Link from 'next/link'
 
 export const metadata = {
-  title: "Documentation - Skir",
-  description: "Learn how to use Skir to define your data types, constants, and RPC interfaces.",
+  title: 'Documentation - Skir',
+  description: 'Learn how to use Skir to define your data types, constants, and RPC interfaces.',
 }
 
 const sections = [
   {
-    title: "Getting Started",
-    description: "Set up Skir in your project and learn the basic workflow.",
-    href: "/docs/getting-started",
+    title: 'Getting Started',
+    description: 'Set up Skir in your project and learn the basic workflow.',
+    href: '/docs/getting-started',
     icon: BookOpen,
   },
   {
-    title: "Language Reference",
-    description: "Complete guide to the Skir schema language syntax and features.",
-    href: "/docs/language-reference",
+    title: 'Language Reference',
+    description: 'Complete guide to the Skir schema language syntax and features.',
+    href: '/docs/language-reference',
     icon: Zap,
   },
   {
-    title: "Serialization",
-    description: "Learn about JSON and binary serialization formats.",
-    href: "/docs/serialization",
+    title: 'Serialization',
+    description: 'Learn about JSON and binary serialization formats.',
+    href: '/docs/serialization',
     icon: Layers,
   },
   {
-    title: "Schema Evolution",
-    description: "Guidelines for evolving your schema without breaking compatibility.",
-    href: "/docs/schema-evolution",
+    title: 'Schema Evolution',
+    description: 'Guidelines for evolving your schema without breaking compatibility.',
+    href: '/docs/schema-evolution',
     icon: RefreshCw,
   },
   {
-    title: "RPC Interfaces",
-    description: "Build typesafe APIs with Skir services.",
-    href: "/docs/rpc",
+    title: 'RPC Interfaces',
+    description: 'Build typesafe APIs with Skir services.',
+    href: '/docs/rpc',
     icon: Globe,
   },
   {
-    title: "External Dependencies",
-    description: "Import types from other GitHub repositories.",
-    href: "/docs/dependencies",
+    title: 'External Dependencies',
+    description: 'Import types from other GitHub repositories.',
+    href: '/docs/dependencies',
     icon: Package,
   },
 ]
@@ -51,9 +51,10 @@ export default function DocsPage() {
       <div className="mb-12">
         <h1 className="text-4xl font-bold mb-4">Documentation</h1>
         <p className="text-lg text-muted-foreground">
-          Skir is a universal language for representing data types, constants, and RPC interfaces. 
-          Define your schema once in a <code className="text-primary font-mono">.skir</code> file 
-          and generate idiomatic, type-safe code for TypeScript, Python, Java, C++, Kotlin, and Dart.
+          Skir is a universal language for representing data types, constants, and RPC interfaces.
+          Define your schema once in a <code className="text-primary font-mono">.skir</code> file
+          and generate idiomatic, type-safe code for TypeScript, Python, Java, C++, Kotlin, and
+          Dart.
         </p>
       </div>
 
@@ -72,9 +73,7 @@ export default function DocsPage() {
                 </div>
                 <h2 className="font-semibold">{section.title}</h2>
               </div>
-              <p className="text-sm text-muted-foreground mb-3">
-                {section.description}
-              </p>
+              <p className="text-sm text-muted-foreground mb-3">{section.description}</p>
               <span className="text-sm text-primary flex items-center gap-1 group-hover:gap-2 transition-all">
                 Learn more
                 <ArrowRight className="h-4 w-4" />
@@ -91,12 +90,12 @@ export default function DocsPage() {
         </p>
         <div className="flex flex-wrap gap-2">
           {[
-            { name: "TypeScript", href: "/docs/languages/typescript" },
-            { name: "Python", href: "/docs/languages/python" },
-            { name: "C++", href: "/docs/languages/cpp" },
-            { name: "Java", href: "/docs/languages/java" },
-            { name: "Kotlin", href: "/docs/languages/kotlin" },
-            { name: "Dart", href: "/docs/languages/dart" },
+            { name: 'TypeScript', href: '/docs/languages/typescript' },
+            { name: 'Python', href: '/docs/languages/python' },
+            { name: 'C++', href: '/docs/languages/cpp' },
+            { name: 'Java', href: '/docs/languages/java' },
+            { name: 'Kotlin', href: '/docs/languages/kotlin' },
+            { name: 'Dart', href: '/docs/languages/dart' },
           ].map((lang) => (
             <Link
               key={lang.name}

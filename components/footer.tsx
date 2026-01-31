@@ -1,26 +1,26 @@
-import Link from "next/link"
-import { Github } from "lucide-react"
+import { Github } from 'lucide-react'
+import Link from 'next/link'
 
 const footerLinks = {
   documentation: [
-    { name: "Getting Started", href: "/docs/getting-started" },
-    { name: "Language Reference", href: "/docs/language-reference" },
-    { name: "Serialization", href: "/docs/serialization" },
-    { name: "Schema Evolution", href: "/docs/schema-evolution" },
+    { name: 'Getting Started', href: '/docs/getting-started' },
+    { name: 'Language Reference', href: '/docs/language-reference' },
+    { name: 'Serialization', href: '/docs/serialization' },
+    { name: 'Schema Evolution', href: '/docs/schema-evolution' },
   ],
   languages: [
-    { name: "TypeScript", href: "/docs/languages/typescript" },
-    { name: "Python", href: "/docs/languages/python" },
-    { name: "C++", href: "/docs/languages/cpp" },
-    { name: "Java", href: "/docs/languages/java" },
-    { name: "Kotlin", href: "/docs/languages/kotlin" },
-    { name: "Dart", href: "/docs/languages/dart" },
+    { name: 'TypeScript', href: '/docs/languages/typescript' },
+    { name: 'Python', href: '/docs/languages/python' },
+    { name: 'C++', href: '/docs/languages/cpp' },
+    { name: 'Java', href: '/docs/languages/java' },
+    { name: 'Kotlin', href: '/docs/languages/kotlin' },
+    { name: 'Dart', href: '/docs/languages/dart' },
   ],
   resources: [
-    { name: "RPC Interfaces", href: "/docs/rpc" },
-    { name: "External Dependencies", href: "/docs/dependencies" },
-    { name: "Coming from Protobuf", href: "/docs/protobuf" },
-    { name: "GitHub", href: "https://github.com/gepheum/skir", external: true },
+    { name: 'RPC Interfaces', href: '/docs/rpc' },
+    { name: 'External Dependencies', href: '/docs/dependencies' },
+    { name: 'Coming from Protobuf', href: '/docs/protobuf' },
+    { name: 'GitHub', href: 'https://github.com/gepheum/skir', external: true },
   ],
 }
 
@@ -36,9 +36,7 @@ export function Footer() {
               </div>
               <span className="text-xl font-bold">Skir</span>
             </Link>
-            <p className="text-sm text-muted-foreground mb-4">
-              Like Protocol Buffer, but better.
-            </p>
+            <p className="text-sm text-muted-foreground mb-4">Like Protocol Buffer, but better.</p>
             <a
               href="https://github.com/gepheum/skir"
               target="_blank"
@@ -87,7 +85,7 @@ export function Footer() {
             <ul className="space-y-2">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
-                  {"external" in link && link.external ? (
+                  {'external' in link && link.external ? (
                     <a
                       href={link.href}
                       target="_blank"

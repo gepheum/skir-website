@@ -1,9 +1,9 @@
-import { Prose, H1, H2, H3, P, CodeBlock, InlineCode } from "@/components/prose"
-import type { Metadata } from "next"
+import { CodeBlock, H1, H2, H3, InlineCode, P, Prose } from '@/components/prose'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Python - Skir Documentation",
-  description: "Learn how to use Skir-generated Python code in your projects",
+  title: 'Python - Skir Documentation',
+  description: 'Learn how to use Skir-generated Python code in your projects',
 }
 
 export default function PythonPage() {
@@ -11,29 +11,40 @@ export default function PythonPage() {
     <Prose>
       <H1>Python</H1>
       <P>
-        This guide covers how to use Python code generated from Skir. Targets Python 3.10 and higher.
+        This guide covers how to use Python code generated from Skir. Targets Python 3.10 and
+        higher.
       </P>
 
       <H2>Set up</H2>
       <P>
-        In your <InlineCode>skir.yml</InlineCode> file, add the following snippet under <InlineCode>generators</InlineCode>:
+        In your <InlineCode>skir.yml</InlineCode> file, add the following snippet under{' '}
+        <InlineCode>generators</InlineCode>:
       </P>
       <CodeBlock language="yaml">{`- mod: skir-python-gen
   outDir: ./src/skirout
   config: {}`}</CodeBlock>
       <P>
-        For more information, see this Python project{" "}
-        <a href="https://github.com/gepheum/skir-python-example" target="_blank" rel="noopener noreferrer">
+        For more information, see this Python project{' '}
+        <a
+          href="https://github.com/gepheum/skir-python-example"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           example
-        </a>.
+        </a>
+        .
       </P>
 
       <H2>Python generated code guide</H2>
       <P>
-        The examples below are for the code generated from{" "}
-        <a href="https://github.com/gepheum/skir-python-example/blob/main/skir_src/user.skir" target="_blank" rel="noopener noreferrer">
+        The examples below are for the code generated from{' '}
+        <a
+          href="https://github.com/gepheum/skir-python-example/blob/main/skir_src/user.skir"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           this
-        </a>{" "}
+        </a>{' '}
         .skir file.
       </P>
 
@@ -43,8 +54,9 @@ from skirout.user_skir import TARZAN, SubscriptionStatus, User, UserHistory, Use
 
       <H3>Struct classes</H3>
       <P>
-        For every struct <InlineCode>S</InlineCode> in the .skir file, skir generates a frozen (deeply immutable) class{" "}
-        <InlineCode>S</InlineCode> and a mutable class <InlineCode>S.Mutable</InlineCode>.
+        For every struct <InlineCode>S</InlineCode> in the .skir file, skir generates a frozen
+        (deeply immutable) class <InlineCode>S</InlineCode> and a mutable class{' '}
+        <InlineCode>S.Mutable</InlineCode>.
       </P>
 
       <H3>Frozen struct classes</H3>
@@ -211,8 +223,9 @@ def get_subscription_info_text(status: SubscriptionStatus) -> str:
 
       <H3>Serialization</H3>
       <P>
-        Every frozen struct class and enum class has a static readonly <InlineCode>serializer</InlineCode> property
-        which can be used for serializing and deserializing instances of the class.
+        Every frozen struct class and enum class has a static readonly{' '}
+        <InlineCode>serializer</InlineCode> property which can be used for serializing and
+        deserializing instances of the class.
       </P>
       <CodeBlock language="python">{`# Serialize 'john' to dense JSON.
 
@@ -296,28 +309,45 @@ assert user_registry.users.find_or_default(100).name == ""
         <strong>Starting a skir service on an HTTP server</strong> - examples:
       </P>
       <P>
-        •{" "}
-        <a href="https://github.com/gepheum/skir-python-example/blob/main/start_service_flask.py" target="_blank" rel="noopener noreferrer">
+        •{' '}
+        <a
+          href="https://github.com/gepheum/skir-python-example/blob/main/start_service_flask.py"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Flask
         </a>
       </P>
       <P>
-        •{" "}
-        <a href="https://github.com/gepheum/skir-python-example/blob/main/start_service_fastapi.py" target="_blank" rel="noopener noreferrer">
+        •{' '}
+        <a
+          href="https://github.com/gepheum/skir-python-example/blob/main/start_service_fastapi.py"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           FastAPI
         </a>
       </P>
       <P>
-        •{" "}
-        <a href="https://github.com/gepheum/skir-python-example/blob/main/start_service_starlite.py" target="_blank" rel="noopener noreferrer">
+        •{' '}
+        <a
+          href="https://github.com/gepheum/skir-python-example/blob/main/start_service_starlite.py"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Litestar
         </a>
       </P>
       <P>
-        <strong>Sending RPCs to a skir service</strong> - full example{" "}
-        <a href="https://github.com/gepheum/skir-python-example/blob/main/call_service.py" target="_blank" rel="noopener noreferrer">
+        <strong>Sending RPCs to a skir service</strong> - full example{' '}
+        <a
+          href="https://github.com/gepheum/skir-python-example/blob/main/call_service.py"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           here
-        </a>.
+        </a>
+        .
       </P>
 
       <H3>Reflection</H3>

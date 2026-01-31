@@ -1,5 +1,5 @@
-import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
 
 interface LanguageCardProps {
   name: string

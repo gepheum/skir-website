@@ -1,22 +1,21 @@
-import { Prose, H1, H2, H3, P, CodeBlock, InlineCode } from "@/components/prose"
-import type { Metadata } from "next"
+import { CodeBlock, H1, H2, H3, InlineCode, P, Prose } from '@/components/prose'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Java - Skir Documentation",
-  description: "Learn how to use Skir-generated Java code in your projects",
+  title: 'Java - Skir Documentation',
+  description: 'Learn how to use Skir-generated Java code in your projects',
 }
 
 export default function JavaPage() {
   return (
     <Prose>
       <H1>Java</H1>
-      <P>
-        This guide covers how to use Java code generated from Skir.
-      </P>
+      <P>This guide covers how to use Java code generated from Skir.</P>
 
       <H2>Set up</H2>
       <P>
-        In your <InlineCode>skir.yml</InlineCode> file, add the following snippet under <InlineCode>generators</InlineCode>:
+        In your <InlineCode>skir.yml</InlineCode> file, add the following snippet under{' '}
+        <InlineCode>generators</InlineCode>:
       </P>
       <CodeBlock language="yaml">{`- mod: skir-java-gen
   outDir: ./src/main/java/skirout
@@ -26,22 +25,34 @@ export default function JavaPage() {
   # config:
   #   packagePrefix: my.project.`}</CodeBlock>
       <P>
-        The generated Java code has a runtime dependency on <InlineCode>build.skir:skir-client</InlineCode>. Add this line to your <InlineCode>build.gradle</InlineCode> file in the <InlineCode>dependencies</InlineCode> section:
+        The generated Java code has a runtime dependency on{' '}
+        <InlineCode>build.skir:skir-client</InlineCode>. Add this line to your{' '}
+        <InlineCode>build.gradle</InlineCode> file in the <InlineCode>dependencies</InlineCode>{' '}
+        section:
       </P>
       <CodeBlock language="gradle">{`implementation 'build.skir:skir-client:latest.release'`}</CodeBlock>
       <P>
-        For more information, see this Java project{" "}
-        <a href="https://github.com/gepheum/skir-java-example" target="_blank" rel="noopener noreferrer">
+        For more information, see this Java project{' '}
+        <a
+          href="https://github.com/gepheum/skir-java-example"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           example
-        </a>.
+        </a>
+        .
       </P>
 
       <H2>Java generated code guide</H2>
       <P>
-        The examples below are for the code generated from{" "}
-        <a href="https://github.com/gepheum/skir-java-example/blob/main/skir-src/user.skir" target="_blank" rel="noopener noreferrer">
+        The examples below are for the code generated from{' '}
+        <a
+          href="https://github.com/gepheum/skir-java-example/blob/main/skir-src/user.skir"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           this
-        </a>{" "}
+        </a>{' '}
         .skir file.
       </P>
 
@@ -55,9 +66,7 @@ import skirout.user.Constants;
 // Now you can use: Constants.TARZAN, User, UserRegistry, SubscriptionStatus, etc.`}</CodeBlock>
 
       <H3>Struct classes</H3>
-      <P>
-        skir generates a deeply immutable Java class for every struct in the .skir file.
-      </P>
+      <P>skir generates a deeply immutable Java class for every struct in the .skir file.</P>
       <CodeBlock language="java">{`// To construct a User, use the builder pattern.
 
 final User john =
@@ -110,8 +119,8 @@ assert evilJohn.userId() == 42;`}</CodeBlock>
 
       <H3>Enum classes</H3>
       <P>
-        skir generates a deeply immutable Java class for every enum in the .skir file.
-        This class is not a Java enum, although the syntax for referring to constants is similar.
+        skir generates a deeply immutable Java class for every enum in the .skir file. This class is
+        not a Java enum, although the syntax for referring to constants is similar.
       </P>
       <P>
         The definition of the <InlineCode>SubscriptionStatus</InlineCode> enum in the .skir file is:
@@ -202,8 +211,9 @@ System.out.println(john.subscriptionStatus().accept(infoTextVisitor));
 
       <H3>Serialization</H3>
       <P>
-        Every frozen struct class and enum class has a static readonly <InlineCode>SERIALIZER</InlineCode> property
-        which can be used for serializing and deserializing instances of the class.
+        Every frozen struct class and enum class has a static readonly{' '}
+        <InlineCode>SERIALIZER</InlineCode> property which can be used for serializing and
+        deserializing instances of the class.
       </P>
       <CodeBlock language="java">{`// Serialize 'john' to dense JSON.
 
@@ -337,16 +347,26 @@ assert userRegistry.users().findByKey(100) == null;`}</CodeBlock>
 
       <H3>skir services</H3>
       <P>
-        <strong>Starting a skir service on an HTTP server</strong> - full example{" "}
-        <a href="https://github.com/gepheum/skir-java-example/blob/main/src/main/java/examples/StartService.java" target="_blank" rel="noopener noreferrer">
+        <strong>Starting a skir service on an HTTP server</strong> - full example{' '}
+        <a
+          href="https://github.com/gepheum/skir-java-example/blob/main/src/main/java/examples/StartService.java"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           here
-        </a>.
+        </a>
+        .
       </P>
       <P>
-        <strong>Sending RPCs to a skir service</strong> - full example{" "}
-        <a href="https://github.com/gepheum/skir-java-example/blob/main/src/main/java/examples/CallService.java" target="_blank" rel="noopener noreferrer">
+        <strong>Sending RPCs to a skir service</strong> - full example{' '}
+        <a
+          href="https://github.com/gepheum/skir-java-example/blob/main/src/main/java/examples/CallService.java"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           here
-        </a>.
+        </a>
+        .
       </P>
 
       <H3>Reflection</H3>
@@ -372,20 +392,20 @@ assert ((StructDescriptor) typeDescriptor).getFields().size() == 5;`}</CodeBlock
 
       <H2>Java codegen versus Kotlin codegen</H2>
       <P>
-        While Java and Kotlin code can interoperate seamlessly, skir provides separate
-        code generators for each language to leverage their unique strengths and idioms.
-        For instance, the Kotlin generator utilizes named parameters for struct
-        construction, whereas the Java generator employs the builder pattern.
+        While Java and Kotlin code can interoperate seamlessly, skir provides separate code
+        generators for each language to leverage their unique strengths and idioms. For instance,
+        the Kotlin generator utilizes named parameters for struct construction, whereas the Java
+        generator employs the builder pattern.
       </P>
       <P>
-        Although it's technically feasible to use Kotlin-generated code in a Java
-        project (or vice versa), doing so results in an API that feels unnatural and
-        cumbersome in the calling language. For the best developer experience, use the code
-        generator that matches your project's primary language.
+        Although it's technically feasible to use Kotlin-generated code in a Java project (or vice
+        versa), doing so results in an API that feels unnatural and cumbersome in the calling
+        language. For the best developer experience, use the code generator that matches your
+        project's primary language.
       </P>
       <P>
-        Note that both the Java and Kotlin generated code share the same runtime
-        dependency: <InlineCode>build.skir:skir-client</InlineCode>.
+        Note that both the Java and Kotlin generated code share the same runtime dependency:{' '}
+        <InlineCode>build.skir:skir-client</InlineCode>.
       </P>
     </Prose>
   )

@@ -1,22 +1,21 @@
-import { Prose, H1, H2, H3, P, CodeBlock, InlineCode } from "@/components/prose"
-import type { Metadata } from "next"
+import { CodeBlock, H1, H2, H3, InlineCode, P, Prose } from '@/components/prose'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Kotlin - Skir Documentation",
-  description: "Learn how to use Skir-generated Kotlin code in your projects",
+  title: 'Kotlin - Skir Documentation',
+  description: 'Learn how to use Skir-generated Kotlin code in your projects',
 }
 
 export default function KotlinPage() {
   return (
     <Prose>
       <H1>Kotlin</H1>
-      <P>
-        This guide covers how to use Kotlin code generated from Skir.
-      </P>
+      <P>This guide covers how to use Kotlin code generated from Skir.</P>
 
       <H2>Set up</H2>
       <P>
-        In your <InlineCode>skir.yml</InlineCode> file, add the following snippet under <InlineCode>generators</InlineCode>:
+        In your <InlineCode>skir.yml</InlineCode> file, add the following snippet under{' '}
+        <InlineCode>generators</InlineCode>:
       </P>
       <CodeBlock language="yaml">{`- mod: skir-kotlin-gen
   outDir: ./src/main/kotlin/skirout
@@ -26,22 +25,34 @@ export default function KotlinPage() {
   # config:
   #   packagePrefix: my.project.`}</CodeBlock>
       <P>
-        The generated Kotlin code has a runtime dependency on <InlineCode>build.skir:skir-client</InlineCode>. Add this line to your <InlineCode>build.gradle.kts</InlineCode> file in the <InlineCode>dependencies</InlineCode> section:
+        The generated Kotlin code has a runtime dependency on{' '}
+        <InlineCode>build.skir:skir-client</InlineCode>. Add this line to your{' '}
+        <InlineCode>build.gradle.kts</InlineCode> file in the <InlineCode>dependencies</InlineCode>{' '}
+        section:
       </P>
       <CodeBlock language="kotlin">{`implementation("build.skir:skir-client:latest.release")`}</CodeBlock>
       <P>
-        For more information, see this Kotlin project{" "}
-        <a href="https://github.com/gepheum/skir-kotlin-example" target="_blank" rel="noopener noreferrer">
+        For more information, see this Kotlin project{' '}
+        <a
+          href="https://github.com/gepheum/skir-kotlin-example"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           example
-        </a>.
+        </a>
+        .
       </P>
 
       <H2>Kotlin generated code guide</H2>
       <P>
-        The examples below are for the code generated from{" "}
-        <a href="https://github.com/gepheum/skir-kotlin-example/blob/main/skir-src/user.skir" target="_blank" rel="noopener noreferrer">
+        The examples below are for the code generated from{' '}
+        <a
+          href="https://github.com/gepheum/skir-kotlin-example/blob/main/skir-src/user.skir"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           this
-        </a>{" "}
+        </a>{' '}
         .skir file.
       </P>
 
@@ -56,8 +67,8 @@ import skirout.user.TARZAN
 
       <H3>Frozen struct classes</H3>
       <P>
-        For every struct S in the .skir file, skir generates a frozen (deeply immutable)
-        class <InlineCode>S</InlineCode> and a mutable class <InlineCode>S.Mutable</InlineCode>.
+        For every struct S in the .skir file, skir generates a frozen (deeply immutable) class{' '}
+        <InlineCode>S</InlineCode> and a mutable class <InlineCode>S.Mutable</InlineCode>.
       </P>
       <CodeBlock language="kotlin">{`// Construct a frozen User.
 val john =
@@ -190,8 +201,8 @@ greet(lyla)
 
       <H3>Enum classes</H3>
       <P>
-        Skir generates a deeply immutable Kotlin class for every enum in the .skir file.
-        This class is not a Kotlin enum, although the syntax for referring to constants is similar.
+        Skir generates a deeply immutable Kotlin class for every enum in the .skir file. This class
+        is not a Kotlin enum, although the syntax for referring to constants is similar.
       </P>
       <CodeBlock language="kotlin">{`val someStatuses =
     listOf(
@@ -247,8 +258,8 @@ println(getInfoText(john.subscriptionStatus))
 
       <H3>Serialization</H3>
       <P>
-        Every frozen struct class and enum class has a static <InlineCode>serializer</InlineCode> property
-        which can be used for serializing and deserializing instances of the class.
+        Every frozen struct class and enum class has a static <InlineCode>serializer</InlineCode>{' '}
+        property which can be used for serializing and deserializing instances of the class.
       </P>
       <CodeBlock language="kotlin">{`val serializer = User.serializer
 
@@ -376,16 +387,26 @@ assert(jack.pets === jade.pets)`}</CodeBlock>
 
       <H3>Skir services</H3>
       <P>
-        <strong>Starting a skir service on an HTTP server</strong> - full example{" "}
-        <a href="https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/examples/startservice/StartService.kt" target="_blank" rel="noopener noreferrer">
+        <strong>Starting a skir service on an HTTP server</strong> - full example{' '}
+        <a
+          href="https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/examples/startservice/StartService.kt"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           here
-        </a>.
+        </a>
+        .
       </P>
       <P>
-        <strong>Sending RPCs to a skir service</strong> - full example{" "}
-        <a href="https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/examples/callservice/CallService.kt" target="_blank" rel="noopener noreferrer">
+        <strong>Sending RPCs to a skir service</strong> - full example{' '}
+        <a
+          href="https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/examples/callservice/CallService.kt"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           here
-        </a>.
+        </a>
+        .
       </P>
 
       <H3>Reflection</H3>
@@ -409,20 +430,20 @@ assert((typeDescriptor as StructDescriptor).fields.size == 5)`}</CodeBlock>
 
       <H2>Java codegen versus Kotlin codegen</H2>
       <P>
-        While Java and Kotlin code can interoperate seamlessly, skir provides separate
-        code generators for each language to leverage their unique strengths and idioms.
-        For instance, the Kotlin generator utilizes named parameters for struct
-        construction, whereas the Java generator employs the builder pattern.
+        While Java and Kotlin code can interoperate seamlessly, skir provides separate code
+        generators for each language to leverage their unique strengths and idioms. For instance,
+        the Kotlin generator utilizes named parameters for struct construction, whereas the Java
+        generator employs the builder pattern.
       </P>
       <P>
-        Although it's technically feasible to use Kotlin-generated code in a Java
-        project (or vice versa), doing so results in an API that feels unnatural and
-        cumbersome in the calling language. For the best developer experience, use the code
-        generator that matches your project's primary language.
+        Although it's technically feasible to use Kotlin-generated code in a Java project (or vice
+        versa), doing so results in an API that feels unnatural and cumbersome in the calling
+        language. For the best developer experience, use the code generator that matches your
+        project's primary language.
       </P>
       <P>
-        Note that both the Java and Kotlin generated code share the same runtime
-        dependency: <InlineCode>build.skir:skir-client</InlineCode>.
+        Note that both the Java and Kotlin generated code share the same runtime dependency:{' '}
+        <InlineCode>build.skir:skir-client</InlineCode>.
       </P>
     </Prose>
   )

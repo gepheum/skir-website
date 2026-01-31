@@ -1,10 +1,11 @@
 // Custom Skir language definition for Highlight.js syntax highlighting
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function skirLanguage(hljs: any) {
   const KEYWORDS = {
     keyword: 'struct enum method const import from as removed',
     literal: 'true false',
-    type: 'int32 int64 hash64 float32 float64 bool string bytes timestamp'
-  };
+    type: 'int32 int64 hash64 float32 float64 bool string bytes timestamp',
+  }
 
   return {
     name: 'Skir',
@@ -16,7 +17,7 @@ export function skirLanguage(hljs: any) {
         className: 'comment',
         begin: '///',
         end: '$',
-        relevance: 10
+        relevance: 10,
       },
       // Line comments
       hljs.COMMENT('//', '$'),
@@ -29,19 +30,19 @@ export function skirLanguage(hljs: any) {
           {
             begin: '"',
             end: '"',
-            contains: [hljs.BACKSLASH_ESCAPE]
-          }
-        ]
+            contains: [hljs.BACKSLASH_ESCAPE],
+          },
+        ],
       },
       // Numbers
       {
         className: 'number',
         variants: [
           { begin: '\\b0x[0-9a-fA-F]+\\b' },
-          { begin: '\\b\\d+(\\.\\d+)?([eE][+-]?\\d+)?\\b' }
+          { begin: '\\b\\d+(\\.\\d+)?([eE][+-]?\\d+)?\\b' },
         ],
-        relevance: 0
-      }
-    ]
-  };
+        relevance: 0,
+      },
+    ],
+  }
 }

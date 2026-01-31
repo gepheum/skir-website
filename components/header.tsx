@@ -1,15 +1,15 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import { useState } from "react"
-import { Github, Menu, X } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Button } from '@/components/ui/button'
+import { Github, Menu, X } from 'lucide-react'
+import Link from 'next/link'
+import { useState } from 'react'
 
 const navigation = [
-  { name: "Docs", href: "/docs" },
-  { name: "Getting Started", href: "/docs/getting-started" },
-  { name: "Language Reference", href: "/docs/language-reference" },
-  { name: "Languages", href: "/docs/typescript" },
+  { name: 'Docs', href: '/docs' },
+  { name: 'Getting Started', href: '/docs/getting-started' },
+  { name: 'Language Reference', href: '/docs/language-reference' },
+  { name: 'Languages', href: '/docs/typescript' },
 ]
 
 export function Header() {
@@ -25,7 +25,7 @@ export function Header() {
             </div>
             <span className="text-xl font-bold">Skir</span>
           </Link>
-          
+
           <div className="hidden md:flex items-center gap-6">
             {navigation.map((item) => (
               <Link
@@ -46,7 +46,7 @@ export function Header() {
               <span className="sr-only">GitHub</span>
             </a>
           </Button>
-          
+
           <Button asChild className="hidden md:flex">
             <Link href="/docs/getting-started">Get Started</Link>
           </Button>

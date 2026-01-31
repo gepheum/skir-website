@@ -1,9 +1,9 @@
-import { Prose, H1, H2, H3, P, CodeBlock, InlineCode } from "@/components/prose"
-import type { Metadata } from "next"
+import { CodeBlock, H1, H2, H3, InlineCode, P, Prose } from '@/components/prose'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Dart - Skir Documentation",
-  description: "Learn how to use Skir-generated Dart code in your projects",
+  title: 'Dart - Skir Documentation',
+  description: 'Learn how to use Skir-generated Dart code in your projects',
 }
 
 export default function DartPage() {
@@ -16,28 +16,40 @@ export default function DartPage() {
 
       <H2>Set up</H2>
       <P>
-        In your <InlineCode>skir.yml</InlineCode> file, add the following snippet under <InlineCode>generators</InlineCode>:
+        In your <InlineCode>skir.yml</InlineCode> file, add the following snippet under{' '}
+        <InlineCode>generators</InlineCode>:
       </P>
       <CodeBlock language="yaml">{`- mod: skir-dart-gen
   outDir: ./src/skirout
   config: {}`}</CodeBlock>
       <P>
-        The generated Dart code has a runtime dependency on the <InlineCode>skir_client</InlineCode> library. Add this line to your <InlineCode>pubspec.yaml</InlineCode> file under <InlineCode>dependencies</InlineCode>:
+        The generated Dart code has a runtime dependency on the <InlineCode>skir_client</InlineCode>{' '}
+        library. Add this line to your <InlineCode>pubspec.yaml</InlineCode> file under{' '}
+        <InlineCode>dependencies</InlineCode>:
       </P>
       <CodeBlock language="yaml">{`skir_client: ^1.0.2  # Use the latest version`}</CodeBlock>
       <P>
-        For more information, see this Dart project{" "}
-        <a href="https://github.com/gepheum/skir-dart-example" target="_blank" rel="noopener noreferrer">
+        For more information, see this Dart project{' '}
+        <a
+          href="https://github.com/gepheum/skir-dart-example"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           example
-        </a>.
+        </a>
+        .
       </P>
 
       <H2>Dart generated code guide</H2>
       <P>
-        The examples below are for the code generated from{" "}
-        <a href="https://github.com/gepheum/skir-dart-example/blob/main/lib/skir_src/user.skir" target="_blank" rel="noopener noreferrer">
+        The examples below are for the code generated from{' '}
+        <a
+          href="https://github.com/gepheum/skir-dart-example/blob/main/lib/skir_src/user.skir"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           this
-        </a>{" "}
+        </a>{' '}
         .skir file.
       </P>
 
@@ -49,8 +61,9 @@ import 'package:skir_dart_example/skirout/user.dart';
 
       <H3>Struct classes</H3>
       <P>
-        For every struct <InlineCode>S</InlineCode> in the .skir file, skir generates a frozen (deeply immutable) class{" "}
-        <InlineCode>S</InlineCode> and a mutable class <InlineCode>S_mutable</InlineCode>.
+        For every struct <InlineCode>S</InlineCode> in the .skir file, skir generates a frozen
+        (deeply immutable) class <InlineCode>S</InlineCode> and a mutable class{' '}
+        <InlineCode>S_mutable</InlineCode>.
       </P>
 
       <H3>Frozen struct classes</H3>
@@ -213,8 +226,9 @@ String getSubscriptionInfoText(SubscriptionStatus status) {
 
       <H3>Serialization</H3>
       <P>
-        Every frozen struct class and enum class has a static readonly <InlineCode>serializer</InlineCode> property
-        which can be used for serializing and deserializing instances of the class.
+        Every frozen struct class and enum class has a static readonly{' '}
+        <InlineCode>serializer</InlineCode> property which can be used for serializing and
+        deserializing instances of the class.
       </P>
       <CodeBlock language="dart">{`// Serialize 'john' to dense JSON.
 
@@ -341,16 +355,26 @@ assert(userRegistry.users.findByKey(43) == evilJane);`}</CodeBlock>
 
       <H3>Skir services</H3>
       <P>
-        <strong>Starting a skir service on an HTTP server</strong> - full example{" "}
-        <a href="https://github.com/gepheum/skir-dart-example/blob/main/bin/start_service.dart" target="_blank" rel="noopener noreferrer">
+        <strong>Starting a skir service on an HTTP server</strong> - full example{' '}
+        <a
+          href="https://github.com/gepheum/skir-dart-example/blob/main/bin/start_service.dart"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           here
-        </a>.
+        </a>
+        .
       </P>
       <P>
-        <strong>Sending RPCs to a skir service</strong> - full example{" "}
-        <a href="https://github.com/gepheum/skir-dart-example/blob/main/bin/call_service.dart" target="_blank" rel="noopener noreferrer">
+        <strong>Sending RPCs to a skir service</strong> - full example{' '}
+        <a
+          href="https://github.com/gepheum/skir-dart-example/blob/main/bin/call_service.dart"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           here
-        </a>.
+        </a>
+        .
       </P>
 
       <H3>Reflection</H3>
