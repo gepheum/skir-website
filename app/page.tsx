@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import {
   ArrowRight,
   FileCode2,
-  Github,
+  Github as GitHubIcon,
   Globe,
   Layers,
   Package,
@@ -58,7 +58,7 @@ export default function HomePage() {
               </Button>
               <Button asChild variant="outline" size="lg" className="text-base bg-transparent">
                 <a href="https://github.com/gepheum/skir" target="_blank" rel="noopener noreferrer">
-                  <Github className="mr-2 h-4 w-4" />
+                  <GitHubIcon className="mr-2 h-4 w-4" />
                   View on GitHub
                 </a>
               </Button>
