@@ -143,7 +143,7 @@ System.out.println(restored.label());  // P`,
   dart: `// Import the generated library
 import 'package:your_project/skirout/shapes.dart';
 
-// Construct a frozen Point
+// Construct a frozen (immutable) Point
 final point = Point(
   x: 3,
   y: 4,
