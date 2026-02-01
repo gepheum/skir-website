@@ -76,12 +76,12 @@ point = Point(
 )
 
 # Serialize to dense JSON: compact and allows schema evolution
-point_json = Point.serializer.to_json(point)
-print(point_json)  # [3, 4, "P"]
+point_json = Point.serializer.to_json_code(point)
+print(point_json)  # [3,4,"P"]
 
 # Deserialize from JSON
-restored = Point.serializer.from_json(point_json)
-print(restored.label)  # "P"`,
+restored = Point.serializer.from_json_code(point_json)
+print(restored.label)  # P`,
 
   cpp: `// Include the generated header
 #include "skirout/shapes.h"
@@ -151,11 +151,11 @@ final point = Point(
 );
 
 // Serialize to dense JSON: compact and allows schema evolution
-final String pointJson = Point.serializer.toJson(point);
-print(pointJson);  // [3, 4, "P"]
+final String pointJson = Point.serializer.toJsonCode(point);
+print(pointJson);  // [3,4,"P"]
 
 // Deserialize from JSON
-final restored = Point.serializer.fromJson(pointJson);
+final restored = Point.serializer.fromJsonCode(pointJson);
 print(restored.label);  // P`,
 }
 
