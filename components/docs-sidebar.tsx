@@ -25,7 +25,7 @@ const navigation = [
     ],
   },
   {
-    title: 'Languages',
+    title: 'Generated Code',
     items: [
       { title: 'TypeScript', href: '/docs/typescript' },
       { title: 'Python', href: '/docs/python' },

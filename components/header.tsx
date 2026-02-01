@@ -9,7 +9,7 @@ const navigation = [
   { name: 'Docs', href: '/docs' },
   { name: 'Getting Started', href: '/docs/getting-started' },
   { name: 'Language Reference', href: '/docs/language-reference' },
-  { name: 'Languages', href: '/docs/typescript' },
+  { name: 'Generated Code', href: '/docs/typescript' },
 ]
 
 export function Header() {

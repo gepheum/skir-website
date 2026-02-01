@@ -16,6 +16,7 @@ import {
   Terminal,
   Zap,
 } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export default function HomePage() {
@@ -64,7 +65,7 @@ export default function HomePage() {
             </div>
 
             {/* Quick start terminal */}
-            <div className="max-w-md mx-auto">
+            <div className="max-w-md mx-auto mb-16">
               <div className="bg-card border border-border rounded-lg p-4 font-mono text-sm">
                 <div className="flex items-center gap-2 text-muted-foreground mb-2">
                   <Terminal className="h-4 w-4" />
@@ -72,6 +73,18 @@ export default function HomePage() {
                 </div>
                 <code className="text-primary">npx skir init</code>
               </div>
+            </div>
+
+            {/* Quick Example GIF */}
+            <div className="max-w-[1000px] mx-auto rounded-xl overflow-hidden border border-border shadow-2xl">
+              <Image
+                src="/skir-website/quick-example.gif"
+                alt="Skir Quick Example showing VS Code editing and code generation"
+                width={0}
+                height={0}
+                sizes="100vw"
+                className="w-full h-auto"
+              />
             </div>
           </div>
         </div>
