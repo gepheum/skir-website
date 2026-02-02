@@ -40,8 +40,8 @@ export default function HomePage() {
             </div>
 
             <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-balance">
-              The single source of truth
-              <br /> for <span className="text-primary">your data types</span>
+              The <span className="text-primary">single source of truth</span>
+              <br /> for your data types
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 text-pretty">
