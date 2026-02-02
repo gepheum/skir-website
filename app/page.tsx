@@ -119,7 +119,8 @@ export default function HomePage() {
               Serialize now, deserialize in 100 years
             </h2>
             <p className="text-muted-foreground text-lg mb-12 max-w-2xl mx-auto">
-              Simple guidelines and built-in checks to evolve your schema without breaking backward compatibility.
+              Simple guidelines and built-in checks to evolve your schema without breaking backward
+              compatibility.
             </p>
 
             <div className="max-w-[480px] mx-auto rounded-xl overflow-hidden border border-border shadow-2xl">
