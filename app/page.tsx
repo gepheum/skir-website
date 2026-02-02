@@ -39,15 +39,15 @@ export default function HomePage() {
               <span className="text-muted-foreground">Like Protocol Buffer, but better</span>
             </div>
 
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-balance">
-              Define once, generate for <span className="text-primary">every language</span>
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-balance">
+              The single source of truth<br /> for <span className="text-primary">your data types</span>
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 text-pretty">
               Skir is a universal language for representing data types, constants, and RPC
               interfaces. Define your schema once in a{' '}
               <code className="text-primary font-mono">.skir</code> file and generate idiomatic,
-              type-safe code for TypeScript, Python, Java, C++, and more.
+              type-safe code in TypeScript, Python, Java, C++, and more.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
