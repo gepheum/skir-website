@@ -5,6 +5,10 @@ import { useState } from 'react'
 // Use Light build to allow custom language registration
 import { skirLanguage } from '@/lib/skir-language'
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
+import cpp from 'react-syntax-highlighter/dist/esm/languages/hljs/cpp'
+import dart from 'react-syntax-highlighter/dist/esm/languages/hljs/dart'
+import java from 'react-syntax-highlighter/dist/esm/languages/hljs/java'
+import kotlin from 'react-syntax-highlighter/dist/esm/languages/hljs/kotlin'
 import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python'
 import typescript from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript'
 import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
@@ -13,6 +17,10 @@ import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 SyntaxHighlighter.registerLanguage('skir', skirLanguage)
 SyntaxHighlighter.registerLanguage('typescript', typescript)
 SyntaxHighlighter.registerLanguage('python', python)
+SyntaxHighlighter.registerLanguage('cpp', cpp)
+SyntaxHighlighter.registerLanguage('kotlin', kotlin)
+SyntaxHighlighter.registerLanguage('java', java)
+SyntaxHighlighter.registerLanguage('dart', dart)
 
 const tabs = [
   { id: 'typescript', label: 'TypeScript' },
