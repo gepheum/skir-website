@@ -170,7 +170,7 @@ export function CodeExample() {
   return (
     <div className="rounded-lg border border-border overflow-hidden bg-card">
       {/* Split layout */}
-      <div className="flex h-[600px]">
+      <div className="flex h-[540px]">
         {/* Left side - Skir code (always visible) */}
         <div className="w-1/2 border-r border-border flex flex-col">
           <div className="px-4 py-3 text-sm font-medium border-b border-border bg-secondary/30 text-primary">
