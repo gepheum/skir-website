@@ -3,6 +3,7 @@ import { FeatureCard } from '@/components/feature-card'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { LanguageCard } from '@/components/language-card'
+import { RpcExample } from '@/components/rpc-example'
 import { Button } from '@/components/ui/button'
 import {
   ArrowRight,
@@ -109,8 +110,40 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* RPC Example Section */}
       <section className="py-16 md:py-24 border-t border-border bg-card/50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
+              RPCs with end-to-end type safety
+            </h2>
+            <p className="text-muted-foreground text-lg mb-6 max-w-2xl mx-auto">
+              Define your RPC methods in Skir and invoke them like local functions. The generated
+              client handles serialization, network transport, and deserialization automatically.
+            </p>
+            <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm">
+              <div className="flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-primary" />
+                <span>Type-checked request and response</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-primary" />
+                <span>Autocompletion in your IDE</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-primary" />
+                <span>No boilerplace code</span>
+              </div>
+            </div>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <RpcExample />
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-16 md:py-24 border-t border-border">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Why choose Skir?</h2>
