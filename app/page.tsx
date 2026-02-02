@@ -111,6 +111,31 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Schema Evolution Section */}
+      <section className="py-16 md:py-24 border-t border-border">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
+              Serialize now, deserialize in 100 years
+            </h2>
+            <p className="text-muted-foreground text-lg mb-12 max-w-2xl mx-auto">
+              Simple guidelines and built-in checks to evolve your schema without breaking backward compatibility.
+            </p>
+
+            <div className="max-w-[480px] mx-auto rounded-xl overflow-hidden border border-border shadow-2xl">
+              <Image
+                src="/skir-website/schema-evolution.gif"
+                alt="Schema Evolution showing breaking change detection"
+                width={0}
+                height={0}
+                sizes="100vw"
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* RPC Example Section */}
       <section className="py-16 md:py-24 border-t border-border bg-card/50">
         <div className="container mx-auto px-4">
