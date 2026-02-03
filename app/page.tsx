@@ -119,12 +119,12 @@ export default function HomePage() {
               Serialize now, deserialize in 100 years
             </h2>
             <p className="text-muted-foreground text-lg mb-12 max-w-2xl mx-auto">
-              Updating data structures in a distributed or long-lived system is risky—one wrong move
-              can break clients or corrupt data. Skir enforces simple guidelines and built-in checks
+              Modifying schemas in a long-lived or distributed system is risky—one wrong move
+              can break clients or make it impossible to deserialize old data. Skir enforces simple guidelines and built-in checks
               to evolve your schema safely.
             </p>
 
-            <div className="max-w-[480px] mx-auto rounded-xl overflow-hidden border border-border shadow-2xl">
+            <div className="max-w-[760px] mx-auto rounded-xl overflow-hidden border border-border shadow-2xl">
               <Image
                 src="/skir-website/schema-evolution.gif"
                 alt="Schema Evolution showing breaking change detection"
