@@ -93,7 +93,7 @@ export default function HomePage() {
                 <br />
                 The generated code feels native to each language and is easy to use.
                 <br />
-                The workflow is stupid simple.
+                The workflow is dead simple.
               </p>
             </div>
 
