@@ -45,8 +45,8 @@ export default function HomePage() {
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 text-pretty">
-              Skir is a universal language for representing data types, constants, and RPC
-              interfaces. Define your schema once in a{' '}
+              Skir is a declarative language for defining data types, constants, and services.
+              Write your schema once in a{' '}
               <code className="text-primary font-mono">.skir</code> file and generate idiomatic,
               type-safe code in TypeScript, Python, Java, C++, and more.
             </p>
@@ -101,8 +101,9 @@ export default function HomePage() {
                 Code generation done right
               </h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Define your data structures once and compile them into idiomatic code for any
-                supported language.
+                One YAML file. One command. Watch mode recompiles automatically.<br/>
+                The generated code feels native to each language and is easy to use.<br/>
+                The workflow is stupid simple.
               </p>
             </div>
 
@@ -120,8 +121,8 @@ export default function HomePage() {
             </h2>
             <p className="text-muted-foreground text-lg mb-12 max-w-2xl mx-auto">
               Modifying schemas in a long-lived or distributed system is risky—one wrong move can
-              break clients or make it impossible to deserialize old data. Skir enforces simple
-              guidelines and built-in checks to evolve your schema safely.
+              break clients or make it impossible to deserialize old data.<br/>
+              Skir has simple guidelines and built-in checks to evolve your schema safely.
             </p>
 
             <div className="max-w-[760px] mx-auto rounded-xl overflow-hidden border border-border shadow-2xl">
@@ -141,30 +142,16 @@ export default function HomePage() {
       {/* RPC Example Section */}
       <section className="py-16 md:py-24 border-t border-border bg-card/50">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center mb-12">
+          <div className="max-w-6xl mx-auto text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-4 text-balance">
               RPCs with end-to-end type safety
             </h2>
             <p className="text-muted-foreground text-lg mb-6 max-w-2xl mx-auto">
-              Define your RPC methods in Skir and invoke them like local functions. The generated
-              client handles serialization, network transport, and deserialization automatically.
+              Define your RPC methods in Skir and invoke them like local functions <em>a la gRPC</em>.
+              No more API contract mismatches between your frontend and backend or across microservices. Client and server are always in sync.
             </p>
-            <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm">
-              <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-primary" />
-                <span>Type-checked request and response</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-primary" />
-                <span>Autocompletion in your IDE</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-primary" />
-                <span>No boilerplace code</span>
-              </div>
-            </div>
           </div>
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             <RpcExample />
           </div>
         </div>

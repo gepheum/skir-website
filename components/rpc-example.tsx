@@ -1,59 +1,134 @@
-'use client'
+import { SplitCodeExample } from '@/components/split-code-example'
 
-import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
-import typescript from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript'
-import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+const skirCode = `struct WhatToWearRequest {
+  temperature_celsius: float32;
+  raining: bool;
+}
 
-SyntaxHighlighter.registerLanguage('typescript', typescript)
+struct WhatToWearResponse {
+  bottom_outfit: string;
+  sunglasses: bool;
+}
 
-const code = `import { ServiceClient } from "skir-client";
-import { IsConvex, Shape } from "./skirout/shapes";
+method WhatToWear(WhatToWearRequest):
+    WhatToWearResponse  = 770862;`
 
-const serviceClient = new ServiceClient("http://localhost:8080/myapi");
+const codeExamples = {
+  typescript: `import { ServiceClient } from "skir-client";
+import { WhatToWear, WhatToWearRequest } from "../skirout/outfit_picker";
 
-const emShape = Shape.create({
-  points: [
-    {x: 0, y: 0, label: "A"},
-    {x: 2, y: 5, label: "B"},
-    {x: 2, y: 2, label: "C"},
-    {x: 4, y: 5, label: "D"},
-    {x: 4, y: 0, label: "E"},
-  ],
-  label: "M",
-});
+const client = new ServiceClient("http://localhost:8080/api");
 
-// Invoke the IsConvex method remotely
-const isConvex: boolean = await serviceClient.invokeRemote(IsConvex, emShape);
+const response = await client.invokeRemote(
+  WhatToWear,
+  WhatToWearRequest.create({
+    temperatureCelsius: 25,
+    raining: true,
+  })
+);
 
-console.log(isConvex);  // false`
+if (response.sunglasses) {
+  console.log("Don't forget your sunglasses 😎");
+}`,
+
+  python: `from skirout.outfit_picker_skir import WhatToWear, WhatToWearRequest
+
+import skir
+
+service_client = skir.ServiceClient("http://localhost:8080/api")
+
+response = service_client.invoke_remote(
+    WhatToWear,
+    WhatToWearRequest(
+        temperature_celsius=25,
+        raining=False,
+    )
+)
+
+if (response.sunglasses):
+    print("Don't forget your sunglasses 😎")`,
+
+  cpp: `#include "httplib.h"
+#include "skirout/outfit_picker.h"
+#include "skir.h"
+
+using ::skirout_outfit_picker::WhatToWear;
+using ::skirout_outfit_picker::WhatToWearRequest;
+using ::skirout_outfit_picker::WhatToWearResponse;
+
+std::unique_ptr<skir::service::Client> client =
+    skir::service::MakeHttplibClient(
+        std::make_unique<httplib::Client>("localhost", 8080), "/api");
+
+const WhatToWearRequest request = {
+    .raining = false,
+    .temperature_celsius = 25,
+};
+
+const absl::StatusOr<WhatToWearResponse> response =
+    InvokeRemote(*client, WhatToWear(), request);
+
+if (response.ok() && response->sunglasses) {
+  std::cout << "Don't forget your sunglasses 😎\\n";
+}`,
+
+  kotlin: `import build.skir.service.ServiceClient
+import skirout.outfit_picker.WhatToWear
+import skirout.outfit_picker.WhatToWearRequest
+import skirout.outfit_picker.WhatToWearResponse
+
+val serviceClient = ServiceClient("http://localhost:8080/api")
+
+val response = serviceClient.invokeRemote(
+    WhatToWear,
+    WhatToWearRequest(
+        temperatureCelcius = 25,
+        raining = false,
+    ),
+)
+
+if (response.sunglasses) {
+    println("Don't forget your sunglasses 😎")
+}`,
+
+  java: `import build.skir.service.ServiceClient;
+import skirout.outfit_picker.WhatToWearRequest;
+import skirout.outfit_picker.WhatToWearResponse;
+import skirout.outfit_picker.Methods;
+
+final ServiceClient serviceClient =
+    new ServiceClient("http://localhost:8080/api");
+
+final WhatToWearResponse response = serviceClient.invokeRemoteBlocking(
+    Methods.WHAT_TO_WEAR,
+    WhatToWearRequest.builder()
+        .setRaining(false)
+        .setTemperatureCelsius(25)
+        .build());
+
+if (response.sunglasses()) {
+  System.out.println("Don't forget your sunglasses 😎");
+}`,
+
+  dart: `import 'package:skir_client/skir_client.dart' as skir;
+import 'package:your_project/skirout/outfit_picker.dart';
+
+final serviceClient = skir.ServiceClient('http://localhost:8080/api');
+
+final response = await serviceClient
+    .wrap(whatToWearMethod)
+    .invoke(
+      WhatToWearRequest(
+        temperatureCelsius: 25,
+        raining: false,
+      )
+    );
+
+if (response.sunglasses) {
+  print("Don't forget your sunglasses 😎");
+}`,
+}
 
 export function RpcExample() {
-  return (
-    <div className="rounded-lg border border-border overflow-hidden bg-card">
-      <div className="px-4 py-3 text-sm font-medium border-b border-border bg-secondary/30 text-primary">
-        client.ts
-      </div>
-      <div className="overflow-x-auto">
-        <SyntaxHighlighter
-          language="typescript"
-          style={atomOneDark}
-          customStyle={{
-            margin: 0,
-            borderRadius: 0,
-            background: 'transparent',
-            padding: '1.5rem',
-          }}
-          codeTagProps={{
-            style: {
-              fontSize: '0.875rem',
-              fontFamily:
-                'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-            },
-          }}
-        >
-          {code}
-        </SyntaxHighlighter>
-      </div>
-    </div>
-  )
+  return <SplitCodeExample skirCode={skirCode} codeExamples={codeExamples} />
 }
