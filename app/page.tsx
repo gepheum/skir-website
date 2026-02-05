@@ -5,18 +5,7 @@ import { Header } from '@/components/header'
 import { LanguageCard } from '@/components/language-card'
 import { RpcExample } from '@/components/rpc-example'
 import { Button } from '@/components/ui/button'
-import {
-  ArrowRight,
-  FileCode2,
-  Github as GitHubIcon,
-  Globe,
-  Layers,
-  Package,
-  RefreshCw,
-  Shield,
-  Terminal,
-  Zap,
-} from 'lucide-react'
+import { ArrowRight, FileCode2, Github as GitHubIcon, Package, Terminal, Zap } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
