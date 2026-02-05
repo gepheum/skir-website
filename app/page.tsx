@@ -164,42 +164,24 @@ export default function HomePage() {
       <section className="py-16 md:py-24 border-t border-border">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why choose Skir?</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Built for modern development with a focus on developer experience and type safety.
-            </p>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">More features</h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            <FeatureCard
-              icon={<Globe className="h-6 w-6" />}
-              title="Multi-Language Support"
-              description="First-class support for TypeScript, Python, C++, Java, Kotlin, and Dart. Generate native, idiomatic code for each language."
-            />
-            <FeatureCard
-              icon={<Shield className="h-6 w-6" />}
-              title="End-to-End Type Safety"
-              description="Generated code is fully type-safe. Catch errors at compile time, not at runtime. No more broken API contracts."
-            />
-            <FeatureCard
-              icon={<RefreshCw className="h-6 w-6" />}
-              title="Schema Evolution"
-              description="Simple guidelines and built-in checks ensure you can evolve your schema without breaking backward compatibility."
-            />
+          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             <FeatureCard
               icon={<Zap className="h-6 w-6" />}
-              title="Effortless Serialization"
-              description="Serialize to JSON or binary format automatically. Never write parsing code manually again."
-            />
-            <FeatureCard
-              icon={<Layers className="h-6 w-6" />}
-              title="RPC Interfaces"
-              description="Define typesafe interfaces between frontend and backend or between microservices with end-to-end type safety."
+              title="Serialization to JSON or binary"
+              description="Choose between dense JSON for web APIs and databases, readable JSON for debugging, or binary for raw performance."
             />
             <FeatureCard
               icon={<Package className="h-6 w-6" />}
-              title="Built-in Package Manager"
-              description="Import types from GitHub repositories to share common data structures across projects."
+              title="Built-in package manager"
+              description="Stop copying files. Import types directly from any GitHub repository. Share common data structures across projects."
+            />
+            <FeatureCard
+              icon={<Terminal className="h-6 w-6" />} // Using Terminal for Dev Experience
+              title="Developer experience delight"
+              description="A mature VS Code extension with all the features you need. Real-time validation, go to definition, and a built-in code formatter."
             />
           </div>
         </div>
