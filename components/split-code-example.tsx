@@ -1,8 +1,8 @@
 'use client'
 
+import { skirLanguage } from '@/lib/skir-language'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
-import { skirLanguage } from '@/lib/skir-language'
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
 import cpp from 'react-syntax-highlighter/dist/esm/languages/hljs/cpp'
 import dart from 'react-syntax-highlighter/dist/esm/languages/hljs/dart'

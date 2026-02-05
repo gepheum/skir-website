@@ -45,10 +45,9 @@ export default function HomePage() {
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 text-pretty">
-              Skir is a declarative language for defining data types, constants, and services.
-              Write your schema once in a{' '}
-              <code className="text-primary font-mono">.skir</code> file and generate idiomatic,
-              type-safe code in TypeScript, Python, Java, C++, and more.
+              Skir is a declarative language for defining data types, constants, and services. Write
+              your schema once in a <code className="text-primary font-mono">.skir</code> file and
+              generate idiomatic, type-safe code in TypeScript, Python, Java, C++, and more.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
@@ -101,8 +100,10 @@ export default function HomePage() {
                 Code generation done right
               </h2>
               <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                One YAML file. One command. Watch mode recompiles automatically.<br/>
-                The generated code feels native to each language and is easy to use.<br/>
+                One YAML file. One command. Watch mode recompiles automatically.
+                <br />
+                The generated code feels native to each language and is easy to use.
+                <br />
                 The workflow is stupid simple.
               </p>
             </div>
@@ -121,7 +122,8 @@ export default function HomePage() {
             </h2>
             <p className="text-muted-foreground text-lg mb-12 max-w-2xl mx-auto">
               Modifying schemas in a long-lived or distributed system is risky—one wrong move can
-              break clients or make it impossible to deserialize old data.<br/>
+              break clients or make it impossible to deserialize old data.
+              <br />
               Skir has simple guidelines and built-in checks to evolve your schema safely.
             </p>
 
@@ -147,8 +149,9 @@ export default function HomePage() {
               RPCs with end-to-end type safety
             </h2>
             <p className="text-muted-foreground text-lg mb-6 max-w-2xl mx-auto">
-              Define your RPC methods in Skir and invoke them like local functions <em>a la gRPC</em>.
-              No more API contract mismatches between your frontend and backend or across microservices. Client and server are always in sync.
+              Define your RPC methods in Skir and invoke them like local functions{' '}
+              <em>a la gRPC</em>. No more API contract mismatches between your frontend and backend
+              or across microservices. Client and server are always in sync.
             </p>
           </div>
           <div className="max-w-6xl mx-auto">
