@@ -239,7 +239,7 @@ struct ImplicitNumbering {
           number. This replacement happens automatically on save if you are using the VSCode
           extension.
         </p>
-        <div className="not-prose my-4 max-w-[50%] mx-auto">
+        <div className="not-prose my-4 pt-[2px] w-[460px] max-w-full mx-auto">
           <HoverVideo src="/skir-website/record-stable-id-on-save.mp4" />
         </div>
       </Note>
@@ -443,7 +443,7 @@ method GetUserProfile(GetUserProfileRequest): GetUserProfileResponse = 12345;`}<
           number. This replacement happens automatically on save if you are using the VSCode
           extension.
         </p>
-        <div className="not-prose my-4 max-w-[50%] mx-auto">
+        <div className="not-prose my-4 pt-[2px] w-[460px] max-w-full mx-auto">
           <HoverVideo src="/skir-website/method-stable-id-on-save.mp4" />
         </div>
       </Note>

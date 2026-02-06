@@ -174,7 +174,7 @@ generators:
         other language features.
       </p>
 
-      <div className="not-prose my-8 max-w-[75%] mx-auto">
+      <div className="not-prose my-8 pt-[2px] w-[460px] max-w-full mx-auto">
         <HoverVideo src="/skir-website/auto-format.mp4" />
       </div>
     </Prose>
