@@ -18,7 +18,7 @@ const navigation = [
     title: 'Core concepts',
     items: [
       { title: 'Language reference', href: '/docs/language-reference' },
-      { title: 'Serialization formats', href: '/docs/serialization' },
+      { title: 'Serialization', href: '/docs/serialization' },
       { title: 'Schema evolution', href: '/docs/schema-evolution' },
       { title: 'Skir services', href: '/docs/rpc' },
       { title: 'External dependencies', href: '/docs/dependencies' },

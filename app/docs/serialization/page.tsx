@@ -107,10 +107,10 @@ const JOHN_DOE: User = {
         your struct definition without breaking backward compatibility.
       </p>
 
-      <h4>Serialization rules</h4>
+      <h4>Encoding rules</h4>
 
       <div className="my-6 not-prose">
-        <Table>
+        <Table className="table-fixed">
           <TableHeader>
             <TableRow>
               <TableHead className="w-[120px]">Type</TableHead>
@@ -244,10 +244,10 @@ const JOHN_DOE: User = {
         words, never store a readable JSON on disk or in a database.
       </p>
 
-      <h4>Serialization rules</h4>
+      <h4>Encoding rules</h4>
 
       <div className="my-6 not-prose">
-        <Table>
+        <Table className="table-fixed">
           <TableHeader>
             <TableRow>
               <TableHead className="w-[120px]">Type</TableHead>
@@ -370,13 +370,13 @@ const JOHN_DOE: User = {
         likely to matter, which should be rare.
       </p>
 
-      <h4>Serialization rules</h4>
+      <h4>Encoding rules</h4>
       <p>
         Similar to dense JSON, zeros are used to represent <code>removed</code> fields.
       </p>
 
       <div className="my-6 not-prose">
-        <Table>
+        <Table className="table-fixed">
           <TableHeader>
             <TableRow>
               <TableHead className="w-[120px]">Type</TableHead>
