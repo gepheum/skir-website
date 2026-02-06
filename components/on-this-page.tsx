@@ -56,13 +56,23 @@ export function OnThisPage() {
   useEffect(() => {
     if (sections.length === 0) return
 
+    const visibleIds = new Set<string>()
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setActiveId(entry.target.id)
+            visibleIds.add(entry.target.id)
+          } else {
+            visibleIds.delete(entry.target.id)
           }
         })
+
+        // Find the first section that is currently visible
+        const firstVisible = sections.find((section) => visibleIds.has(section.id))
+        if (firstVisible) {
+          setActiveId(firstVisible.id)
+        }
       },
       { rootMargin: '-20% 0px -35% 0px' },
     )
@@ -80,7 +90,6 @@ export function OnThisPage() {
   return (
     <aside className="hidden xl:block w-64 shrink-0">
       <div className="sticky top-24 pl-4 text-sm">
-        <h4 className="font-semibold text-foreground mb-4">On this page</h4>
         <ul className="space-y-2">
           {sections.map((section) => (
             <li key={section.id}>
