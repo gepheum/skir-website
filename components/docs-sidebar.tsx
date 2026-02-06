@@ -8,24 +8,24 @@ import { useState } from 'react'
 
 const navigation = [
   {
-    title: 'Getting Started',
+    title: 'Getting started',
     items: [
       { title: 'Introduction', href: '/docs' },
-      { title: 'Setup & Workflow', href: '/docs/getting-started' },
+      { title: 'Setup & workflow', href: '/docs/getting-started' },
     ],
   },
   {
-    title: 'Core Concepts',
+    title: 'Core concepts',
     items: [
-      { title: 'Language Reference', href: '/docs/language-reference' },
-      { title: 'Serialization Formats', href: '/docs/serialization' },
-      { title: 'Schema Evolution', href: '/docs/schema-evolution' },
-      { title: 'Skir Services', href: '/docs/rpc' },
-      { title: 'External Dependencies', href: '/docs/dependencies' },
+      { title: 'Language reference', href: '/docs/language-reference' },
+      { title: 'Serialization formats', href: '/docs/serialization' },
+      { title: 'Schema evolution', href: '/docs/schema-evolution' },
+      { title: 'Skir services', href: '/docs/rpc' },
+      { title: 'External dependencies', href: '/docs/dependencies' },
     ],
   },
   {
-    title: 'Generated Code',
+    title: 'Generated code',
     items: [
       { title: 'TypeScript', href: '/docs/typescript' },
       { title: 'Python', href: '/docs/python' },
@@ -37,7 +37,7 @@ const navigation = [
   },
   {
     title: 'Comparisons',
-    items: [{ title: 'Coming From Protobuf', href: '/docs/protobuf' }],
+    items: [{ title: 'Coming from Protobuf', href: '/docs/protobuf' }],
   },
 ]
 
