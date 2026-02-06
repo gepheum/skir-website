@@ -4,10 +4,9 @@ import { useRef, useState } from 'react'
 
 interface HoverVideoProps {
   src: string
-  poster?: string // Optional poster image
 }
 
-export function HoverVideo({ src, poster }: HoverVideoProps) {
+export function HoverVideo({ src }: HoverVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
 
@@ -48,21 +47,12 @@ export function HoverVideo({ src, poster }: HoverVideoProps) {
         loop
         playsInline
         controls={isPlaying}
+        controlsList="nofullscreen nodownload noremoteplayback"
+        disablePictureInPicture
         className="w-full h-auto block"
       >
         <source src={src} type="video/mp4" />
       </video>
-
-      {/* Custom Poster Overlay */}
-      {poster && (
-        <div
-          className={`absolute inset-0 transition-opacity duration-300 pointer-events-none z-10 ${
-            isPlaying ? 'opacity-0' : 'opacity-100'
-          }`}
-        >
-          <img src={poster} alt="Video preview" className="w-full h-full object-cover" />
-        </div>
-      )}
     </div>
   )
 }

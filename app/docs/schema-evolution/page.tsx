@@ -1,3 +1,4 @@
+import { HoverVideo } from '@/components/hover-video'
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
@@ -159,6 +160,22 @@ export default function SchemaEvolutionPage() {
       </p>
       <CodeBlock language="bash">{`npx skir snapshot --dry-run`}</CodeBlock>
       <p>This confirms that your changes are safe relative to the last release (snapshot).</p>
+
+      <p>
+        If you are using the official{' '}
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=Gepheum.skir-vscode"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline font-medium decoration-primary decoration-2 underline-offset-2"
+        >
+          VSCode extension
+        </a>
+        , breaking changes will be highlighted directly in your editor as you type.
+      </p>
+      <div className="not-prose my-6 max-w-[50%] mx-auto">
+        <HoverVideo src="/skir-website/schema-evolution-check.mp4" />
+      </div>
 
       <p>
         <strong>2. Before release</strong>
