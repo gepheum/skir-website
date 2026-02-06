@@ -1,8 +1,8 @@
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
-  title: 'RPC Interfaces - Skir',
-  description: 'Build typesafe APIs with Skir services and RPC interfaces.',
+  title: 'Skir Services',
+  description: 'Build typesafe APIs with Skir services and.',
 }
 
 export default function RpcPage() {

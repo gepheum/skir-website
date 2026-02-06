@@ -20,7 +20,7 @@ const navigation = [
       { title: 'Language Reference', href: '/docs/language-reference' },
       { title: 'Serialization Formats', href: '/docs/serialization' },
       { title: 'Schema Evolution', href: '/docs/schema-evolution' },
-      { title: 'RPC Interfaces', href: '/docs/rpc' },
+      { title: 'Skir Services', href: '/docs/rpc' },
       { title: 'External Dependencies', href: '/docs/dependencies' },
     ],
   },
@@ -36,7 +36,7 @@ const navigation = [
     ],
   },
   {
-    title: 'Migration',
+    title: 'Comparisons',
     items: [{ title: 'Coming from Protobuf', href: '/docs/protobuf' }],
   },
 ]

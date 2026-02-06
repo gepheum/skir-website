@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'Documentation - Skir',
-  description: 'Learn how to use Skir to define your data types, constants, and RPC interfaces.',
+  description: 'Learn how to use Skir to define your data types, constants, and services.',
 }
 
 const sections = [
@@ -32,7 +32,7 @@ const sections = [
     icon: RefreshCw,
   },
   {
-    title: 'RPC Interfaces',
+    title: 'Skir Services',
     description: 'Build typesafe APIs with Skir services.',
     href: '/docs/rpc',
     icon: Globe,
@@ -51,7 +51,7 @@ export default function DocsPage() {
       <div className="mb-12">
         <h1 className="text-4xl font-bold mb-4">Documentation</h1>
         <p className="text-lg text-muted-foreground">
-          Skir is a universal language for representing data types, constants, and RPC interfaces.
+          Skir is a declarative language for representing data types, constants, and services.
           Define your schema once in a <code className="text-primary font-mono">.skir</code> file
           and generate idiomatic, type-safe code for TypeScript, Python, Java, C++, Kotlin, and
           Dart.

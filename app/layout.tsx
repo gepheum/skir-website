@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Skir - Like Protocol Buffer, but better',
   description:
-    'A universal language for representing data types, constants, and RPC interfaces. Define your schema once and generate idiomatic, type-safe code for TypeScript, Python, Java, C++, Kotlin, and Dart.',
+    'A declarative language for representing data types, constants, and services. Define your schema once and generate idiomatic, type-safe code for TypeScript, Python, Java, C++, Kotlin, and Dart.',
   keywords: [
     'skir',
     'protocol buffer',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Gepheum' }],
   openGraph: {
     title: 'Skir - Like Protocol Buffer, but better',
-    description: 'A universal language for representing data types, constants, and RPC interfaces.',
+    description: 'A descriptive language for representing data types, constants, and services.',
     type: 'website',
   },
   generator: 'v0.app',
