@@ -240,9 +240,7 @@ struct ImplicitNumbering {
           extension.
         </p>
         <div className="not-prose my-4 max-w-[50%] mx-auto">
-          <HoverVideo
-            src="/skir-website/record-stable-id-on-save.mp4"
-          />
+          <HoverVideo src="/skir-website/record-stable-id-on-save.mp4" />
         </div>
       </Note>
 
@@ -446,9 +444,7 @@ method GetUserProfile(GetUserProfileRequest): GetUserProfileResponse = 12345;`}<
           extension.
         </p>
         <div className="not-prose my-4 max-w-[50%] mx-auto">
-          <HoverVideo
-            src="/skir-website/method-stable-id-on-save.mp4"
-          />
+          <HoverVideo src="/skir-website/method-stable-id-on-save.mp4" />
         </div>
       </Note>
 
