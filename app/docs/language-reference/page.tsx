@@ -147,6 +147,35 @@ struct Foo {
         When you use an inline record, the Skir compiler automatically infers the name of the record
         by converting the <code>snake_case</code> field name into <code>PascalCase</code>.
       </p>
+      <p>
+        For example, imagine you are defining a <code>Notification</code> system where each message
+        can have different types of payloads.
+      </p>
+      <CodeBlock language="skir">{`// Not using inline records
+
+struct Notification {
+  metadata: Metadata;
+  struct Metadata {
+    sent_at: timestamp;
+    sender_id: string;
+  }
+
+  payload: Payload;
+  enum Payload {
+    APP_LAUNCH;
+
+    message: Message;
+    struct Message {
+      body: string;
+      title: string;
+    }
+  }
+}`}</CodeBlock>
+      <p>
+        Using inline records, the same structure can be defined more concisely. The compiler will
+        infer that the type for <code>metadata</code> is <code>Metadata</code> and the type for{' '}
+        <code>payload</code> is <code>Payload</code>.
+      </p>
       <CodeBlock language="skir">{`// Using inline records
 
 struct Notification {
@@ -163,6 +192,10 @@ struct Notification {
     }
   }
 }`}</CodeBlock>
+      <p>
+        These two methods of definition are strictly equivalent. The generated code will be
+        identical regardless of whether the record was defined explicitly or inline.
+      </p>
 
       <h3>Removed numbers</h3>
       <p>
@@ -223,6 +256,10 @@ enum DecisionTree {
   result: string;
   node: DecisionNode;
 }`}</CodeBlock>
+      <p>
+        To safeguard against infinite recursion, the generated code in all supported languages has
+        compile-time constraints to prevent an instance of a recursive type from containing itself.
+      </p>
 
       <h2>Data types</h2>
 
@@ -257,7 +294,8 @@ enum DecisionTree {
         </li>
         <li>
           <code>timestamp</code>: a specific instant in time represented as an integral number of
-          milliseconds since the Unix epoch
+          milliseconds since the Unix epoch, from 100M days before the Unix epoch to 100M days after
+          the Unix epoch
         </li>
       </ul>
 
@@ -292,6 +330,28 @@ if user:
         If the item key is nested within another struct, you can chain the field names like so:{' '}
         <code>[Item|a.b.c]</code>.
       </p>
+      <p>
+        The key type must be a primitive type of an enum type. If it's an enum type, add{' '}
+        <code>.kind</code> at the end of the key chain:
+      </p>
+      <CodeBlock language="skir">{`enum Weekday {
+  MONDAY;
+  TUESDAY;
+  WEDNESDAY;
+  THURSDAY;
+  FRIDAY;
+  SATURDAY;
+  SUNDAY;
+}
+
+struct WeekdayWorkStatus {
+  weekday: Weekday;
+  working: bool;
+}
+
+struct Employee {
+  weekly_schedule: [WeekdayWorkStatus|weekday.kind];
+}`}</CodeBlock>
 
       <h3>Optional type</h3>
       <p>
@@ -325,6 +385,10 @@ const LARGE_CIRCLE: Circle = {
     label: "fuschia",
   },
 };
+
+const MULTILINE_STRING: string = 'Hello\\
+world\\
+!';
 
 const SUPPORTED_LOCALES: [string] = [
   "en-GB",
@@ -375,6 +439,12 @@ method GetUserProfile(GetUserProfileRequest): GetUserProfileResponse = 12345;`}<
         definitions for RPC methods. This allows you to define the request and response structures
         directly within the method signature.
       </p>
+      <p>
+        When records are defined inline within a method, the Skir compiler automatically generates
+        the record names by appending <code>Request</code> to the method name for the input and{' '}
+        <code>Response</code> for the output.
+      </p>
+      <p>This syntax allows you to define the same method as above more concisely:</p>
       <CodeBlock language="skir">{`// Using inline records
 
 method GetUserProfile(struct {
@@ -431,6 +501,17 @@ struct Disk {
         One of the primary advantages of doc comments is that they are copied directly into the
         generated code. Developers using IDEs like VSCode or IntelliJ will see your documentation in
         hover information, code completion, and inlay hints.
+      </p>
+
+      <h3>RPC visibility and security</h3>
+      <p>
+        When documenting types used as a request or response for an RPC method, be aware that these
+        comments may be visible to any user or client with access to that interface.
+      </p>
+      <p>
+        For this reason, it is critical not to include business-confidential information, internal
+        server paths, or sensitive security logic in doc comments for types that will be exposed via
+        public-facing services.
       </p>
     </Prose>
   )
