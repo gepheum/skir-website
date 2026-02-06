@@ -15,7 +15,8 @@ method WhatToWear(WhatToWearRequest):
 
 const codeExamples = {
   typescript: `import { ServiceClient } from "skir-client";
-import { WhatToWear, WhatToWearRequest } from "../skirout/outfit_picker";
+import { WhatToWear, WhatToWearRequest }
+    from "../skirout/outfit_picker";
 
 const client = new ServiceClient("http://localhost:8080/api");
 
@@ -23,7 +24,7 @@ const response = await client.invokeRemote(
   WhatToWear,
   WhatToWearRequest.create({
     temperatureCelsius: 25,
-    raining: true,
+    raining: false,
   })
 );
 
@@ -31,7 +32,8 @@ if (response.sunglasses) {
   console.log("Don't forget your sunglasses 😎");
 }`,
 
-  python: `from skirout.outfit_picker_skir import WhatToWear, WhatToWearRequest
+  python: `from skirout.outfit_picker_skir
+    import WhatToWear, WhatToWearRequest
 
 import skir
 
@@ -58,7 +60,8 @@ using ::skirout_outfit_picker::WhatToWearResponse;
 
 std::unique_ptr<skir::service::Client> client =
     skir::service::MakeHttplibClient(
-        std::make_unique<httplib::Client>("localhost", 8080), "/api");
+        std::make_unique<httplib::Client>("localhost", 8080),
+        "/api");
 
 const WhatToWearRequest request = {
     .raining = false,
@@ -99,12 +102,13 @@ import skirout.outfit_picker.Methods;
 final ServiceClient serviceClient =
     new ServiceClient("http://localhost:8080/api");
 
-final WhatToWearResponse response = serviceClient.invokeRemoteBlocking(
-    Methods.WHAT_TO_WEAR,
-    WhatToWearRequest.builder()
-        .setRaining(false)
-        .setTemperatureCelsius(25)
-        .build());
+final WhatToWearResponse response =
+    serviceClient.invokeRemoteBlocking(
+        Methods.WHAT_TO_WEAR,
+        WhatToWearRequest.builder()
+            .setRaining(false)
+            .setTemperatureCelsius(25)
+            .build());
 
 if (response.sunglasses()) {
   System.out.println("Don't forget your sunglasses 😎");
@@ -113,7 +117,8 @@ if (response.sunglasses()) {
   dart: `import 'package:skir_client/skir_client.dart' as skir;
 import 'package:your_project/skirout/outfit_picker.dart';
 
-final serviceClient = skir.ServiceClient('http://localhost:8080/api');
+final serviceClient =
+    skir.ServiceClient('http://localhost:8080/api');
 
 final response = await serviceClient
     .wrap(whatToWearMethod)

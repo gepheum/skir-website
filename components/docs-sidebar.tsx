@@ -37,7 +37,7 @@ const navigation = [
   },
   {
     title: 'Comparisons',
-    items: [{ title: 'Coming from Protobuf', href: '/docs/protobuf' }],
+    items: [{ title: 'Coming From Protobuf', href: '/docs/protobuf' }],
   },
 ]
 

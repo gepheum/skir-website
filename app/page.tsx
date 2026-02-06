@@ -170,7 +170,7 @@ export default function HomePage() {
             <FeatureCard
               icon={<Terminal className="h-6 w-6" />} // Using Terminal for Dev Experience
               title="Developer experience delight"
-              description="A mature VS Code extension with all the features you need. Real-time validation, go to definition, and a built-in code formatter."
+              description="A mature VS Code extension with all the features you need. Real-time validation, go to definition, automatic code formatting."
             />
           </div>
         </div>
