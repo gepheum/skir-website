@@ -1,5 +1,5 @@
-import { CodeBlock, Note, Prose } from '@/components/prose'
 import { HoverVideo } from '@/components/hover-video'
+import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
   title: 'Language Reference - Skir',
