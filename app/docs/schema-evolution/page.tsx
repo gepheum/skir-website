@@ -200,7 +200,7 @@ struct User(500996846) {
         </a>
         , breaking changes will be highlighted directly in your editor as you type.
       </p>
-      <div className="not-prose my-6 pt-[2px] w-[700px] max-w-full mx-auto">
+      <div className="not-prose my-6 pt-[2px] w-[460px] max-w-full mx-auto">
         <HoverVideo src="/skir-website/schema-evolution-check.mp4" />
       </div>
 
