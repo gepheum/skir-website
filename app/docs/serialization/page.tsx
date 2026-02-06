@@ -19,7 +19,7 @@ export default function SerializationPage() {
       <h1>Serialization</h1>
 
       <h2>Serialization formats</h2>
-      <p>When serializing a data structure, you can choose one of 3 formats.</p>
+      <p>When serializing a data structure, you can choose one of 3 formats:</p>
 
       <div className="my-6 not-prose">
         <Table>
@@ -114,7 +114,7 @@ const JOHN_DOE: User = {
           <TableHeader>
             <TableRow>
               <TableHead className="w-[120px]">Type</TableHead>
-              <TableHead>Rule</TableHead>
+              <TableHead>Encoded as</TableHead>
               <TableHead className="w-[250px]">Examples</TableHead>
             </TableRow>
           </TableHeader>
@@ -122,7 +122,7 @@ const JOHN_DOE: User = {
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">bool</TableCell>
               <TableCell className="whitespace-normal">
-                <code>1</code> for true, <code>0</code> for false.
+                <code>1</code> for true, <code>0</code> for false
               </TableCell>
               <TableCell className="font-mono text-xs">
                 <div>1</div>
@@ -130,7 +130,7 @@ const JOHN_DOE: User = {
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">int32</TableCell>
-              <TableCell className="whitespace-normal">A JSON number.</TableCell>
+              <TableCell className="whitespace-normal">A JSON number</TableCell>
               <TableCell className="font-mono text-xs">1234</TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
@@ -171,18 +171,18 @@ const JOHN_DOE: User = {
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">timestamp</TableCell>
               <TableCell className="whitespace-normal">
-                A JSON number representing milliseconds since the Unix epoch.
+                A JSON number representing milliseconds since the Unix epoch
               </TableCell>
               <TableCell className="font-mono text-xs">1672531200000</TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">string</TableCell>
-              <TableCell className="whitespace-normal">A JSON string.</TableCell>
+              <TableCell className="whitespace-normal">A JSON string</TableCell>
               <TableCell className="font-mono text-xs">"Hello"</TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">bytes</TableCell>
-              <TableCell className="whitespace-normal">A Base64 string.</TableCell>
+              <TableCell className="whitespace-normal">A Base64 string</TableCell>
               <TableCell className="font-mono text-xs">"SGVsbG8="</TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
@@ -197,7 +197,7 @@ const JOHN_DOE: User = {
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">[T]</TableCell>
-              <TableCell className="whitespace-normal">A JSON array.</TableCell>
+              <TableCell className="whitespace-normal">A JSON array</TableCell>
               <TableCell className="font-mono text-xs">[1, 2, 3]</TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
@@ -251,7 +251,7 @@ const JOHN_DOE: User = {
           <TableHeader>
             <TableRow>
               <TableHead className="w-[120px]">Type</TableHead>
-              <TableHead>Rule</TableHead>
+              <TableHead>Encoded as</TableHead>
               <TableHead className="w-[250px]">Examples</TableHead>
             </TableRow>
           </TableHeader>
@@ -259,7 +259,7 @@ const JOHN_DOE: User = {
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">bool</TableCell>
               <TableCell className="whitespace-normal">
-                <code>true</code> or <code>false</code>.
+                <code>true</code> or <code>false</code>
               </TableCell>
               <TableCell className="font-mono text-xs">
                 <div>true</div>
@@ -267,7 +267,7 @@ const JOHN_DOE: User = {
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">int32</TableCell>
-              <TableCell className="whitespace-normal">A JSON number.</TableCell>
+              <TableCell className="whitespace-normal">A JSON number</TableCell>
               <TableCell className="font-mono text-xs">1234</TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
@@ -308,7 +308,7 @@ const JOHN_DOE: User = {
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">timestamp</TableCell>
               <TableCell className="whitespace-normal">
-                An object with <code>unix_millis</code> and <code>formatted</code> fields.
+                An object with <code>unix_millis</code> and <code>formatted</code> fields
               </TableCell>
               <TableCell className="font-mono text-xs">
                 {`{ "unix_millis": 1672531200000, "formatted": "2023-01-01T00:00:00Z" }`}
@@ -316,13 +316,13 @@ const JOHN_DOE: User = {
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">string</TableCell>
-              <TableCell className="whitespace-normal">A JSON string.</TableCell>
+              <TableCell className="whitespace-normal">A JSON string</TableCell>
               <TableCell className="font-mono text-xs">"Hello"</TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">bytes</TableCell>
               <TableCell className="whitespace-normal">
-                The string "hex:" followed by the hexadecimal representation.
+                The string "hex:" followed by the hexadecimal representation
               </TableCell>
               <TableCell className="font-mono text-xs">"hex:48656c6c6f"</TableCell>
             </TableRow>
@@ -338,7 +338,7 @@ const JOHN_DOE: User = {
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">[T]</TableCell>
-              <TableCell className="whitespace-normal">A JSON array.</TableCell>
+              <TableCell className="whitespace-normal">A JSON array</TableCell>
               <TableCell className="font-mono text-xs">[1, 2, 3]</TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
@@ -380,7 +380,7 @@ const JOHN_DOE: User = {
           <TableHeader>
             <TableRow>
               <TableHead className="w-[120px]">Type</TableHead>
-              <TableHead>Rule</TableHead>
+              <TableHead>Encoded as</TableHead>
               <TableHead className="w-[250px]">Examples</TableHead>
             </TableRow>
           </TableHeader>
@@ -388,7 +388,7 @@ const JOHN_DOE: User = {
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">bool</TableCell>
               <TableCell className="whitespace-normal">
-                <code>1</code> for true, <code>0</code> for false.
+                <code>1</code> for true, <code>0</code> for false
               </TableCell>
               <TableCell className="font-mono text-xs">
                 <div>0x01</div>
@@ -574,11 +574,11 @@ const JOHN_DOE: User = {
       <h3>Handling of zeros</h3>
       <p>
         Both the dense JSON and binary formats use zeros to represent <code>removed</code> fields to
-        save space. To preserve forward compatibility, "zero" is treated as a valid input for any
+        save space. To preserve forward compatibility, <em>zero</em> is treated as a valid input for any
         type, even non-numerical ones.
       </p>
       <p>
-        With the exception of optional types (<code>T?</code>), all types will decode a "zero" value
+        With the exception of optional types (<code>T?</code>), all types will decode a <em>zero</em> value
         (integer 0) as the default value for that type. For example, a <code>string</code> decodes 0
         as <code>""</code>, and an array decodes 0 as <code>[]</code>. For optional types, 0 is
         decoded as the default value of the underlying type (e.g. <code>string?</code> decodes 0 as{' '}
