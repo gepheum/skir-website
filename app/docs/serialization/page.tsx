@@ -158,7 +158,6 @@ const JOHN_DOE: User = {
               </TableCell>
               <TableCell className="font-mono text-xs">
                 <div>1.23</div>
-                <div>"NaN"</div>
                 <div>"Infinity"</div>
               </TableCell>
             </TableRow>
@@ -289,7 +288,6 @@ const JOHN_DOE: User = {
               </TableCell>
               <TableCell className="font-mono text-xs">
                 <div>1.23</div>
-                <div>"NaN"</div>
                 <div>"Infinity"</div>
               </TableCell>
             </TableRow>
@@ -380,7 +378,6 @@ const JOHN_DOE: User = {
               </TableCell>
               <TableCell className="font-mono text-xs">
                 <div>0x01</div>
-                <div>0x00</div>
               </TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
