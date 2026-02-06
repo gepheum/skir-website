@@ -26,6 +26,7 @@ export function OnThisPage() {
 
       const headings = mainElement.querySelectorAll('h2, h3')
       const sectionsData: Section[] = []
+      const usedIds = new Set<string>()
 
       headings.forEach((heading, index) => {
         let id = heading.id
@@ -37,11 +38,20 @@ export function OnThisPage() {
             .replace(/(^-|-$)/g, '')
 
           if (!id) id = `section-${index}`
-          heading.id = id
         }
 
+        // Ensure unique ID
+        let uniqueId = id
+        let count = 1
+        while (usedIds.has(uniqueId)) {
+          uniqueId = `${id}-${count}`
+          count++
+        }
+        usedIds.add(uniqueId)
+        heading.id = uniqueId
+
         sectionsData.push({
-          id,
+          id: uniqueId,
           title: heading.textContent || '',
           level: parseInt(heading.tagName[1]),
         })
