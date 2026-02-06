@@ -1,3 +1,4 @@
+import { HoverVideo } from '@/components/hover-video'
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
@@ -172,6 +173,10 @@ generators:
         for Skir provides syntax highlighting, auto-formatting, validation, jump-to-definition, and
         other language features.
       </p>
+
+      <div className="not-prose my-8 max-w-[75%] mx-auto">
+        <HoverVideo src="/skir-website/auto-format.mp4" />
+      </div>
     </Prose>
   )
 }
