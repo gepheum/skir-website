@@ -154,8 +154,8 @@ export default function SchemaEvolutionPage() {
         <strong>1. During development</strong>
       </p>
       <p>
-        While drafting a new schema version, use the <code>--dry-run</code> flag to check for backward
-        compatibility without updating the snapshot:
+        While drafting a new schema version, use the <code>--dry-run</code> flag to check for
+        backward compatibility without updating the snapshot:
       </p>
       <CodeBlock language="bash">{`npx skir snapshot --dry-run`}</CodeBlock>
       <p>This confirms that your changes are safe relative to the last release (snapshot).</p>

@@ -39,7 +39,8 @@ export default function SerializationPage() {
               <TableCell>High</TableCell>
               <TableCell>Mediocre</TableCell>
               <TableCell className="whitespace-normal">
-                Default choice. Safe for persistence and offers a good balance between performance and debuggability.
+                Default choice. Safe for persistence and offers a good balance between performance
+                and debuggability.
               </TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
@@ -57,9 +58,7 @@ export default function SerializationPage() {
               <TableCell className="font-medium">Safe</TableCell>
               <TableCell>Very High</TableCell>
               <TableCell>None</TableCell>
-              <TableCell className="whitespace-normal">
-                Fastest and most compact.
-              </TableCell>
+              <TableCell className="whitespace-normal">Most compact, fastest in languages like C++.</TableCell>
             </TableRow>
           </TableBody>
         </Table>
