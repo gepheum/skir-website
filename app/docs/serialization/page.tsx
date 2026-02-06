@@ -141,9 +141,7 @@ const JOHN_DOE: User = {
                     If the value is within the safe integer range for JavaScript
                     (±9,007,199,254,740,991), it is serialized as a JSON number.
                   </li>
-                  <li>
-                    Otherwise, it is serialized as a string.
-                  </li>
+                  <li>Otherwise, it is serialized as a string.</li>
                 </ul>
               </TableCell>
               <TableCell className="font-mono text-xs">
@@ -158,12 +156,10 @@ const JOHN_DOE: User = {
               </TableCell>
               <TableCell className="whitespace-normal">
                 <ul className="!list-none !pl-0 !m-0 !text-foreground !space-y-0.5 [&_li]:!leading-snug">
+                  <li>Finite numbers are serialized as JSON numbers.</li>
                   <li>
-                    Finite numbers are serialized as JSON numbers.
-                  </li>
-                  <li>
-                    <code>NaN</code>, <code>Infinity</code>, and <code>-Infinity</code> are serialized
-                    as strings.
+                    <code>NaN</code>, <code>Infinity</code>, and <code>-Infinity</code> are
+                    serialized as strings.
                   </li>
                 </ul>
               </TableCell>
@@ -282,9 +278,7 @@ const JOHN_DOE: User = {
                     If the value is within the safe integer range for JavaScript
                     (±9,007,199,254,740,991), it is serialized as a JSON number.
                   </li>
-                  <li>
-                    Otherwise, it is serialized as a string.
-                  </li>
+                  <li>Otherwise, it is serialized as a string.</li>
                 </ul>
               </TableCell>
               <TableCell className="font-mono text-xs">
@@ -299,12 +293,10 @@ const JOHN_DOE: User = {
               </TableCell>
               <TableCell className="whitespace-normal">
                 <ul className="!list-none !pl-0 !m-0 !text-foreground !space-y-0.5 [&_li]:!leading-snug">
+                  <li>Finite numbers are serialized as JSON numbers.</li>
                   <li>
-                    Finite numbers are serialized as JSON numbers.
-                  </li>
-                  <li>
-                    <code>NaN</code>, <code>Infinity</code>, and <code>-Infinity</code> are serialized
-                    as strings.
+                    <code>NaN</code>, <code>Infinity</code>, and <code>-Infinity</code> are
+                    serialized as strings.
                   </li>
                 </ul>
               </TableCell>
@@ -407,11 +399,10 @@ const JOHN_DOE: User = {
               <TableCell className="font-mono">int32</TableCell>
               <TableCell className="whitespace-normal">
                 <ul className="!list-none !pl-0 !m-0 !text-foreground !space-y-0.5 [&_li]:!leading-snug">
+                  <li>Small non-negative integers (0-231) are encoded as a single byte.</li>
                   <li>
-                    Small non-negative integers (0-231) are encoded as a single byte.
-                  </li>
-                  <li>
-                    Larger integers and negative integers use a 1-byte marker followed by the value (1, 2 or 4 bytes).
+                    Larger integers and negative integers use a 1-byte marker followed by the value
+                    (1, 2 or 4 bytes).
                   </li>
                 </ul>
               </TableCell>
@@ -426,7 +417,8 @@ const JOHN_DOE: User = {
               <TableCell className="whitespace-normal">
                 <ul className="!list-none !pl-0 !m-0 !text-foreground !space-y-0.5 [&_li]:!leading-snug">
                   <li>
-                    If the value fits in a 32-bit signed integer, it uses the <code>int32</code> encoding.
+                    If the value fits in a 32-bit signed integer, it uses the <code>int32</code>{' '}
+                    encoding.
                   </li>
                   <li>
                     Otherwise, it uses marker <code>0xee</code> followed by 8 bytes (little endian).
@@ -443,7 +435,8 @@ const JOHN_DOE: User = {
                     <code>0</code> is encoded as a single byte <code>0x00</code>.
                   </li>
                   <li>
-                    Otherwise: marker <code>0xf0</code> followed by 4 bytes (IEEE 754, little endian).
+                    Otherwise: marker <code>0xf0</code> followed by 4 bytes (IEEE 754, little
+                    endian).
                   </li>
                 </ul>
               </TableCell>
@@ -460,7 +453,8 @@ const JOHN_DOE: User = {
                     <code>0</code> is encoded as a single byte <code>0x00</code>.
                   </li>
                   <li>
-                    Otherwise: marker <code>0xf1</code> followed by 8 bytes (IEEE 754, little endian).
+                    Otherwise: marker <code>0xf1</code> followed by 8 bytes (IEEE 754, little
+                    endian).
                   </li>
                 </ul>
               </TableCell>
@@ -490,13 +484,12 @@ const JOHN_DOE: User = {
                     Empty string: <code>0xf2</code>.
                   </li>
                   <li>
-                     Non-empty: marker <code>0xf3</code>, followed by length (encoded as a number), followed by UTF-8 bytes.
+                    Non-empty: marker <code>0xf3</code>, followed by length (encoded as a number),
+                    followed by UTF-8 bytes.
                   </li>
                 </ul>
               </TableCell>
-              <TableCell className="font-mono text-xs">
-                "Hi" -&gt; 0xf3 0x02 0x48 0x69
-              </TableCell>
+              <TableCell className="font-mono text-xs">"Hi" -&gt; 0xf3 0x02 0x48 0x69</TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">bytes</TableCell>
@@ -506,7 +499,8 @@ const JOHN_DOE: User = {
                     Empty: <code>0xf4</code>.
                   </li>
                   <li>
-                    Non-empty: marker <code>0xf5</code>, followed by length (encoded as a number), followed by raw bytes.
+                    Non-empty: marker <code>0xf5</code>, followed by length (encoded as a number),
+                    followed by raw bytes.
                   </li>
                 </ul>
               </TableCell>
@@ -519,9 +513,7 @@ const JOHN_DOE: User = {
                   <li>
                     <code>null</code> is encoded as <code>0xff</code>.
                   </li>
-                  <li>
-                    Otherwise, the value is encoded directly.
-                  </li>
+                  <li>Otherwise, the value is encoded directly.</li>
                 </ul>
               </TableCell>
               <TableCell className="font-mono text-xs">
@@ -537,16 +529,13 @@ const JOHN_DOE: User = {
                     Length 0-3: markers <code>0xf6</code>-<code>0xf9</code>.
                   </li>
                   <li>
-                    Length &gt; 3: marker <code>0xfa</code> followed by length (encoded as a number).
+                    Length &gt; 3: marker <code>0xfa</code> followed by length (encoded as a
+                    number).
                   </li>
-                  <li>
-                    Then items are written sequentially.
-                  </li>
+                  <li>Then items are written sequentially.</li>
                 </ul>
               </TableCell>
-              <TableCell className="font-mono text-xs">
-                [1, 2] -&gt; 0xf8 ... ...
-              </TableCell>
+              <TableCell className="font-mono text-xs">[1, 2] -&gt; 0xf8 ... ...</TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">struct</TableCell>
@@ -560,11 +549,11 @@ const JOHN_DOE: User = {
               <TableCell className="font-mono">enum</TableCell>
               <TableCell className="whitespace-normal">
                 <ul className="!list-none !pl-0 !m-0 !text-foreground !space-y-0.5 [&_li]:!leading-snug">
+                  <li>Constant variant: encoded as a number (the variant number).</li>
                   <li>
-                    Constant variant: encoded as a number (the variant number).
-                  </li>
-                  <li>
-                    Wrapper variant: markers <code>0xfb</code>-<code>0xfe</code> (for variant numbers 1-4) or <code>0xf8</code> followed by the variant number. Then the value.
+                    Wrapper variant: markers <code>0xfb</code>-<code>0xfe</code> (for variant
+                    numbers 1-4) or <code>0xf8</code> followed by the variant number. Then the
+                    value.
                   </li>
                 </ul>
               </TableCell>
