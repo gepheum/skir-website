@@ -57,7 +57,7 @@ export function SplitCodeExample({
   return (
     <div className="rounded-lg border border-border overflow-hidden bg-card">
       <div className="flex h-[540px]">
-        <div className="w-1/2 border-r border-border flex flex-col">
+        <div className="w-[45%] border-r border-border flex flex-col">
           <div className="px-4 py-3 text-sm font-medium border-b border-border bg-secondary/30 text-primary">
             {leftTitle}
           </div>
@@ -84,7 +84,7 @@ export function SplitCodeExample({
           </div>
         </div>
 
-        <div className="w-1/2 flex flex-col">
+        <div className="w-[55%] flex flex-col">
           <div className="flex border-b border-border bg-secondary/30">
             {tabs.map((tab) => (
               <button
