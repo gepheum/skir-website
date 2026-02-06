@@ -574,15 +574,15 @@ const JOHN_DOE: User = {
       <h3>Handling of zeros</h3>
       <p>
         Both the dense JSON and binary formats use zeros to represent <code>removed</code> fields to
-        save space. To preserve forward compatibility, <em>zero</em> is treated as a valid input for any
-        type, even non-numerical ones.
+        save space. To preserve forward compatibility, <em>zero</em> is treated as a valid input for
+        any type, even non-numerical ones.
       </p>
       <p>
-        With the exception of optional types (<code>T?</code>), all types will decode a <em>zero</em> value
-        (integer 0) as the default value for that type. For example, a <code>string</code> decodes 0
-        as <code>""</code>, and an array decodes 0 as <code>[]</code>. For optional types, 0 is
-        decoded as the default value of the underlying type (e.g. <code>string?</code> decodes 0 as{' '}
-        <code>""</code>, not <code>null</code>).
+        With the exception of optional types (<code>T?</code>), all types will decode a{' '}
+        <em>zero</em> value (integer 0) as the default value for that type. For example, a{' '}
+        <code>string</code> decodes 0 as <code>""</code>, and an array decodes 0 as <code>[]</code>.
+        For optional types, 0 is decoded as the default value of the underlying type (e.g.{' '}
+        <code>string?</code> decodes 0 as <code>""</code>, not <code>null</code>).
       </p>
     </Prose>
   )
