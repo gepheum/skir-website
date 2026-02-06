@@ -132,12 +132,11 @@ export default function SchemaEvolutionPage() {
         changes.
       </p>
 
-      <h3>The snapshot workflow</h3>
+      <h3>How it works</h3>
       <p>
         The <code>npx skir snapshot</code> command helps you manage schema evolution by maintaining
-        a history of your schema state.
+        a history of your schema state. When you run this command, two things happen:
       </p>
-      <p>When you run this command, two things happen:</p>
       <ol>
         <li>
           <strong>Verification</strong>: Skir checks for a <code>skir-snapshot.json</code> file. If
@@ -149,51 +148,6 @@ export default function SchemaEvolutionPage() {
           creates or updates the <code>skir-snapshot.json</code> file to reflect the current schema.
         </li>
       </ol>
-
-      <h4>Recommended workflow</h4>
-      <p>
-        <strong>1. During development</strong>
-      </p>
-      <p>
-        While drafting a new schema version, use the <code>--dry-run</code> flag to check for
-        backward compatibility without updating the snapshot:
-      </p>
-      <CodeBlock language="bash">{`npx skir snapshot --dry-run`}</CodeBlock>
-      <p>This confirms that your changes are safe relative to the last release (snapshot).</p>
-
-      <p>
-        If you are using the official{' '}
-        <a
-          href="https://marketplace.visualstudio.com/items?itemName=Gepheum.skir-vscode"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline font-medium decoration-primary decoration-2 underline-offset-2"
-        >
-          VSCode extension
-        </a>
-        , breaking changes will be highlighted directly in your editor as you type.
-      </p>
-      <div className="not-prose my-6 pt-[2px] w-[700px] max-w-full mx-auto">
-        <HoverVideo src="/skir-website/schema-evolution-check.mp4" />
-      </div>
-
-      <p>
-        <strong>2. Before release</strong>
-      </p>
-      <p>
-        Run <code>npx skir snapshot</code> without flags to verify compatibility and commit the new
-        schema state to the snapshot file.
-      </p>
-
-      <p>
-        <strong>3. Continuous integration</strong>
-      </p>
-      <p>
-        Add the command to your CI pipeline or pre-commit hook to prevent accidental breaking
-        changes. The <code>--ci</code> flag ensures the snapshot is up-to-date and compatible:
-      </p>
-      <CodeBlock language="yaml">{`- name: Ensure Skir snapshot up-to-date
-  run: npx skir snapshot --ci`}</CodeBlock>
 
       <h3>Tracked types and stable identifiers</h3>
       <p>
@@ -223,6 +177,48 @@ struct User(500996846) {
         <code>skir-snapshot.json</code> file and run <code>npx skir snapshot</code> again to
         establish a new baseline.
       </p>
+
+      <h2>Recommended workflow</h2>
+
+      <h3>1. During development</h3>
+      <p>
+        While drafting a new schema version, use the <code>--dry-run</code> flag to check for
+        backward compatibility without updating the snapshot:
+      </p>
+      <CodeBlock language="bash">{`npx skir snapshot --dry-run`}</CodeBlock>
+      <p>This confirms that your changes are safe relative to the last release (snapshot).</p>
+
+      <p>
+        If you are using the official{' '}
+        <a
+          href="https://marketplace.visualstudio.com/items?itemName=Gepheum.skir-vscode"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline font-medium decoration-primary decoration-2 underline-offset-2"
+        >
+          VSCode extension
+        </a>
+        , breaking changes will be highlighted directly in your editor as you type.
+      </p>
+      <div className="not-prose my-6 pt-[2px] w-[700px] max-w-full mx-auto">
+        <HoverVideo src="/skir-website/schema-evolution-check.mp4" />
+      </div>
+
+      <h3>2. Before release</h3>
+      <p>
+        Run <code>npx skir snapshot</code> without flags to verify compatibility and commit the new
+        schema state to the snapshot file.
+      </p>
+
+      <h3>3. Continuous integration</h3>
+      <p>
+        Add the command to your CI pipeline or pre-commit hook to prevent accidental breaking
+        changes. The <code>--ci</code> flag ensures the snapshot is up-to-date and compatible:
+      </p>
+      <CodeBlock language="yaml">{`- name: Ensure Skir snapshot up-to-date
+  run: npx skir snapshot --ci`}</CodeBlock>
+
+
 
       <h2>Round-tripping unrecognized data</h2>
       <p>
