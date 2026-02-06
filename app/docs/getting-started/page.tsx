@@ -163,7 +163,7 @@ generators:
       <p>
         The official VS Code{' '}
         <a
-          href="https://marketplace.visualstudio.com/items?itemName=gepheum.skir"
+          href="https://marketplace.visualstudio.com/items?itemName=TylerFibonacci.skir-language"
           target="_blank"
           rel="noopener noreferrer"
         >
