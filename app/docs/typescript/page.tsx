@@ -35,7 +35,7 @@ export default function TypeScriptPage() {
         .
       </P>
 
-      <H2>TypeScript generated code guide</H2>
+      <H2>Generated code guide</H2>
       <P>
         The examples below are for the code generated from{' '}
         <a
