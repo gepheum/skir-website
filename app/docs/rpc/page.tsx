@@ -121,7 +121,7 @@ method GetUser(GetUserRequest): GetUserResponse = 12345;`}</CodeBlock>
         implementations.
       </p>
 
-      <h3>1. The RequestMeta concept</h3>
+      <h3>The RequestMeta concept</h3>
       <p>
         Skir services are generic over a <code>RequestMeta</code> type. This is a type you define to
         hold context information extracted from the HTTP request, such as authentication tokens,
@@ -140,7 +140,7 @@ class RequestMeta:
 # Create an async service typed with our metadata class
 service = skir.ServiceAsync[RequestMeta]`}</CodeBlock>
 
-      <h3>2. Registering methods</h3>
+      <h3>Registering methods</h3>
       <p>
         You link the abstract method definitions generated from your schema to your actual code
         logic.

@@ -41,10 +41,10 @@ export function Prose({ children, className }: ProseProps) {
       className={cn(
         'max-w-none',
         // Headings
-        '[&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mb-6 [&_h1]:mt-8 [&_h1]:first:mt-0',
-        '[&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:mb-4 [&_h2]:mt-10 [&_h2]:pt-6 [&_h2]:border-t [&_h2]:border-border [&_h2]:first:border-0 [&_h2]:first:pt-0',
-        '[&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mb-3 [&_h3]:mt-8',
-        '[&_h4]:text-lg [&_h4]:font-semibold [&_h4]:mb-2 [&_h4]:mt-6',
+        '[&_h1]:scroll-mt-24 [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:mb-6 [&_h1]:mt-8 [&_h1]:first:mt-0',
+        '[&_h2]:scroll-mt-24 [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:mb-4 [&_h2]:mt-10 [&_h2]:pt-6 [&_h2]:border-t [&_h2]:border-border [&_h2]:first:border-0 [&_h2]:first:pt-0',
+        '[&_h3]:scroll-mt-24 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:mb-3 [&_h3]:mt-8',
+        '[&_h4]:scroll-mt-24 [&_h4]:text-lg [&_h4]:font-semibold [&_h4]:mb-2 [&_h4]:mt-6',
         // Paragraphs
         '[&_p]:text-muted-foreground [&_p]:leading-7 [&_p]:mb-4',
         // Lists

@@ -1,5 +1,6 @@
 import { DocsSidebar } from '@/components/docs-sidebar'
 import { Header } from '@/components/header'
+import { OnThisPage } from '@/components/on-this-page'
 import React from 'react'
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
@@ -10,6 +11,7 @@ export default function DocsLayout({ children }: { children: React.ReactNode }) 
         <div className="flex gap-8 py-8">
           <DocsSidebar />
           <main className="flex-1 min-w-0">{children}</main>
+          <OnThisPage />
         </div>
       </div>
     </div>

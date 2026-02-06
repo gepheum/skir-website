@@ -31,7 +31,7 @@ export default function SchemaEvolutionPage() {
       <h2>Safe schema changes</h2>
       <p>The following changes are safe and preserve both backward and forward compatibility:</p>
 
-      <h3>1. Adding fields to a struct</h3>
+      <h3>Adding fields to a struct</h3>
       <p>New code reading old data will use default values for missing fields:</p>
       <ul>
         <li>
@@ -57,13 +57,13 @@ export default function SchemaEvolutionPage() {
         </li>
       </ul>
 
-      <h3>2. Adding variants to an enum</h3>
+      <h3>Adding variants to an enum</h3>
       <p>
         Old code encountering a new variant will treat it as the implicit <code>UNKNOWN</code>{' '}
         variant.
       </p>
 
-      <h3>3. Renaming types, fields, and variants</h3>
+      <h3>Renaming types, fields, and variants</h3>
       <p>
         Skir uses numeric identifiers (field numbers) in its binary and compact JSON formats, not
         names. Therefore, renaming any element is safe.
@@ -75,13 +75,13 @@ export default function SchemaEvolutionPage() {
         </p>
       </Note>
 
-      <h3>4. Removing fields or variants</h3>
+      <h3>Removing fields or variants</h3>
       <p>
         You must mark the field or variant number as <code>removed</code> to prevent accidental
         reuse.
       </p>
 
-      <h3>5. Compatible type changes</h3>
+      <h3>Compatible type changes</h3>
       <p>You can change a type if the new type is backward-compatible with the old one:</p>
       <ul>
         <li>
