@@ -217,8 +217,8 @@ const JOHN_DOE: User = {
                 <ul className="!list-none !pl-0 !m-0 !text-foreground !space-y-0.5 [&_li]:!leading-snug">
                   <li>Constant variants are serialized as integers.</li>
                   <li>
-                    Wrapper variants are serialized as arrays with two elements: the variant
-                    number, the value.
+                    Wrapper variants are serialized as arrays with two elements: the variant number,
+                    the value.
                   </li>
                 </ul>
               </TableCell>
@@ -387,9 +387,7 @@ const JOHN_DOE: User = {
       </p>
 
       <h4>Encoding rules</h4>
-      <p>
-        All numeric values are encoded using little-endian byte order.
-      </p>
+      <p>All numeric values are encoded using little-endian byte order.</p>
 
       <div className="my-6 not-prose">
         <Table className="table-fixed">
@@ -571,7 +569,8 @@ const JOHN_DOE: User = {
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">struct</TableCell>
               <TableCell className="whitespace-normal">
-                Same encoding as an array. The array index corresponds to the field number. Removed fields are represented as <code>0</code>. Trailing default values are omitted.
+                Same encoding as an array. The array index corresponds to the field number. Removed
+                fields are represented as <code>0</code>. Trailing default values are omitted.
               </TableCell>
               <TableCell className="font-mono text-xs"></TableCell>
             </TableRow>
