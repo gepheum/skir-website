@@ -170,7 +170,21 @@ export default function HomePage() {
             <FeatureCard
               icon={<Terminal className="h-6 w-6" />} // Using Terminal for Dev Experience
               title="Developer experience delight"
-              description="A mature VS Code extension with all the features you need. Real-time validation, go to definition, automatic code formatting."
+              description={
+                <>
+                  A powerful{' '}
+                  <a
+                    href="https://marketplace.visualstudio.com/items?itemName=TylerFibonacci.skir-language"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-muted-foreground/50 hover:text-foreground transition-colors"
+                  >
+                    VS Code extension
+                  </a>{' '}
+                  with all the features you need. Real-time validation, go to definition, automatic
+                  code formatting.
+                </>
+              }
             />
           </div>
         </div>

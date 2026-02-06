@@ -3,7 +3,7 @@ import type { ReactNode } from 'react'
 interface FeatureCardProps {
   icon: ReactNode
   title: string
-  description: string
+  description: ReactNode
 }
 
 export function FeatureCard({ icon, title, description }: FeatureCardProps) {
