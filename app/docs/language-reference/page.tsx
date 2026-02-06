@@ -8,7 +8,7 @@ export const metadata = {
 export default function LanguageReferencePage() {
   return (
     <Prose>
-      <h1>Skir language reference</h1>
+      <h1>Language reference</h1>
 
       <h2>Records</h2>
       <p>There are two types of records: structs and enums.</p>
