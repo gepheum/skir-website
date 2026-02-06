@@ -151,9 +151,10 @@ const JOHN_DOE: User = {
                 <div>float64</div>
               </TableCell>
               <TableCell className="whitespace-normal">
-                Finite numbers are serialized as JSON numbers.<br />
-                <code>NaN</code>,{' '}
-                <code>Infinity</code>, and <code>-Infinity</code> are serialized as strings.
+                Finite numbers are serialized as JSON numbers.
+                <br />
+                <code>NaN</code>, <code>Infinity</code>, and <code>-Infinity</code> are serialized
+                as strings.
               </TableCell>
               <TableCell className="font-mono text-xs">
                 <div>1.23</div>
@@ -281,9 +282,10 @@ const JOHN_DOE: User = {
                 <div>float64</div>
               </TableCell>
               <TableCell className="whitespace-normal">
-                Finite numbers are serialized as JSON numbers.<br />
-                <code>NaN</code>,{' '}
-                <code>Infinity</code>, and <code>-Infinity</code> are serialized as strings.
+                Finite numbers are serialized as JSON numbers.
+                <br />
+                <code>NaN</code>, <code>Infinity</code>, and <code>-Infinity</code> are serialized
+                as strings.
               </TableCell>
               <TableCell className="font-mono text-xs">
                 <div>1.23</div>
@@ -332,9 +334,7 @@ const JOHN_DOE: User = {
               <TableCell className="whitespace-normal">
                 A JSON object containing field names and values. Default values are omitted.
               </TableCell>
-              <TableCell className="font-mono text-xs">
-                {`{ "name": "John", "age": 30 }`}
-              </TableCell>
+              <TableCell className="font-mono text-xs">{`{ "name": "John", "age": 30 }`}</TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">enum</TableCell>
@@ -359,7 +359,9 @@ const JOHN_DOE: User = {
       </p>
 
       <h4>Serialization rules</h4>
-      <p>Similar to dense JSON, zeros are used to represent <code>removed</code> fields.</p>
+      <p>
+        Similar to dense JSON, zeros are used to represent <code>removed</code> fields.
+      </p>
 
       <div className="my-6 not-prose">
         <Table>
@@ -435,9 +437,7 @@ const JOHN_DOE: User = {
               <TableCell className="whitespace-normal">
                 Varint length prefix followed by UTF-8 bytes.
               </TableCell>
-              <TableCell className="font-mono text-xs">
-                "Hi" -&gt; 0x02 0x48 0x69
-              </TableCell>
+              <TableCell className="font-mono text-xs">"Hi" -&gt; 0x02 0x48 0x69</TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">bytes</TableCell>
@@ -462,9 +462,7 @@ const JOHN_DOE: User = {
               <TableCell className="whitespace-normal">
                 Varint length prefix followed by items sequentially.
               </TableCell>
-              <TableCell className="font-mono text-xs">
-                [1, 2] -&gt; 0x02 ... ...
-              </TableCell>
+              <TableCell className="font-mono text-xs">[1, 2] -&gt; 0x02 ... ...</TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">struct</TableCell>
@@ -489,8 +487,8 @@ const JOHN_DOE: User = {
 
       <h3>JSON flavors</h3>
       <p>
-        When Skir <em>deserializes</em> JSON, it knows how to handle both dense and readable
-        flavor. You do not need to specify which flavor is being used.
+        When Skir <em>deserializes</em> JSON, it knows how to handle both dense and readable flavor.
+        You do not need to specify which flavor is being used.
       </p>
 
       <h3>Handling of zeros</h3>
@@ -501,12 +499,11 @@ const JOHN_DOE: User = {
       </p>
       <p>
         With the exception of optional types (<code>T?</code>), all types will decode a "zero" value
-        (integer 0) as the default value for that type. For example, a <code>string</code> decodes
-        0 as <code>""</code>, and an array decodes 0 as <code>[]</code>. For optional types, 0 is
+        (integer 0) as the default value for that type. For example, a <code>string</code> decodes 0
+        as <code>""</code>, and an array decodes 0 as <code>[]</code>. For optional types, 0 is
         decoded as the default value of the underlying type (e.g. <code>string?</code> decodes 0 as{' '}
         <code>""</code>, not <code>null</code>).
       </p>
-
     </Prose>
   )
 }
