@@ -134,7 +134,10 @@ const JOHN_DOE: User = {
               <TableCell className="font-mono text-xs">1234</TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
-              <TableCell className="font-mono">int64</TableCell>
+              <TableCell className="font-mono">
+                <div>int64</div>
+                <div>hash64</div>
+              </TableCell>
               <TableCell className="whitespace-normal">
                 <ul className="!list-none !pl-0 !m-0 !text-foreground !space-y-0.5 [&_li]:!leading-snug">
                   <li>
@@ -211,8 +214,13 @@ const JOHN_DOE: User = {
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">enum</TableCell>
               <TableCell className="whitespace-normal">
-                Constant variants are serialized as integers. Wrapper variants are serialized as
-                arrays with two elements: the variant number, the value.
+                <ul className="!list-none !pl-0 !m-0 !text-foreground !space-y-0.5 [&_li]:!leading-snug">
+                  <li>Constant variants are serialized as integers.</li>
+                  <li>
+                    Wrapper variants are serialized as arrays with two elements: the variant
+                    number, the value.
+                  </li>
+                </ul>
               </TableCell>
               <TableCell className="font-mono text-xs">
                 <div>1</div>
@@ -271,7 +279,10 @@ const JOHN_DOE: User = {
               <TableCell className="font-mono text-xs">1234</TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
-              <TableCell className="font-mono">int64</TableCell>
+              <TableCell className="font-mono">
+                <div>int64</div>
+                <div>hash64</div>
+              </TableCell>
               <TableCell className="whitespace-normal">
                 <ul className="!list-none !pl-0 !m-0 !text-foreground !space-y-0.5 [&_li]:!leading-snug">
                   <li>
@@ -351,8 +362,13 @@ const JOHN_DOE: User = {
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">enum</TableCell>
               <TableCell className="whitespace-normal">
-                Constant variants are serialized as strings. Wrapper variants are serialized as
-                objects with <code>kind</code> and <code>value</code> fields.
+                <ul className="!list-none !pl-0 !m-0 !text-foreground !space-y-0.5 [&_li]:!leading-snug">
+                  <li>Constant variants are serialized as strings.</li>
+                  <li>
+                    Wrapper variants are serialized as objects with <code>kind</code> and{' '}
+                    <code>value</code> fields.
+                  </li>
+                </ul>
               </TableCell>
               <TableCell className="font-mono text-xs">
                 <div>"RED"</div>
@@ -372,7 +388,7 @@ const JOHN_DOE: User = {
 
       <h4>Encoding rules</h4>
       <p>
-        Similar to dense JSON, zeros are used to represent <code>removed</code> fields.
+        All numeric values are encoded using little-endian byte order.
       </p>
 
       <div className="my-6 not-prose">
@@ -421,7 +437,22 @@ const JOHN_DOE: User = {
                     encoding.
                   </li>
                   <li>
-                    Otherwise, it uses marker <code>0xee</code> followed by 8 bytes (little endian).
+                    Otherwise, it uses marker <code>0xee</code> followed by 8 bytes.
+                  </li>
+                </ul>
+              </TableCell>
+              <TableCell className="font-mono text-xs"></TableCell>
+            </TableRow>
+            <TableRow className="bg-transparent hover:bg-transparent">
+              <TableCell className="font-mono">hash64</TableCell>
+              <TableCell className="whitespace-normal">
+                <ul className="!list-none !pl-0 !m-0 !text-foreground !space-y-0.5 [&_li]:!leading-snug">
+                  <li>
+                    If the value fits in a 32-bit unsigned integer, it uses the <code>int32</code>{' '}
+                    encoding.
+                  </li>
+                  <li>
+                    Otherwise, it uses marker <code>0xea</code> followed by 8 bytes.
                   </li>
                 </ul>
               </TableCell>
@@ -540,8 +571,7 @@ const JOHN_DOE: User = {
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">struct</TableCell>
               <TableCell className="whitespace-normal">
-                Same encoding as an array, where the length corresponds to the number of fields
-                (including removed ones). Trailing default values are omitted.
+                Same encoding as an array. The array index corresponds to the field number. Removed fields are represented as <code>0</code>. Trailing default values are omitted.
               </TableCell>
               <TableCell className="font-mono text-xs"></TableCell>
             </TableRow>
