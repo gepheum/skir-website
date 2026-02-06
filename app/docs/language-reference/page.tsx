@@ -1,4 +1,5 @@
 import { CodeBlock, Note, Prose } from '@/components/prose'
+import { HoverVideo } from '@/components/hover-video'
 
 export const metadata = {
   title: 'Language Reference - Skir',
@@ -238,6 +239,12 @@ struct ImplicitNumbering {
           number. This replacement happens automatically on save if you are using the VSCode
           extension.
         </p>
+        <div className="not-prose my-4 max-w-[50%] mx-auto">
+          <HoverVideo
+            src="/skir-website/record-stable-id-on-save.mp4"
+            poster="/skir-website/record-stable-id-on-save-poster.jpg"
+          />
+        </div>
       </Note>
 
       <h3>Recursive records</h3>
@@ -432,6 +439,20 @@ method GetUserProfile(GetUserProfileRequest): GetUserProfileResponse = 12345;`}<
         renaming and refactoring without breaking compatibility with older clients.
       </p>
       <p>No two methods in your Skir project can have the same stable identifier.</p>
+      <Note type="tip">
+        <p>
+          You can use <code>?</code> as a placeholder for the identifier and run{' '}
+          <code>npx skir format</code>. It will replace the question mark with a generated random
+          number. This replacement happens automatically on save if you are using the VSCode
+          extension.
+        </p>
+        <div className="not-prose my-4 max-w-[50%] mx-auto">
+          <HoverVideo
+            src="/skir-website/method-stable-id-on-save.mp4"
+            poster="/skir-website/method-stable-id-on-save-poster.jpg"
+          />
+        </div>
+      </Note>
 
       <h3>Inline request/response records</h3>
       <p>
