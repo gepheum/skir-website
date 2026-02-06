@@ -1,4 +1,12 @@
 import { CodeBlock, Note, Prose } from '@/components/prose'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 
 export const metadata = {
   title: 'Serialization Formats - Skir',
@@ -12,6 +20,50 @@ export default function SerializationPage() {
 
       <h2>Serialization formats</h2>
       <p>When serializing a data structure, you can choose one of 3 formats.</p>
+
+      <div className="my-6 not-prose">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[160px]">Format</TableHead>
+              <TableHead className="w-[160px]">Persistence</TableHead>
+              <TableHead className="w-[140px]">Space efficiency</TableHead>
+              <TableHead className="w-[120px]">Readability</TableHead>
+              <TableHead>Notes</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow className="bg-transparent hover:bg-transparent">
+              <TableCell className="font-medium">JSON (Dense)</TableCell>
+              <TableCell className="font-medium">Safe</TableCell>
+              <TableCell>High</TableCell>
+              <TableCell>Mediocre</TableCell>
+              <TableCell className="whitespace-normal">
+                Default choice. Safe for persistence and offers a good balance between performance and debuggability.
+              </TableCell>
+            </TableRow>
+            <TableRow className="bg-transparent hover:bg-transparent">
+              <TableCell className="font-medium">JSON (Readable)</TableCell>
+              <TableCell className="font-medium">Unsafe</TableCell>
+              <TableCell>Low</TableCell>
+              <TableCell>High</TableCell>
+              <TableCell className="whitespace-normal">
+                Good for debugging. <strong>Do not</strong> use for persistence: schema evolution
+                (e.g. renaming fields) will break compatibility with old data.
+              </TableCell>
+            </TableRow>
+            <TableRow className="bg-transparent hover:bg-transparent">
+              <TableCell className="font-medium">Binary</TableCell>
+              <TableCell className="font-medium">Safe</TableCell>
+              <TableCell>Very High</TableCell>
+              <TableCell>None</TableCell>
+              <TableCell className="whitespace-normal">
+                Fastest and most compact.
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
 
       <h3>JSON, dense flavor</h3>
       <p>This is the serialization format you should choose in most cases.</p>
