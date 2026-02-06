@@ -425,7 +425,7 @@ const JOHN_DOE: User = {
                   </li>
                 </ul>
               </TableCell>
-              <TableCell className="font-mono text-xs">-</TableCell>
+              <TableCell className="font-mono text-xs"></TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">float32</TableCell>
@@ -474,7 +474,7 @@ const JOHN_DOE: User = {
                   </li>
                 </ul>
               </TableCell>
-              <TableCell className="font-mono text-xs">-</TableCell>
+              <TableCell className="font-mono text-xs"></TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">string</TableCell>
@@ -504,7 +504,7 @@ const JOHN_DOE: User = {
                   </li>
                 </ul>
               </TableCell>
-              <TableCell className="font-mono text-xs">-</TableCell>
+              <TableCell className="font-mono text-xs"></TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">T?</TableCell>
@@ -543,7 +543,7 @@ const JOHN_DOE: User = {
                 Same encoding as an array, where the length corresponds to the number of fields
                 (including removed ones). Trailing default values are omitted.
               </TableCell>
-              <TableCell className="font-mono text-xs">-</TableCell>
+              <TableCell className="font-mono text-xs"></TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-mono">enum</TableCell>
@@ -557,7 +557,7 @@ const JOHN_DOE: User = {
                   </li>
                 </ul>
               </TableCell>
-              <TableCell className="font-mono text-xs">-</TableCell>
+              <TableCell className="font-mono text-xs"></TableCell>
             </TableRow>
           </TableBody>
         </Table>
