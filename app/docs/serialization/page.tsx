@@ -58,7 +58,9 @@ export default function SerializationPage() {
               <TableCell className="font-medium">Safe</TableCell>
               <TableCell>Very High</TableCell>
               <TableCell>None</TableCell>
-              <TableCell className="whitespace-normal">Most compact, fastest in languages like C++.</TableCell>
+              <TableCell className="whitespace-normal">
+                Most compact, fastest in languages like C++.
+              </TableCell>
             </TableRow>
           </TableBody>
         </Table>
