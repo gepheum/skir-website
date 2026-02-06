@@ -218,8 +218,6 @@ struct User(500996846) {
       <CodeBlock language="yaml">{`- name: Ensure Skir snapshot up-to-date
   run: npx skir snapshot --ci`}</CodeBlock>
 
-
-
       <h2>Round-tripping unrecognized data</h2>
       <p>
         Consider a service in a distributed system that reads a Skir value, modifies it, and writes
