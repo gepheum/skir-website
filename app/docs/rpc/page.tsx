@@ -167,6 +167,177 @@ async def main():
 
         print(response) # 25.0`}</CodeBlock>
 
+      <h2>Code examples</h2>
+      <div className="my-6 w-full overflow-y-auto">
+        <table className="w-full border-collapse border border-border text-sm">
+          <thead>
+            <tr className="bg-secondary/50">
+              <th className="border-b border-border p-4 text-left font-medium">Language</th>
+              <th className="border-b border-border p-4 text-left font-medium">Server side</th>
+              <th className="border-b border-border p-4 text-left font-medium">Client side</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-b border-border transition-colors hover:bg-muted/50">
+              <td className="p-4 font-medium">TypeScript</td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-typescript-example/blob/main/src/server.ts"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Express
+                </a>
+              </td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-typescript-example/blob/main/src/client.ts"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Client
+                </a>
+              </td>
+            </tr>
+            <tr className="border-b border-border transition-colors hover:bg-muted/50">
+              <td className="p-4 font-medium">Python</td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-python-example/blob/main/start_service_flask.py"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Flask
+                </a>
+                ,{' '}
+                <a
+                  href="https://github.com/gepheum/skir-python-example/blob/main/start_service_fastapi.py"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  FastAPI
+                </a>
+                ,{' '}
+                <a
+                  href="https://github.com/gepheum/skir-python-example/blob/main/start_service_starlite.py"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Litestar
+                </a>
+              </td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-python-example/blob/main/call_service.py"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Client
+                </a>
+              </td>
+            </tr>
+            <tr className="border-b border-border transition-colors hover:bg-muted/50">
+              <td className="p-4 font-medium">C++</td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-cc-example/blob/main/service_start.cc"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  cpp-httplib
+                </a>
+              </td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-cc-example/blob/main/service_client.cc"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Client
+                </a>
+              </td>
+            </tr>
+            <tr className="border-b border-border transition-colors hover:bg-muted/50">
+              <td className="p-4 font-medium">Java</td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-java-example/blob/main/src/main/java/examples/StartService.java"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Spring Boot
+                </a>
+              </td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-java-example/blob/main/src/main/java/examples/CallService.java"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Client
+                </a>
+              </td>
+            </tr>
+            <tr className="border-b border-border transition-colors hover:bg-muted/50">
+              <td className="p-4 font-medium">Kotlin</td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/startservice/StartService.kt"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Ktor
+                </a>
+              </td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/callservice/CallService.kt"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Client
+                </a>
+              </td>
+            </tr>
+            <tr className="transition-colors hover:bg-muted/50">
+              <td className="p-4 font-medium">Dart</td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-dart-example/blob/main/bin/start_service.dart"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Shelf
+                </a>
+              </td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-dart-example/blob/main/bin/call_service.dart"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Client
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <h2>Why use Skir services?</h2>
       <p>
         In a traditional REST API, the contract between client and server is implicit and fragile.
