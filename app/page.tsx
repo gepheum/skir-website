@@ -34,7 +34,7 @@ export default function HomePage() {
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 text-pretty">
-              Skir is a declarative language for defining data types, constants, and services. Write
+              Skir is a declarative language for defining data types, constants, and APIs. Write
               your schema once in a <code className="text-primary font-mono">.skir</code> file and
               generate idiomatic, type-safe code in TypeScript, Python, Java, C++, and more.
             </p>

@@ -20,7 +20,7 @@ const navigation = [
       { title: 'Language reference', href: '/docs/language-reference' },
       { title: 'Serialization', href: '/docs/serialization' },
       { title: 'Schema evolution', href: '/docs/schema-evolution' },
-      { title: 'Skir services', href: '/docs/rpc' },
+      { title: 'Skir services', href: '/docs/services' },
       { title: 'External dependencies', href: '/docs/dependencies' },
     ],
   },

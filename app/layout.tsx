@@ -16,7 +16,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'Skir - Like Protocol Buffer, but better',
   description:
-    'A declarative language for representing data types, constants, and services. Define your schema once and generate idiomatic, type-safe code for TypeScript, Python, Java, C++, Kotlin, and Dart.',
+    'A declarative language for representing data types, constants, and APIs. Define your schema once and generate idiomatic, type-safe code for TypeScript, Python, Java, C++, Kotlin, and Dart.',
   keywords: [
     'skir',
     'protocol buffer',
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Gepheum' }],
   openGraph: {
     title: 'Skir - Like Protocol Buffer, but better',
-    description: 'A descriptive language for representing data types, constants, and services.',
+    description: 'A descriptive language for representing data types, constants, and APIs.',
     type: 'website',
   },
   generator: 'v0.app',

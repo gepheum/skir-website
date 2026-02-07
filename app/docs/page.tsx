@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'Documentation - Skir',
-  description: 'Learn how to use Skir to define your data types, constants, and services.',
+  description: 'Learn how to use Skir to define your data types, constants, and APIs.',
 }
 
 const sections = [
@@ -34,7 +34,7 @@ const sections = [
   {
     title: 'Skir Services',
     description: 'Build typesafe APIs with Skir services.',
-    href: '/docs/rpc',
+    href: '/docs/services',
     icon: Globe,
   },
   {
@@ -51,10 +51,9 @@ export default function DocsPage() {
       <div className="mb-12">
         <h1 className="text-4xl font-bold mb-4">Documentation</h1>
         <p className="text-lg text-muted-foreground">
-          Skir is a declarative language for representing data types, constants, and services.
-          Define your schema once in a <code className="text-primary font-mono">.skir</code> file
-          and generate idiomatic, type-safe code for TypeScript, Python, Java, C++, Kotlin, and
-          Dart.
+          Skir is a declarative language for representing data types, constants, and APIs. Define
+          your schema once in a <code className="text-primary font-mono">.skir</code> file and
+          generate idiomatic, type-safe code for TypeScript, Python, Java, C++, Kotlin, and Dart.
         </p>
       </div>
 

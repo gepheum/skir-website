@@ -17,7 +17,7 @@ const footerLinks = {
     { name: 'Dart', href: '/docs/languages/dart' },
   ],
   resources: [
-    { name: 'Skir Services', href: '/docs/rpc' },
+    { name: 'Skir Services', href: '/docs/services' },
     { name: 'External Dependencies', href: '/docs/dependencies' },
     { name: 'Coming from Protobuf', href: '/docs/protobuf' },
     { name: 'GitHub', href: 'https://github.com/gepheum/skir', external: true },
