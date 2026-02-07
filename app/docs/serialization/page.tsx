@@ -20,7 +20,7 @@ export default function SerializationPage() {
       <p>
         Skir defines a standard for serializing and deserializing data types to JSON and binary. The
         generated data classes implement this standard to ensure that data structures defined in
-        your schema can be encoded and decoded consistently across supported languages.
+        your schema can be encoded and decoded consistently across all languages.
       </p>
 
       <h2>Serialization formats</h2>
