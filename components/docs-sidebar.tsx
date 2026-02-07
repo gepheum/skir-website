@@ -27,12 +27,12 @@ const navigation = [
   {
     title: 'Generated code',
     items: [
-      { title: 'TypeScript', href: '/docs/typescript' },
-      { title: 'Python', href: '/docs/python' },
       { title: 'C++', href: '/docs/cpp' },
+      { title: 'Dart', href: '/docs/dart' },
       { title: 'Java', href: '/docs/java' },
       { title: 'Kotlin', href: '/docs/kotlin' },
-      { title: 'Dart', href: '/docs/dart' },
+      { title: 'Python', href: '/docs/python' },
+      { title: 'TypeScript', href: '/docs/typescript' },
     ],
   },
   {
