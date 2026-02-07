@@ -154,6 +154,16 @@ struct UserRegistry {
         numbers.
       </p>
 
+      <h3>API definition</h3>
+      <p>
+        In Protocol Buffers, service methods are grouped into <code>service</code> blocks. In Skir, methods
+        are defined globally in the schema, and grouping is decided in the application code.
+      </p>
+      <p>
+        In Protocol Buffers, service methods are identified by their name. In Skir, methods are identified
+        by a numeric ID. This makes it safe to rename methods without breaking compatibility.
+      </p>
+
       <h2>Differences in generated code</h2>
       <p>
         Although the differences between the protobuf-generated code and the Skir-generated code
@@ -280,7 +290,7 @@ user = User(
         </li>
       </ol>
 
-      <h2>Services & RPC</h2>
+      <h2>RPC Services</h2>
       <p>
         Protobuf is tightly coupled with gRPC. While you <em>can</em> use Protobuf with other
         transports, gRPC is the default and often the only easy path.
