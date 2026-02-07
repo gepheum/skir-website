@@ -430,9 +430,7 @@ async def main():
       <div className="not-prose pt-[2px] max-w-full mx-auto mb-8">
         <HoverVideo src="/skir-website/skir-studio.mp4" />
       </div>
-      <p>
-        You can try out a demo:
-      </p>
+      <p>You can try out a demo:</p>
       <CodeBlock language="bash">{`npx skir-studio-demo`}</CodeBlock>
       <Note type="tip">
         <p>
