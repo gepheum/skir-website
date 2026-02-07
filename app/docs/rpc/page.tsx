@@ -9,124 +9,71 @@ export default function RpcPage() {
   return (
     <Prose>
       <h1>Skir services</h1>
-      <p>
-        Skir provides a transport-agnostic RPC (Remote Procedure Call) framework that lets you
-        define API methods in your schema and implement them in your preferred programming language.
+      <p className="text-xl text-muted-foreground">
+        Skir provides a protocol, along with server and client runtime libraries, allowing you to
+        issue RPCs with end-to-end type safety.
       </p>
       <p>
-        Unlike many RPC frameworks that couple your code to a specific transport protocol or server
-        implementation, Skir services are designed to be embedded within your existing application
-        stack. You can integrate with:
-      </p>
-      <ul>
-        <li>
-          <strong>Java</strong>: Spring Boot
-        </li>
-        <li>
-          <strong>Kotlin</strong>: Ktor
-        </li>
-        <li>
-          <strong>Dart</strong>: Shelf
-        </li>
-        <li>
-          <strong>Python</strong>: FastAPI, Flask, or Starlite
-        </li>
-        <li>
-          <strong>TypeScript</strong>: Express
-        </li>
-        <li>
-          <strong>C++</strong>: httplib
-        </li>
-      </ul>
-      <p>
-        Features like authentication, request logging or rate limiting are handled by the underlying
-        framework.
+        Skir services are versatile: they can be used either for communication between
+        microservices, or for communication between a server and a client.
       </p>
 
-      <h2>Why use Skir services?</h2>
+      <h2>Core concepts</h2>
       <p>
-        The primary advantage of using Skir services is <strong>end-to-end type safety</strong>.
+        Building a Skir service involves three main steps: defining the API schema, implementing the server logic, and calling the service.
+      </p>
+
+      <h3>API definition</h3>
+      <p>
+        Everything starts in your <code>.skir</code> schema. You define methods using the{' '}
+        <code>method</code> keyword.
+      </p>
+      <CodeBlock language="skir">{`// A calculator service
+method Square(float32): float32 = 1001;
+method SquareRoot(float32): float32 = 1002;`}</CodeBlock>
+      <p>
+        A method definition specifies the request type (input), the response type (output), and a
+        stable numeric identifier.
       </p>
       <p>
-        In a traditional REST API, the contract between client and server is often implicit:{' '}
-        <em>
-          Send a JSON object with fields <code>x</code> and <code>y</code> to <code>/api/foo</code>,
-          and receive a JSON object with field <code>z</code>.
-        </em>{' '}
-        This contract is fragile; if the server code changes the expected keys but the client isn't
-        updated, the API breaks at runtime.
+        Methods are defined globally in your schema. Skir does not group methods into <em>Service</em>{" "}
+        blocks in the <code>.skir</code> file like Protocol Buffer does. You decide how to group and
+        implement methods in your application code.
       </p>
-      <p>
-        Skir enforces this contract at compile time. By defining your methods in a{' '}
-        <code>.skir</code> schema, both your server implementation and your client calls are
-        generated from the same source of truth. You cannot call a method that doesn't exist, pass
-        the wrong arguments, or mishandle the response type without the compiler alerting you
-        immediately.
-      </p>
+
+      <h3>Implement the service</h3>
       <Note type="info">
         <p>
-          Skir solves the same problem as <strong>tRPC</strong>, but it is{' '}
-          <strong>language-agnostic</strong>. While tRPC is excellent for full-stack TypeScript
-          applications, Skir brings that same level of developer experience and safety to polyglot
-          environments (e.g., a TypeScript frontend talking to a Kotlin or Python backend).
-        </p>
-      </Note>
-
-      <h3>Use cases</h3>
-      <p>Skir services are versatile and can be used in two main contexts:</p>
-      <ol>
-        <li>
-          <strong>Microservices</strong>: Similar to gRPC, Skir allows efficiently typed
-          communication between backend services.
-        </li>
-        <li>
-          <strong>Browser-to-Backend</strong>: Skir works seamlessly over standard HTTP/JSON, making
-          it perfect for connecting a web frontend (React, Vue, etc.) to your backend.
-        </li>
-      </ol>
-
-      <h2>Defining methods</h2>
-      <p>
-        In Skir, a service is simply a collection of methods. You define methods in your{' '}
-        <code>.skir</code> files using the <code>method</code> keyword.
-      </p>
-      <CodeBlock language="skir">{`// Defines a method named 'GetUser' which takes a GetUserRequest and returns a GetUserResponse
-method GetUser(GetUserRequest): GetUserResponse = 12345;`}</CodeBlock>
-      <p>
-        A method definition specifies the <strong>request</strong> type, the{' '}
-        <strong>response</strong> type, and a stable numeric identifier.
-      </p>
-      <Note type="info">
-        <p>
-          Methods are defined globally in your schema. Skir does not group methods into "Service"
-          blocks in the <code>.skir</code> file. You decide how to group and implement methods in
-          your application code.
-        </p>
-      </Note>
-
-      <h2>Implementing a service</h2>
-      <p>
-        <em>
           The examples below use Python, but the concepts apply identically to all supported
           languages.
-        </em>
-      </p>
+        </p>
+      </Note>
       <p>
-        Skir provides a <code>Service</code> class in its runtime library for each supported
-        language. This class acts as a central dispatcher that handles deserialization, routing, and
-        serialization.
-      </p>
-      <p>
-        To create a service, you instantiate the <code>Service</code> class and register your method
-        implementations.
+        The Skir runtime library provides a <code>Service</code> class that handles all the heavy lifting: deserializing requests, routing to your code, serializing responses.
       </p>
 
-      <h3>The RequestMeta concept</h3>
+      <h4>Registering methods</h4>
       <p>
-        Skir services are generic over a <code>RequestMeta</code> type. This is a type you define to
-        hold context information extracted from the HTTP request, such as authentication tokens,
-        user sessions, or client IP addresses. This metadata is passed to your method
-        implementations along with the request body.
+        You simply link the abstract method definitions from your schema to your Python functions (method implementations) using <code>add_method</code>.
+      </p>
+      <CodeBlock language="python">{`from skirout.calc import Square, SquareRoot
+import math
+
+async def square_impl(val: float, meta: RequestMeta) -> float:
+    return val * val
+
+async def sqrt_impl(val: float, meta: RequestMeta) -> float:
+    if val < 0:
+        raise ValueError("Cannot calculate square root of negative number")
+    return math.sqrt(val)
+
+service.add_method(Square, square_impl)
+service.add_method(SquareRoot, sqrt_impl)`}</CodeBlock>
+
+      <h4>The <code>RequestMeta</code> concept</h4>
+      <p>
+        Services are often generic over a <code>RequestMeta</code> type. This is a custom type you define to
+        pass context (like auth tokens or user IDs) from the HTTP layer into your method logic.
       </p>
       <CodeBlock language="python">{`from dataclasses import dataclass
 import skir
@@ -140,45 +87,17 @@ class RequestMeta:
 # Create an async service typed with our metadata class
 service = skir.ServiceAsync[RequestMeta]`}</CodeBlock>
 
-      <h3>Registering methods</h3>
-      <p>
-        You link the abstract method definitions generated from your schema to your actual code
-        logic.
-      </p>
-      <CodeBlock language="python">{`from skirout.user import GetUser, GetUserRequest, GetUserResponse
-
-async def get_user(req: GetUserRequest, meta: RequestMeta) -> GetUserResponse:
-    # We have type-safe access to both the request fields and our metadata
-    print(f"Request from IP: {meta.client_ip}")
-    return GetUserResponse(user=await db.get_user(req.user_id))
-
-# Typing error if the signature of get_user does not match GetUser.
-service.add_method(GetUser, get_user)`}</CodeBlock>
-
-      <h2>Running the service</h2>
+      <h3>Running the service</h3>
       <p>
         Skir does not start its own HTTP server. Instead, it provides a <code>handle_request</code>{' '}
-        method that you call from your existing web server's request handler.
+        method that you call from your existing framework's request handler (FastAPI, Flask, Express, etc.).
       </p>
       <p>
-        This <code>handle_request</code> method takes:
-      </p>
-      <ol>
-        <li>The raw request body (as a string).</li>
-        <li>
-          Your constructed <code>RequestMeta</code> object.
-        </li>
-      </ol>
-      <p>
-        It returns a generated response containing the status code, content type, and body data,
-        which you seamlessly write back to your HTTP client.
-      </p>
-      <p>
-        Since Skir manages the request body parsing and routing internally, you typically only need{' '}
-        <strong>one HTTP endpoint</strong> (e.g., <code>/api</code>) to serve your entire API.
+        This allows you to leverage your framework's existing middleware for logging, auth, and rate limiting.
       </p>
       <CodeBlock language="python" filename="FastAPI example">{`from fastapi import FastAPI, Request
 from fastapi.responses import Response
+from .my_skir_service import service, RequestMeta
 
 app = FastAPI()
 
@@ -197,7 +116,7 @@ async def myapi(request: Request):
     req_meta = extract_meta_from_request(request)
 
     # 3. Delegate to Skir
-    raw_response = await skir_service.handle_request(req_body, req_headers)
+    raw_response = await service.handle_request(req_body, req_meta)
 
     # 4. Map back to framework response
     return Response(
@@ -210,41 +129,114 @@ async def myapi(request: Request):
 def extract_meta_from_request(request: Request) -> RequestMeta:
     ...`}</CodeBlock>
 
-      <h2>Calling a service</h2>
+      <h3>Call the service</h3>
 
-      <h3>Using Skir clients</h3>
+      <h4>Using Skir clients</h4>
       <p>
-        Skir generates a type-safe <code>ServiceClient</code> class that abstracts away the network
-        layer. This ensures that your client code is always in sync with your API definition.
+        Here is how you call a Skir service directly from your application code.
+      </p>
+      <p>
+        The Skir runtime library provides a <code>ServiceClient</code> class. You point it at your server URL, and use it to invoke your generated API methods.
       </p>
       <CodeBlock language="python">{`from skir import ServiceClient
 import aiohttp
+from skirout.calc import Square
 
-# 1. Initialize the client with your service URL
+# Initialize the client with your service URL
 client = ServiceClient("http://localhost:8000/api")
 
 async def main():
     async with aiohttp.ClientSession() as session:
-        # 2. Call methods directly using the generated definitions
+        # Call methods directly using the generated definitions
         response = await client.invoke_remote_async(
             session,
-            GetUser,
-            GetUserRequest(user_id="u_123"),
+            Square,
+            5.0,
             headers={"Authorization": "Bearer token"}
         )
 
-        # 'response' is fully typed as 'GetUserResponse'
-        print(response.user.name)`}</CodeBlock>
+        print(response) # 25.0`}</CodeBlock>
 
-      <h3>Using cURL</h3>
+      <h4>Using cURL</h4>
       <p>
-        You can also invoke Skir methods using any HTTP client by sending a POST request with a JSON
-        body. The body must follow a specific structure identifying the method and its arguments.
+        Since Skir runs over standard HTTP, you can also inspect or call it manually. Requests are just POSTs with a JSON body specifying the method name and arguments.
       </p>
       <CodeBlock language="bash">{`curl -X POST \\
   -H "Content-Type: application/json" \\
-  -d '{"method": "GetUser", "request": {"user_id": "u_123"}}' \\
+  -d '{"method": "Square", "request": 5.0}' \\
   http://localhost:8000/api`}</CodeBlock>
+
+
+
+      <h2>Why use Skir services?</h2>
+      <p>
+        In a traditional REST API, the contract between client and server is implicit and fragile.
+        If the server changes an endpoint but the client isn't updated, things break at runtime.
+      </p>
+      <p>
+        Skir enforces this contract at compile time. Both your server implementation and your client calls are
+        generated from the same source of truth. You cannot call a method that doesn't exist or pass
+        wrong arguments without the compiler alerting you.
+      </p>
+
+      <h3>Versus traditional REST APIs</h3>
+      <div className="my-6 w-full overflow-y-auto">
+        <table className="w-full border-collapse border border-border text-sm">
+          <thead>
+            <tr className="bg-secondary/50">
+              <th className="border-b border-border p-4 text-left font-medium">Feature</th>
+              <th className="border-b border-border p-4 text-left font-medium">
+                Traditional API (REST)
+              </th>
+              <th className="border-b border-border p-4 text-left font-medium">
+                Skir Service (RPC)
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-b border-border transition-colors hover:bg-muted/50">
+              <td className="p-4 font-medium">Endpoint</td>
+              <td className="p-4 text-muted-foreground">
+                Resource-based (e.g. <code>/users/123</code>)
+              </td>
+              <td className="p-4 text-muted-foreground">
+                Single URL (e.g. <code>/api</code>)
+              </td>
+            </tr>
+            <tr className="border-b border-border transition-colors hover:bg-muted/50">
+              <td className="p-4 font-medium">Operations</td>
+              <td className="p-4 text-muted-foreground">HTTP Verbs (GET, POST, PUT, DELETE)</td>
+              <td className="p-4 text-muted-foreground">
+                Schema methods (e.g. <code>GetUser</code>)
+              </td>
+            </tr>
+            <tr className="border-b border-border transition-colors hover:bg-muted/50">
+              <td className="p-4 font-medium">Input</td>
+              <td className="p-4 text-muted-foreground">Path params, query params, JSON body</td>
+              <td className="p-4 text-muted-foreground">Strongly-typed request record</td>
+            </tr>
+            <tr className="border-b border-border transition-colors hover:bg-muted/50">
+              <td className="p-4 font-medium">Output</td>
+              <td className="p-4 text-muted-foreground">JSON with implicit structure</td>
+              <td className="p-4 text-muted-foreground">Strongly-typed response record</td>
+            </tr>
+            <tr className="transition-colors hover:bg-muted/50">
+              <td className="p-4 font-medium">Client</td>
+              <td className="p-4 text-muted-foreground">Manual fetch/axios calls</td>
+              <td className="p-4 text-muted-foreground">Auto-generated type-safe client</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <Note type="info">
+        <p>
+          Skir solves the same problem as <strong>tRPC</strong>, but it is{' '}
+          <strong>language-agnostic</strong>. While tRPC is excellent for full-stack TypeScript
+          applications, Skir brings that same level of developer experience and safety to polyglot
+          environments (e.g., a TypeScript frontend talking to a Kotlin or Python backend).
+        </p>
+      </Note>
 
       <h2>Skir Studio</h2>
       <p>
