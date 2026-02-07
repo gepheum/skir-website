@@ -1,3 +1,4 @@
+import { HoverVideo } from '@/components/hover-video'
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
@@ -376,7 +377,7 @@ async def main():
             <tr className="border-b border-border transition-colors hover:bg-muted/50">
               <td className="p-4 font-medium">Operations</td>
               <td className="p-4 text-muted-foreground">
-                Endpoint + HTTP berb (e.g. <code>GET /users/123</code>)
+                Endpoint + HTTP verb (e.g. <code>GET /users/123</code>)
               </td>
               <td className="p-4 text-muted-foreground">
                 Methods defined in the <code>.skir</code> file (e.g. <code>GetUser</code>)
@@ -412,7 +413,28 @@ async def main():
         </p>
       </Note>
 
-      <h2>Debugging</h2>
+      <h2>Tooling</h2>
+
+      <h3>Skir Studio</h3>
+      <p>
+        Every Skir service comes with a built-in interactive documentation and testing tool called{' '}
+        Skir Studio.
+      </p>
+      <p>
+        To access it, simply visit your API endpoint in a browser with the <code>?studio</code>{' '}
+        query parameter (e.g., <code>http://localhost:8000/api?studio</code>). Skir serves a
+        lightweight HTML page that inspects your service, lists all available methods, and allows you to quickly send requests and view responses.
+      </p>
+      <div className="not-prose pt-[2px] max-w-full mx-auto mb-8">
+        <HoverVideo src="/skir-website/skir-studio.mp4" />
+      </div>
+      <Note type="tip">
+        <p>
+          If you are familiar with <strong>Swagger UI</strong> (common in the FastAPI ecosystem),
+          Skir Studio fills the same role. It provides a dedicated, auto-generated web interface to
+          explore your API schema and execute requests interactively.
+        </p>
+      </Note>
 
       <h3>Using cURL</h3>
       <p>
@@ -423,25 +445,6 @@ async def main():
   -H "Content-Type: application/json" \\
   -d '{"method": "Square", "request": 5.0}' \\
   http://localhost:8000/api`}</CodeBlock>
-
-      <h3>Skir Studio</h3>
-      <p>
-        Every Skir service comes with a built-in interactive documentation and testing tool called{' '}
-        <strong>Skir Studio</strong>.
-      </p>
-      <p>
-        To access it, simply visit your API endpoint in a browser with the <code>?studio</code>{' '}
-        query parameter (e.g., <code>http://localhost:8000/api?studio</code>). Skir serves a
-        lightweight HTML page that inspects your service, lists all available methods, and provides
-        auto-generated forms to send test requests and view responses.
-      </p>
-      <Note type="tip">
-        <p>
-          If you are familiar with <strong>Swagger UI</strong> (common in the FastAPI ecosystem),
-          Skir Studio fills the same role. It provides a dedicated, auto-generated web interface to
-          explore your API schema and execute requests interactively.
-        </p>
-      </Note>
     </Prose>
   )
 }
