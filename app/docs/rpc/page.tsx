@@ -9,7 +9,7 @@ export default function RpcPage() {
   return (
     <Prose>
       <h1>Skir services</h1>
-      <p className="text-xl text-muted-foreground">
+      <p>
         Skir provides a protocol, along with server and client runtime libraries, allowing you to
         issue RPCs with end-to-end type safety.
       </p>
@@ -143,8 +143,6 @@ def extract_meta_from_request(request: Request) -> RequestMeta:
     ...`}</CodeBlock>
 
       <h3>Call the service</h3>
-
-      <h4>Using Skir clients</h4>
       <p>Here is how you call a Skir service directly from your application code.</p>
       <p>
         The Skir runtime library provides a <code>ServiceClient</code> class. You point it at your
@@ -207,10 +205,10 @@ async def main():
             <tr className="border-b border-border transition-colors hover:bg-muted/50">
               <td className="p-4 font-medium">Operations</td>
               <td className="p-4 text-muted-foreground">
-                Endpoint + HTTP Verb (e.g. <code>GET /users/123</code>)
+                Endpoint + HTTP berb (e.g. <code>GET /users/123</code>)
               </td>
               <td className="p-4 text-muted-foreground">
-                Schema methods (e.g. <code>GetUser</code>)
+                Methods defined in the <code>.skir</code> file (e.g. <code>GetUser</code>)
               </td>
             </tr>
             <tr className="border-b border-border transition-colors hover:bg-muted/50">
