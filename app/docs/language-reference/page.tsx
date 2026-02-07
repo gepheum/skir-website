@@ -1,6 +1,7 @@
 import { HoverVideo } from '@/components/hover-video'
 import { NextPageLink } from '@/components/next-page-link'
 import { CodeBlock, Note, Prose } from '@/components/prose'
+import Link from 'next/link'
 
 export const metadata = {
   title: 'Language Reference - Skir',
@@ -41,7 +42,9 @@ export default function LanguageReferencePage() {
 }`}</CodeBlock>
       <p>
         If you're not explicitly specifying the field numbers, you must be careful not to change the
-        order of the fields or else you won't be able to deserialize old values.
+        order of the fields or else you won't be able to deserialize old values. More information
+        about changes you can make to your schema is available in{' '}
+        <Link href="/docs/schema-evolution">Schema evolution</Link>.
       </p>
       <CodeBlock language="skir">{`// BAD: you can't reorder the fields and keep implicit numbering
 // struct Point {
@@ -117,7 +120,8 @@ enum ImplicitNumbering {
         The variant numbers are used for identifying the variants in the serialization format (not
         the variant names). You must be careful not to change the number of a variant, or you won't
         be able to deserialize old values. For example, if you're using implicit numbering, you must
-        not reorder the variants.
+        not reorder the variants. More information about changes you can make to your schema is
+        available in <Link href="/docs/schema-evolution">Schema evolution</Link>.
       </p>
       <p>
         It is always fine to rename an enum, rename the variants of an enum, or add new variants to
@@ -419,9 +423,9 @@ const NOT_IMPLEMENTED_ERROR: OperationStatus = {
         values.
       </p>
 
-      <h2>Methods (RPCs)</h2>
+      <h2>Methods (API)</h2>
       <p>
-        The <code>method</code> keyword allows you to define the signature of a remote method.
+        The <code>method</code> keyword allows you to define the signature of a service method.
       </p>
       <CodeBlock language="skir">{`struct GetUserProfileRequest {
   user_id: int32;
