@@ -141,6 +141,17 @@ struct UserRegistry {
         <code>id</code>. You get the performance of a map with the storage efficiency of a list.
       </p>
 
+      <h3>Field numbering</h3>
+      <p>
+        In Skir, fields in a <code>struct</code> are numbered starting from 0, and they must use
+        sequential integers (no gaps allowed).
+      </p>
+      <p>
+        This contrasts with Protocol Buffers, where field numbers must be greater than or equal to 1,
+        and can be sparse (you can skip numbers). Skir&apos;s sequential requirement enables more efficient serialization and deserialization implementations (often just array indexing)
+        compared to the hash map or switch statement approaches often required for sparse field numbers.
+      </p>
+
       <h2>Differences in generated code</h2>
       <p>
         Although the differences between the protobuf-generated code and the Skir-generated code
