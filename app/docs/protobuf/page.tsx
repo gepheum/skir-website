@@ -291,19 +291,20 @@ user = User(
 
       <h2>RPC Services</h2>
       <p>
-        Protobuf is tightly coupled with gRPC. While you <em>can</em> use Protobuf with other
-        transports, gRPC is the default and often the only easy path.
+        Protobuf is typically paired with gRPC. While efficient, gRPC requires specific tooling for
+        debugging (like <code>grpcui</code>) and often needs a proxy (gRPC-Web) to be called from a
+        browser.
       </p>
       <p>
-        Skir is transport-agnostic. It gives you a generic <code>Service</code> interface that
-        handles routing and serialization/deserialization. You can hook this into <em>any</em> HTTP
-        server or transport layer. This allows you to support high-performance binary RPCs for
-        microservices (similar to gRPC) while simultaneously serving standard JSON over HTTP for
-        browser clients, all without needing a proxy.
+        Skir services run over standard HTTP and are designed to be embedded into your existing
+        application (Express, Flask, Spring Boot, etc.). This makes them naturally compatible with
+        web clients and easy to inspect with standard tools like cURL.
       </p>
       <p>
-        Skir services are designed to be embedded into your existing application (Express, Flask,
-        Spring Boot, etc.) rather than forcing you to run a separate server.
+        Additionally, every Skir service comes with <strong>Skir Studio</strong> out of the box.
+        This built-in interactive debugging interface allows you to explore your API and test
+        methods directly in your browser, without needing to install or configure any external
+        tools.
       </p>
     </Prose>
   )
