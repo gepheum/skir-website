@@ -256,40 +256,38 @@ user = User(
         source control.
       </p>
 
-      <h2>Serialization flexibility</h2>
-      <p>Protobuf has two main formats: Binary and JSON (Proto3 JSON Mapping).</p>
+      <h2>Serialization</h2>
+      <p>Protobuf has two serialization formats: Binary and JSON (Proto3 JSON Mapping).</p>
       <p>
-        The Protobuf JSON format is <em>readable</em> (uses field names), but because field names
-        can change, it is not safe for long-term storage or schema evolution.
+        The Protobuf JSON format is readable (uses field names), but is not safe for schema
+        evolution (renaming fields breaks compatibility).
       </p>
-      <p>Skir lets you choose between three formats:</p>
-      <ol>
+      <p>Skir offers three serialization formats:</p>
+      <ul>
         <li>
-          <strong>Binary</strong>: Equivalent to Protobuf binary. Compact and fast.
-        </li>
-        <li>
-          <strong>Readable JSON</strong>: Like Protobuf JSON. Good for debugging, bad for specific
-          schema evolution cases (renames).
-        </li>
-        <li>
-          <strong>Dense JSON</strong>: A unique Skir format which is often the best default choice.
-          It serializes structs as JSON arrays (<code>[val1, val2, ...]</code>) instead of objects.
+          <strong>JSON (Dense)</strong>: Structs are serialized as arrays (<code>[val1, val2]</code>
+          ) rather than objects. It is the default choice offering the best balance between:
           <ul>
             <li>
-              <strong>Compact</strong>: Smaller than readable JSON, and often only ~20% larger than
-              the binary format.
+              Space efficiency: although it is not as space efficient as binary, it comes close.
             </li>
+            <li>Evolution safety: you can rename fields without breaking compatibility.</li>
             <li>
-              <strong>Evolution-safe</strong>: Uses field numbers, not names. You can rename fields
-              without breaking compatibility.
-            </li>
-            <li>
-              <strong>Storage-ready</strong>: Perfect for storing data in text-based columns (like
-              PostgreSQL JSONB) while maintaining the ability to rename fields in your schema.
+              Interoperability and debuggability: being valid JSON, it is easy to inspect and works
+              out of the box with databases (e.g., PostgreSQL JSONB columns) and external tools,
+              unlike binary formats.
             </li>
           </ul>
         </li>
-      </ol>
+        <li>
+          <strong>JSON (Readable)</strong>: Similar to Protobuf&apos;s JSON mapping. Useful for
+          debugging but unsafe for persistence as it relies on field names.
+        </li>
+        <li>
+          <strong>Binary</strong>: Equivalent to Protobuf binary. A bit more compact and performant
+          than dense JSON.
+        </li>
+      </ul>
 
       <h2>RPC Services</h2>
       <p>
