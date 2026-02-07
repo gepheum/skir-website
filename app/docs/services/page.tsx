@@ -407,10 +407,13 @@ async def main():
 
       <Note type="info">
         <p>
-          Skir solves the same problem as <strong>tRPC</strong>, but it is{' '}
-          <strong>language-agnostic</strong>. While tRPC is excellent for full-stack TypeScript
-          applications, Skir brings that same level of developer experience and safety to polyglot
-          environments (e.g., a TypeScript frontend talking to a Kotlin or Python backend).
+          Skir solves the same problem as{' '}
+          <a href="https://trpc.io" target="_blank" rel="noreferrer" className="hover:underline">
+            <strong>tRPC</strong>
+          </a>
+          , but it is <strong>language-agnostic</strong>. While tRPC is excellent for full-stack
+          TypeScript applications, Skir brings that same level of developer experience and safety to
+          polyglot environments (e.g., a TypeScript frontend talking to a Kotlin or Python backend).
         </p>
       </Note>
 
