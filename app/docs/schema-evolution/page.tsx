@@ -1,4 +1,5 @@
 import { HoverVideo } from '@/components/hover-video'
+import { NextPageLink } from '@/components/next-page-link'
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
@@ -296,6 +297,8 @@ assert(result.subscriptionStatus.union.kind === "TRIAL");  // Preserved!`}</Code
           corruption.
         </p>
       </Note>
+
+      <NextPageLink title="Skir services" href="/docs/rpc" />
     </Prose>
   )
 }

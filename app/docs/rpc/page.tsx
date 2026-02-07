@@ -1,4 +1,5 @@
 import { HoverVideo } from '@/components/hover-video'
+import { NextPageLink } from '@/components/next-page-link'
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
@@ -437,7 +438,7 @@ async def main():
         </p>
       </Note>
 
-      <h3>Using cURL</h3>
+      <h3>Sending requests with cURL</h3>
       <p>
         Since Skir runs over standard HTTP, you can also inspect or call it manually. Requests are
         just POSTs with a JSON body specifying the method name and arguments.
@@ -446,6 +447,8 @@ async def main():
   -H "Content-Type: application/json" \\
   -d '{"method": "Square", "request": 5.0}' \\
   http://localhost:8000/api`}</CodeBlock>
+
+      <NextPageLink title="External dependencies" href="/docs/dependencies" />
     </Prose>
   )
 }

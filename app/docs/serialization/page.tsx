@@ -1,3 +1,4 @@
+import { NextPageLink } from '@/components/next-page-link'
 import { CodeBlock, Prose } from '@/components/prose'
 import {
   Table,
@@ -631,6 +632,8 @@ const JOHN_DOE: User = {
         For optional types, 0 is decoded as the default value of the underlying type (e.g.{' '}
         <code>string?</code> decodes 0 as <code>""</code>, not <code>null</code>).
       </p>
+
+      <NextPageLink title="Schema evolution" href="/docs/schema-evolution" />
     </Prose>
   )
 }

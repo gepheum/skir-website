@@ -1,4 +1,5 @@
 import { HoverVideo } from '@/components/hover-video'
+import { NextPageLink } from '@/components/next-page-link'
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
@@ -177,6 +178,8 @@ generators:
       <div className="not-prose my-8 pt-[2px] w-[460px] max-w-full mx-auto">
         <HoverVideo src="/skir-website/auto-format.mp4" />
       </div>
+
+      <NextPageLink title="Language reference" href="/docs/language-reference" />
     </Prose>
   )
 }

@@ -1,4 +1,5 @@
 import { HoverVideo } from '@/components/hover-video'
+import { NextPageLink } from '@/components/next-page-link'
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
@@ -532,6 +533,8 @@ struct Disk {
         server paths, or sensitive security logic in doc comments for types that will be exposed via
         public-facing services.
       </p>
+
+      <NextPageLink title="Serialization" href="/docs/serialization" />
     </Prose>
   )
 }
