@@ -32,7 +32,7 @@ export default function SerializationPage() {
           <TableHeader>
             <TableRow>
               <TableHead className="w-[160px]">Format</TableHead>
-              <TableHead className="w-[160px]">Persistence</TableHead>
+              <TableHead className="w-[160px]">Persistable</TableHead>
               <TableHead className="w-[140px]">Space efficiency</TableHead>
               <TableHead className="w-[120px]">Readability</TableHead>
               <TableHead>Notes</TableHead>
@@ -41,9 +41,9 @@ export default function SerializationPage() {
           <TableBody>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-medium">JSON (Dense)</TableCell>
-              <TableCell className="font-medium">Safe</TableCell>
+              <TableCell>Yes: safe</TableCell>
               <TableCell>High</TableCell>
-              <TableCell>Mediocre</TableCell>
+              <TableCell>Low</TableCell>
               <TableCell className="whitespace-normal">
                 Default choice. Safe for persistence and offers a good balance between performance
                 and debuggability.
@@ -51,7 +51,7 @@ export default function SerializationPage() {
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-medium">JSON (Readable)</TableCell>
-              <TableCell className="font-medium">Unsafe</TableCell>
+              <TableCell>No: unsafe</TableCell>
               <TableCell>Low</TableCell>
               <TableCell>High</TableCell>
               <TableCell className="whitespace-normal">
@@ -61,7 +61,7 @@ export default function SerializationPage() {
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-medium">Binary</TableCell>
-              <TableCell className="font-medium">Safe</TableCell>
+              <TableCell>Yes: safe</TableCell>
               <TableCell>Very High</TableCell>
               <TableCell>None</TableCell>
               <TableCell className="whitespace-normal">
