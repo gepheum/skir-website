@@ -10,9 +10,15 @@ export default function LanguageReferencePage() {
   return (
     <Prose>
       <h1>Language reference</h1>
+      <p>
+        This page serves as a reference for the syntax and features of the Skir language.
+      </p>
 
       <h2>Records</h2>
-      <p>There are two types of records: structs and enums.</p>
+      <p>
+        Records are the top-level data definitions in a Skir schema. There are two
+        types of records: structs and enums.
+      </p>
 
       <h3>Structs</h3>
       <p>
@@ -30,9 +36,9 @@ export default function LanguageReferencePage() {
 }`}</CodeBlock>
       <p>or implicitly:</p>
       <CodeBlock language="skir">{`struct Point {
-  x: int32;     // implicitly set to 0
-  y: int32;     // implicitly set to 1
-  label: string; // implicitly set to 2
+  x: int32;       // = 0
+  y: int32;       // = 1
+  label: string;  // = 2
 }`}</CodeBlock>
       <p>
         If you're not explicitly specifying the field numbers, you must be careful not to change the
