@@ -39,7 +39,7 @@ method SquareRoot(float32): float32 = 1002;`}</CodeBlock>
       </p>
       <p>
         Methods are defined globally in your schema. Skir does not group methods into{' '}
-        <em>Service</em> blocks in the <code>.skir</code> file like Protocol Buffer does. You decide
+        <em>service</em> blocks in the <code>.skir</code> file like Protocol Buffer does. You decide
         how to group and implement methods in your application code.
       </p>
 

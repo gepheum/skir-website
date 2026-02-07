@@ -413,10 +413,23 @@ const JOHN_DOE: User = {
               <TableCell className="font-mono">int32</TableCell>
               <TableCell className="whitespace-normal">
                 <ul className="!list-none !pl-0 !m-0 !text-foreground !space-y-0.5 [&_li]:!leading-snug">
-                  <li>Small non-negative integers (0-231) are encoded as a single byte.</li>
                   <li>
-                    Larger integers and negative integers use a 1-byte marker followed by the value
-                    (1, 2 or 4 bytes).
+                    0-231: single byte <code>val</code>
+                  </li>
+                  <li>
+                    232-65535: <code>0xe8</code> followed by <code>uint16(val)</code>
+                  </li>
+                  <li>
+                    &ge; 65536: <code>0xe9</code> followed by <code>uint32(val)</code>
+                  </li>
+                  <li>
+                    -256 to -1: <code>0xeb</code> followed by <code>uint8(val + 256)</code>
+                  </li>
+                  <li>
+                    -65536 to -257: <code>0xec</code> followed by <code>uint16(val + 65536)</code>
+                  </li>
+                  <li>
+                    &le; -65537: <code>0xed</code> followed by <code>int32(val)</code>
                   </li>
                 </ul>
               </TableCell>
@@ -431,11 +444,11 @@ const JOHN_DOE: User = {
               <TableCell className="whitespace-normal">
                 <ul className="!list-none !pl-0 !m-0 !text-foreground !space-y-0.5 [&_li]:!leading-snug">
                   <li>
-                    If the value fits in a 32-bit signed integer, it uses the <code>int32</code>{' '}
+                    If the value fits in a 32-bit signed integer, uses the <code>int32</code>{' '}
                     encoding.
                   </li>
                   <li>
-                    Otherwise, it uses marker <code>0xee</code> followed by 8 bytes.
+                    Otherwise: marker <code>0xee</code> followed by 8 bytes (int64).
                   </li>
                 </ul>
               </TableCell>
@@ -446,11 +459,11 @@ const JOHN_DOE: User = {
               <TableCell className="whitespace-normal">
                 <ul className="!list-none !pl-0 !m-0 !text-foreground !space-y-0.5 [&_li]:!leading-snug">
                   <li>
-                    If the value fits in a 32-bit unsigned integer, it uses the <code>int32</code>{' '}
+                    If the value fits in a 32-bit unsigned integer, uses the <code>int32</code>{' '}
                     encoding.
                   </li>
                   <li>
-                    Otherwise, it uses marker <code>0xea</code> followed by 8 bytes.
+                    Otherwise: marker <code>0xea</code> followed by 8 bytes (uint64).
                   </li>
                 </ul>
               </TableCell>
@@ -461,7 +474,7 @@ const JOHN_DOE: User = {
               <TableCell className="whitespace-normal">
                 <ul className="!list-none !pl-0 !m-0 !text-foreground !space-y-0.5 [&_li]:!leading-snug">
                   <li>
-                    <code>0</code> is encoded as a single byte <code>0x00</code>.
+                    0 is encoded as a single byte <code>0x00</code>.
                   </li>
                   <li>
                     Otherwise: marker <code>0xf0</code> followed by 4 bytes (IEEE 754, little
@@ -479,7 +492,7 @@ const JOHN_DOE: User = {
               <TableCell className="whitespace-normal">
                 <ul className="!list-none !pl-0 !m-0 !text-foreground !space-y-0.5 [&_li]:!leading-snug">
                   <li>
-                    <code>0</code> is encoded as a single byte <code>0x00</code>.
+                    0 is encoded as a single byte <code>0x00</code>.
                   </li>
                   <li>
                     Otherwise: marker <code>0xf1</code> followed by 8 bytes (IEEE 754, little
@@ -496,7 +509,7 @@ const JOHN_DOE: User = {
               <TableCell className="whitespace-normal">
                 <ul className="!list-none !pl-0 !m-0 !text-foreground !space-y-0.5 [&_li]:!leading-snug">
                   <li>
-                    <code>0</code> (Epoch) is encoded as a single byte <code>0x00</code>.
+                    0 (Epoch) is encoded as a single byte <code>0x00</code>.
                   </li>
                   <li>
                     Otherwise: marker <code>0xef</code> followed by 8 bytes (int64 millis).
