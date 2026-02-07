@@ -147,9 +147,11 @@ struct UserRegistry {
         sequential integers (no gaps allowed).
       </p>
       <p>
-        This contrasts with Protocol Buffers, where field numbers must be greater than or equal to 1,
-        and can be sparse (you can skip numbers). Skir&apos;s sequential requirement enables more efficient serialization and deserialization implementations (often just array indexing)
-        compared to the hash map or switch statement approaches often required for sparse field numbers.
+        This contrasts with Protocol Buffers, where field numbers must be greater than or equal to
+        1, and can be sparse (you can skip numbers). Skir&apos;s sequential requirement enables more
+        efficient serialization and deserialization implementations (often just array indexing)
+        compared to the hash map or switch statement approaches often required for sparse field
+        numbers.
       </p>
 
       <h2>Differences in generated code</h2>
