@@ -423,7 +423,8 @@ async def main():
       <p>
         To access it, simply visit your API endpoint in a browser with the <code>?studio</code>{' '}
         query parameter (e.g., <code>http://localhost:8000/api?studio</code>). Skir serves a
-        lightweight HTML page that inspects your service, lists all available methods, and allows you to quickly send requests and view responses.
+        lightweight HTML page that inspects your service, lists all available methods, and allows
+        you to quickly send requests and view responses.
       </p>
       <div className="not-prose pt-[2px] max-w-full mx-auto mb-8">
         <HoverVideo src="/skir-website/skir-studio.mp4" />
