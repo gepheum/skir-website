@@ -1,7 +1,9 @@
 'use client'
 
 import { cn } from '@/lib/utils'
+import { useTheme } from 'next-themes'
 import type { ReactNode } from 'react'
+import { useEffect, useState } from 'react'
 // Use Light build to allow custom language registration
 import { skirLanguage } from '@/lib/skir-language'
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
@@ -15,7 +17,7 @@ import kotlin from 'react-syntax-highlighter/dist/esm/languages/hljs/kotlin'
 import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python'
 import typescript from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript'
 import yaml from 'react-syntax-highlighter/dist/esm/languages/hljs/yaml'
-import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import { atomOneDark, atomOneLight } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
 // Register all languages used in docs
 SyntaxHighlighter.registerLanguage('skir', skirLanguage)
@@ -70,6 +72,16 @@ interface CodeBlockProps {
 }
 
 export function CodeBlock({ children, language, filename }: CodeBlockProps) {
+  const [mounted, setMounted] = useState(false)
+  const { theme } = useTheme()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Use dark theme by default during SSR to match defaultTheme="dark"
+  const syntaxTheme = mounted && theme === 'light' ? atomOneLight : atomOneDark
+
   // Use Skir highlighting for Skir code
   const highlightLanguage = language === 'skir' ? 'skir' : language || 'plaintext'
 
@@ -86,7 +98,7 @@ export function CodeBlock({ children, language, filename }: CodeBlockProps) {
       )}
       <SyntaxHighlighter
         language={highlightLanguage}
-        style={atomOneDark}
+        style={syntaxTheme}
         customStyle={{
           margin: 0,
           borderRadius: 0,

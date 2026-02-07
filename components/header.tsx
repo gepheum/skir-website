@@ -1,5 +1,6 @@
 'use client'
 
+import { ThemeToggle } from '@/components/theme-toggle'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -80,6 +81,7 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-4">
+          <ThemeToggle />
           <Button asChild variant="ghost" size="icon" className="hidden md:flex">
             <a href="https://github.com/gepheum/skir" target="_blank" rel="noopener noreferrer">
               <Github className="h-5 w-5" />
@@ -135,6 +137,7 @@ export function Header() {
               ),
             )}
             <div className="flex items-center gap-4 pt-4 border-t border-border">
+              <ThemeToggle />
               <Button asChild variant="outline" size="sm">
                 <a href="https://github.com/gepheum/skir" target="_blank" rel="noopener noreferrer">
                   <Github className="mr-2 h-4 w-4" />

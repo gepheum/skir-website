@@ -2,7 +2,8 @@
 
 import { skirLanguage } from '@/lib/skir-language'
 import { cn } from '@/lib/utils'
-import { useState } from 'react'
+import { useTheme } from 'next-themes'
+import { useEffect, useState } from 'react'
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
 import cpp from 'react-syntax-highlighter/dist/esm/languages/hljs/cpp'
 import dart from 'react-syntax-highlighter/dist/esm/languages/hljs/dart'
@@ -10,7 +11,7 @@ import java from 'react-syntax-highlighter/dist/esm/languages/hljs/java'
 import kotlin from 'react-syntax-highlighter/dist/esm/languages/hljs/kotlin'
 import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python'
 import typescript from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript'
-import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+import { atomOneDark, atomOneLight } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
 SyntaxHighlighter.registerLanguage('skir', skirLanguage)
 SyntaxHighlighter.registerLanguage('typescript', typescript)
@@ -53,6 +54,15 @@ export function SplitCodeExample({
 }: SplitCodeExampleProps) {
   const fallbackTab = tabs[0]?.id ?? 'typescript'
   const [activeTab, setActiveTab] = useState<CodeTabId>(initialTab ?? fallbackTab)
+  const [mounted, setMounted] = useState(false)
+  const { theme } = useTheme()
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  // Use dark theme by default during SSR to match defaultTheme="dark"
+  const syntaxTheme = mounted && theme === 'light' ? atomOneLight : atomOneDark
 
   return (
     <div className="rounded-lg border border-border overflow-hidden bg-card">
@@ -64,7 +74,7 @@ export function SplitCodeExample({
           <div className="overflow-x-auto overflow-y-auto flex-1">
             <SyntaxHighlighter
               language="skir"
-              style={atomOneDark}
+              style={syntaxTheme}
               customStyle={{
                 margin: 0,
                 borderRadius: 0,
@@ -106,7 +116,7 @@ export function SplitCodeExample({
           <div className="overflow-x-auto overflow-y-auto flex-1">
             <SyntaxHighlighter
               language={activeTab}
-              style={atomOneDark}
+              style={syntaxTheme}
               customStyle={{
                 margin: 0,
                 borderRadius: 0,
