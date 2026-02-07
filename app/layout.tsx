@@ -50,8 +50,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+    <html lang="en" suppressHydrationWarning className="dark">
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`} suppressHydrationWarning>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -60,6 +60,21 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Debug hydration errors in production
+              if (typeof window !== 'undefined') {
+                window.addEventListener('error', function(e) {
+                  console.error('Global error caught:', e.message, e.error);
+                });
+                window.addEventListener('unhandledrejection', function(e) {
+                  console.error('Unhandled promise rejection:', e.reason);
+                });
+              }
+            `,
+          }}
+        />
       </body>
     </html>
   )
