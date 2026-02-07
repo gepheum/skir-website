@@ -10,14 +10,12 @@ export default function LanguageReferencePage() {
   return (
     <Prose>
       <h1>Language reference</h1>
-      <p>
-        This page serves as a reference for the syntax and features of the Skir language.
-      </p>
+      <p>This page serves as a reference for the syntax and features of the Skir language.</p>
 
       <h2>Records</h2>
       <p>
-        Records are the top-level data definitions in a Skir schema. There are two
-        types of records: structs and enums.
+        Records are the top-level data definitions in a Skir schema. There are two types of records:
+        structs and enums.
       </p>
 
       <h3>Structs</h3>

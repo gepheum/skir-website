@@ -14,8 +14,7 @@ export default function RpcPage() {
         issue RPCs with end-to-end type safety.
       </p>
       <p>
-        Skir services are versatile: they can be used either for communication between
-        microservices, or for communication between a server and a client.
+        Skir services are versatile: they can be used either for communication between microservices or between your frontend and your backend.
       </p>
 
       <h2>Core concepts</h2>
