@@ -20,7 +20,7 @@ type NavigationItem = {
 
 const navigation: NavigationItem[] = [
   { name: 'Docs', href: '/docs' },
-  { name: 'Getting started', href: '/docs/getting-started' },
+  { name: 'Getting started', href: '/docs/setup' },
   { name: 'Language reference', href: '/docs/language-reference' },
   {
     name: 'Generated code',
@@ -90,7 +90,7 @@ export function Header() {
           </Button>
 
           <Button asChild className="hidden md:flex">
-            <Link href="/docs/getting-started">Get Started</Link>
+            <Link href="/docs/setup">Get Started</Link>
           </Button>
 
           <Button
@@ -145,7 +145,7 @@ export function Header() {
                 </a>
               </Button>
               <Button asChild size="sm">
-                <Link href="/docs/getting-started" onClick={() => setMobileMenuOpen(false)}>
+                <Link href="/docs/setup" onClick={() => setMobileMenuOpen(false)}>
                   Get Started
                 </Link>
               </Button>

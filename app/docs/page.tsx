@@ -10,7 +10,7 @@ const sections = [
   {
     title: 'Getting Started',
     description: 'Set up Skir in your project and learn the basic workflow.',
-    href: '/docs/getting-started',
+    href: '/docs/setup',
     icon: BookOpen,
   },
   {

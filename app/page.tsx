@@ -41,7 +41,7 @@ export default function HomePage() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
               <Button asChild size="lg" className="text-base">
-                <Link href="/docs/getting-started">
+                <Link href="/docs/setup">
                   Get Started
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -224,7 +224,7 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg">
-                <Link href="/docs/getting-started">
+                <Link href="/docs/setup">
                   Read the Docs
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>

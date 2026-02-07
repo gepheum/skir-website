@@ -11,7 +11,7 @@ const navigation = [
     title: 'Getting started',
     items: [
       { title: 'Introduction', href: '/docs' },
-      { title: 'Setup & workflow', href: '/docs/getting-started' },
+      { title: 'Setup & workflow', href: '/docs/setup' },
     ],
   },
   {

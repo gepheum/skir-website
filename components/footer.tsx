@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 const footerLinks = {
   documentation: [
-    { name: 'Getting Started', href: '/docs/getting-started' },
+    { name: 'Getting Started', href: '/docs/setup' },
     { name: 'Language Reference', href: '/docs/language-reference' },
     { name: 'Serialization', href: '/docs/serialization' },
     { name: 'Schema Evolution', href: '/docs/schema-evolution' },
