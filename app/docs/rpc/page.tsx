@@ -20,7 +20,8 @@ export default function RpcPage() {
 
       <h2>Core concepts</h2>
       <p>
-        Building a Skir service involves three main steps: defining the API schema, implementing the server logic, and calling the service.
+        Building a Skir service involves three main steps: defining the API schema, implementing the
+        server logic, and calling the service.
       </p>
 
       <h3>API definition</h3>
@@ -36,9 +37,9 @@ method SquareRoot(float32): float32 = 1002;`}</CodeBlock>
         stable numeric identifier.
       </p>
       <p>
-        Methods are defined globally in your schema. Skir does not group methods into <em>Service</em>{" "}
-        blocks in the <code>.skir</code> file like Protocol Buffer does. You decide how to group and
-        implement methods in your application code.
+        Methods are defined globally in your schema. Skir does not group methods into{' '}
+        <em>Service</em> blocks in the <code>.skir</code> file like Protocol Buffer does. You decide
+        how to group and implement methods in your application code.
       </p>
 
       <h3>Implement the service</h3>
@@ -49,12 +50,14 @@ method SquareRoot(float32): float32 = 1002;`}</CodeBlock>
         </p>
       </Note>
       <p>
-        The Skir runtime library provides a <code>Service</code> class that handles all the heavy lifting: deserializing requests, routing to your code, serializing responses.
+        The Skir runtime library provides a <code>Service</code> class that handles all the heavy
+        lifting: deserializing requests, routing to your code, serializing responses.
       </p>
 
       <h4>Registering methods</h4>
       <p>
-        You simply link the abstract method definitions from your schema to your Python functions (method implementations) using <code>add_method</code>.
+        You simply link the abstract method definitions from your schema to your Python functions
+        (method implementations) using <code>add_method</code>.
       </p>
       <CodeBlock language="python">{`from skirout.calc import Square, SquareRoot
 import math
@@ -70,10 +73,13 @@ async def sqrt_impl(val: float, meta: RequestMeta) -> float:
 service.add_method(Square, square_impl)
 service.add_method(SquareRoot, sqrt_impl)`}</CodeBlock>
 
-      <h4>The <code>RequestMeta</code> concept</h4>
+      <h4>
+        The <code>RequestMeta</code> concept
+      </h4>
       <p>
-        Services are often generic over a <code>RequestMeta</code> type. This is a custom type you define to
-        pass context (like auth tokens or user IDs) from the HTTP layer into your method logic.
+        Services are often generic over a <code>RequestMeta</code> type. This is a custom type you
+        define to pass context (like auth tokens or user IDs) from the HTTP layer into your method
+        logic.
       </p>
       <CodeBlock language="python">{`from dataclasses import dataclass
 import skir
@@ -90,10 +96,12 @@ service = skir.ServiceAsync[RequestMeta]`}</CodeBlock>
       <h3>Running the service</h3>
       <p>
         Skir does not start its own HTTP server. Instead, it provides a <code>handle_request</code>{' '}
-        method that you call from your existing framework's request handler (FastAPI, Flask, Express, etc.).
+        method that you call from your existing framework's request handler (FastAPI, Flask,
+        Express, etc.).
       </p>
       <p>
-        This allows you to leverage your framework's existing middleware for logging, auth, and rate limiting.
+        This allows you to leverage your framework's existing middleware for logging, auth, and rate
+        limiting.
       </p>
       <CodeBlock language="python" filename="FastAPI example">{`from fastapi import FastAPI, Request
 from fastapi.responses import Response
@@ -132,11 +140,10 @@ def extract_meta_from_request(request: Request) -> RequestMeta:
       <h3>Call the service</h3>
 
       <h4>Using Skir clients</h4>
+      <p>Here is how you call a Skir service directly from your application code.</p>
       <p>
-        Here is how you call a Skir service directly from your application code.
-      </p>
-      <p>
-        The Skir runtime library provides a <code>ServiceClient</code> class. You point it at your server URL, and use it to invoke your generated API methods.
+        The Skir runtime library provides a <code>ServiceClient</code> class. You point it at your
+        server URL, and use it to invoke your generated API methods.
       </p>
       <CodeBlock language="python">{`from skir import ServiceClient
 import aiohttp
@@ -159,14 +166,13 @@ async def main():
 
       <h4>Using cURL</h4>
       <p>
-        Since Skir runs over standard HTTP, you can also inspect or call it manually. Requests are just POSTs with a JSON body specifying the method name and arguments.
+        Since Skir runs over standard HTTP, you can also inspect or call it manually. Requests are
+        just POSTs with a JSON body specifying the method name and arguments.
       </p>
       <CodeBlock language="bash">{`curl -X POST \\
   -H "Content-Type: application/json" \\
   -d '{"method": "Square", "request": 5.0}' \\
   http://localhost:8000/api`}</CodeBlock>
-
-
 
       <h2>Why use Skir services?</h2>
       <p>
@@ -174,9 +180,9 @@ async def main():
         If the server changes an endpoint but the client isn't updated, things break at runtime.
       </p>
       <p>
-        Skir enforces this contract at compile time. Both your server implementation and your client calls are
-        generated from the same source of truth. You cannot call a method that doesn't exist or pass
-        wrong arguments without the compiler alerting you.
+        Skir enforces this contract at compile time. Both your server implementation and your client
+        calls are generated from the same source of truth. You cannot call a method that doesn't
+        exist or pass wrong arguments without the compiler alerting you.
       </p>
 
       <h3>Versus traditional REST APIs</h3>
