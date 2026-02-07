@@ -29,7 +29,8 @@ export default function RpcPage() {
         Everything starts in your <code>.skir</code> schema. You define methods using the{' '}
         <code>method</code> keyword.
       </p>
-      <CodeBlock language="skir">{`// A calculator service
+      <CodeBlock language="skir">{`// calculator.skir
+
 method Square(float32): float32 = 1001;
 method SquareRoot(float32): float32 = 1002;`}</CodeBlock>
       <p>
@@ -43,16 +44,16 @@ method SquareRoot(float32): float32 = 1002;`}</CodeBlock>
       </p>
 
       <h3>Implement the service</h3>
+      <p>
+        The Skir runtime library provides a <code>Service</code> class that handles all the heavy
+        lifting: deserializing requests, routing to your code, serializing responses.
+      </p>
       <Note type="info">
         <p>
           The examples below use Python, but the concepts apply identically to all supported
           languages.
         </p>
       </Note>
-      <p>
-        The Skir runtime library provides a <code>Service</code> class that handles all the heavy
-        lifting: deserializing requests, routing to your code, serializing responses.
-      </p>
 
       <h4>Registering methods</h4>
       <p>
@@ -70,16 +71,19 @@ async def sqrt_impl(val: float, meta: RequestMeta) -> float:
         raise ValueError("Cannot calculate square root of negative number")
     return math.sqrt(val)
 
+service = skir.ServiceAsync[RequestMeta]
 service.add_method(Square, square_impl)
 service.add_method(SquareRoot, sqrt_impl)`}</CodeBlock>
 
-      <h4>
-        The <code>RequestMeta</code> concept
-      </h4>
+      <h4>Request context</h4>
       <p>
-        Services are often generic over a <code>RequestMeta</code> type. This is a custom type you
-        define to pass context (like auth tokens or user IDs) from the HTTP layer into your method
-        logic.
+        <code>RequestMeta</code> is a custom type you define to pass context (like auth tokens or
+        user IDs) from the HTTP layer into your method logic. This context object is passed to every
+        method implementation.
+      </p>
+      <p>
+        If you do not need to extract any context from the request, you can simply define an empty
+        class.
       </p>
       <CodeBlock language="python">{`from dataclasses import dataclass
 import skir
@@ -110,6 +114,7 @@ from .my_skir_service import service, RequestMeta
 app = FastAPI()
 
 
+# Mount the Skir service into this FastAPI app
 @app.api_route("/myapi", methods=["GET", "POST"])
 async def myapi(request: Request):
     # 1. Read body
@@ -164,15 +169,6 @@ async def main():
 
         print(response) # 25.0`}</CodeBlock>
 
-      <h4>Using cURL</h4>
-      <p>
-        Since Skir runs over standard HTTP, you can also inspect or call it manually. Requests are
-        just POSTs with a JSON body specifying the method name and arguments.
-      </p>
-      <CodeBlock language="bash">{`curl -X POST \\
-  -H "Content-Type: application/json" \\
-  -d '{"method": "Square", "request": 5.0}' \\
-  http://localhost:8000/api`}</CodeBlock>
 
       <h2>Why use Skir services?</h2>
       <p>
@@ -211,7 +207,9 @@ async def main():
             </tr>
             <tr className="border-b border-border transition-colors hover:bg-muted/50">
               <td className="p-4 font-medium">Operations</td>
-              <td className="p-4 text-muted-foreground">HTTP Verbs (GET, POST, PUT, DELETE)</td>
+              <td className="p-4 text-muted-foreground">
+                Endpoint + HTTP Verb (e.g. <code>GET /users/123</code>)
+              </td>
               <td className="p-4 text-muted-foreground">
                 Schema methods (e.g. <code>GetUser</code>)
               </td>
@@ -219,17 +217,17 @@ async def main():
             <tr className="border-b border-border transition-colors hover:bg-muted/50">
               <td className="p-4 font-medium">Input</td>
               <td className="p-4 text-muted-foreground">Path params, query params, JSON body</td>
-              <td className="p-4 text-muted-foreground">Strongly-typed request record</td>
+              <td className="p-4 text-muted-foreground">Strongly-typed request</td>
             </tr>
             <tr className="border-b border-border transition-colors hover:bg-muted/50">
               <td className="p-4 font-medium">Output</td>
               <td className="p-4 text-muted-foreground">JSON with implicit structure</td>
-              <td className="p-4 text-muted-foreground">Strongly-typed response record</td>
+              <td className="p-4 text-muted-foreground">Strongly-typed response</td>
             </tr>
             <tr className="transition-colors hover:bg-muted/50">
               <td className="p-4 font-medium">Client</td>
               <td className="p-4 text-muted-foreground">Manual fetch/axios calls</td>
-              <td className="p-4 text-muted-foreground">Auto-generated type-safe client</td>
+              <td className="p-4 text-muted-foreground">Typesafe, handles serialization and transport</td>
             </tr>
           </tbody>
         </table>
@@ -244,7 +242,19 @@ async def main():
         </p>
       </Note>
 
-      <h2>Skir Studio</h2>
+      <h2>Debugging</h2>
+
+      <h3>Using cURL</h3>
+      <p>
+        Since Skir runs over standard HTTP, you can also inspect or call it manually. Requests are
+        just POSTs with a JSON body specifying the method name and arguments.
+      </p>
+      <CodeBlock language="bash">{`curl -X POST \\
+  -H "Content-Type: application/json" \\
+  -d '{"method": "Square", "request": 5.0}' \\
+  http://localhost:8000/api`}</CodeBlock>
+
+      <h3>Skir Studio</h3>
       <p>
         Every Skir service comes with a built-in interactive documentation and testing tool called{' '}
         <strong>Skir Studio</strong>.
