@@ -11,10 +11,7 @@ interface NextPageLinkProps {
 export function NextPageLink({ title, href }: NextPageLinkProps) {
   return (
     <div className="mt-12 pt-8 border-t border-border flex justify-end">
-      <Link
-        href={href}
-        className="group inline-flex flex-col items-end text-right"
-      >
+      <Link href={href} className="group inline-flex flex-col items-end text-right">
         <span className="text-sm text-muted-foreground mb-1">Next</span>
         <span className="font-medium text-primary flex items-center gap-2">
           {title}
