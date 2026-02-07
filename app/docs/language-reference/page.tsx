@@ -257,7 +257,7 @@ struct ImplicitNumbering {
           .
         </p>
         <div className="not-prose my-4 pt-[2px] w-[460px] max-w-full mx-auto">
-          <HoverVideo src="/skir-website/record-stable-id-on-save.mp4" />
+          <HoverVideo src="/record-stable-id-on-save.mp4" />
         </div>
       </Note>
 
@@ -469,7 +469,7 @@ method GetUserProfile(GetUserProfileRequest): GetUserProfileResponse = 12345;`}<
           .
         </p>
         <div className="not-prose my-4 pt-[2px] w-[460px] max-w-full mx-auto">
-          <HoverVideo src="/skir-website/method-stable-id-on-save.mp4" />
+          <HoverVideo src="/method-stable-id-on-save.mp4" />
         </div>
       </Note>
 

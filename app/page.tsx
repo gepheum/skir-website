@@ -68,7 +68,7 @@ export default function HomePage() {
             {/* Quick Example GIF */}
             <div className="max-w-[1000px] mx-auto rounded-xl overflow-hidden border border-border shadow-2xl">
               <Image
-                src="/skir-website/quick-example.gif"
+                src="/quick-example.gif"
                 alt="Skir Quick Example showing VS Code editing and code generation"
                 width={0}
                 height={0}
@@ -118,7 +118,7 @@ export default function HomePage() {
 
             <div className="max-w-[760px] mx-auto rounded-xl overflow-hidden border border-border shadow-2xl">
               <Image
-                src="/skir-website/schema-evolution.gif"
+                src="/schema-evolution.gif"
                 alt="Schema Evolution showing breaking change detection"
                 width={0}
                 height={0}
