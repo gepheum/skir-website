@@ -169,7 +169,6 @@ async def main():
 
         print(response) # 25.0`}</CodeBlock>
 
-
       <h2>Why use Skir services?</h2>
       <p>
         In a traditional REST API, the contract between client and server is implicit and fragile.
@@ -227,7 +226,9 @@ async def main():
             <tr className="transition-colors hover:bg-muted/50">
               <td className="p-4 font-medium">Client</td>
               <td className="p-4 text-muted-foreground">Manual fetch/axios calls</td>
-              <td className="p-4 text-muted-foreground">Typesafe, handles serialization and transport</td>
+              <td className="p-4 text-muted-foreground">
+                Typesafe, handles serialization and transport
+              </td>
             </tr>
           </tbody>
         </table>
