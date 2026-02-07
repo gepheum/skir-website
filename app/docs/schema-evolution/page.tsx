@@ -192,10 +192,10 @@ struct User(500996846) {
       <p>
         If you are using the official{' '}
         <a
-          href="https://marketplace.visualstudio.com/items?itemName=Gepheum.skir-vscode"
+          href="https://marketplace.visualstudio.com/items?itemName=TylerFibonacci.skir-language"
           target="_blank"
           rel="noopener noreferrer"
-          className="underline font-medium decoration-primary decoration-2 underline-offset-2"
+          className="underline decoration-muted-foreground/50 hover:text-foreground transition-colors"
         >
           VSCode extension
         </a>

@@ -245,8 +245,16 @@ struct ImplicitNumbering {
         <p>
           You can use <code>?</code> as a placeholder for the identifier and run{' '}
           <code>npx skir format</code>. It will replace the question mark with a generated random
-          number. This replacement happens automatically on save if you are using the VSCode
-          extension.
+          number. This replacement happens automatically on save if you are using the{' '}
+          <a
+            href="https://marketplace.visualstudio.com/items?itemName=TylerFibonacci.skir-language"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-muted-foreground/50 hover:text-foreground transition-colors"
+          >
+            VSCode extension
+          </a>
+          .
         </p>
         <div className="not-prose my-4 pt-[2px] w-[460px] max-w-full mx-auto">
           <HoverVideo src="/skir-website/record-stable-id-on-save.mp4" />
@@ -449,8 +457,16 @@ method GetUserProfile(GetUserProfileRequest): GetUserProfileResponse = 12345;`}<
         <p>
           You can use <code>?</code> as a placeholder for the identifier and run{' '}
           <code>npx skir format</code>. It will replace the question mark with a generated random
-          number. This replacement happens automatically on save if you are using the VSCode
-          extension.
+          number. This replacement happens automatically on save if you are using the{' '}
+          <a
+            href="https://marketplace.visualstudio.com/items?itemName=TylerFibonacci.skir-language"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline decoration-muted-foreground/50 hover:text-foreground transition-colors"
+          >
+            VSCode extension
+          </a>
+          .
         </p>
         <div className="not-prose my-4 pt-[2px] w-[460px] max-w-full mx-auto">
           <HoverVideo src="/skir-website/method-stable-id-on-save.mp4" />

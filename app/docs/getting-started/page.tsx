@@ -163,13 +163,14 @@ generators:
 
       <h2>IDE support</h2>
       <p>
-        The official VS Code{' '}
+        The official{' '}
         <a
           href="https://marketplace.visualstudio.com/items?itemName=TylerFibonacci.skir-language"
           target="_blank"
           rel="noopener noreferrer"
+          className="underline decoration-muted-foreground/50 hover:text-foreground transition-colors"
         >
-          extension
+          VS Code extension
         </a>{' '}
         for Skir provides syntax highlighting, auto-formatting, validation, jump-to-definition, and
         other language features.
