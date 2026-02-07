@@ -52,7 +52,24 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="dark">
       <head>
-        <meta httpEquiv="Cache-Control" content="no-store" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              // Reload if page is restored from bfcache (back-forward cache)
+              window.addEventListener('pageshow', function(e) {
+                if (e.persisted) window.location.reload();
+              });
+              // Safety net: if page is blank after load, reload
+              window.addEventListener('load', function() {
+                setTimeout(function() {
+                  if (!document.body || document.body.children.length === 0) {
+                    window.location.reload();
+                  }
+                }, 100);
+              });
+            `,
+          }}
+        />
       </head>
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider
