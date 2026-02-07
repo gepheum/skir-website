@@ -156,12 +156,13 @@ struct UserRegistry {
 
       <h3>API definition</h3>
       <p>
-        In Protocol Buffers, service methods are grouped into <code>service</code> blocks. In Skir, methods
-        are defined globally in the schema, and grouping is decided in the application code.
+        In Protocol Buffers, service methods are grouped into <code>service</code> blocks. In Skir,
+        methods are defined globally in the schema, and grouping is decided in the application code.
       </p>
       <p>
-        In Protocol Buffers, service methods are identified by their name. In Skir, methods are identified
-        by a numeric ID. This makes it safe to rename methods without breaking compatibility.
+        In Protocol Buffers, service methods are identified by their name. In Skir, methods are
+        identified by a numeric ID. This makes it safe to rename methods without breaking
+        compatibility.
       </p>
 
       <h2>Differences in generated code</h2>
