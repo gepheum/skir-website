@@ -51,10 +51,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning className="dark">
-      <body
-        className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
-        suppressHydrationWarning
-      >
+      <head>
+        <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta httpEquiv="Pragma" content="no-cache" />
+        <meta httpEquiv="Expires" content="0" />
+      </head>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -63,21 +65,6 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              // Debug hydration errors in production
-              if (typeof window !== 'undefined') {
-                window.addEventListener('error', function(e) {
-                  console.error('Global error caught:', e.message, e.error);
-                });
-                window.addEventListener('unhandledrejection', function(e) {
-                  console.error('Unhandled promise rejection:', e.reason);
-                });
-              }
-            `,
-          }}
-        />
       </body>
     </html>
   )
