@@ -225,7 +225,49 @@ user = User(
         TypeScript and Python.
       </p>
 
-      <h2>Package management</h2>
+      <h2>Schema evolution: guidelines vs guarantees</h2>
+      <p>
+        Both Protocol Buffers and Skir are designed to support schema evolution, but they take
+        fundamentally different approaches to ensuring compatibility.
+      </p>
+      <p>
+        Protocol Buffers provides{' '}
+        <a
+          href="https://protobuf.dev/programming-guides/proto3/#updating"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          guidelines and best practices
+        </a>{' '}
+        for evolving schemas safely. These guidelines tell you which changes are safe (e.g., adding
+        fields, renaming) and which are dangerous (e.g., changing field numbers, incompatible type
+        changes). However, <strong>nothing in the toolchain enforces these rules</strong>. It is
+        entirely up to developers to remember the guidelines, understand the implications, and avoid
+        making breaking changes.
+      </p>
+      <p>
+        This manual approach works well in small teams with high discipline, but it becomes
+        error-prone as teams grow or when developers are less familiar with the evolution rules.
+        Breaking changes can slip through code review and cause production issues when old code
+        encounters incompatible new data, or when new code cannot deserialize old persisted records.
+      </p>
+      <p>
+        Skir takes a different approach: it provides <strong>automated enforcement</strong> through
+        its built-in snapshot tool. When you run <code>npx skir snapshot</code>, Skir analyzes your
+        current schema against a stored snapshot of the previous version and automatically detects
+        breaking changes. If you accidentally change a field number or make an incompatible type
+        change, Skir will catch it and refuse to proceed.
+      </p>
+      <p>
+        This shift from <em>guidelines you must remember to follow</em> to{' '}
+        <em>automated checks that prevent mistakes</em> provides a much stronger guarantee of
+        compatibility. You can confidently evolve your schema knowing that the tooling will catch
+        any dangerous changes before they reach production. Additionally, when integrated into your
+        CI pipeline or Git pre-commit hooks, the snapshot check ensures that every schema change is
+        validated automatically.
+      </p>
+
+      <h2>External dependencies</h2>
       <p>
         Protocol Buffers does not come with a built-in package manager. To share types across
         multiple Git repositories, developers traditionally have to rely on{' '}
