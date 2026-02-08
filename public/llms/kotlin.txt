@@ -1,0 +1,240 @@
+# Kotlin
+
+Guide for using Skir-generated Kotlin code.
+
+## Set Up
+
+In `skir.yml`, add under `generators`:
+
+```yaml
+- mod: skir-kotlin-gen
+  outDir: ./src/main/kotlin/skirout
+  config: {}
+  # Alternatively:
+  # outDir: ./src/main/kotlin/my/project/skirout
+  # config:
+  #   packagePrefix: my.project.
+```
+
+Runtime dependency: add to `build.gradle.kts`:
+
+```kotlin
+implementation("build.skir:skir-client:latest.release")
+```
+
+Example project: [skir-kotlin-example](https://github.com/gepheum/skir-kotlin-example)
+
+## Generated Code Guide
+
+Examples for code generated from [this .skir file](https://github.com/gepheum/skir-kotlin-example/blob/main/skir-src/user.skir).
+
+### Referring to Generated Symbols
+
+```kotlin
+import skirout.user.User
+import skirout.user.UserRegistry
+import skirout.user.SubscriptionStatus
+import skirout.user.TARZAN
+```
+
+### Frozen Struct Classes
+
+For every struct `S`, Skir generates a frozen (deeply immutable) class `S` and a mutable class `S.Mutable`.
+
+```kotlin
+val john = User(
+    userId = 42,
+    name = "John Doe",
+    quote = "Coffee is just a socially acceptable form of rage.",
+    pets = listOf(
+        User.Pet(
+            name = "Dumbo",
+            heightInMeters = 1.0f,
+            picture = "🐘",
+        ),
+    ),
+    subscriptionStatus = SubscriptionStatus.FREE,
+)
+
+assert(john.name == "John Doe")
+// john.name = "John Smith"  -- Does not compile: read-only
+```
+
+### Partial Construction
+
+```kotlin
+val jane = User.partial(
+    userId = 43,
+    name = "Jane Doe",
+    pets = listOf(User.Pet.partial(name = "Fido", picture = "🐶")),
+)
+assert(jane.quote == "")  // Default value
+assert(User.partial().pets.isEmpty())
+```
+
+### Creating Modified Copies
+
+```kotlin
+val evilJohn = john.copy(
+    name = "Evil John",
+    quote = "I solemnly swear I am up to no good.",
+)
+assert(evilJohn.userId == 42)
+```
+
+### Mutable Struct Classes
+
+```kotlin
+val lyla = User.Mutable()
+lyla.userId = 44
+lyla.name = "Lyla Doe"
+
+val userHistory = UserHistory.Mutable()
+userHistory.user = lyla  // Can be frozen or mutable
+
+// mutableUser: returns mutable version, creating shallow copy if needed
+userHistory.user = john  // frozen
+userHistory.mutableUser.name = "John the Second"  // makes shallow copy
+
+// mutablePets: same pattern for lists
+lyla.mutablePets.add(User.Pet(name = "Simba", heightInMeters = 0.4f, picture = "🦁"))
+```
+
+### Converting Between Frozen and Mutable
+
+```kotlin
+val evilJaneBuilder = jane.toMutable()  // Shallow copy (cheap)
+evilJaneBuilder.name = "Evil Jane"
+evilJaneBuilder.mutablePets.add(
+    User.Pet(name = "Shadow", heightInMeters = 0.5f, picture = "🐺"),
+)
+val evilJane = evilJaneBuilder.toFrozen()  // Recursively copies mutable values
+```
+
+### Type Aliases
+
+```kotlin
+// 'User_OrMutable' is a type alias for the sealed class.
+val greet: (User_OrMutable) -> Unit = { println("Hello, $it") }
+```
+
+### Enum Classes
+
+Skir generates a deeply immutable Kotlin class (not a Kotlin enum).
+
+```kotlin
+val someStatuses = listOf(
+    SubscriptionStatus.UNKNOWN,
+    SubscriptionStatus.FREE,
+    SubscriptionStatus.PREMIUM,
+    // Wrapper variant via subclass constructor
+    SubscriptionStatus.TrialWrapper(
+        SubscriptionStatus.Trial(startTime = Instant.now()),
+    ),
+    // Concise syntax when wrapped value is a struct
+    SubscriptionStatus.createTrial(startTime = Instant.now()),
+)
+```
+
+### Conditions on Enums
+
+```kotlin
+assert(john.subscriptionStatus == SubscriptionStatus.FREE)
+assert(jane.subscriptionStatus == SubscriptionStatus.UNKNOWN)
+
+val trialStatus = SubscriptionStatus.TrialWrapper(Trial(startTime = now))
+assert(trialStatus is SubscriptionStatus.TrialWrapper && trialStatus.value.startTime == now)
+```
+
+### Branching on Enum Variants
+
+```kotlin
+val getInfoText: (SubscriptionStatus) -> String = {
+    when (it) {
+        SubscriptionStatus.FREE -> "Free user"
+        SubscriptionStatus.PREMIUM -> "Premium user"
+        is SubscriptionStatus.TrialWrapper -> "On trial since ${it.value.startTime}"
+        is SubscriptionStatus.Unknown -> "Unknown subscription status"
+    }
+}
+```
+
+### Serialization
+
+Every frozen struct/enum class has a `serializer` property.
+
+```kotlin
+val serializer = User.serializer
+
+// Dense JSON
+val johnDenseJson: String = serializer.toJsonCode(john)
+
+// Readable JSON
+println(serializer.toJsonCode(john, JsonFlavor.READABLE))
+
+// Binary
+val johnBytes = serializer.toBytes(john)
+```
+
+### Deserialization
+
+```kotlin
+val reserializedJohn: User = serializer.fromJsonCode(johnDenseJson)
+// fromJsonCode handles both dense and readable JSON
+assert(serializer.fromBytes(johnBytes).equals(john))
+```
+
+### Constants
+
+```kotlin
+println(TARZAN)
+// User(userId = 123, name = "Tarzan", ...)
+```
+
+### Keyed Lists
+
+```kotlin
+val userRegistry = UserRegistry(users = listOf(john, jane, evilJohn))
+
+assert(userRegistry.users.findByKey(43) === jane)
+assert(userRegistry.users.findByKey(42) === evilJohn)  // Last duplicate wins
+assert(userRegistry.users.findByKey(100) == null)
+// First lookup O(N), subsequent O(1).
+```
+
+### Frozen Lists and Copies
+
+```kotlin
+val pets: MutableList<Pet> = mutableListOf(
+    Pet.partial(name = "Fluffy", picture = "🐶"),
+    Pet.partial(name = "Fido", picture = "🐻"),
+)
+val jade = User.partial(name = "Jade", pets = pets)
+// ^ mutable, so Skir makes an immutable copy
+assert(pets !== jade.pets)
+
+val jack = User.partial(name = "Jack", pets = jade.pets)
+// ^ already immutable, no copy
+assert(jack.pets === jade.pets)
+```
+
+### Skir Services
+
+- **Server**: [Ktor](https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/startservice/StartService.kt)
+- **Client**: [Example](https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/callservice/CallService.kt)
+
+### Reflection
+
+```kotlin
+println(User.typeDescriptor.fields.map { it.name }.toList())
+// [user_id, name, quote, pets, subscription_status]
+
+val typeDescriptor = TypeDescriptor.parseFromJsonCode(
+    User.serializer.typeDescriptor.asJsonCode(),
+)
+assert(typeDescriptor is StructDescriptor)
+```
+
+## Java Codegen versus Kotlin Codegen
+
+Skir provides separate generators for each language. Kotlin uses named parameters; Java uses builder pattern. Use the generator matching your project's primary language. Both share the same runtime dependency: `build.skir:skir-client`.

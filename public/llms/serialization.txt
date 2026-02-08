@@ -1,0 +1,131 @@
+# Serialization
+
+Skir defines a standard for serializing and deserializing data types to JSON and binary. Generated data classes implement this standard for consistent encoding and decoding across all languages.
+
+## Serialization Formats
+
+| Format | Persistable | Space Efficiency | Readability | Notes |
+|---|---|---|---|---|
+| JSON (Dense) | Yes: safe | High | Low | Default choice. Safe for persistence. |
+| JSON (Readable) | No: unsafe | Low | High | Good for debugging. Do NOT use for persistence: renaming fields breaks compatibility. |
+| Binary | Yes: safe | Very High | None | Most compact, fastest in C++. |
+
+### JSON, Dense Flavor
+
+Default choice. Structs are serialized as JSON arrays (field numbers = array indexes). Enum constants are serialized as numbers.
+
+```skir
+struct User {
+  user_id: int32;
+  removed;
+  name: string;
+  rest_day: Weekday;
+  pets: [Pet];
+  nickname: string;
+}
+
+const JOHN_DOE: User = {
+  user_id = 400,
+  name = "John Doe",
+  rest_day = "SUNDAY",
+  pets = [
+    { name = "Fluffy" },
+    { name = "Fido" },
+  ],
+  nickname = "",
+}
+```
+
+Dense JSON of `JOHN_DOE`:
+
+```json
+[400,0,"John Doe",7,[["Fluffy"],["Fido"]]]
+```
+
+- Removed fields are replaced with zeros
+- Trailing fields with default values are omitted
+
+#### Dense JSON Encoding Rules
+
+| Type | Encoded as | Examples |
+|---|---|---|
+| `bool` | `1` for true, `0` for false | `1` |
+| `int32` | JSON number | `1234` |
+| `int64`, `hash64` | JSON number if within JS safe integer range (±9,007,199,254,740,991), otherwise string | `1234`, `"9007199254740992"` |
+| `float32`, `float64` | Finite: JSON number. `NaN`, `Infinity`, `-Infinity`: strings | `1.23`, `"Infinity"` |
+| `timestamp` | JSON number (milliseconds since Unix epoch) | `1672531200000` |
+| `string` | JSON string | `"Hello"` |
+| `bytes` | Base64 string | `"SGVsbG8="` |
+| `T?` | `null` if missing, otherwise serialized value | `null`, `123` |
+| `[T]` | JSON array | `[1, 2, 3]` |
+| `struct` | JSON array. Index = field number. Removed fields = `0`. Trailing defaults omitted. | `[400, 0, "John"]` |
+| `enum` | Constants: integers. Wrappers: `[variant_number, value]` | `1`, `[2, "value"]` |
+
+### JSON, Readable Flavor
+
+Structs as JSON objects, enum constants as strings.
+
+```json
+{
+  "user_id": 400,
+  "name": "John Doe",
+  "rest_day": "SUNDAY",
+  "pets": [
+    { "name": "Fluffy" },
+    { "name": "Fido" }
+  ]
+}
+```
+
+**Do not** use for persistence since Skir allows renaming fields.
+
+#### Readable JSON Encoding Rules
+
+| Type | Encoded as | Examples |
+|---|---|---|
+| `bool` | `true` or `false` | `true` |
+| `int32` | JSON number | `1234` |
+| `int64`, `hash64` | JSON number if within JS safe range, otherwise string | `1234`, `"9007199254740992"` |
+| `float32`, `float64` | Finite: JSON number. Special values: strings | `1.23`, `"Infinity"` |
+| `timestamp` | Object with `unix_millis` and `formatted` fields | `{ "unix_millis": 1672531200000, "formatted": "2023-01-01T00:00:00Z" }` |
+| `string` | JSON string | `"Hello"` |
+| `bytes` | `"hex:"` followed by hexadecimal | `"hex:48656c6c6f"` |
+| `T?` | `null` if missing, otherwise serialized value | `null`, `123` |
+| `[T]` | JSON array | `[1, 2, 3]` |
+| `struct` | JSON object with field names. Default values omitted. | `{ "name": "John", "age": 30 }` |
+| `enum` | Constants: strings. Wrappers: `{ "kind": "...", "value": ... }` | `"RED"`, `{ "kind": "rgb", "value": "ff0000" }` |
+
+### Binary Format
+
+More compact than JSON. Faster serialization/deserialization in C++. All numeric values: little-endian byte order.
+
+#### Binary Encoding Rules
+
+| Type | Encoding |
+|---|---|
+| `bool` | `1` for true, `0` for false |
+| `int32` | 0-231: single byte. 232-65535: `0xe8` + uint16. ≥65536: `0xe9` + uint32. -256 to -1: `0xeb` + uint8(val+256). -65536 to -257: `0xec` + uint16(val+65536). ≤-65537: `0xed` + int32. |
+| `int64` | Fits in int32: int32 encoding. Otherwise: `0xee` + 8 bytes. |
+| `hash64` | Fits in uint32: int32 encoding. Otherwise: `0xea` + 8 bytes. |
+| `float32` | 0: `0x00`. Otherwise: `0xf0` + 4 bytes (IEEE 754 LE). |
+| `float64` | 0: `0x00`. Otherwise: `0xf1` + 8 bytes (IEEE 754 LE). |
+| `timestamp` | 0: `0x00`. Otherwise: `0xef` + 8 bytes (int64 millis). |
+| `string` | Empty: `0xf2`. Non-empty: `0xf3` + length (as number) + UTF-8 bytes. |
+| `bytes` | Empty: `0xf4`. Non-empty: `0xf5` + length (as number) + raw bytes. |
+| `T?` | null: `0xff`. Otherwise: value directly. |
+| `[T]` | Length 0-3: `0xf6`-`0xf9`. Length >3: `0xfa` + length. Then items sequentially. |
+| `struct` | Same as array. Index = field number. Removed = `0`. Trailing defaults omitted. |
+| `enum` | Constants: variant number. Wrappers: `0xfb`-`0xfe` (variants 1-4) or `0xf8` + variant number, then value. |
+
+## Deserialization
+
+### JSON Flavors
+
+Skir automatically handles both dense and readable flavor during deserialization. No need to specify which.
+
+### Handling of Zeros
+
+Both dense JSON and binary use zeros for `removed` fields. Zero is treated as valid input for any type:
+- `string` decodes 0 as `""`
+- Arrays decode 0 as `[]`
+- Optional types (`T?`): 0 decodes as the default value of the underlying type (e.g. `string?` → `""`, not `null`)

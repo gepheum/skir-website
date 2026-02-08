@@ -1,0 +1,81 @@
+# Skir
+
+**Like Protocol Buffers, but better.**
+
+Skir is a declarative language for defining data types, constants, and RPC interfaces. Write your schema once in a `.skir` file and generate idiomatic, type-safe code in TypeScript, Python, Java, C++, Kotlin, and Dart.
+
+- Website: https://skir.build
+- GitHub: https://github.com/gepheum/skir
+- npm: https://www.npmjs.com/package/skir
+
+## Key Features
+
+- **Single source of truth** — Define data types and APIs once, share across backend, frontend, and microservices.
+- **Multi-language** — First-class support for TypeScript, Python, C++, Java, Kotlin, and Dart.
+- **Idiomatic code gen** — Generated code feels native to each language.
+- **Effortless serialization** — JSON and binary serialization generated automatically.
+- **Schema evolution** — Built-in rules and checks for backward-compatible schema changes.
+- **End-to-end type-safe RPCs** — Like tRPC, but for every language.
+- **Built-in package manager** — Import types from other GitHub repos.
+- **Easy setup** — `npx skir init`, single YAML config file, watch mode, formatter, VSCode extension.
+
+## Quick Example
+
+```skir
+// shapes.skir
+
+struct Point {
+  x: int32;
+  y: int32;
+  label: string;
+}
+
+struct Shape {
+  points: [Point];
+  /// A short string describing this shape.
+  label: string;
+}
+
+const TOP_RIGHT_CORNER: Point = {
+  x = 600,
+  y = 400,
+  label = "top-right corner",
+};
+
+/// Returns true if no part of the shape's boundary curves inward.
+method IsConvex(Shape): bool = 12345;
+```
+
+Skir compiles these definitions into native, type-safe code:
+
+```python
+from skirout.shapes_skir import Point
+
+point = Point(x=3, y=4, label="P")
+
+point_json = Point.serializer.to_json(point)
+restored = Point.serializer.from_json(point_json)
+
+assert(restored == point)
+```
+
+## Detailed Documentation
+
+### Getting Started
+- Setup & Workflow: https://skir.build/llms/setup.txt
+- Language Reference: https://skir.build/llms/language-reference.txt
+
+### Core Concepts
+- Serialization: https://skir.build/llms/serialization.txt
+- Schema Evolution: https://skir.build/llms/schema-evolution.txt
+- RPC Services: https://skir.build/llms/services.txt
+- External Dependencies: https://skir.build/llms/dependencies.txt
+- Coming from Protobuf: https://skir.build/llms/protobuf.txt
+
+### Language Guides
+- TypeScript: https://skir.build/llms/typescript.txt
+- Python: https://skir.build/llms/python.txt
+- Java: https://skir.build/llms/java.txt
+- Kotlin: https://skir.build/llms/kotlin.txt
+- C++: https://skir.build/llms/cpp.txt
+- Dart: https://skir.build/llms/dart.txt

@@ -1,0 +1,113 @@
+# Getting Started: Setup and Workflow
+
+## Prerequisites
+
+The Skir compiler requires [Node.js](https://nodejs.org) to be installed.
+
+## Setting Up a Project
+
+### Initialize a project
+
+From your project directory, run:
+
+```bash
+npx skir init
+```
+
+This creates:
+- `skir.yml`: the Skir configuration file
+- `skir-src/hello_world.skir`: an example `.skir` file
+
+### Configure code generation
+
+The `skir.yml` file controls how Skir generates code for your project.
+
+```yaml
+# skir.yml
+
+generators:
+  - mod: skir-cc-gen
+    outDir: ./app/src/skirout
+    config:
+      writeGoogleTestHeaders: true
+  - mod: skir-typescript-gen
+    outDir: ./frontend/skirout
+    config: {}
+```
+
+All paths are relative to the directory containing `skir.yml` (the root directory).
+
+Every generator entry has the following properties:
+- **mod**: Identifies the code generator to run (e.g., `skir-python-gen` for Python).
+- **outDir**: The output directory for generated source code (e.g., `./src/skirout`). The directory **must** be named `skirout`. If you specify an array of strings, the generator will write to multiple output directories, which is useful when you have multiple sub-projects in the same language.
+- **config**: Generator-specific configuration. Use `{}` for default settings.
+
+### Output directory location
+
+Typically, place the skirout directory at the root of your sub-project's source tree. Placement varies by ecosystem:
+- **TypeScript**: Often more convenient to place `skirout` adjacent to the `src` directory.
+- **Java / Kotlin / Python**: Place inside your top-level package (e.g., `src/main/java/com/myproject/skirout`). This ensures generated package names (like `com.myproject.skirout.*`) follow standard naming conventions.
+
+Multiple generators can write to the same output directory (it will contain source files in different languages).
+
+> **Warning:** Do not manually edit files inside a `skirout` directory. This directory is managed by Skir. Any manual change will be overwritten during the next generation.
+
+## Core Workflow
+
+Run Skir code generation before compiling your language-specific source code:
+
+```bash
+npx skir gen
+```
+
+This transpiles your `.skir` files into the target languages specified in your configuration, creating or updating your `skirout` directories.
+
+For a more seamless experience, use watch mode:
+
+```bash
+npx skir gen --watch
+```
+
+The compiler will monitor your source directory and automatically regenerate code whenever you modify a `.skir` file.
+
+> **Tip:** If your project is a Node project, add `skir gen` to your `package.json` scripts. Using the `prebuild` hook is recommended so code is regenerated automatically before every build.
+
+```json
+{
+  "scripts": {
+    "prebuild": "skir gen",
+    "build": "tsc"
+  }
+}
+```
+
+## Formatting .skir Files
+
+Use `npx skir format` to format all `.skir` files in your project.
+
+## Continuous Integration (GitHub)
+
+We recommend adding `skirout` to `.gitignore` and running Skir code generation in your GitHub workflow. GitHub's hosted runners come with Node.js and `npx` pre-installed, so you only need to add one step:
+
+```yaml
+- name: Run Skir codegen
+  run: npx skir gen
+```
+
+If you have a formatting check step, it may fail on Skir-generated code. Either run the formatting check before Skir codegen, or configure your formatter to skip `skirout` directories.
+
+Optional steps for stricter validation:
+
+```yaml
+- name: Run Skir format checker
+  run: npx skir format --ci
+
+- name: Ensure Skir snapshot up-to-date
+  run: npx skir snapshot --ci
+```
+
+The first step ensures `.skir` files are properly formatted. The second step verifies that you ran `npx skir snapshot` before committing. See the [Schema evolution & compatibility](https://skir.build/docs/schema-evolution) guide for more information about the snapshot command.
+
+## IDE Support
+
+The official [VS Code extension](https://marketplace.visualstudio.com/items?itemName=TylerFibonacci.skir-language) for Skir provides syntax highlighting, auto-formatting, validation, jump-to-definition, and other language features.

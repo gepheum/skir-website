@@ -1,0 +1,87 @@
+# External Dependencies
+
+Skir allows you to import and use types defined in other Skir projects. External dependencies are regular GitHub repositories containing Skir definitions. This is useful for sharing common data structures across multiple repositories.
+
+## Configuring Dependencies
+
+Add entries to the `dependencies` section of `skir.yml`. The key is the GitHub repository identifier (`@owner/repo`), the value is the Git tag:
+
+```yaml
+# skir.yml
+dependencies:
+  "@gepheum/fantasy-game-skir-example": v1.0.0
+  "@my-org/user-service-skir": v3.5.0
+```
+
+When you run `npx skir gen`, Skir automatically fetches dependencies and caches them in `skir-external/`.
+
+> Add `skir-external/` to your `.gitignore`.
+
+### Transitive Dependencies
+
+Dependencies are transitive: if A depends on B and B depends on C, then A implicitly depends on C. Skir downloads all transitive dependencies automatically.
+
+Skir strictly forbids version conflicts. If two dependencies require different versions of the same package, the compiler reports an error. You must resolve this by aligning on a single version.
+
+## Importing Types
+
+Once configured, import types using the full path prefixed with the package identifier:
+
+```skir
+import Quest from "@gepheum/fantasy-game-skir-example/fantasy_game.skir";
+
+struct QuestCollection {
+  collection_name: string;
+  quests: [Quest|quest_id];
+}
+```
+
+## Code Generation
+
+For languages allowing `@` in directory names (JavaScript):
+
+```javascript
+import { Quest } from "../skirout/@gepheum/fantasy-game-skir-example/fantasy_game.js"
+```
+
+For languages requiring valid identifiers (Python), with dashes replaced by underscores:
+
+```python
+from skirout.external.gepheum.fantasy_game_skir_example import fantasy_game_skir
+```
+
+## Private Repositories
+
+If dependencies are in private GitHub repositories, provide a Personal Access Token.
+
+### 1. Generate a Token
+
+Go to [GitHub settings](https://github.com/settings/tokens) and generate a Personal Access Token (Classic) with the `repo` scope.
+
+### 2. Set the Environment Variable
+
+```bash
+export MY_GITHUB_TOKEN=ghp_...
+```
+
+### 3. Configure skir.yml
+
+```yaml
+# skir.yml
+githubTokenEnvVar: MY_GITHUB_TOKEN
+```
+
+### 4. GitHub Actions CI
+
+Use `${{ secrets.GITHUB_TOKEN }}` for repos in the same organization, or a repository secret for broader access:
+
+```yaml
+steps:
+  - uses: actions/checkout@v3
+  - name: Install dependencies and generate code
+    run: npx skir gen
+    env:
+      MY_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+> If the dependency is in a different private repo that the default `GITHUB_TOKEN` cannot access, create a Personal Access Token, store it as a Repository Secret, and use that instead.

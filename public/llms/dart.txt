@@ -1,0 +1,248 @@
+# Dart
+
+Guide for using Skir-generated Dart code. Targets Dart 3.0+.
+
+## Set Up
+
+In `skir.yml`, add under `generators`:
+
+```yaml
+- mod: skir-dart-gen
+  outDir: ./src/skirout
+  config: {}
+```
+
+Runtime dependency: add to `pubspec.yaml`:
+
+```yaml
+skir_client: ^1.0.2  # Use the latest version
+```
+
+Example project: [skir-dart-example](https://github.com/gepheum/skir-dart-example)
+
+## Generated Code Guide
+
+Examples for code generated from [this .skir file](https://github.com/gepheum/skir-dart-example/blob/main/lib/skir_src/user.skir).
+
+### Referring to Generated Symbols
+
+```dart
+import 'package:skir_dart_example/skirout/user.dart';
+// Now you can use: tarzan, User, UserHistory, UserRegistry, etc.
+```
+
+### Struct Classes
+
+For every struct `S`, Skir generates a frozen (deeply immutable) class `S` and a mutable class `S_mutable`.
+
+### Frozen Struct Classes
+
+```dart
+final john = User(
+  userId: 42,
+  name: "John Doe",
+  quote: "Coffee is just a socially acceptable form of rage.",
+  pets: [
+    User_Pet(name: "Dumbo", heightInMeters: 1.0, picture: "🐘"),
+  ],
+  subscriptionStatus: SubscriptionStatus.free,
+);
+
+assert(john.name == "John Doe");
+// john.name = "John Smith";  -- Does not compile: read-only
+
+// Builder pattern with mutable instance
+final User jane = (User.mutable()
+      ..userId = 43
+      ..name = "Jane Doe"
+      ..pets = [
+        User_Pet(name: "Fluffy", heightInMeters: 0.2, picture: "🐱"),
+      ])
+    .toFrozen();
+
+assert(jane.quote == "");  // Default value
+assert(User.defaultInstance.name == "");
+```
+
+### Mutable Struct Classes
+
+```dart
+final User_mutable mutableLyla = User.mutable()..userId = 44;
+mutableLyla.name = "Lyla Doe";
+
+final userHistory = UserHistory.mutable();
+userHistory.user = mutableLyla;  // Can be frozen or mutable
+
+// mutableUser: returns mutable version, creating shallow copy if needed
+userHistory.user = john;  // frozen
+userHistory.mutableUser.name = "John the Second";
+
+// mutablePets: same pattern for lists
+mutableLyla.mutablePets.add(User_Pet(name: "Simba", heightInMeters: 0.4, picture: "🦁"));
+mutableLyla.mutablePets.add(User_Pet.mutable()..name = "Cupcake");
+```
+
+### Converting Between Frozen and Mutable
+
+```dart
+final evilJane = (jane.toMutable()
+      ..name = "Evil Jane"
+      ..quote = "I solemnly swear I am up to no good.")
+    .toFrozen();
+
+assert(evilJane.name == "Evil Jane");
+assert(evilJane.userId == 43);
+```
+
+### Writing Logic Agnostic of Mutability
+
+```dart
+// 'User_orMutable' is a type alias for the sealed class.
+void greet(User_orMutable user) {
+  print("Hello, ${user.name}");
+}
+```
+
+### Enum Classes
+
+```skir
+enum SubscriptionStatus {
+  FREE;
+  trial: Trial;
+  PREMIUM;
+}
+```
+
+### Making Enum Values
+
+```dart
+final johnStatus = SubscriptionStatus.free;
+final janeStatus = SubscriptionStatus.premium;
+final jolyStatus = SubscriptionStatus.unknown;
+
+// wrapX() or createX() for wrapper variants
+final roniStatus = SubscriptionStatus.wrapTrial(
+  SubscriptionStatus_Trial(
+      startTime: DateTime.fromMillisecondsSinceEpoch(1234, isUtc: true)),
+);
+
+// createX() shorthand
+final ericStatus = SubscriptionStatus.createTrial(
+  startTime: DateTime.fromMillisecondsSinceEpoch(5678, isUtc: true),
+);
+```
+
+### Conditions on Enums
+
+```dart
+assert(johnStatus == SubscriptionStatus.free);
+
+if (roniStatus is SubscriptionStatus_trialWrapper) {
+  assert(roniStatus.value.startTime.millisecondsSinceEpoch == 1234);
+}
+
+String getSubscriptionInfoText(SubscriptionStatus status) {
+  return switch (status) {
+    SubscriptionStatus_unknown() => "Unknown",
+    SubscriptionStatus.free => "Free user",
+    SubscriptionStatus.premium => "Premium user",
+    SubscriptionStatus_trialWrapper(:final value) =>
+      "On trial since ${value.startTime}",
+  };
+}
+```
+
+### Serialization
+
+Every frozen struct/enum class has a `serializer` property.
+
+```dart
+final serializer = User.serializer;
+
+// Dense JSON
+final String johnDenseJson = serializer.toJsonCode(john);
+
+// Readable JSON
+print(serializer.toJsonCode(john, readableFlavor: true));
+
+// Binary
+final Uint8List johnBytes = serializer.toBytes(john);
+```
+
+### Deserialization
+
+```dart
+final reserializedJohn = serializer.fromJsonCode(johnDenseJson);
+assert(reserializedJohn.name == "John Doe");
+
+final reserializedJane = serializer.fromJsonCode(
+  serializer.toJsonCode(jane, readableFlavor: true),
+);
+assert(serializer.fromBytes(johnBytes) == john);
+```
+
+### Frozen Lists and Copies
+
+```dart
+final pets = [
+    User_Pet(name: "Fluffy", heightInMeters: 0.25, picture: "🐶"),
+    User_Pet(name: "Fido", heightInMeters: 0.5, picture: "🐻"),
+];
+
+final jade = User(
+  userId: 46, name: "Jade", quote: "", pets: pets,
+  // ^ makes a copy because 'pets' is mutable
+  subscriptionStatus: SubscriptionStatus.unknown,
+);
+assert(!identical(jade.pets, pets));
+
+final jack = User(
+  userId: 47, name: "Jack", quote: "", pets: jade.pets,
+  // ^ doesn't copy because 'jade.pets' is frozen
+  subscriptionStatus: SubscriptionStatus.unknown,
+);
+assert(identical(jack.pets, jade.pets));
+```
+
+### Keyed Lists
+
+```dart
+final userRegistry = UserRegistry(
+  users: [john, jane, mutableLyla, evilJane],
+);
+
+assert(userRegistry.users.findByKey(42) == john);
+assert(userRegistry.users.findByKey(100) == null);
+assert(userRegistry.users.findByKey(43) == evilJane);  // Last duplicate wins
+// First lookup O(N), subsequent O(1).
+```
+
+### Constants
+
+```dart
+print(tarzan);
+// User(userId: 123, name: "Tarzan", ...)
+```
+
+### Skir Services
+
+- **Server**: [Shelf](https://github.com/gepheum/skir-dart-example/blob/main/bin/start_service.dart)
+- **Client**: [Example](https://github.com/gepheum/skir-dart-example/blob/main/bin/call_service.dart)
+
+### Reflection
+
+```dart
+import 'package:skir/skir.dart' as skir;
+
+final fieldNames = <String>[];
+for (final field in User.serializer.typeDescriptor.fields) {
+  fieldNames.add(field.name);
+}
+print(fieldNames);
+// [user_id, name, quote, pets, subscription_status]
+
+// TypeDescriptor can be serialized/deserialized.
+final typeDescriptor = skir.TypeDescriptor.parseFromJson(
+  User.serializer.typeDescriptor.asJson,
+);
+```

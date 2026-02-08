@@ -1,0 +1,222 @@
+# Java
+
+Guide for using Skir-generated Java code.
+
+## Set Up
+
+In `skir.yml`, add under `generators`:
+
+```yaml
+- mod: skir-java-gen
+  outDir: ./src/main/java/skirout
+  config: {}
+  # Alternatively:
+  # outDir: ./src/main/kotlin/my/project/skirout
+  # config:
+  #   packagePrefix: my.project.
+```
+
+Runtime dependency: add to `build.gradle`:
+
+```gradle
+implementation 'build.skir:skir-client:latest.release'
+```
+
+Example project: [skir-java-example](https://github.com/gepheum/skir-java-example)
+
+## Generated Code Guide
+
+Examples for code generated from [this .skir file](https://github.com/gepheum/skir-java-example/blob/main/skir-src/user.skir).
+
+### Referring to Generated Symbols
+
+```java
+import skirout.user.User;
+import skirout.user.UserRegistry;
+import skirout.user.SubscriptionStatus;
+import skirout.user.Constants;
+```
+
+### Struct Classes
+
+Skir generates a deeply immutable Java class for every struct.
+
+```java
+// Builder pattern with all fields required, in alphabetical order.
+final User john =
+    User.builder()
+        .setName("John Doe")
+        .setPets(List.of(
+            User.Pet.builder()
+                .setHeightInMeters(1.0f)
+                .setName("Dumbo")
+                .setPicture("🐘")
+                .build()))
+        .setQuote("Coffee is just a socially acceptable form of rage.")
+        .setSubscriptionStatus(SubscriptionStatus.FREE)
+        .setUserId(42)
+        .build();
+
+// partialBuilder(): no field order constraint, not all fields required.
+final User jane = User.partialBuilder().setUserId(43).setName("Jane Doe").build();
+assert jane.quote().equals("");  // Default value
+
+assert User.DEFAULT.name().equals("");
+```
+
+### Creating Modified Copies
+
+```java
+final User evilJohn =
+    john.toBuilder()
+        .setName("Evil John")
+        .setQuote("I solemnly swear I am up to no good.")
+        .build();
+```
+
+### Enum Classes
+
+Skir generates a deeply immutable Java class (not a Java enum) for every enum.
+
+```skir
+enum SubscriptionStatus {
+  FREE;
+  trial: Trial;
+  PREMIUM;
+}
+```
+
+### Making Enum Values
+
+```java
+List.of(
+    SubscriptionStatus.UNKNOWN,
+    SubscriptionStatus.FREE,
+    SubscriptionStatus.PREMIUM,
+    SubscriptionStatus.wrapTrial(
+        SubscriptionStatus.Trial.builder()
+            .setStartTime(Instant.now())
+            .build()));
+```
+
+### Conditions on Enums
+
+```java
+assert john.subscriptionStatus().equals(SubscriptionStatus.FREE);
+assert jane.subscriptionStatus().equals(SubscriptionStatus.UNKNOWN);  // Default
+
+final SubscriptionStatus trialStatus =
+    SubscriptionStatus.wrapTrial(
+        SubscriptionStatus.Trial.builder().setStartTime(now).build());
+assert trialStatus.kind() == SubscriptionStatus.Kind.TRIAL_WRAPPER;
+assert trialStatus.asTrial().startTime() == now;
+```
+
+### Branching on Enum Variants
+
+```java
+// Switch on kind()
+switch (status.kind()) {
+  case FREE_CONST -> "Free user";
+  case PREMIUM_CONST -> "Premium user";
+  case TRIAL_WRAPPER -> "On trial since " + status.asTrial().startTime();
+  case UNKNOWN -> "Unknown subscription status";
+  default -> throw new AssertionError("Unreachable");
+};
+
+// Visitor pattern (compile-time safe, all variants must be handled)
+new SubscriptionStatus.Visitor<String>() {
+  @Override public String onFree() { return "Free user"; }
+  @Override public String onPremium() { return "Premium user"; }
+  @Override public String onTrial(SubscriptionStatus.Trial trial) {
+    return "On trial since " + trial.startTime();
+  }
+  @Override public String onUnknown() { return "Unknown"; }
+};
+```
+
+### Serialization
+
+Every frozen struct/enum class has a static `SERIALIZER` property.
+
+```java
+final Serializer<User> serializer = User.SERIALIZER;
+
+// Dense JSON
+final String johnDenseJson = serializer.toJsonCode(john);
+
+// Readable JSON
+System.out.println(serializer.toJsonCode(john, JsonFlavor.READABLE));
+
+// Binary
+final ByteString johnBytes = serializer.toBytes(john);
+```
+
+### Deserialization
+
+```java
+final User reserializedJohn = serializer.fromJsonCode(johnDenseJson);
+assert reserializedJohn.equals(john);
+
+// fromJsonCode handles both dense and readable JSON
+assert serializer.fromBytes(johnBytes).equals(john);
+```
+
+### Frozen Lists and Copies
+
+```java
+final List<User.Pet> pets = new ArrayList<>();
+// ...
+final User jade = User.partialBuilder().setPets(pets).build();
+// 'pets' is mutable, so Skir makes an immutable shallow copy
+assert pets != jade.pets();
+
+final User jack = User.partialBuilder().setPets(jade.pets()).build();
+// Already immutable, no copy
+assert jack.pets() == jade.pets();
+```
+
+### Keyed Lists
+
+```java
+final UserRegistry userRegistry =
+    UserRegistry.builder().setUsers(List.of(john, jane, evilJohn)).build();
+
+assert userRegistry.users().findByKey(43) == jane;
+assert userRegistry.users().findByKey(42) == evilJohn;  // Last duplicate wins
+assert userRegistry.users().findByKey(100) == null;
+// First lookup O(N), subsequent O(1).
+```
+
+### Constants
+
+```java
+System.out.println(Constants.TARZAN);
+```
+
+### Skir Services
+
+- **Server**: [Spring Boot](https://github.com/gepheum/skir-java-example/blob/main/src/main/java/examples/StartService.java)
+- **Client**: [Example](https://github.com/gepheum/skir-java-example/blob/main/src/main/java/examples/CallService.java)
+
+### Reflection
+
+```java
+System.out.println(
+    User.TYPE_DESCRIPTOR.getFields().stream()
+        .map(field -> field.getName()).toList());
+// [user_id, name, quote, pets, subscription_status]
+
+// TypeDescriptor can be serialized/deserialized.
+final TypeDescriptor typeDescriptor =
+    TypeDescriptor.Companion.parseFromJsonCode(
+        User.SERIALIZER.typeDescriptor().asJsonCode());
+```
+
+## Java Codegen versus Kotlin Codegen
+
+Skir provides separate code generators for Java and Kotlin to leverage each language's idioms. The Kotlin generator uses named parameters for construction; Java uses the builder pattern.
+
+Although it's technically feasible to use Kotlin-generated code in Java or vice-versa, doing so results in an unnatural API. Use the generator matching your project's primary language.
+
+Both share the same runtime dependency: `build.skir:skir-client`.

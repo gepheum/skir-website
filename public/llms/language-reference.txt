@@ -1,0 +1,404 @@
+# Language Reference
+
+This page serves as a reference for the syntax and features of the Skir language.
+
+## Records
+
+Records are the top-level data definitions in a Skir schema. There are two types of records: structs and enums.
+
+### Structs
+
+Use the keyword `struct` to define a struct, which is a collection of fields of different types.
+
+Fields have a name, but during serialization they are identified by a number, which can either be set explicitly:
+
+```skir
+struct Point {
+  x: int32 = 0;
+  y: int32 = 1;
+  label: string = 2;
+}
+```
+
+or implicitly:
+
+```skir
+struct Point {
+  x: int32;       // = 0
+  y: int32;       // = 1
+  label: string;  // = 2
+}
+```
+
+If you're not explicitly specifying the field numbers, you must be careful not to change the order of the fields or else you won't be able to deserialize old values.
+
+```skir
+// BAD: you can't reorder the fields and keep implicit numbering
+// struct Point {
+//   label: string;
+//   x: int32;
+//   y: int32;
+// }
+
+// GOOD
+struct Point {
+  label: string = 2;
+
+  // Fine to rename fields
+  x_coordinate: int32 = 0;
+  y_coordinate: int32 = 1;
+
+  // Fine to add new fields
+  color: Color = 3;
+}
+```
+
+### Enums
+
+Enums in Skir are similar to enums in Rust. An enum value is one of several possible variants, and each variant can optionally have data associated with it.
+
+```skir
+// Indicates whether an operation succeeded or failed.
+enum OperationStatus {
+  SUCCESS;        // a constant variant
+  error: string;  // a wrapper variant
+}
+```
+
+An `OperationStatus` is one of these 3 things:
+- the `SUCCESS` constant
+- an `error` with a string value
+- `UNKNOWN`: a special implicit variant common to all enums
+
+If you need a variant to hold multiple values, wrap them inside a struct:
+
+```skir
+struct MoveAction {
+  x: int32;
+  y: int32;
+}
+
+enum BoardGameTurn {
+  PASS;
+  move: MoveAction;
+}
+```
+
+Like the fields of a struct, the variants of an enum have a number, and the numbering can be explicit or implicit.
+
+```skir
+enum ExplicitNumbering {
+  // The numbers don't need to be consecutive.
+  FOO = 10;
+  bar: string = 2;
+}
+
+enum ImplicitNumbering {
+  // Implicit numbering is 1-based.
+  // 0 is reserved for the special UNKNOWN variant.
+
+  FOO;          // = 1
+  bar: string;  // = 2
+}
+```
+
+The variant numbers identify variants in the serialization format. You must not change the number of a variant. If using implicit numbering, you must not reorder the variants.
+
+It is always fine to rename an enum, rename the variants of an enum, or add new variants to an enum.
+
+### Nesting Records
+
+You can define a record (struct or enum) within another record for namespacing.
+
+```skir
+enum Status {
+  OK;
+
+  struct Error {
+    message: string;
+  }
+  error: Error;
+}
+
+struct Foo {
+  // Dot notation to refer to the nested record.
+  error: Status.Error;
+}
+```
+
+### Inline Records
+
+Skir allows you to define records directly within a field's type definition. The compiler infers the record name by converting the `snake_case` field name into `PascalCase`.
+
+Without inline records:
+
+```skir
+struct Notification {
+  metadata: Metadata;
+  struct Metadata {
+    sent_at: timestamp;
+    sender_id: string;
+  }
+
+  payload: Payload;
+  enum Payload {
+    APP_LAUNCH;
+
+    message: Message;
+    struct Message {
+      body: string;
+      title: string;
+    }
+  }
+}
+```
+
+Using inline records (strictly equivalent; generates identical code):
+
+```skir
+struct Notification {
+  metadata: struct {
+    sent_at: timestamp;
+    sender_id: string;
+  }
+
+  payload: enum {
+    APP_LAUNCH;
+    message: struct {
+      body: string;
+      title: string;
+    }
+  }
+}
+```
+
+### Removed Numbers
+
+When removing a field from a struct or a variant from an enum, mark the removed number with the `removed` keyword:
+
+```skir
+struct ExplicitNumbering {
+  a: string = 0;
+  b: string = 1;
+  f: string = 5;
+  removed 2..4, 6;  // 2..4 is same as 2, 3, 4
+}
+
+struct ImplicitNumbering {
+  a: string;
+  b: string:
+  removed;
+  removed;
+  removed;
+  f: string;
+  removed;
+}
+```
+
+### Stable Identifiers
+
+Assign a numeric stable identifier to a struct or enum in parentheses after the record name:
+
+```skir
+struct Point(23456) { ... }
+```
+
+Used by `npx skir snapshot` to track record identity across renames and detect breaking changes. No two types can share the same stable identifier.
+
+> **Tip:** Use `?` as a placeholder and run `npx skir format` to auto-generate a random number. This happens automatically on save with the [VS Code extension](https://marketplace.visualstudio.com/items?itemName=TylerFibonacci.skir-language).
+
+### Recursive Records
+
+Records can be recursive (contain a field of their own type). Essential for trees and similar structures.
+
+```skir
+struct DecisionNode {
+  question: string;
+  yes: DecisionTree;
+  no: DecisionTree;
+}
+
+enum DecisionTree {
+  result: string;
+  node: DecisionNode;
+}
+```
+
+Generated code has compile-time constraints to prevent an instance of a recursive type from containing itself.
+
+## Data Types
+
+### Primitive Types
+
+- `bool`: true or false
+- `int32`: signed 32-bit integer
+- `int64`: signed 64-bit integer
+- `hash64`: unsigned 64-bit integer; prefer this for hash codes, `int64` for actual counts
+- `float32`: 32-bit float; can be `NaN`, `Infinity`, `-Infinity`
+- `float64`: 64-bit float; can be `NaN`, `Infinity`, `-Infinity`
+- `string`: Unicode string
+- `bytes`: sequence of bytes
+- `timestamp`: instant in time as milliseconds since Unix epoch (±100M days range)
+
+### Array Type
+
+Wrap the item type in square brackets: `[string]`, `[User]`.
+
+#### Keyed Arrays
+
+If items are structs with a unique key field, use `[Item|key_field]`:
+
+```skir
+struct User {
+  id: int32;
+  name: string;
+}
+
+struct UserRegistry {
+  users: [User|id];
+}
+```
+
+Generates methods for O(1) key lookups via hash table. Example in Python:
+
+```python
+user = user_registry.users.find(user_id)
+```
+
+For nested keys, chain field names: `[Item|a.b.c]`. For enum keys, add `.kind`: `[Item|weekday.kind]`.
+
+Key type must be a primitive or enum type.
+
+### Optional Type
+
+Add `?` to make a type optional: `string?` is either a `string` or null.
+
+## Constants
+
+Define constants of any type with `const`. Syntax is similar to JSON with these differences:
+- Object keys must not be quoted
+- Trailing commas are allowed and encouraged
+- Strings can be single-quoted or double-quoted
+- Strings can span multiple lines by escaping newlines
+
+```skir
+const PI: float64 = 3.14159;
+
+const LARGE_CIRCLE: Circle = {
+  center: {
+    x: 100,
+    y: 100,
+  },
+  radius: 100,
+  color: {
+    r: 255,
+    g: 0,
+    b: 255,
+    label: "fuschia",
+  },
+};
+
+const MULTILINE_STRING: string = 'Hello\
+world\
+!';
+
+const SUPPORTED_LOCALES: [string] = [
+  "en-GB",
+  "en-US",
+  "es-MX",
+];
+
+// Use strings for enum constant variants.
+const REST_DAY: Weekday = "SUNDAY";
+
+// Use { kind: ..., value: ... } for enum wrapper variants.
+const NOT_IMPLEMENTED_ERROR: OperationStatus = {
+  kind: "error",
+  value: "Not implemented",
+};
+```
+
+All struct fields must be specified, unless you use `{| ... |}` instead of `{ ... }`, in which case missing fields are set to their default values.
+
+## Methods (API)
+
+The `method` keyword defines the signature of a service method.
+
+```skir
+struct GetUserProfileRequest {
+  user_id: int32;
+}
+
+struct GetUserProfileResponse {
+  profile: UserProfile?;
+}
+
+method GetUserProfile(GetUserProfileRequest): GetUserProfileResponse = 12345;
+```
+
+The request and response can have any type.
+
+### Stable Identifiers
+
+Every method must have a unique integer identifier (e.g. `= 12345`) used for RPC routing. This decouples the method's identity from its name, allowing safe renaming. No two methods can share the same identifier.
+
+> **Tip:** Use `?` as a placeholder and run `npx skir format` to auto-generate a random number.
+
+### Inline Request/Response Records
+
+Skir supports inline record definitions for methods. The compiler generates names by appending `Request` and `Response` to the method name.
+
+```skir
+method GetUserProfile(struct {
+  user_id: int32;
+}): struct {
+  profile: UserProfile?;
+} = 12345;
+```
+
+## Imports
+
+Import types from another module with `import`. You can specify names or import the whole module with `as`:
+
+```skir
+import Point, Circle from "geometry/geometry.skir";
+import * as color from "color.skir";
+
+struct Rectangle {
+  top_left: Point;
+  bottom_right: Point;
+}
+
+struct Disk {
+  circle: Circle;
+  fill_color: color.Color;
+}
+```
+
+The path is always relative to the root of the Skir source directory.
+
+## Doc Comments
+
+Doc comments use triple slashes (`///`) and document records, fields, variants, methods, and constants. They are processed as part of the schema definition (unlike regular `//` or `/*` comments).
+
+### Referencing Symbols
+
+Enclose symbol references in square brackets. Missing or misspelled references cause compilation errors:
+
+```skir
+struct Account {
+  /// Same as [User.email]
+  email: string;
+  /// True if the [email] has been confirmed via a verification link.
+  is_verified: bool;
+  created_at: timestamp;
+}
+```
+
+### Integration with Code Generators
+
+Doc comments are copied into generated code. IDE users see them in hover information, code completion, and inlay hints.
+
+### RPC Visibility and Security
+
+Doc comments on types used for RPC request/response may be visible to clients. Do not include confidential information in them.

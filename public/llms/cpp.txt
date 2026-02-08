@@ -1,0 +1,243 @@
+# C++
+
+Guide for using Skir-generated C++ code. Targets C++17 and higher.
+
+## Set Up
+
+In `skir.yml`, add under `generators`:
+
+```yaml
+- mod: skir-cc-gen
+  outDir: ./src/skirout
+  config:
+    writeGoogleTestHeaders: true  # If you use GoogleTest
+```
+
+## Runtime Dependencies
+
+Generated C++ code depends on the [skir client library](https://github.com/gepheum/skir-cc-gen/tree/main/client), [absl](https://abseil.io/), and optionally [GoogleTest](https://github.com/google/googletest).
+
+Add to `CMakeLists.txt`:
+
+```cmake
+include(FetchContent)
+
+FetchContent_Declare(
+  skir-client
+  GIT_REPOSITORY https://github.com/gepheum/skir-cc-gen.git
+  GIT_TAG        main
+  SOURCE_SUBDIR  client
+)
+FetchContent_MakeAvailable(skir-client)
+```
+
+See [example CMakeLists.txt](https://github.com/gepheum/skir-cc-example/blob/main/CMakeLists.txt).
+
+## Generated Code Guide
+
+Examples for code generated from [this .skir file](https://github.com/gepheum/skir-cc-example/blob/main/skir_src/user.skir).
+
+### Referring to Generated Symbols
+
+Every symbol lives in a namespace `skirout_${path}` (path relative to skir source dir, without `.skir`, slashes replaced with underscores).
+
+```cpp
+#include "skirout/user.h"
+
+using ::skirout_user::SubscriptionStatus;
+using ::skirout_user::User;
+using ::skirout_user::UserRegistry;
+```
+
+### Constructing Structs
+
+```cpp
+// Field-by-field
+User john;
+john.user_id = 42;
+john.name = "John Doe";
+
+// Designated initializer syntax
+User jane = {
+    .name = "Jane Doe",
+    .pets = {{.name = "Fluffy", .picture = "cat"},
+             {.name = "Rex", .picture = "dog"}},
+    .subscription_status = skirout::kPremium,
+    .user_id = 43,
+};
+
+// ${Struct}::whole forces all fields (compile-time error if any missing)
+User lyla = User::whole{
+    .name = "Lyla Doe",
+    .pets = {User::Pet::whole{
+        .height_in_meters = 0.05f,
+        .name = "Tiny",
+        .picture = "🐁",
+    }},
+    .quote = "This is Lyla's world, you just live in it",
+    .subscription_status = skirout::kFree,
+    .user_id = 44,
+};
+```
+
+### Constructing Enums
+
+```cpp
+// Constant variants
+SubscriptionStatus john_status = skirout::kFree;
+SubscriptionStatus jane_status = skirout::kPremium;
+SubscriptionStatus lara_status = SubscriptionStatus::kFree;
+
+// Wrapper variants
+SubscriptionStatus jade_status =
+    skirout::wrap_trial(SubscriptionStatus::Trial({
+        .start_time = absl::FromUnixMillis(1743682787000),
+    }));
+SubscriptionStatus roni_status = SubscriptionStatus::wrap_trial({
+    .start_time = absl::FromUnixMillis(1743682787000),
+});
+```
+
+### Conditions on Enums
+
+```cpp
+if (john_status == skirout::kFree) { /* ... */ }
+
+// is_${field_name}() checks for wrapper variants
+if (jade_status.is_trial()) {
+  const SubscriptionStatus::Trial& trial = jade_status.as_trial();
+}
+
+// Switch on kind()
+switch (lara_status.kind()) {
+  case SubscriptionStatus::kind_type::kUnknown: break;
+  case SubscriptionStatus::kind_type::kFreeConst: break;
+  case SubscriptionStatus::kind_type::kPremiumConst: break;
+  case SubscriptionStatus::kind_type::kTrialWrapper: {
+    const SubscriptionStatus::Trial& trial = lara_status.as_trial();
+  }
+}
+
+// Visitor pattern
+struct Visitor {
+  void operator()(skirout::k_unknown) const { /* ... */ }
+  void operator()(skirout::k_free) const { /* ... */ }
+  void operator()(skirout::k_premium) const { /* ... */ }
+  void operator()(SubscriptionStatus::wrap_trial_type& w) const {
+    const SubscriptionStatus::Trial& trial = w.value;
+  }
+};
+lara_status.visit(Visitor());
+```
+
+### Serialization
+
+```cpp
+// Dense JSON
+std::string john_dense_json = skir::ToDenseJson(john);
+
+// Readable JSON
+std::cout << skir::ToReadableJson(john) << "\n";
+
+// Binary
+skir::ByteString john_bytes = skir::ToBytes(john);
+```
+
+### Deserialization
+
+```cpp
+absl::StatusOr<User> reserialized_john = skir::Parse<User>(john_dense_json);
+assert(reserialized_john.ok() && *reserialized_john == john);
+
+reserialized_john = skir::Parse<User>(john_bytes.as_string());
+assert(reserialized_john.ok() && *reserialized_john == john);
+```
+
+### Keyed Arrays
+
+`keyed_items<T, get_key>` stores items with fast hash-table lookups by key.
+
+```cpp
+UserRegistry user_registry;
+auto& users = user_registry.users;
+users.push_back(john);
+users.push_back(jane);
+users.push_back(lyla);
+
+const User* maybe_jane = users.find_or_null(43);
+assert(maybe_jane != nullptr && *maybe_jane == jane);
+
+assert(users.find_or_default(45).name == "");
+// Duplicates: find returns last one.
+```
+
+### Equality and Hashing
+
+Skir structs and enums are equality comparable and hashable:
+
+```cpp
+absl::flat_hash_set<User> user_set;
+user_set.insert(john);
+user_set.insert(jane);
+user_set.insert(jane);
+assert(user_set.size() == 2);
+```
+
+### Constants
+
+```cpp
+const User& tarzan = skirout_user::k_tarzan();
+assert(tarzan.name == "Tarzan");
+```
+
+### Skir Services
+
+- **Server**: [cpp-httplib](https://github.com/gepheum/skir-cc-example/blob/main/service_start.cc)
+- **Client**: [Example](https://github.com/gepheum/skir-cc-example/blob/main/service_client.cc)
+
+### Dynamic Reflection
+
+```cpp
+using ::skir::reflection::GetTypeDescriptor;
+using ::skir::reflection::TypeDescriptor;
+
+const TypeDescriptor& user_descriptor = GetTypeDescriptor<User>();
+
+// Can be serialized/deserialized to/from JSON.
+absl::StatusOr<TypeDescriptor> reserialized =
+    TypeDescriptor::FromJson(user_descriptor.AsJson());
+```
+
+### Static Reflection
+
+Static reflection allows typesafe inspection and modification of generated values. See [string_capitalizer.h](https://github.com/gepheum/skir-cc-example/blob/main/string_capitalizer.h).
+
+```cpp
+User tarzan_copy = skirout_user::k_tarzan();
+CapitalizeStrings(tarzan_copy);
+// All strings recursively capitalized: "Tarzan" → "TARZAN", etc.
+```
+
+### Unit Tests with GoogleTest
+
+See [full example](https://github.com/gepheum/skir-cc-example/blob/main/example.test.cc).
+
+#### Struct Matchers
+
+```cpp
+EXPECT_THAT(john, (StructIs<User>{
+    .pets = testing::ElementsAre(StructIs<User::Pet>{
+        .height_in_meters = testing::FloatNear(1.7, 0.1),
+    }),
+    .quote = testing::StartsWith("Life is"),
+    .user_id = 42,
+}));
+```
+
+#### Enum Matchers
+
+```cpp
+EXPECT_THAT(john_status, testing::Eq(skirout::kFree));
+EXPECT_THAT(jade_status, IsTrial(StructIs<SubscriptionStatus::Trial>{
+    .start_time = testing::Gt(absl::UnixEpoch())}));
+```

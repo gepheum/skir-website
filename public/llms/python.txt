@@ -1,0 +1,236 @@
+# Python
+
+Guide for using Skir-generated Python code. Targets Python 3.10+.
+
+## Set Up
+
+In `skir.yml`, add under `generators`:
+
+```yaml
+- mod: skir-python-gen
+  outDir: ./src/skirout
+  config: {}
+```
+
+Example project: [skir-python-example](https://github.com/gepheum/skir-python-example)
+
+## Generated Code Guide
+
+Examples for code generated from [this .skir file](https://github.com/gepheum/skir-python-example/blob/main/skir_src/user.skir).
+
+### Referring to Generated Symbols
+
+```python
+from skirout.user_skir import TARZAN, SubscriptionStatus, User, UserHistory, UserRegistry
+```
+
+### Struct Classes
+
+For every struct `S`, Skir generates a frozen (deeply immutable) class `S` and a mutable class `S.Mutable`.
+
+### Frozen Struct Classes
+
+```python
+john = User(
+    user_id=42,
+    name="John Doe",
+    quote="Coffee is just a socially acceptable form of rage.",
+    pets=[
+        User.Pet(
+            name="Dumbo",
+            height_in_meters=1.0,
+            picture="🐘",
+        ),
+    ],
+    subscription_status=SubscriptionStatus.FREE,
+)
+
+assert john.name == "John Doe"
+assert isinstance(john.pets, tuple)  # Lists are copied into tuples
+
+# Static type checkers will error on: john.name = "John Smith"
+
+# With partial(), you don't need all fields.
+jane = User.partial(
+    user_id=43,
+    name="Jane Doe",
+)
+assert jane.quote == ""  # Missing fields get default values
+
+assert User.DEFAULT == User.partial()
+```
+
+### Mutable Struct Classes
+
+```python
+lyla_mut = User.Mutable()
+lyla_mut.user_id = 44
+lyla_mut.name = "Lyla Doe"
+
+joly_mut = User.Mutable(user_id=45)
+joly_mut.name = "Joly Doe"
+
+joly_history_mut = UserHistory.Mutable()
+joly_history_mut.user = joly_mut  # Can be frozen or mutable
+
+# mutable_user: returns mutable version, creating shallow copy if needed
+joly_history_mut.mutable_user.quote = "I am Joly."
+
+# mutable_pets: same pattern for arrays
+lyla_mut.mutable_pets.append(User.Pet.partial(name="Cupcake"))
+```
+
+### Converting Between Frozen and Mutable
+
+```python
+evil_jane_mut = jane.to_mutable()  # Shallow copy (cheap)
+evil_jane_mut.name = "Evil Jane"
+evil_jane: User = evil_jane_mut.to_frozen()  # Recursively copies mutable values
+
+# Or use replace() on frozen struct:
+evil_jane = evil_jane.replace(name="Evil Jane")
+```
+
+### Writing Logic Agnostic of Mutability
+
+```python
+# 'User.OrMutable' is a type alias for 'User | User.Mutable'.
+def greet(user: User.OrMutable):
+    print(f"Hello, {user.name}")
+```
+
+### Enum Classes
+
+```skir
+enum SubscriptionStatus {
+  FREE;
+  trial: Trial;
+  PREMIUM;
+}
+```
+
+### Making Enum Values
+
+```python
+john_status = SubscriptionStatus.FREE
+jane_status = SubscriptionStatus.PREMIUM
+joly_status = SubscriptionStatus.UNKNOWN
+
+# wrap_*() for wrapper variants
+roni_status = SubscriptionStatus.wrap_trial(
+    SubscriptionStatus.Trial(
+        start_time=skir.Timestamp.from_unix_millis(1744974198000),
+    )
+)
+
+# create_*() shorthand when wrapped value is a struct
+assert roni_status == SubscriptionStatus.create_trial(
+    start_time=skir.Timestamp.from_unix_millis(1744974198000)
+)
+```
+
+### Conditions on Enums
+
+```python
+assert john_status.union.kind == "FREE"
+assert joly_status.union.kind == "UNKNOWN"
+assert roni_status.union.kind == "trial"
+assert isinstance(roni_status.union.value, SubscriptionStatus.Trial)
+
+def get_subscription_info_text(status: SubscriptionStatus) -> str:
+    if status.union.kind == "UNKNOWN":
+        return "Unknown subscription status"
+    elif status.union.kind == "FREE":
+        return "Free user"
+    elif status.union.kind == "trial":
+        trial = status.union.value
+        return f"On trial since {trial.start_time}"
+    elif status.union.kind == "PREMIUM":
+        return "Premium user"
+    _: Never = status.union.kind
+    raise AssertionError("Unreachable code")
+```
+
+### Serialization
+
+Every frozen struct/enum class has a `serializer` property.
+
+```python
+serializer = User.serializer
+
+# Dense JSON (default, safe for persistence)
+john_dense_json = serializer.to_json(john)
+assert isinstance(john_dense_json, list)
+john_dense_json_code: str = serializer.to_json_code(john)
+
+# Readable JSON (debugging only)
+print(serializer.to_json_code(john, readable=True))
+# {
+#   "user_id": 42,
+#   "name": "John Doe",
+#   ...
+# }
+```
+
+### Deserialization
+
+```python
+assert john == serializer.from_json(john_dense_json)
+assert john == serializer.from_json_code(john_dense_json_code)
+# Also works with readable JSON
+assert john == serializer.from_json_code(
+    serializer.to_json_code(john, readable=True)
+)
+```
+
+### Keyed Arrays
+
+```python
+user_registry = UserRegistry(users=[john, jane, lyla_mut])
+
+# users is a subclass of tuple with key lookup methods
+assert user_registry.users.find(42) == john
+assert user_registry.users.find(100) is None
+assert user_registry.users.find_or_default(42).name == "John Doe"
+assert user_registry.users.find_or_default(100).name == ""
+# First lookup O(N), subsequent O(1).
+```
+
+### Constants
+
+```python
+print(TARZAN)
+# User(user_id=123, name='Tarzan', ...)
+```
+
+### Skir Services
+
+- **Server**: [Flask](https://github.com/gepheum/skir-python-example/blob/main/start_service_flask.py), [FastAPI](https://github.com/gepheum/skir-python-example/blob/main/start_service_fastapi.py), [Litestar](https://github.com/gepheum/skir-python-example/blob/main/start_service_starlite.py)
+- **Client**: [Example](https://github.com/gepheum/skir-python-example/blob/main/call_service.py)
+
+### Reflection
+
+```python
+user_type_descriptor = User.serializer.type_descriptor
+
+print(user_type_descriptor.as_json_code())
+# {
+#   "type": { "kind": "record", "value": "user.skir:User" },
+#   "records": [
+#     {
+#       "kind": "struct",
+#       "id": "user.skir:User",
+#       "fields": [
+#         { "name": "user_id", "type": { "kind": "primitive", "value": "int64" }, "number": 0 },
+#         ...
+#       ]
+#     },
+#     ...
+#   ]
+# }
+
+# TypeDescriptor can be serialized/deserialized.
+assert user_type_descriptor == skir.reflection.TypeDescriptor.from_json_code(
+    user_type_descriptor.as_json_code()
+)
+```

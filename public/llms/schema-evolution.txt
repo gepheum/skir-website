@@ -1,0 +1,141 @@
+# Schema Evolution & Compatibility
+
+Skir is designed for long-term data persistence and distributed systems. It ensures your application can evolve data structures while maintaining backward compatibility (new code reads old data) and forward compatibility (old code reads new data).
+
+## Safe Schema Changes
+
+### Adding Fields to a Struct
+
+New code reading old data uses default values:
+- Numbers: `0`
+- Booleans: `false`
+- Strings/Bytes: empty
+- Arrays: `[]`
+- Structs: all fields at defaults
+- Enums: `UNKNOWN`
+- Optional types: `null`
+
+### Adding Variants to an Enum
+
+Old code encountering a new variant treats it as `UNKNOWN`.
+
+### Renaming Types, Fields, and Variants
+
+Skir uses numeric identifiers in binary and dense JSON formats, not names. Renaming is always safe.
+
+> **Note:** Names *are* used in readable JSON, which is for debugging only and should not be used for storage.
+
+### Removing Fields or Variants
+
+Mark the number as `removed` to prevent accidental reuse.
+
+### Compatible Type Changes
+
+- `bool` → `int32`, `int64`, `hash64`
+- `int32` → `int64`
+- `float32` → `float64`
+- `float64` → `float32` (precision loss possible)
+- `[A]` → `[B]` (if A → B is valid)
+- `A?` → `B?` (if A → B is valid)
+
+## Unsafe Changes
+
+- Changing a field/variant number, or reordering with implicit numbering
+- Incompatible type changes to fields, wrapper variants, method request/response
+- Changing a method's stable identifier
+- Reusing a `removed` number
+- Deleting without marking as `removed`
+- Changing a constant variant to a wrapper variant or vice-versa
+
+## Automated Compatibility Checks
+
+### The Snapshot Tool
+
+`npx skir snapshot` maintains schema history:
+
+1. **Verification**: If `skir-snapshot.json` exists, compares current `.skir` files against it. Reports breaking changes and exits if any found.
+2. **Update**: If no breaking changes (or no snapshot exists), creates/updates `skir-snapshot.json`.
+
+### Stable Identifiers
+
+Track compatibility across renames with stable IDs:
+
+```skir
+struct User(500996846) {
+  name: string;
+}
+```
+
+Renaming `User` to `Account` while keeping ID `500996846` lets Skir know it's the same type.
+
+> **Tip:** Assign stable identifiers to all root types used for storage. Nested types are tracked through parents. Method request/response types are tracked as part of the method.
+
+### Intentional Breaking Changes
+
+Delete `skir-snapshot.json` and run `npx skir snapshot` to establish a new baseline.
+
+## Recommended Workflow
+
+### 1. During Development
+
+```bash
+npx skir snapshot --dry-run
+```
+
+The [VS Code extension](https://marketplace.visualstudio.com/items?itemName=TylerFibonacci.skir-language) highlights breaking changes in your editor as you type.
+
+### 2. Before Release
+
+Run `npx skir snapshot` without flags to verify and commit the new schema state.
+
+### 3. Continuous Integration
+
+```yaml
+- name: Ensure Skir snapshot up-to-date
+  run: npx skir snapshot --ci
+```
+
+## Round-Tripping Unrecognized Data
+
+When a service running older code encounters data from a newer schema, it can either **drop** (default) or **preserve** unrecognized data.
+
+- **Drop**: Unrecognized fields/variants discarded. Safe but causes data loss on re-save.
+- **Preserve**: Kept internally and written back during serialization. Enables round-tripping.
+
+### Example
+
+```skir
+// Version 1
+struct UserBefore(999) {
+  id: int64;
+  subscription_status: enum {
+    FREE;
+    PREMIUM;
+  };
+}
+
+// Version 2 (added TRIAL variant and name field)
+struct UserAfter(999) {
+  id: int64;
+  subscription_status: enum {
+    FREE;
+    PREMIUM;
+    TRIAL;
+  };
+  name: string;
+}
+```
+
+Default (drop): round-tripped data loses `name` and new variants become `UNKNOWN`.
+
+Preserve mode:
+
+```typescript
+const oldUser = UserBefore.serializer.fromJson(originalJson, "keep-unrecognized-values");
+const roundTrippedJson = UserBefore.serializer.toJson(oldUser);
+const result = UserAfter.serializer.fromJson(roundTrippedJson);
+// result.name === "Jane"  -- Preserved!
+// result.subscriptionStatus.union.kind === "TRIAL"  -- Preserved!
+```
+
+> **Warning:** Only preserve unrecognized data from trusted sources. Malicious actors could inject fields with future IDs, leading to security vulnerabilities when those IDs are later defined.

@@ -1,0 +1,167 @@
+# Skir Services
+
+Skir provides a protocol with server and client runtime libraries for issuing RPCs with end-to-end type safety. Services can be used for microservice communication or frontend-to-backend communication.
+
+## Core Concepts
+
+### API Definition
+
+Define methods in your `.skir` schema:
+
+```skir
+// calculator.skir
+
+method Square(float32): float32 = 1001;
+method SquareRoot(float32): float32 = 1002;
+```
+
+A method definition specifies the request type (input), the response type (output), and a stable numeric identifier.
+
+Methods are defined globally in the schema. Skir does not group methods into `service` blocks like Protocol Buffer does. You decide how to group and implement methods in your application code.
+
+### Implement the Service
+
+The Skir runtime provides a `Service` class that handles deserialization, routing, and serialization.
+
+#### Registering Methods
+
+Link abstract method definitions to your functions:
+
+```python
+from skirout.calc import Square, SquareRoot
+import math
+
+async def square_impl(val: float, meta: RequestMeta) -> float:
+    return val * val
+
+async def sqrt_impl(val: float, meta: RequestMeta) -> float:
+    if val < 0:
+        raise ValueError("Cannot calculate square root of negative number")
+    return math.sqrt(val)
+
+service = skir.ServiceAsync[RequestMeta]
+service.add_method(Square, square_impl)
+service.add_method(SquareRoot, sqrt_impl)
+```
+
+#### Request Context
+
+`RequestMeta` is a custom type you define to pass context (auth tokens, user IDs) from the HTTP layer into method logic:
+
+```python
+from dataclasses import dataclass
+import skir
+
+@dataclass
+class RequestMeta:
+    auth_token: str
+    client_ip: str
+
+service = skir.ServiceAsync[RequestMeta]
+```
+
+If no context is needed, define an empty class.
+
+### Running the Service
+
+Skir does not start its own HTTP server. It provides a `handle_request` method you call from your existing framework (FastAPI, Flask, Express, etc.), letting you leverage existing middleware for logging, auth, and rate limiting.
+
+```python
+# FastAPI example
+from fastapi import FastAPI, Request
+from fastapi.responses import Response
+
+app = FastAPI()
+
+@app.api_route("/myapi", methods=["GET", "POST"])
+async def myapi(request: Request):
+    if request.method == "POST":
+        req_body = (await request.body()).decode("utf-8")
+    else:
+        req_body = urllib.parse.unquote(
+            request.url.query.encode("utf-8").decode("utf-8")
+        )
+
+    req_meta = extract_meta_from_request(request)
+    raw_response = await service.handle_request(req_body, req_meta)
+
+    return Response(
+        content=raw_response.data,
+        status_code=raw_response.status_code,
+        media_type=raw_response.content_type,
+    )
+```
+
+### Call the Service
+
+Use the `ServiceClient` class to invoke methods:
+
+```python
+from skir import ServiceClient
+import aiohttp
+from skirout.calc import Square
+
+client = ServiceClient("http://localhost:8000/api")
+
+async def main():
+    async with aiohttp.ClientSession() as session:
+        response = await client.invoke_remote_async(
+            session,
+            Square,
+            5.0,
+            headers={"Authorization": "Bearer token"}
+        )
+        print(response)  # 25.0
+```
+
+## Code Examples
+
+| Language | Server | Client |
+|---|---|---|
+| TypeScript | [Express](https://github.com/gepheum/skir-typescript-example/blob/main/src/server.ts) | [Client](https://github.com/gepheum/skir-typescript-example/blob/main/src/client.ts) |
+| Python | [Flask](https://github.com/gepheum/skir-python-example/blob/main/start_service_flask.py), [FastAPI](https://github.com/gepheum/skir-python-example/blob/main/start_service_fastapi.py), [Litestar](https://github.com/gepheum/skir-python-example/blob/main/start_service_starlite.py) | [Client](https://github.com/gepheum/skir-python-example/blob/main/call_service.py) |
+| C++ | [cpp-httplib](https://github.com/gepheum/skir-cc-example/blob/main/service_start.cc) | [Client](https://github.com/gepheum/skir-cc-example/blob/main/service_client.cc) |
+| Java | [Spring Boot](https://github.com/gepheum/skir-java-example/blob/main/src/main/java/examples/StartService.java) | [Client](https://github.com/gepheum/skir-java-example/blob/main/src/main/java/examples/CallService.java) |
+| Kotlin | [Ktor](https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/startservice/StartService.kt) | [Client](https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/callservice/CallService.kt) |
+| Dart | [Shelf](https://github.com/gepheum/skir-dart-example/blob/main/bin/start_service.dart) | [Client](https://github.com/gepheum/skir-dart-example/blob/main/bin/call_service.dart) |
+
+## Why Use Skir Services?
+
+In a traditional REST API, the contract between client and server is implicit and fragile. Skir enforces the contract at compile time. Both server and client are generated from the same source of truth.
+
+### Versus Traditional REST APIs
+
+| Feature | REST | Skir Service (RPC) |
+|---|---|---|
+| Endpoint | Resource-based (`/users/123`) | Single URL (`/api`) |
+| Operations | Endpoint + HTTP verb | Methods in `.skir` file |
+| Input | Path params, query params, JSON body | Strongly-typed request |
+| Output | JSON with implicit structure | Strongly-typed response |
+| Client | Manual fetch/axios calls | Typesafe, handles serialization |
+
+> Skir solves the same problem as [tRPC](https://trpc.io), but is **language-agnostic**. While tRPC is excellent for full-stack TypeScript, Skir brings the same safety to polyglot environments (e.g., TypeScript frontend talking to a Kotlin or Python backend).
+
+## Tooling
+
+### Skir Studio
+
+Every Skir service comes with Skir Studio, a built-in interactive documentation and testing tool. Visit your API endpoint with `?studio` (e.g., `http://localhost:8000/api?studio`). It lists all methods and lets you send requests and view responses.
+
+Try the demo:
+
+```bash
+npx skir-studio-demo
+```
+
+> Similar to Swagger UI in the FastAPI ecosystem.
+
+### Sending Requests with cURL
+
+Skir runs over standard HTTP. Requests are POSTs with a JSON body:
+
+```bash
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"method": "Square", "request": 5.0}' \
+  http://localhost:8000/api
+```

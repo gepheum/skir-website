@@ -1,0 +1,280 @@
+# TypeScript
+
+Guide for using Skir-generated TypeScript code. Works on Node, Deno, and in the browser.
+
+## Set Up
+
+In `skir.yml`, add under `generators`:
+
+```yaml
+- mod: skir-typescript-gen
+  outDir: ./skirout
+  config: {}
+```
+
+Example project: [skir-typescript-example](https://github.com/gepheum/skir-typescript-example)
+
+## Generated Code Guide
+
+Examples below are for code generated from [this .skir file](https://github.com/gepheum/skir-typescript-example/blob/main/skir_src/user.skir).
+
+### Referring to Generated Symbols
+
+```typescript
+import { TARZAN, SubscriptionStatus, User, UserHistory, UserRegistry } from "../skirout/user";
+```
+
+### Struct Classes
+
+For every struct `S`, Skir generates a frozen (deeply immutable) class `S` and a mutable class `S.Mutable`.
+
+### Frozen Struct Classes
+
+```typescript
+// Construct a frozen User with User.create({...})
+const john = User.create({
+  userId: 42,
+  name: "John Doe",
+  quote: "Coffee is just a socially acceptable form of rage.",
+  pets: [
+    {
+      name: "Dumbo",
+      heightInMeters: 1.0,
+      picture: "🐘",
+    },
+  ],
+  subscriptionStatus: "FREE",
+  // foo: "bar",
+  // ^ Does not compile: 'foo' is not a field of User
+});
+
+assert(john.name === "John Doe");
+
+// john.name = "John Smith";
+// ^ Does not compile: all the properties are read-only
+
+// With create<"partial">({...}), you don't need to specify all the fields.
+const jane = User.create<"partial">({
+  userId: 43,
+  name: "Jane Doe",
+  pets: [{ name: "Fluffy" }, { name: "Fido" }],
+});
+
+// Missing fields are initialized to their default values.
+assert(jane.quote === "");
+
+const defaultUser = User.DEFAULT;
+assert(defaultUser.name === "");
+// User.DEFAULT is same as User.create<"partial">({});
+```
+
+### Mutable Struct Classes
+
+```typescript
+const lylaMut = new User.Mutable();
+lylaMut.userId = 44;
+lylaMut.name = "Lyla Doe";
+
+const jolyMut = new User.Mutable({ userId: 45 });
+jolyMut.name = "Joly Doe";
+
+const jolyHistoryMut = new UserHistory.Mutable();
+jolyHistoryMut.user = jolyMut;
+// ^ Right-hand side can be either frozen or mutable.
+
+// mutableUser() checks if 'user' is already mutable; if not, assigns a
+// mutable shallow copy and returns it.
+jolyHistoryMut.mutableUser.quote = "I am Joly.";
+
+// mutablePets() works the same way for arrays.
+lylaMut.mutablePets.push(User.Pet.create<"partial">({ name: "Cupcake" }));
+lylaMut.mutablePets.push(new User.Pet.Mutable({ name: "Simba" }));
+```
+
+### Converting Between Frozen and Mutable
+
+```typescript
+// toMutable() does a shallow copy (cheap).
+const evilJaneMut = jane.toMutable();
+evilJaneMut.name = "Evil Jane";
+
+// toFrozen() recursively copies mutable values.
+const evilJane: User = evilJaneMut.toFrozen();
+```
+
+### Writing Logic Agnostic of Mutability
+
+```typescript
+// 'User.OrMutable' is a type alias for 'User | User.Mutable'.
+function greet(user: User.OrMutable) {
+  console.log(`Hello, ${user.name}`);
+}
+```
+
+### Enum Classes
+
+```skir
+enum SubscriptionStatus {
+  FREE;
+  trial: Trial;
+  PREMIUM;
+}
+```
+
+### Making Enum Values
+
+```typescript
+const johnStatus = SubscriptionStatus.FREE;
+const janeStatus = SubscriptionStatus.PREMIUM;
+const lylaStatus = SubscriptionStatus.create("PREMIUM");
+const jolyStatus = SubscriptionStatus.UNKNOWN;
+
+// Wrapper variants use create({kind: ..., value: ...})
+const roniStatus = SubscriptionStatus.create({
+  kind: "trial",
+  value: {
+    startTime: Timestamp.fromUnixMillis(1234),
+  },
+});
+```
+
+### Conditions on Enums
+
+```typescript
+// Use 'union.kind' to check the variant.
+assert(johnStatus.union.kind === "FREE");
+assert(jolyStatus.union.kind === "UNKNOWN");
+assert(roniStatus.union.kind === "trial");
+assert(roniStatus.union.value.startTime.unixMillis === 1234);
+
+function getSubscriptionInfoText(status: SubscriptionStatus): string {
+  switch (status.union.kind) {
+    case "UNKNOWN": return "Unknown subscription status";
+    case "FREE": return "Free user";
+    case "PREMIUM": return "Premium user";
+    case "trial": return "On trial since " + status.union.value.startTime;
+  }
+}
+```
+
+### Serialization
+
+Every frozen struct/enum class has a static readonly `serializer` property.
+
+```typescript
+const serializer = User.serializer;
+
+// Dense JSON (default, safe for persistence)
+const johnDenseJson = serializer.toJson(john);
+assert(Array.isArray(johnDenseJson));
+const johnDenseJsonCode = serializer.toJsonCode(john);
+
+// Readable JSON (debugging only)
+console.log(serializer.toJsonCode(john, "readable"));
+// {
+//   "user_id": 42,
+//   "name": "John Doe",
+//   ...
+// }
+
+// Binary format
+const johnBytes = serializer.toBytes(john);
+```
+
+### Deserialization
+
+```typescript
+const reserializedJohn = serializer.fromJsonCode(johnDenseJsonCode);
+assert(reserializedJohn.name === "John Doe");
+
+assert(serializer.fromJson(johnDenseJson).name === "John Doe");
+assert(serializer.fromBytes(johnBytes.toBuffer()).name === "John Doe");
+```
+
+### Frozen Arrays and Copies
+
+```typescript
+const pets = [
+  User.Pet.create<"partial">({ name: "Fluffy" }),
+  User.Pet.create<"partial">({ name: "Fido" }),
+];
+
+const jade = User.create<"partial">({
+  pets: pets,
+  // ^ makes a copy because 'pets' is mutable
+});
+assert(jade.pets !== pets);
+
+const jack = User.create<"partial">({
+  pets: jade.pets,
+  // ^ doesn't copy because 'jade.pets' is frozen
+});
+assert(jack.pets === jade.pets);
+```
+
+### Keyed Arrays
+
+```typescript
+const userRegistry = UserRegistry.create({
+  users: [john, jane, lylaMut, evilJane],
+});
+
+// First lookup O(N), subsequent O(1).
+assert(userRegistry.searchUsers(42) === john);
+assert(userRegistry.searchUsers(100) === undefined);
+// Duplicates: returns the last one.
+assert(userRegistry.searchUsers(43) === evilJane);
+```
+
+### Constants
+
+```typescript
+console.log(TARZAN);
+// User { userId: 123, name: 'Tarzan', ... }
+```
+
+### Skir Services
+
+- **Server**: [Express example](https://github.com/gepheum/skir-typescript-example/blob/main/src/server.ts)
+- **Client**: [Client example](https://github.com/gepheum/skir-typescript-example/blob/main/src/client.ts)
+
+### Reflection
+
+```typescript
+const fieldNames: string[] = [];
+for (const field of User.serializer.typeDescriptor.fields) {
+  const { name, number, property, type } = field;
+  fieldNames.push(name);
+}
+// [ 'user_id', 'name', 'quote', 'pets', 'subscription_status' ]
+
+// TypeDescriptor can be serialized/deserialized.
+const typeDescriptor = parseTypeDescriptorFromJson(
+  User.serializer.typeDescriptor.asJson(),
+);
+```
+
+### Writing Unit Tests
+
+With mocha and [buckwheat](https://github.com/gepheum/buckwheat):
+
+```typescript
+expect(tarzan).toMatch({
+  name: "Tarzan",
+  quote: /^A/,
+  pets: [
+    {
+      name: "Cheeta",
+      heightInMeters: near(1.6, 0.1),
+    },
+  ],
+  subscriptionStatus: {
+    union: {
+      kind: "trial",
+      value: {
+        startTime: Timestamp.fromUnixMillis(1234),
+      },
+    },
+  },
+});
+```
