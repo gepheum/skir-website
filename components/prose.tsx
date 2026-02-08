@@ -79,7 +79,7 @@ export function CodeBlock({ children, language, filename }: CodeBlockProps) {
     setMounted(true)
   }, [])
 
-  // Use dark theme by default during SSR to match defaultTheme="dark"
+  // Use light theme by default during SSR to match defaultTheme="light"
   const syntaxTheme = mounted && theme === 'light' ? atomOneLight : atomOneDark
 
   // Use Skir highlighting for Skir code

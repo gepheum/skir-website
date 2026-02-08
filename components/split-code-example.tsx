@@ -61,7 +61,7 @@ export function SplitCodeExample({
     setMounted(true)
   }, [])
 
-  // Use dark theme by default during SSR to match defaultTheme="dark"
+  // Use light theme by default during SSR to match defaultTheme="light"
   const syntaxTheme = mounted && theme === 'light' ? atomOneLight : atomOneDark
 
   return (
