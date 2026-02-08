@@ -154,7 +154,7 @@ struct UserRegistry {
         numbers.
       </p>
 
-      <h3>API definition</h3>
+      <h3>API definitions</h3>
       <p>
         In Protocol Buffers, service methods are grouped into <code>service</code> blocks. In Skir,
         methods are defined globally in the schema, and grouping is decided in the application code.
@@ -233,10 +233,9 @@ user = User(
         <code>buf</code>.
       </p>
       <p>
-        Skir includes a built-in, free package manager that treats{' '}
-        <strong>GitHub repositories as packages</strong>. This allows you to easily share common
-        data structures (like standard currency types or user definitions) across your backend
-        microservices and your frontend applications.
+        Skir includes a built-in, free package manager that treats GitHub repositories as packages.
+        This allows you to easily share common data structures (like standard currency types or user
+        definitions) across your backend microservices and your frontend applications.
       </p>
       <ol>
         <li>
