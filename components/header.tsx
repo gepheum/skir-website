@@ -9,8 +9,8 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { ChevronDown, Github, Menu, X } from 'lucide-react'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 
 type NavigationItem = {
