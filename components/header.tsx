@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { ChevronDown, Github, Menu, X } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 
 type NavigationItem = {
@@ -43,9 +44,13 @@ export function Header() {
       <nav className="container mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground font-bold">
-              S
-            </div>
+            <Image
+              src="/skir-icon-32x32.png"
+              alt="Skir"
+              width={32}
+              height={32}
+              className="rounded-md"
+            />
             <span className="text-xl font-bold">Skir</span>
           </Link>
 
