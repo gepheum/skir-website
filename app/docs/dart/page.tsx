@@ -228,13 +228,12 @@ String getSubscriptionInfoText(SubscriptionStatus status) {
         <InlineCode>serializer</InlineCode> property which can be used for serializing and
         deserializing instances of the class.
       </P>
-      <CodeBlock language="dart">{`// Serialize 'john' to dense JSON.
+      <CodeBlock language="dart">{`final serializer = User.serializer;
 
-final serializer = User.serializer;
-
-print(serializer.toJsonCode(john));
-// [42,"John Doe","Coffee is just a socially acceptable form of
-rage.",[["Dumbo",1.0,"🐘"]],[1]]
+// Serialize 'john' to dense JSON.
+final String johnDenseJson = serializer.toJsonCode(john);
+print(johnDenseJson);
+// [42,"John Doe",...]
 
 // Serialize 'john' to readable JSON.
 print(serializer.toJsonCode(john, readableFlavor: true));
@@ -259,7 +258,7 @@ print(serializer.toJsonCode(john, readableFlavor: true));
 // You should pick the readable flavor mostly for debugging purposes.
 
 // Serialize 'john' to binary format.
-print(serializer.toBytes(john));
+final Uint8List johnBytes = serializer.toBytes(john);
 
 // The binary format is not human readable, but it is slightly more compact
 // than JSON, and serialization/deserialization can be a bit faster in
@@ -269,7 +268,7 @@ print(serializer.toBytes(john));
       <H3>Deserialization</H3>
       <CodeBlock language="dart">{`// Use fromJson(), fromJsonCode() and fromBytes() to deserialize.
 
-final reserializedJohn = serializer.fromJsonCode(serializer.toJsonCode(john));
+final reserializedJohn = serializer.fromJsonCode(johnDenseJson);
 assert(reserializedJohn.name == "John Doe");
 
 final reserializedJane = serializer.fromJsonCode(
@@ -277,9 +276,7 @@ final reserializedJane = serializer.fromJsonCode(
 );
 assert(reserializedJane.name == "Jane Doe");
 
-final reserializedLyla =
-    serializer.fromBytes(serializer.toBytes(mutableLyla.toFrozen()));
-assert(reserializedLyla.name == "Lyla Doe");`}</CodeBlock>
+assert(serializer.fromBytes(johnBytes) == john);`}</CodeBlock>
 
       <H3>Frozen lists and copies</H3>
       <CodeBlock language="dart">{`final pets = [
@@ -342,7 +339,7 @@ assert(userRegistry.users.findByKey(43) == evilJane);`}</CodeBlock>
 //     ),
 //   ],
 //   subscriptionStatus: SubscriptionStatus.wrapTrial(
-//     User_Trial(
+//     SubscriptionStatus_Trial(
 //       startTime: DateTime.fromMillisecondsSinceEpoch(
 //         // 2025-04-02T11:13:29.000Z
 //         1743592409000

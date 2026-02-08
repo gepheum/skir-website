@@ -204,7 +204,8 @@ lara_status.visit(Visitor());`}</CodeBlock>
         <InlineCode>ToBytes</InlineCode> to serialize a skir value.
       </P>
       <CodeBlock language="cpp">{`// Serialize a skir value to JSON with ToDenseJson or ToReadableJson.
-std::cout << skir::ToDenseJson(john) << "\\n";
+std::string john_dense_json = skir::ToDenseJson(john);
+std::cout << john_dense_json << "\\n";
 // [42,"John Doe"]
 
 std::cout << skir::ToReadableJson(john) << "\\n";
@@ -223,14 +224,18 @@ std::cout << skir::ToReadableJson(john) << "\\n";
 // JSON, and serialization/deserialization can be a bit faster.
 // Only use it when this small performance gain is likely to matter, which
 // should be rare.
-std::cout << skir::ToBytes(john).as_string() << "\\n";`}</CodeBlock>
+skir::ByteString john_bytes = skir::ToBytes(john);`}</CodeBlock>
 
       <H3>Deserialization</H3>
       <P>
         Use <InlineCode>Parse</InlineCode> to deserialize a skir value from JSON or binary format.
       </P>
-      <CodeBlock language="cpp">{`absl::StatusOr<User> maybe_john = skir::Parse<User>(skir::ToDenseJson(john));
-assert(maybe_john.ok() && *maybe_john == john);`}</CodeBlock>
+      <CodeBlock language="cpp">{`// Use Parse to deserialize a skir value from JSON or binary format.
+absl::StatusOr<User> reserialized_john = skir::Parse<User>(john_dense_json);
+assert(reserialized_john.ok() && *reserialized_john == john);
+
+reserialized_john = skir::Parse<User>(john_bytes.as_string());
+assert(reserialized_john.ok() && *reserialized_john == john);`}</CodeBlock>
 
       <H3>Keyed arrays</H3>
       <P>

@@ -215,12 +215,12 @@ System.out.println(john.subscriptionStatus().accept(infoTextVisitor));
         <InlineCode>SERIALIZER</InlineCode> property which can be used for serializing and
         deserializing instances of the class.
       </P>
-      <CodeBlock language="java">{`// Serialize 'john' to dense JSON.
+      <CodeBlock language="java">{`final Serializer<User> serializer = User.SERIALIZER;
 
-final Serializer<User> serializer = User.SERIALIZER;
-
-System.out.println(serializer.toJsonCode(john));
-// [42,"John Doe","Coffee is just a socially acceptable form of rage.",[["Dumbo",1.0,"🐘"]],[1]]
+// Serialize 'john' to dense JSON.
+final String johnDenseJson = serializer.toJsonCode(john);
+System.out.println(johnDenseJson);
+// [42,"John Doe",...]
 
 // Serialize 'john' to readable JSON.
 System.out.println(serializer.toJsonCode(john, JsonFlavor.READABLE));
@@ -245,7 +245,8 @@ System.out.println(serializer.toJsonCode(john, JsonFlavor.READABLE));
 // You should pick the readable flavor mostly for debugging purposes.
 
 // Serialize 'john' to binary format.
-System.out.println(serializer.toBytes(john));
+final ByteString johnBytes = serializer.toBytes(john);
+System.out.println(johnBytes);
 
 // The binary format is not human readable, but it is slightly more compact
 // than JSON, and serialization/deserialization can be a bit faster in
@@ -255,8 +256,7 @@ System.out.println(serializer.toBytes(john));
       <H3>Deserialization</H3>
       <CodeBlock language="java">{`// Use fromJson(), fromJsonCode() and fromBytes() to deserialize.
 
-final User reserializedJohn =
-    serializer.fromJsonCode(serializer.toJsonCode(john));
+final User reserializedJohn = serializer.fromJsonCode(johnDenseJson);
 assert reserializedJohn.equals(john);
 
 final User reserializedEvilJohn =
@@ -265,9 +265,7 @@ final User reserializedEvilJohn =
         serializer.toJsonCode(john, JsonFlavor.READABLE));
 assert reserializedEvilJohn.equals(evilJohn);
 
-final User reserializedJane =
-    serializer.fromBytes(serializer.toBytes(jane));
-assert reserializedJane.equals(jane);`}</CodeBlock>
+assert serializer.fromBytes(johnBytes).equals(john);`}</CodeBlock>
 
       <H3>Frozen lists and copies</H3>
       <CodeBlock language="java">{`// Since all Skir objects are deeply immutable, all lists contained in a
