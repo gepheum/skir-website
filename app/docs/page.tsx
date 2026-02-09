@@ -89,12 +89,12 @@ export default function DocsPage() {
         </p>
         <div className="flex flex-wrap gap-2">
           {[
-            { name: 'TypeScript', href: '/docs/languages/typescript' },
-            { name: 'Python', href: '/docs/languages/python' },
-            { name: 'C++', href: '/docs/languages/cpp' },
-            { name: 'Java', href: '/docs/languages/java' },
-            { name: 'Kotlin', href: '/docs/languages/kotlin' },
-            { name: 'Dart', href: '/docs/languages/dart' },
+            { name: 'TypeScript', href: '/docs/typescript' },
+            { name: 'Python', href: '/docs/python' },
+            { name: 'C++', href: '/docs/cpp' },
+            { name: 'Java', href: '/docs/java' },
+            { name: 'Kotlin', href: '/docs/kotlin' },
+            { name: 'Dart', href: '/docs/dart' },
           ].map((lang) => (
             <Link
               key={lang.name}
