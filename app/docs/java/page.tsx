@@ -343,7 +343,7 @@ assert userRegistry.users().findByKey(100) == null;`}</CodeBlock>
 //   }
 // }`}</CodeBlock>
 
-      <H3>skir services</H3>
+      <H3>Skir services</H3>
       <P>
         <strong>Starting a skir service on an HTTP server</strong> - full example{' '}
         <a
