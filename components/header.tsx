@@ -45,7 +45,7 @@ export function Header() {
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/skir-icon-32x32.png"
+              src="/iceberg-32x32.png"
               alt="Skir"
               width={32}
               height={32}

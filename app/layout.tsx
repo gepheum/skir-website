@@ -36,6 +36,17 @@ export const metadata: Metadata = {
     'codegen',
   ],
   authors: [{ name: 'Gepheum' }],
+  icons: {
+    icon: [
+      { url: '/iceberg-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/iceberg-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/iceberg-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/iceberg-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/iceberg-apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   openGraph: {
     title: 'Skir - Like Protocol Buffer, but better',
     description: 'A descriptive language for representing data types, constants, and APIs.',
