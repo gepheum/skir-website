@@ -63,14 +63,21 @@ assert(restored == point)
 
 ### Getting Started
 - Setup & Workflow: https://skir.build/llms/setup.txt
+  - Learn how to initialize a Skir project, configure code generators for multiple languages, and integrate Skir into your build workflow with watch mode and continuous integration.
 - Language Reference: https://skir.build/llms/language-reference.txt
+  - Complete syntax guide covering structs, enums, fields, variants, types, constants, methods, and all language features with examples.
 
 ### Core Concepts
 - Serialization: https://skir.build/llms/serialization.txt
+  - Understand Skir's JSON (dense and readable) and binary serialization formats, including encoding rules for each data type and when to use each format.
 - Schema Evolution: https://skir.build/llms/schema-evolution.txt
+  - Learn safe schema changes (adding fields, renaming types), automated compatibility checking with snapshots, and how to maintain backward/forward compatibility.
 - RPC Services: https://skir.build/llms/services.txt
+  - Build type-safe RPC services by defining methods in schemas, implementing handlers with custom context, and integrating with existing HTTP frameworks.
 - External Dependencies: https://skir.build/llms/dependencies.txt
+  - Import and reuse types from other GitHub repositories by configuring dependencies in skir.yml, with support for transitive dependencies and private repositories.
 - Coming from Protobuf: https://skir.build/llms/protobuf.txt
+  - Migration guide highlighting key differences from Protocol Buffers including unified enums, keyed arrays, schema constants, and stricter generated code patterns.
 
 ### Language Guides
 - TypeScript: https://skir.build/llms/typescript.txt
