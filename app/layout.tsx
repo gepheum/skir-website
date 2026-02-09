@@ -43,9 +43,7 @@ export const metadata: Metadata = {
       { url: '/iceberg-192x192.png', sizes: '192x192', type: 'image/png' },
       { url: '/iceberg-512x512.png', sizes: '512x512', type: 'image/png' },
     ],
-    apple: [
-      { url: '/iceberg-apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
-    ],
+    apple: [{ url: '/iceberg-apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   openGraph: {
     title: 'Skir - Like Protocol Buffer, but better',
