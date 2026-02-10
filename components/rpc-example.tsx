@@ -15,17 +15,17 @@ method WhatToWear(WhatToWearRequest):
 
 const codeExamples = {
   typescript: `import { ServiceClient } from "skir-client";
-import { WhatToWear, WhatToWearRequest }
+import { WhatToWear, WhatToWearRequest, WhatToWearResponse }
     from "../skirout/outfit_picker";
 
 const client = new ServiceClient("http://localhost:8080/api");
 
-const response = await client.invokeRemote(
+const response: WhatToWearResponse = await client.invokeRemote(
   WhatToWear,
   WhatToWearRequest.create({
     temperatureCelsius: 25,
     raining: false,
-  })
+  }),
 );
 
 if (response.sunglasses) {
@@ -33,18 +33,18 @@ if (response.sunglasses) {
 }`,
 
   python: `from skirout.outfit_picker_skir
-    import WhatToWear, WhatToWearRequest
+    import WhatToWear, WhatToWearRequest, WhatToWearResponse
 
 import skir
 
 service_client = skir.ServiceClient("http://localhost:8080/api")
 
-response = service_client.invoke_remote(
+response: WhatToWearResponse = service_client.invoke_remote(
     WhatToWear,
     WhatToWearRequest(
         temperature_celsius=25,
         raining=False,
-    )
+    ),
 )
 
 if (response.sunglasses):
@@ -82,7 +82,7 @@ import skirout.outfit_picker.WhatToWearResponse
 
 val serviceClient = ServiceClient("http://localhost:8080/api")
 
-val response = serviceClient.invokeRemote(
+val response: WhatToWearResponse = serviceClient.invokeRemote(
     WhatToWear,
     WhatToWearRequest(
         temperatureCelcius = 25,
@@ -120,7 +120,7 @@ import 'package:your_project/skirout/outfit_picker.dart';
 final serviceClient =
     skir.ServiceClient('http://localhost:8080/api');
 
-final response = await serviceClient
+final response: WhatToWearResponse = await serviceClient
     .wrap(whatToWearMethod)
     .invoke(
       WhatToWearRequest(
