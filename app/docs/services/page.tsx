@@ -14,8 +14,6 @@ export default function RpcPage() {
       <p>
         Skir provides a protocol, along with server and client runtime libraries, allowing you to
         issue RPCs with end-to-end type safety.
-      </p>
-      <p>
         Skir services are versatile: they can be used either for communication between microservices
         or between your frontend and your backend.
       </p>
