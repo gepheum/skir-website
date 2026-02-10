@@ -9,7 +9,7 @@ Add entries to the `dependencies` section of `skir.yml`. The key is the GitHub r
 ```yaml
 # skir.yml
 dependencies:
-  "@gepheum/fantasy-game-skir-example": v1.0.0
+  "@gepheum/skir-fantasy-game-example": v1.0.0
   "@my-org/user-service-skir": v3.5.0
 ```
 
@@ -28,7 +28,7 @@ Skir strictly forbids version conflicts. If two dependencies require different v
 Once configured, import types using the full path prefixed with the package identifier:
 
 ```skir
-import Quest from "@gepheum/fantasy-game-skir-example/fantasy_game.skir";
+import Quest from "@gepheum/skir-fantasy-game-example/fantasy_game.skir";
 
 struct QuestCollection {
   collection_name: string;
@@ -41,13 +41,13 @@ struct QuestCollection {
 For languages allowing `@` in directory names (JavaScript):
 
 ```javascript
-import { Quest } from "../skirout/@gepheum/fantasy-game-skir-example/fantasy_game.js"
+import { Quest } from "../skirout/@gepheum/skir-fantasy-game-example/fantasy_game.js"
 ```
 
 For languages requiring valid identifiers (Python), with dashes replaced by underscores:
 
 ```python
-from skirout.external.gepheum.fantasy_game_skir_example import fantasy_game_skir
+from skirout.external.gepheum.skir_fantasy_game_example import fantasy_game_skir
 ```
 
 ## Private Repositories

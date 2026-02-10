@@ -24,8 +24,8 @@ export default function DependenciesPage() {
         release version you want to use.
       </p>
       <CodeBlock language="yaml" filename="skir.yml">{`dependencies:
-  # https://github.com/gepheum/fantasy-game-skir-example/tree/v1.0.0
-  "@gepheum/fantasy-game-skir-example": v1.0.0
+  # https://github.com/gepheum/skir-fantasy-game-example/tree/v1.0.0
+  "@gepheum/skir-fantasy-game-example": v1.0.0
 
   "@my-org/user-service-skir": v3.5.0`}</CodeBlock>
       <p>
@@ -55,7 +55,7 @@ export default function DependenciesPage() {
         statement in your <code>.skir</code> files. The import path is the full path to the file
         within the dependency, prefixed with the package identifier.
       </p>
-      <CodeBlock language="skir">{`import Quest from "@gepheum/fantasy-game-skir-example/fantasy_game.skir";
+      <CodeBlock language="skir">{`import Quest from "@gepheum/skir-fantasy-game-example/fantasy_game.skir";
 
 struct QuestCollection {
   collection_name: string;
@@ -70,7 +70,7 @@ struct QuestCollection {
       </p>
       <CodeBlock language="javascript">{`// JavaScript
 
-import { Quest } from "../skirout/@gepheum/fantasy-game-skir-example/fantasy_game.js"`}</CodeBlock>
+import { Quest } from "../skirout/@gepheum/skir-fantasy-game-example/fantasy_game.js"`}</CodeBlock>
       <p>
         For languages which require every directory name to be a valid identifier (like Python), the
         generated code is placed in <code>{'skirout/external/{owner}/{repo}'}</code>, with dashes
@@ -78,7 +78,7 @@ import { Quest } from "../skirout/@gepheum/fantasy-game-skir-example/fantasy_gam
       </p>
       <CodeBlock language="python">{`# Python
 
-from skirout.external.gepheum.fantasy_game_skir_example import fantasy_game_skir`}</CodeBlock>
+from skirout.external.gepheum.skir_fantasy_game_example import fantasy_game_skir`}</CodeBlock>
 
       <h2>Private repositories</h2>
       <p>
