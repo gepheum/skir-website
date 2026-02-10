@@ -6,7 +6,6 @@ Skir is a declarative language for defining data types, constants, and RPC inter
 
 - Website: https://skir.build
 - GitHub: https://github.com/gepheum/skir
-- npm: https://www.npmjs.com/package/skir
 
 ## Key Features
 
