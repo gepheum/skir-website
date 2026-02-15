@@ -106,7 +106,7 @@ Optional steps for stricter validation:
   run: npx skir snapshot --ci
 ```
 
-The first step ensures `.skir` files are properly formatted. The second step verifies that you ran `npx skir snapshot` before committing. See the [Schema evolution & compatibility](https://skir.build/docs/schema-evolution) guide for more information about the snapshot command.
+The first step ensures `.skir` files are properly formatted. The second step verifies that you ran `npx skir snapshot` before committing. See the [Schema evolution & compatibility](https://skir.sh/docs/schema-evolution) guide for more information about the snapshot command.
 
 ## IDE Support
 
