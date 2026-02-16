@@ -150,7 +150,7 @@ struct Foo {
       <h3>Inline records</h3>
       <p>
         For improved readability and conciseness, Skir allows you to define records (structs or
-        enums) directly within a field's type definition. This <strong>inline</strong> syntax is a
+        enums) directly within a field's type definition. This inline syntax is a
         shorthand for explicitly nesting a record definition and then referencing it as a type.
       </p>
       <p>
