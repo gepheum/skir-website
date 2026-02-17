@@ -15,7 +15,7 @@ In `skir.yml`, add under `generators`:
 Runtime dependency: add to `pubspec.yaml`:
 
 ```yaml
-skir_client: ^1.0.2  # Use the latest version
+skir_client: any
 ```
 
 Example project: [skir-dart-example](https://github.com/gepheum/skir-dart-example)

@@ -23,6 +23,11 @@ export default function PythonPage() {
   outDir: ./src/skirout
   config: {}`}</CodeBlock>
       <P>
+        The generated Python code has a runtime dependency on the{' '}
+        <InlineCode>skir-client</InlineCode> library. Install it with:
+      </P>
+      <CodeBlock language="shell">{`pip install skir-client`}</CodeBlock>
+      <P>
         For more information, see this Python project{' '}
         <a
           href="https://github.com/gepheum/skir-python-example"

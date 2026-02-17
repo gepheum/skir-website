@@ -24,6 +24,11 @@ export default function TypeScriptPage() {
   outDir: ./skirout
   config: {}`}</CodeBlock>
       <P>
+        The generated TypeScript code has a runtime dependency on the{' '}
+        <InlineCode>skir_client</InlineCode> library. Install it with:
+      </P>
+      <CodeBlock language="shell">{`npm i skir-client`}</CodeBlock>
+      <P>
         For more information, see this TypeScript project{' '}
         <a
           href="https://github.com/gepheum/skir-typescript-example"

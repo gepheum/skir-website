@@ -416,10 +416,10 @@ async def main():
 
       <h2>Tooling</h2>
 
-      <h3>Skir Studio</h3>
+      <h3>RPC Studio</h3>
       <p>
         Every Skir service comes with a built-in interactive documentation and testing tool called{' '}
-        Skir Studio.
+        RPC Studio.
       </p>
       <p>
         To access it, simply visit your API endpoint in a browser with the <code>?studio</code>{' '}
@@ -435,7 +435,7 @@ async def main():
       <Note type="tip">
         <p>
           If you are familiar with <strong>Swagger UI</strong> (common in the FastAPI ecosystem),
-          Skir Studio fills the same role. It provides a dedicated, auto-generated web interface to
+          RPC Studio fills the same role. It provides a dedicated, auto-generated web interface to
           explore your API schema and execute requests interactively.
         </p>
       </Note>

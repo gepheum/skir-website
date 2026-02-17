@@ -25,7 +25,7 @@ export default function DartPage() {
         library. Add this line to your <InlineCode>pubspec.yaml</InlineCode> file under{' '}
         <InlineCode>dependencies</InlineCode>:
       </P>
-      <CodeBlock language="yaml">{`skir_client: ^1.0.2  # Use the latest version`}</CodeBlock>
+      <CodeBlock language="yaml">{`skir_client: any`}</CodeBlock>
       <P>
         For more information, see this Dart project{' '}
         <a
