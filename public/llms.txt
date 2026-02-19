@@ -65,6 +65,8 @@ assert(restored == point)
   - Learn how to initialize a Skir project, configure code generators for multiple languages, and integrate Skir into your build workflow with watch mode and continuous integration.
 - Language Reference: https://skir.sh/llms/language-reference.txt
   - Complete syntax guide covering structs, enums, fields, variants, types, constants, methods, and all language features with examples.
+- Examples & Projects: https://skir.sh/llms/examples.txt
+  - Browse a collection of starter projects for every language and full-stack end-to-end applications demonstrating real-world usage.
 
 ### Core Concepts
 - Serialization: https://skir.sh/llms/serialization.txt

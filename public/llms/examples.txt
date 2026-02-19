@@ -1,0 +1,27 @@
+# Project Examples
+
+A collection of real-world Skir projects and starter repositories.
+
+## Language Starter Projects
+
+Each starter focuses on the same core workflow: setting up Skir, generating code, and running a service.
+
+- **C++**: https://github.com/gepheum/skir-cc-example (cpp-httplib, CMake)
+- **Dart**: https://github.com/gepheum/skir-dart-example (Shelf, pub)
+- **Java**: https://github.com/gepheum/skir-java-example (Spring Boot, Gradle)
+- **Kotlin**: https://github.com/gepheum/skir-kotlin-example (Ktor, Gradle Kotlin DSL)
+- **Python**: https://github.com/gepheum/skir-python-example (Flask/FastAPI/Litestar)
+- **TypeScript**: https://github.com/gepheum/skir-typescript-example (Express, Node + Browser)
+
+## Projects and Demos
+
+Complete applications and specialized projects showing Skir in real usage.
+
+- **Multilingual Skir example** (End-to-end app): https://github.com/gepheum/skir-multilingual-example
+  - Minimal web app with Python backend and TypeScript frontend.
+- **Intergalactic Lost & Found** (End-to-end app): https://github.com/gepheum/skir-lost-and-found-example
+  - Full-stack demo with Kotlin backend and TypeScript frontend.
+- **Fantasy Game schema package** (Schema-only project): https://github.com/gepheum/skir-fantasy-game-example
+  - Standalone schema repository intended to be imported as a dependency.
+- **RPC Studio demo** (Service demo): https://github.com/gepheum/skir-studio-demo
+  - TypeScript geometry service highlighting RPC Studio.

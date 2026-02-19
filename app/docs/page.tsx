@@ -1,4 +1,13 @@
-import { ArrowRight, BookOpen, Globe, Layers, Package, RefreshCw, Zap } from 'lucide-react'
+import {
+  ArrowRight,
+  BookOpen,
+  Globe,
+  Layers,
+  LayoutGrid,
+  Package,
+  RefreshCw,
+  Zap,
+} from 'lucide-react'
 import Link from 'next/link'
 
 export const metadata = {
@@ -12,6 +21,12 @@ const sections = [
     description: 'Set up Skir in your project and learn the basic workflow.',
     href: '/docs/setup',
     icon: BookOpen,
+  },
+  {
+    title: 'Project Examples',
+    description: 'Explore real-world repositories and starter projects across languages.',
+    href: '/docs/examples',
+    icon: LayoutGrid,
   },
   {
     title: 'Language Reference',
