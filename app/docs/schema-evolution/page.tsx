@@ -298,7 +298,7 @@ assert(result.subscriptionStatus.union.kind === "TRIAL");  // Preserved!`}</Code
         </p>
       </Note>
 
-      <NextPageLink title="Skir services" href="/docs/services" />
+      <NextPageLink title="Typesafe RPCs" href="/docs/services" />
     </Prose>
   )
 }
