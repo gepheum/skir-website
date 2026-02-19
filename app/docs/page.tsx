@@ -47,7 +47,7 @@ const sections = [
     icon: RefreshCw,
   },
   {
-    title: 'Skir Services',
+    title: 'Typesafe RPCs',
     description: 'Build typesafe APIs with Skir services.',
     href: '/docs/services',
     icon: Globe,

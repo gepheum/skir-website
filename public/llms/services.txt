@@ -1,6 +1,9 @@
-# Skir Services
+# Typesafe RPCs with Skir services
 
-Skir provides a protocol with server and client runtime libraries for issuing RPCs with end-to-end type safety. Services can be used for microservice communication or frontend-to-backend communication.
+A **Skir service** is a typesafe HTTP API: a server and a client communicate using shared Skir data types.
+Your schema defines each method’s signature (request type and response type), and both the server code and the client code refer to the same schema-defined signatures—so both sides agree on the contract at compile time.
+
+Skir services work equally well for communication between microservices, or between a frontend (browser/mobile app) and a backend. The protocol is lightweight and easy to integrate: you can attach a Skir service handler to almost any HTTP server framework.
 
 ## Core Concepts
 

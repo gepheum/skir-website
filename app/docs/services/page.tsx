@@ -3,18 +3,25 @@ import { NextPageLink } from '@/components/next-page-link'
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
-  title: 'Skir Services',
-  description: 'Build typesafe APIs with Skir services and.',
+  title: 'Typesafe RPCs - Skir',
+  description: 'Build typesafe APIs with Skir services.',
 }
 
 export default function RpcPage() {
   return (
     <Prose>
-      <h1>Skir services</h1>
+      <h1>Typesafe RPCs</h1>
       <p>
-        Skir provides a protocol, along with server and client runtime libraries, allowing you to
-        issue RPCs with end-to-end type safety. Skir services are versatile: they can be used either
-        for communication between microservices or between your frontend and your backend.
+        A <strong>Skir service</strong> is a typesafe HTTP API: a server and a client communicate
+        using shared Skir data types. Your schema defines each method’s signature (request type and
+        response type), and both the server code and the client code refer to those same
+        schema-defined signatures—so you get a compile-time guarantee that both sides agree on the
+        contract.
+      </p>
+      <p>
+        Skir services work equally well for communication between microservices, or between a
+        frontend (browser/mobile app) and a backend. The protocol is lightweight and easy to
+        integrate: you can attach a Skir service handler to almost any HTTP server framework.
       </p>
 
       <h2>Core concepts</h2>

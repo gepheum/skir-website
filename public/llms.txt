@@ -73,7 +73,7 @@ assert(restored == point)
   - Understand Skir's JSON (dense and readable) and binary serialization formats, including encoding rules for each data type and when to use each format.
 - Schema Evolution: https://skir.sh/llms/schema-evolution.txt
   - Learn safe schema changes (adding fields, renaming types), automated compatibility checking with snapshots, and how to maintain backward/forward compatibility.
-- RPC Services: https://skir.sh/llms/services.txt
+- Typesafe RPCs: https://skir.sh/llms/services.txt
   - Build type-safe RPC services by defining methods in schemas, implementing handlers with custom context, and integrating with existing HTTP frameworks.
 - External Dependencies: https://skir.sh/llms/dependencies.txt
   - Import and reuse types from other GitHub repositories by configuring dependencies in skir.yml, with support for transitive dependencies and private repositories.
