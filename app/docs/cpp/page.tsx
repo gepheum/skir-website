@@ -237,6 +237,37 @@ assert(reserialized_john.ok() && *reserialized_john == john);
 reserialized_john = skir::Parse<User>(john_bytes.as_string());
 assert(reserialized_john.ok() && *reserialized_john == john);`}</CodeBlock>
 
+      <H3>Primitive serializers</H3>
+      <CodeBlock language="cpp">{`// Skir type: bool
+assert(skir::ToDenseJson(true) == "1");
+// Skir type: int32
+assert(skir::ToDenseJson(int32_t{3}) == "3");
+// Skir type: int64
+assert(skir::ToDenseJson(int64_t{9223372036854775807}) ==
+       "\\"9223372036854775807\\"");
+// Skir type: hash64
+assert(skir::ToDenseJson(uint64_t{18446744073709551615ULL}) ==
+       "\\"18446744073709551615\\"");
+// Skir type: timestamp
+assert(skir::ToDenseJson(absl::FromUnixMillis(1743682787000)) ==
+       "1743682787000");
+// Skir type: float32
+assert(skir::ToDenseJson(3.14f) == "3.14");
+// Skir type: float64
+assert(skir::ToDenseJson(3.14) == "3.14");
+// Skir type: string
+assert(skir::ToDenseJson(std::string("Foo")) == "\\"Foo\\"");
+// Skir type: bytes
+assert(skir::ToDenseJson(skir::ByteString("\\x01\\x02\\x03")) == "\\"AQID\\"");`}</CodeBlock>
+
+      <H3>Composite serializers</H3>
+      <CodeBlock language="cpp">{`// Skir type: string?
+assert(skir::ToDenseJson(std::optional<std::string>("foo")) == "\\"foo\\"");
+assert(skir::ToDenseJson(std::optional<std::string>()) == "null");
+
+// Skir type: [bool]
+assert(skir::ToDenseJson(std::vector<bool>{true, false}) == "[1,0]");`}</CodeBlock>
+
       <H3>Keyed arrays</H3>
       <P>
         A <InlineCode>keyed_items&lt;T, get_key&gt;</InlineCode> is a container that stores items of

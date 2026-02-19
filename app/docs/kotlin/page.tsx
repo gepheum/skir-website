@@ -313,6 +313,31 @@ assert(reserializedEvilJohn.equals(evilJohn))
 
 assert(serializer.fromBytes(johnBytes).equals(john))`}</CodeBlock>
 
+      <H3>Primitive serializers</H3>
+      <CodeBlock language="kotlin">{`assert(Serializers.bool.toJsonCode(true) == "1")
+assert(Serializers.int32.toJsonCode(3) == "3")
+assert(Serializers.int64.toJsonCode(9223372036854775807) == "9223372036854775807")
+assert(
+    Serializers.hash64.toJsonCode(BigInteger("18446744073709551615")) ==
+        "18446744073709551615"
+)
+assert(
+    Serializers.timestamp.toJsonCode(Instant.ofEpochMilli(1743682787000)) ==
+        "1743682787000"
+)
+assert(Serializers.float32.toJsonCode(3.14f) == "3.14")
+assert(Serializers.float64.toJsonCode(3.14) == "3.14")
+assert(Serializers.string.toJsonCode("Foo") == "\\"Foo\\"")
+assert(
+    Serializers.bytes.toJsonCode(byteArrayOf(1, 2, 3)) == "\\"AQID\\""
+)`}</CodeBlock>
+
+      <H3>Composite serializers</H3>
+      <CodeBlock language="kotlin">{`assert(Serializers.optional(Serializers.string).toJsonCode("foo") == "\\"foo\\"")
+assert(Serializers.optional(Serializers.string).toJsonCode(null) == "null")
+
+assert(Serializers.list(Serializers.bool).toJsonCode(listOf(true, false)) == "[1,0]")`}</CodeBlock>
+
       <H3>Constants</H3>
       <CodeBlock language="kotlin">{`println(TARZAN)
 // User(

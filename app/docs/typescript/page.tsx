@@ -277,6 +277,40 @@ assert(reserializedJane.name === "Jane Doe");
 assert(serializer.fromJson(johnDenseJson).name === "John Doe");
 assert(serializer.fromBytes(johnBytes.toBuffer()).name === "John Doe");`}</CodeBlock>
 
+      <H3>Primitive serializers</H3>
+      <CodeBlock language="typescript">{`assert(primitiveSerializer("bool").toJson(true) === 1);
+assert(primitiveSerializer("int32").toJson(3) === 3);
+assert(
+  primitiveSerializer("int64").toJson(BigInt("9223372036854775807")) ===
+    "9223372036854775807",
+);
+assert(
+  primitiveSerializer("hash64").toJson(BigInt("18446744073709551615")) ===
+    "18446744073709551615",
+);
+assert(
+  primitiveSerializer("timestamp").toJson(
+    Timestamp.fromUnixMillis(1743682787000),
+  ) === 1743682787000,
+);
+assert(primitiveSerializer("float32").toJson(3.14) === 3.14);
+assert(primitiveSerializer("float64").toJson(3.14) === 3.14);
+assert(primitiveSerializer("string").toJson("Foo") === "Foo");
+assert(
+  primitiveSerializer("bytes").toJson(
+    ByteString.sliceOf(new Uint8Array([1, 2, 3]).buffer),
+  ) === "AQID",
+);`}</CodeBlock>
+
+      <H3>Composite serializers</H3>
+      <CodeBlock language="typescript">{`assert(
+  optionalSerializer(primitiveSerializer("string")).toJson("foo") === "foo",
+);
+assert(optionalSerializer(primitiveSerializer("string")).toJson(null) === null);
+
+console.log(arraySerializer(primitiveSerializer("bool")).toJson([true, false]));
+// [1, 0]`}</CodeBlock>
+
       <H3>Frozen arrays and copies</H3>
       <CodeBlock language="typescript">{`const pets = [
   User.Pet.create<"partial">({ name: "Fluffy" }),
