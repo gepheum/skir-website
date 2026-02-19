@@ -9,12 +9,12 @@ const footerLinks = {
     { name: 'Schema Evolution', href: '/docs/schema-evolution' },
   ],
   languages: [
-    { name: 'TypeScript', href: '/docs/languages/typescript' },
-    { name: 'Python', href: '/docs/languages/python' },
-    { name: 'C++', href: '/docs/languages/cpp' },
-    { name: 'Java', href: '/docs/languages/java' },
-    { name: 'Kotlin', href: '/docs/languages/kotlin' },
-    { name: 'Dart', href: '/docs/languages/dart' },
+    { name: 'TypeScript', href: '/docs/languagestypescript' },
+    { name: 'Python', href: '/docs/languagespython' },
+    { name: 'C++', href: '/docs/languagescpp' },
+    { name: 'Java', href: '/docs/languagesjava' },
+    { name: 'Kotlin', href: '/docs/languageskotlin' },
+    { name: 'Dart', href: '/docs/languagesdart' },
   ],
   resources: [
     { name: 'Skir Services', href: '/docs/services' },
