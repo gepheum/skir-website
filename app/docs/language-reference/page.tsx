@@ -206,6 +206,26 @@ struct Notification {
         These two methods of definition are strictly equivalent. The generated code will be
         identical regardless of whether the record was defined explicitly or inline.
       </p>
+      <Note type="info">
+        <p>
+          Inline records must be used directly as a field type. You can’t wrap an inline record in
+          an array type or an optional type (for example <code>[struct &#123; ... &#125;]</code> or{' '}
+          <code>struct &#123; ... &#125;?</code>). If you need an array or optional, define a nested
+          record and reference it by name.
+        </p>
+        <CodeBlock language="skir">{`struct Product {
+  // BAD
+  // tags: [struct {
+  //   tag_name: string;
+  // }];
+
+  // GOOD
+  struct Tag {
+    tag_name: string;
+  }
+  tags: [Tag];
+}`}</CodeBlock>
+      </Note>
 
       <h3>Removed numbers</h3>
       <p>
