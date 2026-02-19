@@ -3,7 +3,7 @@
 import { cn } from '@/lib/utils'
 import { useTheme } from 'next-themes'
 import type { ReactNode } from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 // Use Light build to allow custom language registration
 import { skirLanguage } from '@/lib/skir-language'
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
@@ -38,8 +38,75 @@ interface ProseProps {
 }
 
 export function Prose({ children, className }: ProseProps) {
+  const containerRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container) return
+
+    const headings = container.querySelectorAll<HTMLElement>('h1, h2, h3, h4')
+    if (headings.length === 0) return
+
+    const usedIds = new Set<string>()
+
+    const slugify = (value: string) =>
+      value
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '')
+
+    const ensureUniqueId = (baseId: string) => {
+      let uniqueId = baseId
+      let count = 1
+      while (usedIds.has(uniqueId)) {
+        uniqueId = `${baseId}-${count}`
+        count++
+      }
+      usedIds.add(uniqueId)
+      return uniqueId
+    }
+
+    headings.forEach((heading, index) => {
+      // Skip if we already decorated this heading on a previous render.
+      if (heading.dataset.skirAnchored === 'true') {
+        if (heading.id) usedIds.add(heading.id)
+        return
+      }
+
+      const text = heading.textContent || ''
+      const baseId = heading.id || slugify(text) || `section-${index}`
+      const uniqueId = ensureUniqueId(baseId)
+      heading.id = uniqueId
+
+      heading.classList.add('group')
+
+      const anchor = document.createElement('a')
+      anchor.href = `#${uniqueId}`
+      anchor.className =
+        'heading-anchor ml-2 inline-flex align-middle opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity'
+      anchor.setAttribute('aria-label', 'Link to this section')
+      anchor.setAttribute('data-skir-heading-anchor', 'true')
+
+      // Inline SVG keeps textContent clean (used by OnThisPage).
+      anchor.innerHTML =
+        '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>'
+
+      heading.appendChild(anchor)
+      heading.dataset.skirAnchored = 'true'
+    })
+
+    // If the page loads with a hash, ensure we scroll once IDs exist.
+    if (typeof window !== 'undefined' && window.location.hash.length > 1) {
+      const id = window.location.hash.slice(1)
+      const el = document.getElementById(id)
+      if (el) el.scrollIntoView({ block: 'start' })
+    }
+  }, [children])
+
   return (
     <div
+      ref={containerRef}
       className={cn(
         'max-w-none',
         // Headings
@@ -55,6 +122,8 @@ export function Prose({ children, className }: ProseProps) {
         '[&_li]:leading-7',
         // Links
         '[&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4 [&_a]:hover:text-primary/80',
+        // Heading anchor links (override default link styles)
+        '[&_.heading-anchor]:no-underline [&_.heading-anchor]:text-muted-foreground [&_.heading-anchor]:hover:text-foreground',
         // Strong / Bold
         '[&_strong]:text-foreground [&_strong]:font-semibold',
         className,

@@ -111,16 +111,19 @@ export default function ExamplesPage() {
               <th className="border-b border-border px-4 py-3">Language</th>
               <th className="border-b border-border px-4 py-3">Server framework</th>
               <th className="border-b border-border px-4 py-3">Notes</th>
-              <th className="border-b border-border px-4 py-3">Source</th>
+              <th className="border-b border-border px-4 py-3 w-24 whitespace-nowrap">Source</th>
             </tr>
           </thead>
           <tbody>
             {languageStarters.map((example) => (
-              <tr key={example.href} className="border-b border-border last:border-0">
+              <tr
+                key={example.href}
+                className="border-b border-border last:border-0 transition-colors hover:bg-secondary/30"
+              >
                 <td className="px-4 py-3 font-medium text-foreground">{example.title}</td>
                 <td className="px-4 py-3 text-muted-foreground">{example.framework}</td>
                 <td className="px-4 py-3 text-muted-foreground">{example.notes}</td>
-                <td className="px-4 py-3 font-medium text-primary">
+                <td className="px-4 py-3 font-medium text-primary w-24 whitespace-nowrap">
                   <a
                     href={example.href}
                     target="_blank"
@@ -146,20 +149,17 @@ export default function ExamplesPage() {
               <th className="border-b border-border px-4 py-3">Type</th>
               <th className="border-b border-border px-4 py-3">Backend</th>
               <th className="border-b border-border px-4 py-3">Frontend</th>
+              <th className="border-b border-border px-4 py-3 w-24 whitespace-nowrap">Source</th>
             </tr>
           </thead>
           <tbody>
             {projects.map((example) => (
-              <tr key={example.href} className="border-b border-border last:border-0">
+              <tr
+                key={example.href}
+                className="border-b border-border last:border-0 transition-colors hover:bg-secondary/30"
+              >
                 <td className="px-4 py-3 font-medium text-foreground">
-                  <a
-                    href={example.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:underline"
-                  >
-                    {example.title}
-                  </a>
+                  {example.title}
                   <div className="mt-1 text-xs text-muted-foreground">{example.description}</div>
                 </td>
                 <td className="px-4 py-3 whitespace-nowrap text-muted-foreground">
@@ -167,6 +167,16 @@ export default function ExamplesPage() {
                 </td>
                 <td className="px-4 py-3 text-muted-foreground">{example.backend}</td>
                 <td className="px-4 py-3 text-muted-foreground">{example.frontend}</td>
+                <td className="px-4 py-3 font-medium text-primary w-24 whitespace-nowrap">
+                  <a
+                    href={example.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="hover:underline"
+                  >
+                    GitHub
+                  </a>
+                </td>
               </tr>
             ))}
           </tbody>
