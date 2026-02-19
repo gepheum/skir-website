@@ -316,10 +316,10 @@ assert(serializer.fromBytes(johnBytes).equals(john))`}</CodeBlock>
       <H3>Primitive serializers</H3>
       <CodeBlock language="kotlin">{`assert(Serializers.bool.toJsonCode(true) == "1")
 assert(Serializers.int32.toJsonCode(3) == "3")
-assert(Serializers.int64.toJsonCode(9223372036854775807) == "9223372036854775807")
+assert(Serializers.int64.toJsonCode(9223372036854775807) == "\\\"9223372036854775807\\\"")
 assert(
     Serializers.hash64.toJsonCode(BigInteger("18446744073709551615")) ==
-        "18446744073709551615"
+        "\\\"18446744073709551615\\\""
 )
 assert(
     Serializers.timestamp.toJsonCode(Instant.ofEpochMilli(1743682787000)) ==
