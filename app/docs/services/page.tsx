@@ -428,7 +428,7 @@ async def main():
         you to quickly send requests and view responses.
       </p>
       <div className="not-prose pt-[2px] max-w-full mx-auto mb-8">
-        <HoverVideo src="/skir-studio.mp4" />
+        <HoverVideo src="/rpc-studio.mp4" />
       </div>
       <p>You can try out a demo:</p>
       <CodeBlock language="bash">{`npx skir-studio-demo`}</CodeBlock>
