@@ -56,7 +56,7 @@ export function DocsSidebar() {
 
   return (
     <aside className="hidden md:block w-64 shrink-0">
-      <div className="sticky top-24">
+      <div className="sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto pr-2">
         <nav className="space-y-6">
           {navigation.map((section) => (
             <div key={section.title}>
