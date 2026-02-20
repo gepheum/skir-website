@@ -66,7 +66,7 @@ import skirout.user.Constants;
 // Now you can use: Constants.TARZAN, User, UserRegistry, SubscriptionStatus, etc.`}</CodeBlock>
 
       <H3>Structs</H3>
-      <P>skir generates a deeply immutable Java class for every struct in the .skir file.</P>
+      <P>Skir generates a deeply immutable Java class for every struct in the .skir file.</P>
       <CodeBlock language="java">{`// To construct a User, use the builder pattern.
 
 final User john =
@@ -119,7 +119,7 @@ assert evilJohn.userId() == 42;`}</CodeBlock>
 
       <H3>Enums</H3>
       <P>
-        skir generates a deeply immutable Java class for every enum in the .skir file. This class is
+        Skir generates a deeply immutable Java class for every enum in the .skir file. This class is
         not a Java enum, although the syntax for referring to constants is similar.
       </P>
       <P>

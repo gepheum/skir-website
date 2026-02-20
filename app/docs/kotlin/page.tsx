@@ -67,7 +67,7 @@ import skirout.user.TARZAN
 
       <H3>Structs</H3>
       <P>
-        For every struct S in the .skir file, skir generates a frozen (deeply immutable) class{' '}
+        For every struct S in the .skir file, Skir generates a frozen (deeply immutable) class{' '}
         <InlineCode>S</InlineCode> and a mutable class <InlineCode>S.Mutable</InlineCode>.
       </P>
       <H4>Frozen structs</H4>

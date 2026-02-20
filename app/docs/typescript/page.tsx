@@ -58,7 +58,7 @@ export default function TypeScriptPage() {
 
       <H3>Structs</H3>
       <P>
-        For every struct <InlineCode>S</InlineCode> in the .skir file, skir generates a frozen
+        For every struct <InlineCode>S</InlineCode> in the .skir file, Skir generates a frozen
         (deeply immutable) class <InlineCode>S</InlineCode> and a mutable class{' '}
         <InlineCode>S.Mutable</InlineCode>.
       </P>
