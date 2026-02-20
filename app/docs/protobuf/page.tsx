@@ -1,14 +1,14 @@
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
-  title: 'Coming from Protocol Buffer - Skir',
+  title: 'Skir vs Protobuf - Skir',
   description: 'A guide for Protocol Buffer users migrating to Skir.',
 }
 
 export default function ProtobufPage() {
   return (
     <Prose>
-      <h1>Coming from Protocol Buffer</h1>
+      <h1>Skir vs Protobuf</h1>
       <p>
         If you have used{' '}
         <a href="https://protobuf.dev/" target="_blank" rel="noopener noreferrer">
