@@ -37,7 +37,7 @@ import skirout.user.SubscriptionStatus
 import skirout.user.TARZAN
 ```
 
-### Frozen Struct Classes
+### Structs
 
 For every struct `S`, Skir generates a frozen (deeply immutable) class `S` and a mutable class `S.Mutable`.
 
@@ -60,7 +60,7 @@ assert(john.name == "John Doe")
 // john.name = "John Smith"  -- Does not compile: read-only
 ```
 
-### Partial Construction
+#### Partial construction
 
 ```kotlin
 val jane = User.partial(
@@ -72,7 +72,7 @@ assert(jane.quote == "")  // Default value
 assert(User.partial().pets.isEmpty())
 ```
 
-### Creating Modified Copies
+#### Creating modified copies
 
 ```kotlin
 val evilJohn = john.copy(
@@ -82,7 +82,7 @@ val evilJohn = john.copy(
 assert(evilJohn.userId == 42)
 ```
 
-### Mutable Struct Classes
+#### Mutable structs
 
 ```kotlin
 val lyla = User.Mutable()
@@ -100,7 +100,7 @@ userHistory.mutableUser.name = "John the Second"  // makes shallow copy
 lyla.mutablePets.add(User.Pet(name = "Simba", heightInMeters = 0.4f, picture = "🦁"))
 ```
 
-### Converting Between Frozen and Mutable
+#### Converting between frozen and mutable
 
 ```kotlin
 val evilJaneBuilder = jane.toMutable()  // Shallow copy (cheap)
@@ -111,14 +111,14 @@ evilJaneBuilder.mutablePets.add(
 val evilJane = evilJaneBuilder.toFrozen()  // Recursively copies mutable values
 ```
 
-### Type Aliases
+#### Type aliases
 
 ```kotlin
 // 'User_OrMutable' is a type alias for the sealed class.
 val greet: (User_OrMutable) -> Unit = { println("Hello, $it") }
 ```
 
-### Enum Classes
+### Enums
 
 Skir generates a deeply immutable Kotlin class (not a Kotlin enum).
 
@@ -136,7 +136,7 @@ val someStatuses = listOf(
 )
 ```
 
-### Conditions on Enums
+#### Conditions on enums
 
 ```kotlin
 assert(john.subscriptionStatus == SubscriptionStatus.FREE)
@@ -146,7 +146,7 @@ val trialStatus = SubscriptionStatus.TrialWrapper(Trial(startTime = now))
 assert(trialStatus is SubscriptionStatus.TrialWrapper && trialStatus.value.startTime == now)
 ```
 
-### Branching on Enum Variants
+#### Branching on enum variants
 
 ```kotlin
 val getInfoText: (SubscriptionStatus) -> String = {
@@ -176,7 +176,7 @@ println(serializer.toJsonCode(john, JsonFlavor.READABLE))
 val johnBytes = serializer.toBytes(john)
 ```
 
-### Deserialization
+#### Deserialization
 
 ```kotlin
 val reserializedJohn: User = serializer.fromJsonCode(johnDenseJson)
@@ -184,7 +184,7 @@ val reserializedJohn: User = serializer.fromJsonCode(johnDenseJson)
 assert(serializer.fromBytes(johnBytes).equals(john))
 ```
 
-### Primitive Serializers
+#### Primitive serializers
 
 ```kotlin
 assert(Serializers.bool.toJsonCode(true) == "1")
@@ -206,7 +206,7 @@ assert(
 )
 ```
 
-### Composite Serializers
+#### Composite serializers
 
 ```kotlin
 assert(Serializers.optional(Serializers.string).toJsonCode("foo") == "\"foo\"")
@@ -222,7 +222,7 @@ println(TARZAN)
 // User(userId = 123, name = "Tarzan", ...)
 ```
 
-### Keyed Lists
+### Keyed lists
 
 ```kotlin
 val userRegistry = UserRegistry(users = listOf(john, jane, evilJohn))
@@ -233,7 +233,7 @@ assert(userRegistry.users.findByKey(100) == null)
 // First lookup O(N), subsequent O(1).
 ```
 
-### Frozen Lists and Copies
+### Frozen lists and copies
 
 ```kotlin
 val pets: MutableList<Pet> = mutableListOf(
@@ -249,7 +249,7 @@ val jack = User.partial(name = "Jack", pets = jade.pets)
 assert(jack.pets === jade.pets)
 ```
 
-### Skir Services
+### Skir services
 
 - **Server**: [Ktor](https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/startservice/StartService.kt)
 - **Client**: [Example](https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/callservice/CallService.kt)

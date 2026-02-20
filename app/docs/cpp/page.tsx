@@ -1,4 +1,4 @@
-import { CodeBlock, H1, H2, H3, InlineCode, P, Prose } from '@/components/prose'
+import { CodeBlock, H1, H2, H3, H4, InlineCode, P, Prose } from '@/components/prose'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -93,7 +93,7 @@ using ::skirout_user::SubscriptionStatus;
 using ::skirout_user::User;
 using ::skirout_user::UserRegistry;`}</CodeBlock>
 
-      <H3>Constructing structs</H3>
+      <H3>Structs</H3>
       <CodeBlock language="cpp">{`// You can construct a struct like this:
 User john;
 john.user_id = 42;
@@ -150,7 +150,7 @@ SubscriptionStatus roni_status = SubscriptionStatus::wrap_trial({
     .start_time = absl::FromUnixMillis(1743682787000),
 });`}</CodeBlock>
 
-      <H3>Conditions on enums</H3>
+      <H4>Conditions on enums</H4>
       <CodeBlock language="cpp">{`if (john_status == skirout::kFree) {
   std::cout << "John, would you like to upgrade to premium?\\n";
 }
@@ -226,7 +226,7 @@ std::cout << skir::ToReadableJson(john) << "\\n";
 // should be rare.
 skir::ByteString john_bytes = skir::ToBytes(john);`}</CodeBlock>
 
-      <H3>Deserialization</H3>
+      <H4>Deserialization</H4>
       <P>
         Use <InlineCode>Parse</InlineCode> to deserialize a skir value from JSON or binary format.
       </P>
@@ -237,7 +237,7 @@ assert(reserialized_john.ok() && *reserialized_john == john);
 reserialized_john = skir::Parse<User>(john_bytes.as_string());
 assert(reserialized_john.ok() && *reserialized_john == john);`}</CodeBlock>
 
-      <H3>Primitive serializers</H3>
+      <H4>Primitive serializers</H4>
       <CodeBlock language="cpp">{`// Skir type: bool
 assert(skir::ToDenseJson(true) == "1");
 // Skir type: int32
@@ -260,7 +260,7 @@ assert(skir::ToDenseJson(std::string("Foo")) == "\\"Foo\\"");
 // Skir type: bytes
 assert(skir::ToDenseJson(skir::ByteString("\\x01\\x02\\x03")) == "\\"AQID\\"");`}</CodeBlock>
 
-      <H3>Composite serializers</H3>
+      <H4>Composite serializers</H4>
       <CodeBlock language="cpp">{`// Skir type: string?
 assert(skir::ToDenseJson(std::optional<std::string>("foo")) == "\\"foo\\"");
 assert(skir::ToDenseJson(std::optional<std::string>()) == "null");
@@ -296,7 +296,7 @@ evil_lyla.name = "Evil Lyla";
 users.push_back(evil_lyla);
 assert(users.find_or_default(44).name == "Evil Lyla");`}</CodeBlock>
 
-      <H3>Equality and hashing</H3>
+      <H4>Equality and hashing</H4>
       <P>Skir structs and enums are equality comparable and hashable.</P>
       <CodeBlock language="cpp">{`absl::flat_hash_set<User> user_set;
 user_set.insert(john);
@@ -398,7 +398,7 @@ std::cout << tarzan_copy << "\\n";
         .
       </P>
 
-      <H3>Struct matchers</H3>
+      <H4>Struct matchers</H4>
       <CodeBlock language="cpp">{`const User john = {
     .name = "John Doe",
     .pets =
@@ -418,7 +418,7 @@ EXPECT_THAT(john, (StructIs<User>{
                       .user_id = 42,
                   }));`}</CodeBlock>
 
-      <H3>Enum matchers</H3>
+      <H4>Enum matchers</H4>
       <CodeBlock language="cpp">{`SubscriptionStatus john_status = skirout::kFree;
 
 EXPECT_THAT(john_status, testing::Eq(skirout::kFree));

@@ -62,11 +62,11 @@ Later evolution becomes trivial:
 method AnalyzeWord(
 	struct {
 		word: string;
-		case_sensitive: bool;
+		case_sensitive: bool;  // New field
 	}
 ): struct {
 	is_palindrome: bool;
-	is_semordnilap: bool;
+	is_semordnilap: bool;  // New field
 } = 2000;
 ```
 

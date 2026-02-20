@@ -31,11 +31,11 @@ import 'package:skir_dart_example/skirout/user.dart';
 // Now you can use: tarzan, User, UserHistory, UserRegistry, etc.
 ```
 
-### Struct Classes
+### Structs
 
 For every struct `S`, Skir generates a frozen (deeply immutable) class `S` and a mutable class `S_mutable`.
 
-### Frozen Struct Classes
+#### Frozen structs
 
 ```dart
 final john = User(
@@ -64,7 +64,7 @@ assert(jane.quote == "");  // Default value
 assert(User.defaultInstance.name == "");
 ```
 
-### Mutable Struct Classes
+#### Mutable structs
 
 ```dart
 final User_mutable mutableLyla = User.mutable()..userId = 44;
@@ -82,7 +82,7 @@ mutableLyla.mutablePets.add(User_Pet(name: "Simba", heightInMeters: 0.4, picture
 mutableLyla.mutablePets.add(User_Pet.mutable()..name = "Cupcake");
 ```
 
-### Converting Between Frozen and Mutable
+#### Converting between frozen and mutable
 
 ```dart
 final evilJane = (jane.toMutable()
@@ -94,7 +94,7 @@ assert(evilJane.name == "Evil Jane");
 assert(evilJane.userId == 43);
 ```
 
-### Writing Logic Agnostic of Mutability
+#### Writing logic agnostic of mutability
 
 ```dart
 // 'User_orMutable' is a type alias for the sealed class.
@@ -103,7 +103,7 @@ void greet(User_orMutable user) {
 }
 ```
 
-### Enum Classes
+### Enums
 
 ```skir
 enum SubscriptionStatus {
@@ -113,7 +113,7 @@ enum SubscriptionStatus {
 }
 ```
 
-### Making Enum Values
+#### Creating enum values
 
 ```dart
 final johnStatus = SubscriptionStatus.free;
@@ -132,7 +132,7 @@ final ericStatus = SubscriptionStatus.createTrial(
 );
 ```
 
-### Conditions on Enums
+#### Conditions on enums
 
 ```dart
 assert(johnStatus == SubscriptionStatus.free);
@@ -169,7 +169,7 @@ print(serializer.toJsonCode(john, readableFlavor: true));
 final Uint8List johnBytes = serializer.toBytes(john);
 ```
 
-### Deserialization
+#### Deserialization
 
 ```dart
 final reserializedJohn = serializer.fromJsonCode(johnDenseJson);
@@ -181,7 +181,7 @@ final reserializedJane = serializer.fromJsonCode(
 assert(serializer.fromBytes(johnBytes) == john);
 ```
 
-### Primitive Serializers
+#### Primitive serializers
 
 ```dart
 assert(skir.Serializers.bool.toJson(true) == 1);
@@ -200,7 +200,7 @@ assert(
     skir.Serializers.bytes.toJson(skir.ByteString.copy([1, 2, 3])) == "AQID");
 ```
 
-### Composite Serializers
+#### Composite serializers
 
 ```dart
 assert(skir.Serializers.optional(skir.Serializers.string).toJson("foo") ==
@@ -212,7 +212,7 @@ print(skir.Serializers.iterable(skir.Serializers.bool).toJson([true, false]));
 // [1, 0]
 ```
 
-### Frozen Lists and Copies
+### Frozen lists and copies
 
 ```dart
 final pets = [
@@ -235,7 +235,7 @@ final jack = User(
 assert(identical(jack.pets, jade.pets));
 ```
 
-### Keyed Lists
+### Keyed lists
 
 ```dart
 final userRegistry = UserRegistry(
@@ -255,7 +255,7 @@ print(tarzan);
 // User(userId: 123, name: "Tarzan", ...)
 ```
 
-### Skir Services
+### Skir services
 
 - **Server**: [Shelf](https://github.com/gepheum/skir-dart-example/blob/main/bin/start_service.dart)
 - **Client**: [Example](https://github.com/gepheum/skir-dart-example/blob/main/bin/call_service.dart)

@@ -1,4 +1,4 @@
-import { CodeBlock, H1, H2, H3, InlineCode, P, Prose } from '@/components/prose'
+import { CodeBlock, H1, H2, H3, H4, InlineCode, P, Prose } from '@/components/prose'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -57,14 +57,14 @@ import 'package:skir_dart_example/skirout/user.dart';
 
 // Now you can use: tarzan, User, UserHistory, UserRegistry, etc.`}</CodeBlock>
 
-      <H3>Struct classes</H3>
+      <H3>Structs</H3>
       <P>
         For every struct <InlineCode>S</InlineCode> in the .skir file, skir generates a frozen
         (deeply immutable) class <InlineCode>S</InlineCode> and a mutable class{' '}
         <InlineCode>S_mutable</InlineCode>.
       </P>
 
-      <H3>Frozen struct classes</H3>
+      <H4>Frozen structs</H4>
       <CodeBlock language="dart">{`// To construct a frozen User, call the User constructor.
 
 final john = User(
@@ -112,7 +112,7 @@ assert(jane.quote == "");
 assert(User.defaultInstance.name == "");
 assert(User.defaultInstance.pets.isEmpty);`}</CodeBlock>
 
-      <H3>Mutable struct classes</H3>
+      <H4>Mutable structs</H4>
       <CodeBlock language="dart">{`// 'User_mutable' is a dataclass similar to User except it is mutable.
 // Use User.mutable() to create a new instance.
 final User_mutable mutableLyla = User.mutable()..userId = 44;
@@ -147,7 +147,7 @@ mutableLyla.mutablePets.add(User_Pet(
 ));
 mutableLyla.mutablePets.add(User_Pet.mutable()..name = "Cupcake");`}</CodeBlock>
 
-      <H3>Converting between frozen and mutable</H3>
+      <H4>Converting between frozen and mutable</H4>
       <CodeBlock language="dart">{`// toMutable() does a shallow copy of the frozen struct, so it's cheap. All the
 // properties of the copy hold a frozen value.
 final evilJane = (jane.toMutable()
@@ -158,7 +158,7 @@ final evilJane = (jane.toMutable()
 assert(evilJane.name == "Evil Jane");
 assert(evilJane.userId == 43);`}</CodeBlock>
 
-      <H3>Writing logic agnostic of mutability</H3>
+      <H4>Writing logic agnostic of mutability</H4>
       <CodeBlock language="dart">{`// 'User_orMutable' is a type alias for the sealed class that both 'User' and
 // 'User_mutable' implement.
 void greet(User_orMutable user) {
@@ -170,7 +170,7 @@ greet(jane);
 greet(mutableLyla);
 // Hello, Lyla Doe`}</CodeBlock>
 
-      <H3>Enum classes</H3>
+      <H3>Enums</H3>
       <P>
         The definition of the <InlineCode>SubscriptionStatus</InlineCode> enum in the .skir file is:
       </P>
@@ -180,7 +180,7 @@ greet(mutableLyla);
   PREMIUM;
 }`}</CodeBlock>
 
-      <H3>Making enum values</H3>
+      <H4>Making enum values</H4>
       <CodeBlock language="dart">{`final johnStatus = SubscriptionStatus.free;
 final janeStatus = SubscriptionStatus.premium;
 
@@ -200,7 +200,7 @@ final ericStatus = SubscriptionStatus.createTrial(
   startTime: DateTime.fromMillisecondsSinceEpoch(5678, isUtc: true),
 );`}</CodeBlock>
 
-      <H3>Conditions on enums</H3>
+      <H4>Conditions on enums</H4>
       <CodeBlock language="dart">{`assert(johnStatus == SubscriptionStatus.free);
 assert(janeStatus == SubscriptionStatus.premium);
 assert(jolyStatus == SubscriptionStatus.unknown);
@@ -265,7 +265,7 @@ final Uint8List johnBytes = serializer.toBytes(john);
 // languages like C++. Only use it when this small performance gain is likely
 // to matter, which should be rare.`}</CodeBlock>
 
-      <H3>Deserialization</H3>
+      <H4>Deserialization</H4>
       <CodeBlock language="dart">{`// Use fromJson(), fromJsonCode() and fromBytes() to deserialize.
 
 final reserializedJohn = serializer.fromJsonCode(johnDenseJson);
@@ -278,7 +278,7 @@ assert(reserializedJane.name == "Jane Doe");
 
 assert(serializer.fromBytes(johnBytes) == john);`}</CodeBlock>
 
-      <H3>Primitive serializers</H3>
+      <H4>Primitive serializers</H4>
       <CodeBlock language="dart">{`assert(skir.Serializers.bool.toJson(true) == 1);
 assert(skir.Serializers.int32.toJson(3) == 3);
 assert(skir.Serializers.int64.toJson(9223372036854775807) ==
@@ -294,7 +294,7 @@ assert(skir.Serializers.string.toJson("Foo") == "Foo");
 assert(
     skir.Serializers.bytes.toJson(skir.ByteString.copy([1, 2, 3])) == "AQID");`}</CodeBlock>
 
-      <H3>Composite serializers</H3>
+      <H4>Composite serializers</H4>
       <CodeBlock language="dart">{`assert(skir.Serializers.optional(skir.Serializers.string).toJson("foo") ==
     "foo");
 assert(

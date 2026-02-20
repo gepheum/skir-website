@@ -1,4 +1,4 @@
-import { CodeBlock, H1, H2, H3, InlineCode, P, Prose } from '@/components/prose'
+import { CodeBlock, H1, H2, H3, H4, InlineCode, P, Prose } from '@/components/prose'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -56,14 +56,14 @@ export default function TypeScriptPage() {
       <H3>Referring to generated symbols</H3>
       <CodeBlock language="typescript">{`import { TARZAN, SubscriptionStatus, User, UserHistory, UserRegistry } from "../skirout/user";`}</CodeBlock>
 
-      <H3>Struct classes</H3>
+      <H3>Structs</H3>
       <P>
         For every struct <InlineCode>S</InlineCode> in the .skir file, skir generates a frozen
         (deeply immutable) class <InlineCode>S</InlineCode> and a mutable class{' '}
         <InlineCode>S.Mutable</InlineCode>.
       </P>
 
-      <H3>Frozen struct classes</H3>
+      <H4>Frozen structs</H4>
       <CodeBlock language="typescript">{`// Construct a frozen User with User.create({...})
 const john = User.create({
   userId: 42,
@@ -112,7 +112,7 @@ const defaultUser = User.DEFAULT;
 assert(defaultUser.name === "");
 // User.DEFAULT is same as User.create<"partial">({});`}</CodeBlock>
 
-      <H3>Mutable struct classes</H3>
+      <H4>Mutable structs</H4>
       <CodeBlock language="typescript">{`// User.Mutable is a mutable version of User.
 const lylaMut = new User.Mutable();
 lylaMut.userId = 44;
@@ -141,7 +141,7 @@ jolyHistoryMut.mutableUser.quote = "I am Joly.";
 lylaMut.mutablePets.push(User.Pet.create<"partial">({ name: "Cupcake" }));
 lylaMut.mutablePets.push(new User.Pet.Mutable({ name: "Simba" }));`}</CodeBlock>
 
-      <H3>Converting between frozen and mutable</H3>
+      <H4>Converting between frozen and mutable</H4>
       <CodeBlock language="typescript">{`// toMutable() does a shallow copy of the frozen struct, so it's cheap. All the
 // properties of the copy hold a frozen value.
 const evilJaneMut = jane.toMutable();
@@ -151,7 +151,7 @@ evilJaneMut.name = "Evil Jane";
 // object. It's cheap if all the values are frozen, like in this example.
 const evilJane: User = evilJaneMut.toFrozen();`}</CodeBlock>
 
-      <H3>Writing logic agnostic of mutability</H3>
+      <H4>Writing logic agnostic of mutability</H4>
       <CodeBlock language="typescript">{`// 'User.OrMutable' is a type alias for 'User | User.Mutable'.
 function greet(user: User.OrMutable) {
   console.log(\`Hello, \${user.name}\`);
@@ -162,7 +162,7 @@ greet(jane);
 greet(lylaMut);
 // Hello, Lyla Doe`}</CodeBlock>
 
-      <H3>Enum classes</H3>
+      <H3>Enums</H3>
       <P>
         The definition of the <InlineCode>SubscriptionStatus</InlineCode> enum in the .skir file is:
       </P>
@@ -172,7 +172,7 @@ greet(lylaMut);
   PREMIUM;
 }`}</CodeBlock>
 
-      <H3>Making enum values</H3>
+      <H4>Creating enum values</H4>
       <CodeBlock language="typescript">{`const johnStatus = SubscriptionStatus.FREE;
 const janeStatus = SubscriptionStatus.PREMIUM;
 const lylaStatus = SubscriptionStatus.create("PREMIUM");
@@ -187,7 +187,7 @@ const roniStatus = SubscriptionStatus.create({
   },
 });`}</CodeBlock>
 
-      <H3>Conditions on enums</H3>
+      <H4>Conditions on enums</H4>
       <CodeBlock language="typescript">{`// Use 'union.kind' to check which variant the enum value holds.
 assert(johnStatus.union.kind === "FREE");
 
@@ -263,7 +263,7 @@ const johnBytes = serializer.toBytes(john);
 // C++. Only use it when this small performance gain is likely to matter, which
 // should be rare.`}</CodeBlock>
 
-      <H3>Deserialization</H3>
+      <H4>Deserialization</H4>
       <CodeBlock language="typescript">{`// Use fromJson(), fromJsonCode() and fromBytes() to deserialize.
 
 const reserializedJohn = serializer.fromJsonCode(johnDenseJsonCode);
@@ -277,7 +277,7 @@ assert(reserializedJane.name === "Jane Doe");
 assert(serializer.fromJson(johnDenseJson).name === "John Doe");
 assert(serializer.fromBytes(johnBytes.toBuffer()).name === "John Doe");`}</CodeBlock>
 
-      <H3>Primitive serializers</H3>
+      <H4>Primitive serializers</H4>
       <CodeBlock language="typescript">{`assert(primitiveSerializer("bool").toJson(true) === 1);
 assert(primitiveSerializer("int32").toJson(3) === 3);
 assert(
@@ -302,7 +302,7 @@ assert(
   ) === "AQID",
 );`}</CodeBlock>
 
-      <H3>Composite serializers</H3>
+      <H4>Composite serializers</H4>
       <CodeBlock language="typescript">{`assert(
   optionalSerializer(primitiveSerializer("string")).toJson("foo") === "foo",
 );

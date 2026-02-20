@@ -24,17 +24,17 @@ Example project: [skir-python-example](https://github.com/gepheum/skir-python-ex
 
 Examples for code generated from [this .skir file](https://github.com/gepheum/skir-python-example/blob/main/skir_src/user.skir).
 
-### Referring to Generated Symbols
+### Importing Generated Symbols
 
 ```python
 from skirout.user_skir import TARZAN, SubscriptionStatus, User, UserHistory, UserRegistry
 ```
 
-### Struct Classes
+### Structs
 
 For every struct `S`, Skir generates a frozen (deeply immutable) class `S` and a mutable class `S.Mutable`.
 
-### Frozen Struct Classes
+#### Frozen Structs
 
 ```python
 john = User(
@@ -66,7 +66,7 @@ assert jane.quote == ""  # Missing fields get default values
 assert User.DEFAULT == User.partial()
 ```
 
-### Mutable Struct Classes
+#### Mutable Structs
 
 ```python
 lyla_mut = User.Mutable()
@@ -86,7 +86,7 @@ joly_history_mut.mutable_user.quote = "I am Joly."
 lyla_mut.mutable_pets.append(User.Pet.partial(name="Cupcake"))
 ```
 
-### Converting Between Frozen and Mutable
+#### Converting Between Frozen and Mutable
 
 ```python
 evil_jane_mut = jane.to_mutable()  # Shallow copy (cheap)
@@ -97,7 +97,7 @@ evil_jane: User = evil_jane_mut.to_frozen()  # Recursively copies mutable values
 evil_jane = evil_jane.replace(name="Evil Jane")
 ```
 
-### Writing Logic Agnostic of Mutability
+#### Writing Logic Agnostic of Mutability
 
 ```python
 # 'User.OrMutable' is a type alias for 'User | User.Mutable'.
@@ -105,7 +105,7 @@ def greet(user: User.OrMutable):
     print(f"Hello, {user.name}")
 ```
 
-### Enum Classes
+### Enums
 
 ```skir
 enum SubscriptionStatus {
@@ -115,7 +115,7 @@ enum SubscriptionStatus {
 }
 ```
 
-### Making Enum Values
+#### Creating Enum Values
 
 ```python
 john_status = SubscriptionStatus.FREE
@@ -135,7 +135,7 @@ assert roni_status == SubscriptionStatus.create_trial(
 )
 ```
 
-### Conditions on Enums
+#### Pattern Matching
 
 ```python
 assert john_status.union.kind == "FREE"
@@ -178,7 +178,7 @@ print(serializer.to_json_code(john, readable=True))
 # }
 ```
 
-### Deserialization
+#### Deserialization
 
 ```python
 assert john == serializer.from_json(john_dense_json)
@@ -189,7 +189,7 @@ assert john == serializer.from_json_code(
 )
 ```
 
-### Primitive Serializers
+#### Primitive Serializers
 
 ```python
 assert skir.primitive_serializer("bool").to_json(True) == 1
@@ -214,7 +214,7 @@ assert skir.primitive_serializer("string").to_json("Foo") == "Foo"
 assert skir.primitive_serializer("bytes").to_json(bytes([1, 2, 3])) == "AQID"
 ```
 
-### Composite Serializers
+#### Composite Serializers
 
 ```python
 assert (

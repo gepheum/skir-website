@@ -30,11 +30,11 @@ Examples below are for code generated from [this .skir file](https://github.com/
 import { TARZAN, SubscriptionStatus, User, UserHistory, UserRegistry } from "../skirout/user";
 ```
 
-### Struct Classes
+### Structs
 
 For every struct `S`, Skir generates a frozen (deeply immutable) class `S` and a mutable class `S.Mutable`.
 
-### Frozen Struct Classes
+#### Frozen structs
 
 ```typescript
 // Construct a frozen User with User.create({...})
@@ -74,7 +74,7 @@ assert(defaultUser.name === "");
 // User.DEFAULT is same as User.create<"partial">({});
 ```
 
-### Mutable Struct Classes
+#### Mutable structs
 
 ```typescript
 const lylaMut = new User.Mutable();
@@ -97,7 +97,7 @@ lylaMut.mutablePets.push(User.Pet.create<"partial">({ name: "Cupcake" }));
 lylaMut.mutablePets.push(new User.Pet.Mutable({ name: "Simba" }));
 ```
 
-### Converting Between Frozen and Mutable
+#### Converting Between Frozen and Mutable
 
 ```typescript
 // toMutable() does a shallow copy (cheap).
@@ -108,7 +108,7 @@ evilJaneMut.name = "Evil Jane";
 const evilJane: User = evilJaneMut.toFrozen();
 ```
 
-### Writing Logic Agnostic of Mutability
+#### Writing Logic Agnostic of Mutability
 
 ```typescript
 // 'User.OrMutable' is a type alias for 'User | User.Mutable'.
@@ -117,7 +117,7 @@ function greet(user: User.OrMutable) {
 }
 ```
 
-### Enum Classes
+### Enums
 
 ```skir
 enum SubscriptionStatus {
@@ -127,7 +127,7 @@ enum SubscriptionStatus {
 }
 ```
 
-### Making Enum Values
+#### Creating enum values
 
 ```typescript
 const johnStatus = SubscriptionStatus.FREE;
@@ -144,7 +144,7 @@ const roniStatus = SubscriptionStatus.create({
 });
 ```
 
-### Conditions on Enums
+#### Conditions on Enums
 
 ```typescript
 // Use 'union.kind' to check the variant.
@@ -187,7 +187,7 @@ console.log(serializer.toJsonCode(john, "readable"));
 const johnBytes = serializer.toBytes(john);
 ```
 
-### Deserialization
+#### Deserialization
 
 ```typescript
 const reserializedJohn = serializer.fromJsonCode(johnDenseJsonCode);
@@ -197,7 +197,7 @@ assert(serializer.fromJson(johnDenseJson).name === "John Doe");
 assert(serializer.fromBytes(johnBytes.toBuffer()).name === "John Doe");
 ```
 
-### Primitive Serializers
+#### Primitive Serializers
 
 ```typescript
 assert(primitiveSerializer("bool").toJson(true) === 1);
@@ -225,7 +225,7 @@ assert(
 );
 ```
 
-### Composite Serializers
+#### Composite Serializers
 
 ```typescript
 assert(
@@ -237,7 +237,7 @@ console.log(arraySerializer(primitiveSerializer("bool")).toJson([true, false]));
 // [1, 0]
 ```
 
-### Frozen Arrays and Copies
+### Frozen arrays and copies
 
 ```typescript
 const pets = [
@@ -258,7 +258,7 @@ const jack = User.create<"partial">({
 assert(jack.pets === jade.pets);
 ```
 
-### Keyed Arrays
+## Keyed arrays
 
 ```typescript
 const userRegistry = UserRegistry.create({
@@ -272,19 +272,19 @@ assert(userRegistry.searchUsers(100) === undefined);
 assert(userRegistry.searchUsers(43) === evilJane);
 ```
 
-### Constants
+## Constants
 
 ```typescript
 console.log(TARZAN);
 // User { userId: 123, name: 'Tarzan', ... }
 ```
 
-### Skir Services
+## Skir services
 
 - **Server**: [Express example](https://github.com/gepheum/skir-typescript-example/blob/main/src/server.ts)
 - **Client**: [Client example](https://github.com/gepheum/skir-typescript-example/blob/main/src/client.ts)
 
-### Reflection
+## Reflection
 
 ```typescript
 const fieldNames: string[] = [];

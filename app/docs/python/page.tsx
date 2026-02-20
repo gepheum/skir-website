@@ -1,4 +1,4 @@
-import { CodeBlock, H1, H2, H3, InlineCode, P, Prose } from '@/components/prose'
+import { CodeBlock, H1, H2, H3, H4, InlineCode, P, Prose } from '@/components/prose'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -52,18 +52,18 @@ export default function PythonPage() {
         .skir file.
       </P>
 
-      <H3>Referring to generated symbols</H3>
+      <P>First, import the symbols from the generated module:</P>
       <CodeBlock language="python">{`# Import the given symbols from the Python module generated from "user.skir"
 from skirout.user_skir import TARZAN, SubscriptionStatus, User, UserHistory, UserRegistry`}</CodeBlock>
 
-      <H3>Struct classes</H3>
+      <H3>Structs</H3>
       <P>
         For every struct <InlineCode>S</InlineCode> in the .skir file, skir generates a frozen
         (deeply immutable) class <InlineCode>S</InlineCode> and a mutable class{' '}
         <InlineCode>S.Mutable</InlineCode>.
       </P>
 
-      <H3>Frozen struct classes</H3>
+      <H4>Frozen structs</H4>
       <CodeBlock language="python">{`# To construct a frozen User, either call the User constructor or the
 # User.partial() static factory method.
 
@@ -105,7 +105,7 @@ assert jane.quote == ""
 # with no arguments.
 assert User.DEFAULT == User.partial()`}</CodeBlock>
 
-      <H3>Mutable struct classes</H3>
+      <H4>Mutable structs</H4>
       <CodeBlock language="python">{`# User.Mutable is a mutable version of User.
 lyla_mut = User.Mutable()
 lyla_mut.user_id = 44
@@ -133,7 +133,7 @@ joly_history_mut.mutable_user.quote = "I am Joly."
 lyla_mut.mutable_pets.append(User.Pet.partial(name="Cupcake"))
 lyla_mut.mutable_pets.append(User.Pet.Mutable(name="Simba"))`}</CodeBlock>
 
-      <H3>Converting between frozen and mutable</H3>
+      <H4>Converting between frozen and mutable</H4>
       <CodeBlock language="python">{`# to_mutable() does a shallow copy of the frozen struct, so it's cheap. All the
 # properties of the copy hold a frozen value.
 evil_jane_mut = jane.to_mutable()
@@ -152,7 +152,7 @@ evil_jane = evil_jane.replace(name="Evil Jane")
 
 assert evil_jane.user_id == 43`}</CodeBlock>
 
-      <H3>Writing logic agnostic of mutability</H3>
+      <H4>Writing logic agnostic of mutability</H4>
       <CodeBlock language="python">{`# 'User.OrMutable' is a type alias for 'User | User.Mutable'.
 def greet(user: User.OrMutable):
     print(f"Hello, {user.name}")
@@ -163,7 +163,7 @@ greet(jane)
 greet(lyla_mut)
 # Hello, Lyla Doe`}</CodeBlock>
 
-      <H3>Enum classes</H3>
+      <H3>Enums</H3>
       <P>
         The definition of the <InlineCode>SubscriptionStatus</InlineCode> enum in the .skir file is:
       </P>
@@ -173,7 +173,7 @@ greet(lyla_mut)
   PREMIUM;
 }`}</CodeBlock>
 
-      <H3>Making enum values</H3>
+      <H4>Creating enum values</H4>
       <CodeBlock language="python">{`john_status = SubscriptionStatus.FREE
 jane_status = SubscriptionStatus.PREMIUM
 
@@ -192,7 +192,7 @@ assert roni_status == SubscriptionStatus.create_trial(
     start_time=skir.Timestamp.from_unix_millis(1744974198000)
 )`}</CodeBlock>
 
-      <H3>Conditions on enums</H3>
+      <H4>Pattern matching</H4>
       <CodeBlock language="python">{`# Use 'union.kind' to check which variant the enum value holds.
 assert john_status.union.kind == "FREE"
 
@@ -267,7 +267,7 @@ print(serializer.to_json_code(john, readable=True))
 # not prevent you from deserializing the value.
 # You should pick the readable flavor mostly for debugging purposes.`}</CodeBlock>
 
-      <H3>Deserialization</H3>
+      <H4>Deserialization</H4>
       <CodeBlock language="python">{`# Use from_json() and from_json_code() to deserialize.
 
 assert john == serializer.from_json(john_dense_json)
@@ -279,7 +279,7 @@ assert john == serializer.from_json_code(  #
     serializer.to_json_code(john, readable=True)
 )`}</CodeBlock>
 
-      <H3>Primitive serializers</H3>
+      <H4>Primitive serializers</H4>
       <CodeBlock language="python">{`assert skir.primitive_serializer("bool").to_json(True) == 1
 assert skir.primitive_serializer("int32").to_json(3) == 3
 assert (
@@ -301,7 +301,7 @@ assert skir.primitive_serializer("float64").to_json(3.14) == 3.14
 assert skir.primitive_serializer("string").to_json("Foo") == "Foo"
 assert skir.primitive_serializer("bytes").to_json(bytes([1, 2, 3])) == "AQID"`}</CodeBlock>
 
-      <H3>Composite serializers</H3>
+      <H4>Composite serializers</H4>
       <CodeBlock language="python">{`assert (
     skir.optional_serializer(skir.primitive_serializer("string")).to_json("foo")
     == "foo"

@@ -1,4 +1,4 @@
-import { CodeBlock, H1, H2, H3, InlineCode, P, Prose } from '@/components/prose'
+import { CodeBlock, H1, H2, H3, H4, InlineCode, P, Prose } from '@/components/prose'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -65,7 +65,7 @@ import skirout.user.Constants;
 
 // Now you can use: Constants.TARZAN, User, UserRegistry, SubscriptionStatus, etc.`}</CodeBlock>
 
-      <H3>Struct classes</H3>
+      <H3>Structs</H3>
       <P>skir generates a deeply immutable Java class for every struct in the .skir file.</P>
       <CodeBlock language="java">{`// To construct a User, use the builder pattern.
 
@@ -104,7 +104,7 @@ assert jane.pets().equals(List.of());
 assert User.DEFAULT.name().equals("");
 assert User.DEFAULT.userId() == 0;`}</CodeBlock>
 
-      <H3>Creating modified copies</H3>
+      <H4>Creating modified copies</H4>
       <CodeBlock language="java">{`// toBuilder() creates a builder initialized with the values of this instance.
 // This is useful for creating a modified copy of an existing object.
 final User evilJohn =
@@ -117,7 +117,7 @@ final User evilJohn =
 assert evilJohn.name().equals("Evil John");
 assert evilJohn.userId() == 42;`}</CodeBlock>
 
-      <H3>Enum classes</H3>
+      <H3>Enums</H3>
       <P>
         skir generates a deeply immutable Java class for every enum in the .skir file. This class is
         not a Java enum, although the syntax for referring to constants is similar.
@@ -131,7 +131,7 @@ assert evilJohn.userId() == 42;`}</CodeBlock>
   PREMIUM;
 }`}</CodeBlock>
 
-      <H3>Making enum values</H3>
+      <H4>Making enum values</H4>
       <CodeBlock language="java">{`final List<SubscriptionStatus> someStatuses =
     List.of(
         // The UNKNOWN constant is present in all skir enums even if it is not
@@ -146,7 +146,7 @@ assert evilJohn.userId() == 42;`}</CodeBlock>
                 .setStartTime(Instant.now())
                 .build()));`}</CodeBlock>
 
-      <H3>Conditions on enums</H3>
+      <H4>Conditions on enums</H4>
       <CodeBlock language="java">{`assert john.subscriptionStatus().equals(SubscriptionStatus.FREE);
 
 // UNKNOWN is the default value for enums.
@@ -165,7 +165,7 @@ assert trialStatus.asTrial().startTime() == now;
 // SubscriptionStatus.FREE.asTrial();
 // ^ Runtime error: asTrial() can only be called on a trial wrapper.`}</CodeBlock>
 
-      <H3>Branching on enum variants</H3>
+      <H4>Branching on enum variants</H4>
       <CodeBlock language="java">{`// First way to branch on enum variants: switch on kind()
 final Function<SubscriptionStatus, String> getInfoText =
     status ->
@@ -253,7 +253,7 @@ System.out.println(johnBytes);
 // languages like C++. Only use it when this small performance gain is
 // likely to matter, which should be rare.`}</CodeBlock>
 
-      <H3>Deserialization</H3>
+      <H4>Deserialization</H4>
       <CodeBlock language="java">{`// Use fromJson(), fromJsonCode() and fromBytes() to deserialize.
 
 final User reserializedJohn = serializer.fromJsonCode(johnDenseJson);
@@ -284,7 +284,7 @@ assert Serializers.bytes()
     .toJsonCode(ByteString.of((byte) 1, (byte) 2, (byte) 3))
     .equals("\\"AQID\\"");`}</CodeBlock>
 
-      <H3>Composite serializers</H3>
+      <H4>Composite serializers</H4>
       <CodeBlock language="java">{`assert Serializers.javaOptional(Serializers.string())
     .toJsonCode(java.util.Optional.of("foo"))
     .equals("\\"foo\\"");

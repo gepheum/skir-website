@@ -1,4 +1,4 @@
-import { CodeBlock, H1, H2, H3, InlineCode, P, Prose } from '@/components/prose'
+import { CodeBlock, H1, H2, H3, H4, InlineCode, P, Prose } from '@/components/prose'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -65,11 +65,12 @@ import skirout.user.TARZAN
 
 // Now you can use: TARZAN, User, UserRegistry, SubscriptionStatus, etc.`}</CodeBlock>
 
-      <H3>Frozen struct classes</H3>
+      <H3>Structs</H3>
       <P>
         For every struct S in the .skir file, skir generates a frozen (deeply immutable) class{' '}
         <InlineCode>S</InlineCode> and a mutable class <InlineCode>S.Mutable</InlineCode>.
       </P>
+      <H4>Frozen structs</H4>
       <CodeBlock language="kotlin">{`// Construct a frozen User.
 val john =
     User(
@@ -94,7 +95,7 @@ assert(john.name == "John Doe")
 // john.name = "John Smith";
 // ^ Does not compile: all the properties are read-only`}</CodeBlock>
 
-      <H3>Partial construction</H3>
+      <H4>Partial construction</H4>
       <CodeBlock language="kotlin">{`// With .partial(), you don't need to specify all the fields of the struct.
 val jane =
     User.partial(
@@ -116,7 +117,7 @@ assert(jane.quote == "")
 // fields set to their default values.
 assert(User.partial().pets.isEmpty())`}</CodeBlock>
 
-      <H3>Creating modified copies</H3>
+      <H4>Creating modified copies</H4>
       <CodeBlock language="kotlin">{`// User.copy() creates a shallow copy of the struct with the specified fields
 // modified.
 val evilJohn =
@@ -127,7 +128,7 @@ val evilJohn =
 assert(evilJohn.name == "Evil John")
 assert(evilJohn.userId == 42)`}</CodeBlock>
 
-      <H3>Mutable struct classes</H3>
+      <H4>Mutable structs</H4>
       <CodeBlock language="kotlin">{`// User.Mutable is a dataclass similar to User except it is mutable.
 val lyla = User.Mutable()
 lyla.userId = 44
@@ -137,7 +138,7 @@ val userHistory = UserHistory.Mutable()
 userHistory.user = lyla
 // ^ The right-hand side of the assignment can be either frozen or mutable.`}</CodeBlock>
 
-      <H3>Mutable accessors</H3>
+      <H4>Mutable accessors</H4>
       <CodeBlock language="kotlin">{`// The 'mutableUser' getter provides access to a mutable version of 'user'.
 // If 'user' is already mutable, it returns it directly.
 // If 'user' is frozen, it creates a mutable shallow copy, assigns it to
@@ -167,7 +168,7 @@ lyla.mutablePets.add(User.Pet.Mutable(name = "Cupcake"))
 // lyla.pets.add(User.Pet.Mutable(name = "Cupcake"));
 // ^ Does not compile: 'User.pets' is read-only`}</CodeBlock>
 
-      <H3>Converting between frozen and mutable structs</H3>
+      <H4>Converting between frozen and mutable structs</H4>
       <CodeBlock language="kotlin">{`// toMutable() does a shallow copy of the frozen struct, so it's cheap. All
 // the properties of the copy hold a frozen value.
 val evilJaneBuilder = jane.toMutable()
@@ -187,7 +188,7 @@ val evilJane = evilJaneBuilder.toFrozen()
 assert(evilJane.name == "Evil Jane")
 assert(evilJane.userId == 43)`}</CodeBlock>
 
-      <H3>Type aliases for frozen or mutable</H3>
+      <H4>Type aliases for frozen or mutable</H4>
       <CodeBlock language="kotlin">{`// 'User_OrMutable' is a type alias for the sealed class that both 'User' and
 // 'User.Mutable' implement.
 val greet: (User_OrMutable) -> Unit = {
@@ -199,7 +200,7 @@ greet(jane)
 greet(lyla)
 // Hello, Lyla Doe`}</CodeBlock>
 
-      <H3>Enum classes</H3>
+      <H3>Enums</H3>
       <P>
         Skir generates a deeply immutable Kotlin class for every enum in the .skir file. This class
         is not a Kotlin enum, although the syntax for referring to constants is similar.
@@ -226,7 +227,7 @@ greet(lyla)
         ),
     )`}</CodeBlock>
 
-      <H3>Conditions on enums</H3>
+      <H4>Conditions on enums</H4>
       <CodeBlock language="kotlin">{`assert(john.subscriptionStatus == SubscriptionStatus.FREE)
 
 // UNKNOWN is the default value for enums.
@@ -243,7 +244,7 @@ assert(
         trialStatus.value.startTime == now,
 )`}</CodeBlock>
 
-      <H3>Branching on enum variants</H3>
+      <H4>Branching on enum variants</H4>
       <CodeBlock language="kotlin">{`val getInfoText: (SubscriptionStatus) -> String = {
     when (it) {
         SubscriptionStatus.FREE -> "Free user"
@@ -299,7 +300,7 @@ val johnBytes = serializer.toBytes(john)
 // languages like C++. Only use it when this small performance gain is
 // likely to matter, which should be rare.`}</CodeBlock>
 
-      <H3>Deserialization</H3>
+      <H4>Deserialization</H4>
       <CodeBlock language="kotlin">{`// Use fromJson(), fromJsonCode() and fromBytes() to deserialize.
 val reserializedJohn: User = serializer.fromJsonCode(johnDenseJson)
 assert(reserializedJohn.equals(john))
@@ -313,7 +314,7 @@ assert(reserializedEvilJohn.equals(evilJohn))
 
 assert(serializer.fromBytes(johnBytes).equals(john))`}</CodeBlock>
 
-      <H3>Primitive serializers</H3>
+      <H4>Primitive serializers</H4>
       <CodeBlock language="kotlin">{`assert(Serializers.bool.toJsonCode(true) == "1")
 assert(Serializers.int32.toJsonCode(3) == "3")
 assert(Serializers.int64.toJsonCode(9223372036854775807) == "\\\"9223372036854775807\\\"")
@@ -332,7 +333,7 @@ assert(
     Serializers.bytes.toJsonCode(byteArrayOf(1, 2, 3)) == "\\"AQID\\""
 )`}</CodeBlock>
 
-      <H3>Composite serializers</H3>
+      <H4>Composite serializers</H4>
       <CodeBlock language="kotlin">{`assert(Serializers.optional(Serializers.string).toJsonCode("foo") == "\\"foo\\"")
 assert(Serializers.optional(Serializers.string).toJsonCode(null) == "null")
 

@@ -83,11 +83,11 @@ export default function BestPracticesPage() {
       <CodeBlock language="skir" filename="Later evolution">{`method AnalyzeWord(
   struct {
     word: string;
-    case_sensitive: bool;
+    case_sensitive: bool;  // New field
   }
 ): struct {
   is_palindrome: bool;
-  is_semordnilap: bool;
+  is_semordnilap: bool;  // New field
 } = 2000;`}</CodeBlock>
 
       <Note type="tip">

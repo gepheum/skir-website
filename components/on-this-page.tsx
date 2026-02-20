@@ -24,7 +24,7 @@ export function OnThisPage() {
       const mainElement = document.querySelector('main')
       if (!mainElement) return
 
-      const headings = mainElement.querySelectorAll('h2, h3')
+      const headings = mainElement.querySelectorAll('h2, h3, h4')
       const sectionsData: Section[] = []
       const usedIds = new Set<string>()
 
@@ -87,7 +87,7 @@ export function OnThisPage() {
       { rootMargin: '-20% 0px -35% 0px' },
     )
 
-    const headings = document.querySelectorAll('main h2, main h3')
+    const headings = document.querySelectorAll('main h2, main h3, main h4')
     headings.forEach((heading) => observer.observe(heading))
 
     return () => observer.disconnect()
@@ -109,6 +109,7 @@ export function OnThisPage() {
                   'block transition-colors hover:text-foreground',
                   activeId === section.id ? 'text-primary font-medium' : 'text-muted-foreground',
                   section.level === 3 && 'pl-4',
+                  section.level === 4 && 'pl-8',
                 )}
                 onClick={(e) => {
                   e.preventDefault()

@@ -37,7 +37,7 @@ import skirout.user.SubscriptionStatus;
 import skirout.user.Constants;
 ```
 
-### Struct Classes
+### Structs
 
 Skir generates a deeply immutable Java class for every struct.
 
@@ -64,7 +64,7 @@ assert jane.quote().equals("");  // Default value
 assert User.DEFAULT.name().equals("");
 ```
 
-### Creating Modified Copies
+#### Creating modified copies
 
 ```java
 final User evilJohn =
@@ -74,7 +74,7 @@ final User evilJohn =
         .build();
 ```
 
-### Enum Classes
+### Enums
 
 Skir generates a deeply immutable Java class (not a Java enum) for every enum.
 
@@ -86,7 +86,7 @@ enum SubscriptionStatus {
 }
 ```
 
-### Making Enum Values
+#### Creating enum values
 
 ```java
 List.of(
@@ -99,7 +99,7 @@ List.of(
             .build()));
 ```
 
-### Conditions on Enums
+#### Conditions on enums
 
 ```java
 assert john.subscriptionStatus().equals(SubscriptionStatus.FREE);
@@ -112,7 +112,7 @@ assert trialStatus.kind() == SubscriptionStatus.Kind.TRIAL_WRAPPER;
 assert trialStatus.asTrial().startTime() == now;
 ```
 
-### Branching on Enum Variants
+#### Branching on enum variants
 
 ```java
 // Switch on kind()
@@ -152,7 +152,7 @@ System.out.println(serializer.toJsonCode(john, JsonFlavor.READABLE));
 final ByteString johnBytes = serializer.toBytes(john);
 ```
 
-### Deserialization
+#### Deserialization
 
 ```java
 final User reserializedJohn = serializer.fromJsonCode(johnDenseJson);
@@ -162,7 +162,7 @@ assert reserializedJohn.equals(john);
 assert serializer.fromBytes(johnBytes).equals(john);
 ```
 
-### Primitive Serializers
+#### Primitive serializers
 
 ```java
 assert Serializers.bool().toJsonCode(true).equals("1");
@@ -182,7 +182,7 @@ assert Serializers.bytes()
     .equals("\"AQID\"");
 ```
 
-### Composite Serializers
+#### Composite serializers
 
 ```java
 assert Serializers.javaOptional(Serializers.string())
@@ -197,7 +197,7 @@ assert Serializers.list(Serializers.bool())
     .equals("[1,0]");
 ```
 
-### Frozen Lists and Copies
+### Frozen lists and copies
 
 ```java
 final List<User.Pet> pets = new ArrayList<>();
@@ -211,7 +211,7 @@ final User jack = User.partialBuilder().setPets(jade.pets()).build();
 assert jack.pets() == jade.pets();
 ```
 
-### Keyed Lists
+### Keyed lists
 
 ```java
 final UserRegistry userRegistry =
@@ -229,7 +229,7 @@ assert userRegistry.users().findByKey(100) == null;
 System.out.println(Constants.TARZAN);
 ```
 
-### Skir Services
+### Skir services
 
 - **Server**: [Spring Boot](https://github.com/gepheum/skir-java-example/blob/main/src/main/java/examples/StartService.java)
 - **Client**: [Example](https://github.com/gepheum/skir-java-example/blob/main/src/main/java/examples/CallService.java)
