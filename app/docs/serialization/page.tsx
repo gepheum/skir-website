@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/table'
 
 export const metadata = {
-  title: 'Serialization Formats - Skir',
+  title: 'Serialization - Skir Documentation',
   description: 'Learn about JSON and binary serialization formats in Skir.',
 }
 

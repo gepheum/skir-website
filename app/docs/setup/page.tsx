@@ -3,7 +3,7 @@ import { NextPageLink } from '@/components/next-page-link'
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
-  title: 'Getting Started - Skir',
+  title: 'Getting started: setup and workflow - Skir Documentation',
   description: 'Set up Skir in your project and learn the basic workflow.',
 }
 

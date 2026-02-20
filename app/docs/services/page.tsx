@@ -3,7 +3,7 @@ import { NextPageLink } from '@/components/next-page-link'
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
-  title: 'Typesafe RPCs - Skir',
+  title: 'Typesafe RPCs - Skir Documentation',
   description: 'Build typesafe APIs with Skir services.',
 }
 

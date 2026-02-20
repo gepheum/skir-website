@@ -2,7 +2,7 @@ import { NextPageLink } from '@/components/next-page-link'
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
-  title: 'External Dependencies - Skir',
+  title: 'External dependencies - Skir Documentation',
   description:
     'Import types from other GitHub repositories to share common data structures across projects.',
 }

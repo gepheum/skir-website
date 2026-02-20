@@ -1,7 +1,7 @@
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
-  title: 'Schema design: best practices - Skir',
+  title: 'Schema design: best practices - Skir Documentation',
   description:
     'Practical rules for writing Skir schemas that stay readable, maintainable, and easy to evolve.',
 }

@@ -3,7 +3,7 @@ import { NextPageLink } from '@/components/next-page-link'
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
-  title: 'Schema Evolution & Compatibility - Skir',
+  title: 'Schema evolution & compatibility - Skir Documentation',
   description: 'Guidelines for evolving your Skir schema without breaking backward compatibility.',
 }
 

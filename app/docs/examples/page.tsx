@@ -1,7 +1,7 @@
 import { Prose } from '@/components/prose'
 
 export const metadata = {
-  title: 'Project Examples - Skir',
+  title: 'Project examples - Skir Documentation',
   description: 'Explore real-world Skir projects and starter repositories across languages.',
 }
 

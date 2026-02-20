@@ -12,7 +12,7 @@ import {
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Documentation - Skir',
+  title: 'Documentation - Skir Documentation',
   description: 'Practical rules for writing future-proof schemas and robust APIs.',
 }
 

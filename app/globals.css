@@ -61,7 +61,7 @@
 /* Dark theme - Modest Mineral (Neutral & Professional) */
 .dark {
   /* Background: A neutral, earthy charcoal (L~0.15, very low chroma) */
-  --background: oklch(0.15 0.01 240);
+  --background: oklch(0.165 0.01 240);
   --foreground: oklch(0.92 0.01 240);
 
   /* Cards: Slightly lighter, very subtle separation */
@@ -102,7 +102,7 @@
   --chart-4: oklch(0.85 0.08 230);
   --chart-5: oklch(0.7 0.08 230);
 
-  --sidebar: oklch(0.15 0.01 240);
+  --sidebar: oklch(0.165 0.01 240);
   --sidebar-foreground: oklch(0.92 0.01 240);
   --sidebar-primary: oklch(0.75 0.08 230);
   --sidebar-primary-foreground: oklch(0.15 0.01 240);

@@ -4,7 +4,7 @@ import { CodeBlock, Note, Prose } from '@/components/prose'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Language Reference - Skir',
+  title: 'Language reference - Skir Documentation',
   description: 'Complete guide to the Skir schema language syntax and features.',
 }
 

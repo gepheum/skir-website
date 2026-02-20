@@ -1,7 +1,7 @@
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
-  title: 'Skir vs Protobuf - Skir',
+  title: 'Skir vs Protobuf - Skir Documentation',
   description: 'A guide for Protocol Buffer users migrating to Skir.',
 }
 
