@@ -55,7 +55,11 @@ enum PokerAction {
 
 ### Implicit UNKNOWN Variant
 
-Protobuf requires manually adding an `UNSPECIFIED` value as the first entry of every enum. Skir does this automatically: every enum has an implicit `UNKNOWN` variant (index 0) serving as default value and capturing unrecognized variants from newer schemas.
+The Protobuf Style Guide requires you to manually add an `UNSPECIFIED` value as the first entry of every enum to handle default values safely:
+
+> The first listed value should be a zero value enum and have the suffix of either `_UNSPECIFIED` or `_UNKNOWN`. This value may be used as an unknown/default value and should be distinct from any of the semantic values you expect to be explicitly set. For more information on the unspecified enum value, see the Proto Best Practices page.
+
+Skir does this automatically. Every enum in Skir has an implicit `UNKNOWN` variant (with index 0). This serves as the default value and captures unrecognized variants deserialized from newer schema versions.
 
 ### Keyed Arrays vs Maps
 

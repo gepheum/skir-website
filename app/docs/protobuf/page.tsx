@@ -91,8 +91,19 @@ message PokerAction {
           Protobuf Style Guide
         </a>{' '}
         requires you to manually add an <code>UNSPECIFIED</code> value as the first entry of every
-        enum to handle default values safely.
+        enum to handle default values safely:
       </p>
+
+      <blockquote className="border-l-4 pl-4 text-muted-foreground italic my-4">
+        <p>
+          The first listed value should be a zero value enum and have the suffix of either{' '}
+          <code>_UNSPECIFIED</code> or <code>_UNKNOWN</code>. This value may be used as an
+          unknown/default value and should be distinct from any of the semantic values you expect to
+          be explicitly set. For more information on the unspecified enum value, see the Proto Best
+          Practices page.
+        </p>
+      </blockquote>
+
       <p>
         Skir does this automatically. Every enum in Skir has an implicit <code>UNKNOWN</code>{' '}
         variant (with index 0). This serves as the default value and captures unrecognized variants
