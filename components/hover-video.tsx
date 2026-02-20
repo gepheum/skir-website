@@ -1,5 +1,6 @@
 'use client'
 
+import { useIsMobile } from '@/hooks/use-mobile'
 import { useRef, useState } from 'react'
 
 interface HoverVideoProps {
@@ -9,8 +10,11 @@ interface HoverVideoProps {
 export function HoverVideo({ src }: HoverVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
+  const isMobile = useIsMobile()
 
   const handleMouseEnter = () => {
+    if (isMobile) return
+
     if (videoRef.current) {
       const playPromise = videoRef.current.play()
       if (playPromise !== undefined) {
@@ -20,14 +24,14 @@ export function HoverVideo({ src }: HoverVideoProps) {
             if (e.name !== 'AbortError') {
               console.error('Failed to play video', e)
             }
-            // If play failed, or was aborted, ensure state is correct
-            // But usually mouseLeave handles the state reset
           })
       }
     }
   }
 
   const handleMouseLeave = () => {
+    if (isMobile) return
+
     if (videoRef.current) {
       videoRef.current.pause()
       videoRef.current.currentTime = 0
@@ -46,7 +50,7 @@ export function HoverVideo({ src }: HoverVideoProps) {
         muted
         loop
         playsInline
-        controls={isPlaying}
+        controls={isPlaying || isMobile}
         controlsList="nofullscreen nodownload noremoteplayback"
         disablePictureInPicture
         className="w-full h-auto block"
