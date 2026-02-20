@@ -1,3 +1,4 @@
+import { NextPageLink } from '@/components/next-page-link'
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
@@ -134,6 +135,8 @@ githubTokenEnvVar: MY_GITHUB_TOKEN`}</CodeBlock>
           instead.
         </p>
       </Note>
+
+      <NextPageLink title="Best Practices" href="/docs/best-practices" />
     </Prose>
   )
 }

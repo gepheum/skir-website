@@ -69,6 +69,8 @@ assert(restored == point)
   - Browse a collection of starter projects for every language and full-stack end-to-end applications demonstrating real-world usage.
 
 ### Core Concepts
+- Best Practices: https://skir.sh/llms/best-practices.txt
+  - Practical rules for writing future-proof schemas and robust APIs.
 - Serialization: https://skir.sh/llms/serialization.txt
   - Understand Skir's JSON (dense and readable) and binary serialization formats, including encoding rules for each data type and when to use each format.
 - Schema Evolution: https://skir.sh/llms/schema-evolution.txt
@@ -77,8 +79,6 @@ assert(restored == point)
   - Build type-safe RPC services by defining methods in schemas, implementing handlers with custom context, and integrating with existing HTTP frameworks.
 - External Dependencies: https://skir.sh/llms/dependencies.txt
   - Import and reuse types from other GitHub repositories by configuring dependencies in skir.yml, with support for transitive dependencies and private repositories.
-- Coming from Protobuf: https://skir.sh/llms/protobuf.txt
-  - Migration guide highlighting key differences from Protocol Buffers including unified enums, keyed arrays, schema constants, and stricter generated code patterns.
 
 ### Language Guides
 - TypeScript: https://skir.sh/llms/typescript.txt

@@ -375,9 +375,11 @@ Every method must have a unique integer identifier (e.g. `= 12345`) used for RPC
 Skir supports inline record definitions for methods. The compiler generates names by appending `Request` and `Response` to the method name.
 
 ```skir
-method GetUserProfile(struct {
-  user_id: int32;
-}): struct {
+method GetUserProfile(
+  struct {
+    user_id: int32;
+  }
+): struct {
   profile: UserProfile?;
 } = 12345;
 ```

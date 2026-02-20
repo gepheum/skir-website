@@ -5,6 +5,7 @@ import {
   Layers,
   LayoutGrid,
   Package,
+  PenTool,
   RefreshCw,
   Zap,
 } from 'lucide-react'
@@ -12,7 +13,7 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'Documentation - Skir',
-  description: 'Learn how to use Skir to define your data types, constants, and APIs.',
+  description: 'Practical rules for writing future-proof schemas and robust APIs.',
 }
 
 const sections = [
@@ -33,6 +34,12 @@ const sections = [
     description: 'Complete guide to the Skir schema language syntax and features.',
     href: '/docs/language-reference',
     icon: Zap,
+  },
+  {
+    title: 'Best Practices',
+    description: 'Practical rules for writing future-proof schemas and robust APIs.',
+    href: '/docs/best-practices',
+    icon: PenTool,
   },
   {
     title: 'Serialization',

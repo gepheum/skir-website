@@ -5,7 +5,7 @@ import { Header } from '@/components/header'
 import { LanguageCard } from '@/components/language-card'
 import { RpcExample } from '@/components/rpc-example'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, FileCode2, Github as GitHubIcon, Package, Terminal, Zap } from 'lucide-react'
+import { ArrowRight, Github as GitHubIcon, Package, Terminal, Zap } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -138,7 +138,7 @@ export default function HomePage() {
               RPCs with end-to-end type safety
             </h2>
             <p className="text-muted-foreground text-lg mb-6 max-w-2xl mx-auto">
-              Define your RPC methods in Skir and invoke them like local functions{' '}
+              Define your API methods in Skir and invoke them like local functions{' '}
               <em>a la gRPC</em>. No more API contract mismatches between your frontend and backend
               or across microservices. Client and server are always in sync.
             </p>
@@ -227,12 +227,6 @@ export default function HomePage() {
                 <Link href="/docs/setup">
                   Read the Docs
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link href="/docs/protobuf">
-                  <FileCode2 className="mr-2 h-4 w-4" />
-                  Coming from Protobuf?
                 </Link>
               </Button>
             </div>

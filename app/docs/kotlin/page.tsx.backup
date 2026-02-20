@@ -198,7 +198,7 @@ interface UserServiceHandler {
 
       <H2>Coroutines Support</H2>
       <P>
-        The Kotlin plugin generates suspend functions for RPC methods,
+        The Kotlin plugin generates suspend functions for API methods,
         integrating seamlessly with Kotlin coroutines:
       </P>
       <CodeBlock language="kotlin">{`class MyUserService : UserServiceHandler {

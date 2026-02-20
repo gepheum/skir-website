@@ -23,6 +23,7 @@ const navigation = [
       { title: 'Schema evolution', href: '/docs/schema-evolution' },
       { title: 'Typesafe RPCs', href: '/docs/services' },
       { title: 'External dependencies', href: '/docs/dependencies' },
+      { title: 'Best practices', href: '/docs/best-practices' },
     ],
   },
   {

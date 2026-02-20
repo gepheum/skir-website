@@ -214,12 +214,11 @@ struct Notification {
           record and reference it by name.
         </p>
         <CodeBlock language="skir">{`struct Product {
-  // BAD
+  // SYNTAX NOT SUPPORTED
   // tags: [struct {
   //   tag_name: string;
   // }];
 
-  // GOOD
   struct Tag {
     tag_name: string;
   }
@@ -496,7 +495,7 @@ method GetUserProfile(GetUserProfileRequest): GetUserProfileResponse = 12345;`}<
       <h3>Inline request/response records</h3>
       <p>
         Just as you can define structs and enums inline for fields, Skir supports inline record
-        definitions for RPC methods. This allows you to define the request and response structures
+        definitions for API methods. This allows you to define the request and response structures
         directly within the method signature.
       </p>
       <p>
@@ -507,9 +506,11 @@ method GetUserProfile(GetUserProfileRequest): GetUserProfileResponse = 12345;`}<
       <p>This syntax allows you to define the same method as above more concisely:</p>
       <CodeBlock language="skir">{`// Using inline records
 
-method GetUserProfile(struct {
-  user_id: int32;
-}): struct {
+method GetUserProfile(
+  struct {
+    user_id: int32;
+  }
+): struct {
   profile: UserProfile?;
 } = 12345;`}</CodeBlock>
 

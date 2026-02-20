@@ -1,0 +1,245 @@
+````plaintext
+# Schema design: best practices
+
+This section contains an opinionated list of rules for writing good Skir schemas.
+
+When followed, these practices will help you design APIs that are robust, consistent, easy to evolve, and safe to use across different languages.
+
+## 1) When in doubt, wrap it in a struct
+
+A wrapper struct costs almost nothing, but it gives you an evolution escape hatch.
+
+### Wrap elements of arrays
+
+Primitive arrays are hard to extend later. If you might want to attach metadata to each element in the future, start with a wrapper.
+
+DON'T:
+
+```skir
+struct Product {
+	// ...
+	tags: [string];
+}
+```
+
+DO:
+
+```skir
+struct Product {
+	// ...
+	struct Tag {
+		value: string;
+		// added_at: timestamp;   // easy future evolution
+	}
+
+	tags: [Tag];
+}
+```
+
+### Wrap method inputs and outputs
+
+DON'T:
+
+```skir
+method IsPalindrome(string): bool = 2000;
+```
+
+DO:
+
+```skir
+method IsPalindrome(
+	struct {
+		word: string;
+	}
+): struct {
+	result: bool;
+} = 2000;
+```
+
+Later evolution becomes trivial:
+
+```skir
+method AnalyzeWord(
+	struct {
+		word: string;
+		case_sensitive: bool;
+	}
+): struct {
+	is_palindrome: bool;
+	is_semordnilap: bool;
+} = 2000;
+```
+
+## 2) Prefer wrapper structs for enriched views
+
+If a type `A` exists in multiple stages of a flow, you will often end up with an enriched version of it: you start with `A`, then later attach some extra data `B` (permissions, computed pricing, resolved references, cache metadata, etc.).
+
+It can look tempting to add a `B?` field directly on `A` and explain in a comment that it is only populated in some parts of the flow. Avoid that.
+
+DON'T:
+
+```skir
+struct Permissions {
+	can_edit: bool;
+	can_delete: bool;
+}
+
+struct User {
+	id: hash64;
+	name: string;
+
+	// Only populated after an authorization step.
+	permissions: Permissions?;
+}
+```
+
+Prefer defining a new wrapper type that makes the enrichment explicit:
+
+DO:
+
+```skir
+struct Permissions {
+	can_edit: bool;
+	can_delete: bool;
+}
+
+struct User {
+	id: hash64;
+	name: string;
+}
+
+struct UserWithPermissions {
+	user: User;
+	permissions: Permissions;
+}
+```
+
+This is more type-safe, reads better at call sites, and scales well over time.
+
+## 3) Don't overuse optional types
+
+Optional types (`T?`) are great when "missing" is a distinct state. But if the default value of `T` is a fine representation of "not set" (for example, "" for strings, 0 for numbers, [] for arrays), prefer non-optional fields and document the convention.
+
+```skir
+struct Product {
+	// Can be empty.
+	description: string;
+}
+```
+
+Use `T?` when you must distinguish "not provided" from "provided with a default value".
+
+## 4) Use the `timestamp` type for instants
+
+If a field represents an instant in time, use `timestamp` instead of a numeric type.
+
+DON'T:
+
+```skir
+struct User {
+	// Is this seconds? milliseconds? microseconds?
+	last_visit: int64;
+}
+```
+
+DO:
+
+```skir
+struct User {
+	last_visit: timestamp;
+}
+```
+
+This makes unit mistakes (seconds vs milliseconds) much harder - a surprisingly common pitfall that often slips past compile-time checks.
+
+## 5) Prefer good names over doc comments
+
+Good documentation starts with good names.
+
+If a symbol name can carry the key information (units, meaning, constraints) without being absurdly long, put it in the name.
+
+Doc comments should be added when they provide extra value (examples, rationale, edge cases, invariants) - not just to restate what a better name could have said.
+
+DON'T:
+
+```skir
+struct Telemetry {
+	/// Duration in milliseconds.
+	request_timeout: int64;
+
+	/// Speed in kilometers per hour.
+	max_speed: int32;
+}
+```
+
+DO:
+
+```skir
+struct Telemetry {
+	request_timeout_millis: int64;
+	max_speed_kmph: int32;
+}
+```
+
+Adding the unit to the name usually only makes it slightly longer, but it carries crucial information and significantly reduces the risk of accidentally mixing up units (which the compiler typically cannot catch).
+
+Once the name is explicit, the doc comment often stops adding value - so it can be removed.
+
+## 6) Keep nested type names short
+
+Nested types keep schemas readable, but users must refer to them as `A.B`. Because the parent name is already present, the nested name should not repeat it.
+
+DON'T:
+
+```skir
+struct UserHistory {
+	struct HistoricalUserAction {
+		// ...
+	}
+
+	actions: [HistoricalUserAction];
+}
+```
+
+DO:
+
+```skir
+struct UserHistory {
+	struct Action {
+		// ...
+	}
+
+	actions: [Action];
+}
+```
+
+## 7) Model expected outcomes in the response type
+
+Use transport errors (HTTP errors, exceptions) for unexpected failures (unauthorized, infrastructure issues).
+
+If an outcome is part of normal operation ("not found", already exists, rate limited, invalid input you want to report precisely), model it in the response type so clients can handle it in a typed, exhaustive way.
+
+DON'T:
+
+```skir
+method GetProduct(
+	struct {
+		product_id: hash64;
+	}
+): Product = 1000;
+// "Not found" would have to be communicated via HTTP errors.
+```
+
+DO:
+
+```skir
+method GetProduct(
+	struct {
+		product_id: hash64;
+	}
+): struct {
+	// Null if not found
+	product: Product?;
+} = 1000;
+```
+````
