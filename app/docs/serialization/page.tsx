@@ -41,7 +41,7 @@ export default function SerializationPage() {
           <TableBody>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-medium">JSON (Dense)</TableCell>
-              <TableCell>Yes: safe</TableCell>
+              <TableCell>Yes (safe)</TableCell>
               <TableCell>High</TableCell>
               <TableCell>Low</TableCell>
               <TableCell className="whitespace-normal">
@@ -51,7 +51,7 @@ export default function SerializationPage() {
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-medium">JSON (Readable)</TableCell>
-              <TableCell>No: unsafe</TableCell>
+              <TableCell>No (unsafe)</TableCell>
               <TableCell>Low</TableCell>
               <TableCell>High</TableCell>
               <TableCell className="whitespace-normal">
@@ -61,7 +61,7 @@ export default function SerializationPage() {
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-medium">Binary</TableCell>
-              <TableCell>Yes: safe</TableCell>
+              <TableCell>Yes (safe)</TableCell>
               <TableCell>Very High</TableCell>
               <TableCell>None</TableCell>
               <TableCell className="whitespace-normal">
