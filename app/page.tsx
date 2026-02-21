@@ -149,6 +149,37 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Ask Claude Section */}
+      <section className="py-16 md:py-24 border-t border-border bg-card/50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-balance">
+              Ask Claude — or your favorite AI
+            </h2>
+            
+            <div className="bg-card border border-border rounded-lg p-6 mb-6">
+              <div className="text-muted-foreground mb-2">Prompt:</div>
+              <p className="text-lg italic text-foreground">
+                Create a full-stack application with a Kotlin backend and a TypeScript frontend, connected via Skir (https://skir.sh/) for data exchange.
+              </p>
+            </div>
+
+            <div className="flex justify-center">
+              <Button asChild variant="outline" size="lg" className="text-base">
+                <a 
+                  href="https://github.com/gepheum/skir-lost-and-found-example" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  <GitHubIcon className="mr-2 h-4 w-4" />
+                  See the actual project created with this prompt
+                </a>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="py-16 md:py-24 border-t border-border">
         <div className="container mx-auto px-4">
