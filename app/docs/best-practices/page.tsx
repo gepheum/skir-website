@@ -28,9 +28,9 @@ export default function BestPracticesPage() {
 
       <h3>Wrap elements of arrays</h3>
       <p>
-        If you store an array of primitives (<code>string</code>, <code>int32</code>, …),
-        remember that in the future you may want to attach metadata to each element (for example,
-        when it was added or where it came from).
+        If you store an array of primitives (<code>string</code>, <code>int32</code>, …), remember
+        that in the future you may want to attach metadata to each element (for example, when it was
+        added or where it came from).
       </p>
 
       <CodeBlock language="skir" filename="Don't (hard to extend)">{`struct Product {
