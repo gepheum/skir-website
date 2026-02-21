@@ -58,7 +58,7 @@ export function Header() {
             {navigation.map((item) =>
               item.items ? (
                 <DropdownMenu key={item.name}>
-                  <DropdownMenuTrigger className="flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors focus:outline-none">
+                  <DropdownMenuTrigger className="flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors focus:outline-none cursor-pointer">
                     {item.name}
                     <ChevronDown className="ml-1 h-4 w-4" />
                   </DropdownMenuTrigger>
