@@ -156,19 +156,20 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-4xl font-bold mb-8 text-balance">
               Ask Claude — or your favorite AI
             </h2>
-            
+
             <div className="bg-card border border-border rounded-lg p-6 mb-6">
               <div className="text-muted-foreground mb-2">Prompt:</div>
               <p className="text-lg italic text-foreground">
-                Create a full-stack application with a Kotlin backend and a TypeScript frontend, connected via Skir (https://skir.sh/) for data exchange.
+                Create a full-stack application with a Kotlin backend and a TypeScript frontend,
+                connected via Skir (https://skir.sh/) for data exchange.
               </p>
             </div>
 
             <div className="flex justify-center">
               <Button asChild variant="outline" size="lg" className="text-base">
-                <a 
-                  href="https://github.com/gepheum/skir-lost-and-found-example" 
-                  target="_blank" 
+                <a
+                  href="https://github.com/gepheum/skir-lost-and-found-example"
+                  target="_blank"
                   rel="noopener noreferrer"
                 >
                   <GitHubIcon className="mr-2 h-4 w-4" />
