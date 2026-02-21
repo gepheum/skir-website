@@ -168,7 +168,7 @@ struct UserBundle {
       </p>
 
       <CodeBlock language="skir">{`struct Product {
-  // Can be empty.
+  /// Can be empty.
   description: string;
 }`}</CodeBlock>
 
