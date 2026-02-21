@@ -36,12 +36,6 @@ const sections = [
     icon: Zap,
   },
   {
-    title: 'Best Practices',
-    description: 'Practical rules for writing future-proof schemas and robust APIs.',
-    href: '/docs/best-practices',
-    icon: PenTool,
-  },
-  {
     title: 'Serialization',
     description: 'Learn about JSON and binary serialization formats.',
     href: '/docs/serialization',
@@ -64,6 +58,12 @@ const sections = [
     description: 'Import types from other GitHub repositories.',
     href: '/docs/dependencies',
     icon: Package,
+  },
+  {
+    title: 'Best Practices',
+    description: 'Practical rules for writing future-proof schemas and robust APIs.',
+    href: '/docs/best-practices',
+    icon: PenTool,
   },
 ]
 
