@@ -25,6 +25,10 @@ Skir uses numeric identifiers in binary and dense JSON formats, not names. Renam
 
 > **Note:** Names *are* used in readable JSON, which is for debugging only and should not be used for storage.
 
+### Changing Keyed Array Keys
+
+You can freely add, remove, or change the key field of a keyed array (the part after `|`). For example, changing `[User|id]` to `[User|email]` or `[User]` is safe. The key annotation is purely a hint for code generation to provide efficient lookup methods—it doesn't affect the serialization format or data compatibility.
+
 ### Removing Fields or Variants
 
 Mark the number as `removed` to prevent accidental reuse.

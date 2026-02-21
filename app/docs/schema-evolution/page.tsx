@@ -77,6 +77,15 @@ export default function SchemaEvolutionPage() {
         </p>
       </Note>
 
+      <h3>Changing keyed array keys</h3>
+      <p>
+        You can freely add, remove, or change the key field of a keyed array (the part after{' '}
+        <code>|</code>). For example, changing <code>[User|id]</code> to <code>[User|email]</code>{' '}
+        or <code>[User]</code> is safe. The key annotation is purely a hint for code generation to
+        provide efficient lookup methods—it doesn't affect the serialization format or data
+        compatibility.
+      </p>
+
       <h3>Removing fields or variants</h3>
       <p>
         You must mark the field or variant number as <code>removed</code> to prevent accidental
