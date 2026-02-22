@@ -24,7 +24,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-card mb-8">
-              <span className="text-primary font-medium">v1.0</span>
+              <span className="text-primary font-medium">v1.1</span>
               <span className="text-muted-foreground">Like Protocol Buffer, but better</span>
             </div>
 
