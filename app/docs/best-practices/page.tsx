@@ -286,11 +286,13 @@ struct UserBundle {
 
       <CodeBlock language="skir" filename="Do (explicit)">{`method GetProduct(
   struct {
-    product_id: hash64;
+    product_id: string;
   }
-): struct {
-  /// Null if not found
-  product: Product?;
+): enum {
+  ok: Product;
+  NOT_FOUND;
+  RETIRED;
+  invalid_product_id: string;
 } = 1000;`}</CodeBlock>
 
       <Note type="info">
