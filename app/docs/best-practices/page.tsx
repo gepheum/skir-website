@@ -16,7 +16,7 @@ export default function BestPracticesPage() {
         to evolve, and safe to use across different languages.
       </p>
 
-      <h2>1. When in doubt, wrap it in a struct</h2>
+      <h2>When in doubt, wrap it in a struct</h2>
       <p>
         The most common evolution pitfall is starting with primitives <em>because it's simpler</em>{' '}
         and getting stuck the first time you need to add one more attribute.
@@ -98,7 +98,7 @@ export default function BestPracticesPage() {
         </p>
       </Note>
 
-      <h2>2. Prefer wrapper structs for enriched views</h2>
+      <h2>Prefer wrapper structs for enriched views</h2>
       <p>
         If a type <code>A</code> exists in multiple stages of a flow, you will often end up with an
         <em>enriched</em> version of it: you start with <code>A</code>, then later attach some extra
@@ -156,7 +156,7 @@ struct UserBundle {
         other enriched views without turning the base type into a grab-bag of conditional fields).
       </p>
 
-      <h2>3. Don't overuse optional types</h2>
+      <h2>Don't overuse optional types</h2>
       <p>
         Optional types (<code>T?</code>) are great when <em>missing</em> is a distinct state. But
         they also propagate into generated APIs and typically add extra branching in client code.
@@ -178,7 +178,7 @@ struct UserBundle {
       </p>
 
       <h2>
-        4. Use the <code>timestamp</code> type for instants
+        Use the <code>timestamp</code> type for instants
       </h2>
       <p>
         If a field represents an instant in time, use the <code>timestamp</code> primitive instead
@@ -200,7 +200,7 @@ struct UserBundle {
         debug output across languages.
       </p>
 
-      <h2>5. Prefer good names over doc comments</h2>
+      <h2>Prefer good names over doc comments</h2>
       <p>Good documentation starts with good names.</p>
       <p>
         If a symbol name can carry the key information (units, meaning, constraints) without being
@@ -239,7 +239,7 @@ struct UserBundle {
         Once the name is explicit, the doc comment often stops adding value - so it can be removed.
       </p>
 
-      <h2>6. Keep nested type names short</h2>
+      <h2>Keep nested type names short</h2>
       <p>
         Nested types are a great way to keep a schema readable: they group related definitions
         together and reduce global namespace clutter.
@@ -266,7 +266,7 @@ struct UserBundle {
   actions: [Action];
 }`}</CodeBlock>
 
-      <h2>7. Model expected outcomes in the response type</h2>
+      <h2>Model expected outcomes in the response type</h2>
       <p>
         Transport errors (HTTP errors, exceptions, etc.) are for <em>unexpected</em> failures: the
         user is unauthorized, the server is unhealthy, a dependency timed out.

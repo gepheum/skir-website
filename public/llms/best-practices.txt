@@ -5,7 +5,7 @@ This section contains an opinionated list of rules for writing good Skir schemas
 
 When followed, these practices will help you design APIs that are robust, consistent, easy to evolve, and safe to use across different languages.
 
-## 1) When in doubt, wrap it in a struct
+## When in doubt, wrap it in a struct
 
 A wrapper struct costs almost nothing, but it gives you an evolution escape hatch.
 
@@ -70,7 +70,7 @@ method AnalyzeWord(
 } = 2000;
 ```
 
-## 2) Prefer wrapper structs for enriched views
+## Prefer wrapper structs for enriched views
 
 If a type `A` exists in multiple stages of a flow, you will often end up with an enriched version of it: you start with `A`, then later attach some extra data `B` (permissions, computed pricing, resolved references, cache metadata, etc.).
 
@@ -116,7 +116,7 @@ struct UserWithPermissions {
 
 This is more type-safe, reads better at call sites, and scales well over time.
 
-## 3) Don't overuse optional types
+## Don't overuse optional types
 
 Optional types (`T?`) are great when "missing" is a distinct state. But if the default value of `T` is a fine representation of "not set" (for example, "" for strings, 0 for numbers, [] for arrays), prefer non-optional fields and document the convention.
 
@@ -129,7 +129,7 @@ struct Product {
 
 Use `T?` when you must distinguish "not provided" from "provided with a default value".
 
-## 4) Use the `timestamp` type for instants
+## Use the `timestamp` type for instants
 
 If a field represents an instant in time, use `timestamp` instead of a numeric type.
 
@@ -152,7 +152,7 @@ struct User {
 
 This makes unit mistakes (seconds vs milliseconds) much harder - a surprisingly common pitfall that often slips past compile-time checks.
 
-## 5) Prefer good names over doc comments
+## Prefer good names over doc comments
 
 Good documentation starts with good names.
 
@@ -185,7 +185,7 @@ Adding the unit to the name usually only makes it slightly longer, but it carrie
 
 Once the name is explicit, the doc comment often stops adding value - so it can be removed.
 
-## 6) Keep nested type names short
+## Keep nested type names short
 
 Nested types keep schemas readable, but users must refer to them as `A.B`. Because the parent name is already present, the nested name should not repeat it.
 
@@ -213,7 +213,7 @@ struct UserHistory {
 }
 ```
 
-## 7) Model expected outcomes in the response type
+## Model expected outcomes in the response type
 
 Use transport errors (HTTP errors, exceptions) for unexpected failures (unauthorized, infrastructure issues).
 
