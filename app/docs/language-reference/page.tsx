@@ -520,7 +520,7 @@ method GetUserProfile(
         either specify the names to import, or import the whole module with an alias using the{' '}
         <code>as</code> keyword.
       </p>
-      <CodeBlock language="skir">{`import Point, Circle from "geometry/geometry.skir";
+      <CodeBlock language="skir">{`import { Point, Circle } from "geometry/geometry.skir";
 import * as color from "color.skir";
 
 struct Rectangle {

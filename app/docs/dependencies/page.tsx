@@ -56,7 +56,7 @@ export default function DependenciesPage() {
         statement in your <code>.skir</code> files. The import path is the full path to the file
         within the dependency, prefixed with the package identifier.
       </p>
-      <CodeBlock language="skir">{`import Quest from "@gepheum/skir-fantasy-game-example/fantasy_game.skir";
+      <CodeBlock language="skir">{`import { Quest } from "@gepheum/skir-fantasy-game-example/fantasy_game.skir";
 
 struct QuestCollection {
   collection_name: string;

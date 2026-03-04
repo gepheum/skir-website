@@ -389,7 +389,7 @@ method GetUserProfile(
 Import types from another module with `import`. You can specify names or import the whole module with `as`:
 
 ```skir
-import Point, Circle from "geometry/geometry.skir";
+import { Point, Circle } from "geometry/geometry.skir";
 import * as color from "color.skir";
 
 struct Rectangle {

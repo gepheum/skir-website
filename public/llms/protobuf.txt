@@ -127,7 +127,7 @@ Protobuf has no built-in package manager (relies on git submodule, manual copyin
 Skir includes a built-in, free package manager using GitHub repositories as packages:
 
 1. Define dependencies in `skir.yml` pointing to GitHub repos and tags.
-2. Import types: `import User from "@my-org/common-types/user.skir";`
+2. Import types: `import { User } from "@my-org/common-types/user.skir";`
 3. Run `npx skir gen`.
 
 ## Serialization
