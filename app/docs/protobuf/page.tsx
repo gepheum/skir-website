@@ -296,7 +296,8 @@ user = User(
           repository and a tag.
         </li>
         <li>
-          Import the types you need: <code>import { User } from "@my-org/common-types/user.skir";</code>
+          Import the types you need:{' '}
+          <code>{'import { User } from "@my-org/common-types/user.skir";'}</code>
         </li>
         <li>
           Run <code>npx skir gen</code>.
