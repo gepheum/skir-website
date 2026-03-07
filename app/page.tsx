@@ -213,7 +213,7 @@ export default function HomePage() {
                   >
                     VS Code extension
                   </a>{' '}
-                  with all the features you need. Real-time validation, go to definition, automatic
+                  with all the features you need. Real-time validation, code completion, automatic
                   code formatting and more.
                 </>
               }
