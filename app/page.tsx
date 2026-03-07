@@ -161,7 +161,7 @@ export default function HomePage() {
               <div className="text-muted-foreground mb-2">Prompt:</div>
               <p className="text-lg italic text-foreground">
                 Create a full-stack application with a Kotlin backend and a TypeScript frontend,
-                connected via Skir (https://skir.sh/) for data exchange.
+                connected via Skir (https://skir.build/) for data exchange.
               </p>
             </div>
 

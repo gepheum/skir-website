@@ -4,7 +4,7 @@
 
 Skir is a declarative language for defining data types, constants, and RPC interfaces. Write your schema once in a `.skir` file and generate idiomatic, type-safe code in TypeScript, Python, Java, C++, Kotlin, and Dart.
 
-- Website: https://skir.sh/
+- Website: https://skir.build/
 - GitHub: https://github.com/gepheum/skir
 
 ## Key Features
@@ -61,29 +61,29 @@ assert(restored == point)
 ## Detailed Documentation
 
 ### Getting Started
-- Setup & Workflow: https://skir.sh/llms/setup.txt
+- Setup & Workflow: https://skir.build/llms/setup.txt
   - Learn how to initialize a Skir project, configure code generators for multiple languages, and integrate Skir into your build workflow with watch mode and continuous integration.
-- Language Reference: https://skir.sh/llms/language-reference.txt
+- Language Reference: https://skir.build/llms/language-reference.txt
   - Complete syntax guide covering structs, enums, fields, variants, types, constants, methods, and all language features with examples.
-- Examples & Projects: https://skir.sh/llms/examples.txt
+- Examples & Projects: https://skir.build/llms/examples.txt
   - Browse a collection of starter projects for every language and full-stack end-to-end applications demonstrating real-world usage.
 
 ### Core Concepts
-- Best Practices: https://skir.sh/llms/best-practices.txt
+- Best Practices: https://skir.build/llms/best-practices.txt
   - Practical rules for writing future-proof schemas and robust APIs.
-- Serialization: https://skir.sh/llms/serialization.txt
+- Serialization: https://skir.build/llms/serialization.txt
   - Understand Skir's JSON (dense and readable) and binary serialization formats, including encoding rules for each data type and when to use each format.
-- Schema Evolution: https://skir.sh/llms/schema-evolution.txt
+- Schema Evolution: https://skir.build/llms/schema-evolution.txt
   - Learn safe schema changes (adding fields, renaming types), automated compatibility checking with snapshots, and how to maintain backward/forward compatibility.
-- Typesafe RPCs: https://skir.sh/llms/services.txt
+- Typesafe RPCs: https://skir.build/llms/services.txt
   - Build type-safe RPC services by defining methods in schemas, implementing handlers with custom context, and integrating with existing HTTP frameworks.
-- External Dependencies: https://skir.sh/llms/dependencies.txt
+- External Dependencies: https://skir.build/llms/dependencies.txt
   - Import and reuse types from other GitHub repositories by configuring dependencies in skir.yml, with support for transitive dependencies and private repositories.
 
 ### Language Guides
-- TypeScript: https://skir.sh/llms/typescript.txt
-- Python: https://skir.sh/llms/python.txt
-- Java: https://skir.sh/llms/java.txt
-- Kotlin: https://skir.sh/llms/kotlin.txt
-- C++: https://skir.sh/llms/cpp.txt
-- Dart: https://skir.sh/llms/dart.txt
+- TypeScript: https://skir.build/llms/typescript.txt
+- Python: https://skir.build/llms/python.txt
+- Java: https://skir.build/llms/java.txt
+- Kotlin: https://skir.build/llms/kotlin.txt
+- C++: https://skir.build/llms/cpp.txt
+- Dart: https://skir.build/llms/dart.txt
