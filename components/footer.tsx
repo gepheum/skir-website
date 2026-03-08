@@ -17,8 +17,11 @@ const footerLinks = {
     { name: 'Dart', href: '/docs/dart' },
   ],
   resources: [
-    { name: 'Skir Services', href: '/docs/services' },
-    { name: 'External Dependencies', href: '/docs/dependencies' },
+    {
+      name: 'Why I Built Skir (Blog)',
+      href: 'https://medium.com/@gepheum/i-spent-15-years-with-protobuf-then-i-built-skir-9cf61cc65631',
+      external: true,
+    },
     { name: 'GitHub', href: 'https://github.com/gepheum/skir', external: true },
   ],
 }
