@@ -17,7 +17,7 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Skir - Like Protocol Buffer, but better',
+  title: 'Skir - A modern alternative to Protocol Buffer',
   description:
     'A declarative language for representing data types, constants, and APIs. Define your schema once and generate idiomatic, type-safe code for TypeScript, Python, Java, C++, Kotlin, and Dart.',
   keywords: [
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     apple: [{ url: '/iceberg-apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   openGraph: {
-    title: 'Skir - Like Protocol Buffer, but better',
+    title: 'Skir - A modern alternative to Protocol Buffer',
     description: 'A descriptive language for representing data types, constants, and APIs.',
     type: 'website',
   },
