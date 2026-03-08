@@ -446,6 +446,18 @@ async def main():
           explore your API schema and execute requests interactively.
         </p>
       </Note>
+      <p>
+        RPC Studio also lets you download a lightweight instruction file that you can pass to an AI
+        agent. It teaches the agent how to call your API, what each method does, and the
+        input/output schema for each method.
+      </p>
+      <div className="not-prose max-w-full mx-auto mb-8 rounded-lg overflow-hidden border border-border">
+        <img
+          src="/studio-llms.png"
+          alt="RPC Studio agent-ready instruction file"
+          className="w-full h-auto"
+        />
+      </div>
 
       <h3>Sending requests with cURL</h3>
       <p>
