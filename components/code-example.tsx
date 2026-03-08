@@ -15,9 +15,9 @@ struct Shape {
 }
 
 const TOP_RIGHT_CORNER: Point = {
-  x = 600,
-  y = 400,
-  label = "top-right corner",
+  x: 600,
+  y: 400,
+  label: "top-right corner",
 };`
 
 const codeExamples = {
