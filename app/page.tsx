@@ -36,7 +36,7 @@ export default function HomePage() {
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 text-pretty">
               Skir is a declarative language for defining data types, constants, and APIs. Write
               your schema once in a <code className="text-primary font-mono">.skir</code> file and
-              generate idiomatic, type-safe code in TypeScript, Python, Java, C++, and more.
+              generate idiomatic, type-safe code in TypeScript, Python, Java, Go, C++, and more.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
@@ -236,6 +236,7 @@ export default function HomePage() {
             <LanguageCard name="TypeScript" icon="🟦" href="/docs/typescript" />
             <LanguageCard name="Python" icon="🐍" href="/docs/python" />
             <LanguageCard name="C++" icon="⚡" href="/docs/cpp" />
+            <LanguageCard name="Go" icon="🐹" href="/docs/go" />
             <LanguageCard name="Java" icon="☕" href="/docs/java" />
             <LanguageCard name="Kotlin" icon="💜" href="/docs/kotlin" />
             <LanguageCard name="Dart" icon="🎯" href="/docs/dart" />

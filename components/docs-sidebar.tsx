@@ -31,6 +31,7 @@ const navigation = [
     items: [
       { title: 'C++', href: '/docs/cpp' },
       { title: 'Dart', href: '/docs/dart' },
+      { title: 'Go', href: '/docs/go' },
       { title: 'Java', href: '/docs/java' },
       { title: 'Kotlin', href: '/docs/kotlin' },
       { title: 'Python', href: '/docs/python' },

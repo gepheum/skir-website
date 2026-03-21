@@ -12,6 +12,7 @@ const footerLinks = {
     { name: 'TypeScript', href: '/docs/typescript' },
     { name: 'Python', href: '/docs/python' },
     { name: 'C++', href: '/docs/cpp' },
+    { name: 'Go', href: '/docs/go' },
     { name: 'Java', href: '/docs/java' },
     { name: 'Kotlin', href: '/docs/kotlin' },
     { name: 'Dart', href: '/docs/dart' },

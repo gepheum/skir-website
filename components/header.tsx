@@ -28,6 +28,7 @@ const navigation: NavigationItem[] = [
     items: [
       { name: 'C++', href: '/docs/cpp' },
       { name: 'Dart', href: '/docs/dart' },
+      { name: 'Go', href: '/docs/go' },
       { name: 'Java', href: '/docs/java' },
       { name: 'Kotlin', href: '/docs/kotlin' },
       { name: 'Python', href: '/docs/python' },

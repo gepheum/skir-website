@@ -131,6 +131,24 @@ print(pointJson);  // [3,4,"P"]
 // Deserialize from JSON
 final restored = Point.serializer.fromJsonCode(pointJson);
 print(restored.label);  // P`,
+
+  go: `// Import the generated package
+import shapes "github.com/my-org/my-project/skirout/shapes"
+
+// Construct an immutable Point
+point := shapes.Point_builder().
+    SetLabel("P").
+    SetX(3).
+    SetY(4).
+    Build()
+
+// Serialize to dense JSON: compact and allows schema evolution
+pointJson := shapes.Point_serializer().ToJson(point)
+fmt.Println(pointJson)  // [3,4,"P"]
+
+// Deserialize from JSON
+restored, _ := shapes.Point_serializer().FromJson(pointJson)
+fmt.Println(restored.Label())  // P`,
 }
 
 export function CodeExample() {

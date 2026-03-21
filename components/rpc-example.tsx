@@ -132,6 +132,32 @@ final response: WhatToWearResponse = await serviceClient
 if (response.sunglasses) {
   print("Don't forget your sunglasses 😎");
 }`,
+
+  go: `import (
+    "context"
+    "fmt"
+    skir "github.com/gepheum/skir-go-client"
+    op "github.com/my-org/my-project/skirout/outfit_picker"
+)
+
+client := skir.NewServiceClient("http://localhost:8080/api")
+defer client.Close()
+
+response, err := skir.InvokeRemote(
+    context.Background(),
+    client,
+    op.WhatToWear(),
+    op.WhatToWearRequest_builder().
+        SetRaining(false).
+        SetTemperatureCelsius(25).
+        Build(),
+)
+if err != nil {
+    panic(err)
+}
+if response.Sunglasses() {
+    fmt.Println("Don't forget your sunglasses 😎")
+}`,
 }
 
 export function RpcExample() {

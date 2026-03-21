@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
 import cpp from 'react-syntax-highlighter/dist/esm/languages/hljs/cpp'
 import dart from 'react-syntax-highlighter/dist/esm/languages/hljs/dart'
+import go from 'react-syntax-highlighter/dist/esm/languages/hljs/go'
 import java from 'react-syntax-highlighter/dist/esm/languages/hljs/java'
 import kotlin from 'react-syntax-highlighter/dist/esm/languages/hljs/kotlin'
 import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python'
@@ -17,11 +18,12 @@ SyntaxHighlighter.registerLanguage('skir', skirLanguage)
 SyntaxHighlighter.registerLanguage('typescript', typescript)
 SyntaxHighlighter.registerLanguage('python', python)
 SyntaxHighlighter.registerLanguage('cpp', cpp)
+SyntaxHighlighter.registerLanguage('go', go)
 SyntaxHighlighter.registerLanguage('kotlin', kotlin)
 SyntaxHighlighter.registerLanguage('java', java)
 SyntaxHighlighter.registerLanguage('dart', dart)
 
-export type CodeTabId = 'typescript' | 'python' | 'cpp' | 'kotlin' | 'java' | 'dart'
+export type CodeTabId = 'typescript' | 'python' | 'cpp' | 'go' | 'kotlin' | 'java' | 'dart'
 
 type CodeTab = {
   id: CodeTabId
@@ -40,6 +42,7 @@ const defaultTabs: CodeTab[] = [
   { id: 'typescript', label: 'TypeScript' },
   { id: 'python', label: 'Python' },
   { id: 'cpp', label: 'C++' },
+  { id: 'go', label: 'Go' },
   { id: 'kotlin', label: 'Kotlin' },
   { id: 'java', label: 'Java' },
   { id: 'dart', label: 'Dart' },

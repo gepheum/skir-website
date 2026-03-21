@@ -19,6 +19,12 @@ const languageStarters = [
     notes: 'Dart 3 project with pub dependencies.',
   },
   {
+    title: 'Go',
+    href: 'https://github.com/gepheum/skir-go-example',
+    framework: 'net/http',
+    notes: 'Standard library HTTP server, no external framework.',
+  },
+  {
     title: 'Java',
     href: 'https://github.com/gepheum/skir-java-example',
     framework: 'Spring Boot',

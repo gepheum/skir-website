@@ -8,6 +8,7 @@ Each starter focuses on the same core workflow: setting up Skir, generating code
 
 - **C++**: https://github.com/gepheum/skir-cc-example (cpp-httplib, CMake)
 - **Dart**: https://github.com/gepheum/skir-dart-example (Shelf, pub)
+- **Go**: https://github.com/gepheum/skir-go-example (net/http, standard library)
 - **Java**: https://github.com/gepheum/skir-java-example (Spring Boot, Gradle)
 - **Kotlin**: https://github.com/gepheum/skir-kotlin-example (Ktor, Gradle Kotlin DSL)
 - **Python**: https://github.com/gepheum/skir-python-example (Flask/FastAPI/Litestar)
