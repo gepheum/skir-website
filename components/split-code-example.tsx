@@ -68,7 +68,7 @@ export function SplitCodeExample({
   }, [])
 
   // Use light theme by default during SSR to match defaultTheme="light"
-  const syntaxTheme = mounted && theme === 'light' ? atomOneLight : atomOneDark
+  const syntaxTheme = !mounted || theme === 'light' ? atomOneLight : atomOneDark
 
   return (
     <div className="rounded-lg border border-border overflow-hidden bg-card">
