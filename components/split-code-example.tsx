@@ -11,6 +11,7 @@ import go from 'react-syntax-highlighter/dist/esm/languages/hljs/go'
 import java from 'react-syntax-highlighter/dist/esm/languages/hljs/java'
 import kotlin from 'react-syntax-highlighter/dist/esm/languages/hljs/kotlin'
 import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python'
+import rust from 'react-syntax-highlighter/dist/esm/languages/hljs/rust'
 import typescript from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript'
 import { atomOneDark, atomOneLight } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
@@ -22,8 +23,9 @@ SyntaxHighlighter.registerLanguage('go', go)
 SyntaxHighlighter.registerLanguage('kotlin', kotlin)
 SyntaxHighlighter.registerLanguage('java', java)
 SyntaxHighlighter.registerLanguage('dart', dart)
+SyntaxHighlighter.registerLanguage('rust', rust)
 
-export type CodeTabId = 'typescript' | 'python' | 'cpp' | 'go' | 'kotlin' | 'java' | 'dart'
+export type CodeTabId = 'typescript' | 'python' | 'cpp' | 'go' | 'kotlin' | 'java' | 'dart' | 'rust'
 
 type CodeTab = {
   id: CodeTabId
@@ -46,6 +48,7 @@ const defaultTabs: CodeTab[] = [
   { id: 'kotlin', label: 'Kotlin' },
   { id: 'java', label: 'Java' },
   { id: 'dart', label: 'Dart' },
+  { id: 'rust', label: 'Rust' },
 ]
 
 export function SplitCodeExample({

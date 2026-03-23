@@ -16,6 +16,7 @@ const footerLinks = {
     { name: 'Java', href: '/docs/java' },
     { name: 'Kotlin', href: '/docs/kotlin' },
     { name: 'Dart', href: '/docs/dart' },
+    { name: 'Rust', href: '/docs/rust' },
   ],
   resources: [
     {

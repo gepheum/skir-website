@@ -133,6 +133,27 @@ if (response.sunglasses) {
   print("Don't forget your sunglasses 😎");
 }`,
 
+  rust: `use skir_client::ServiceClient;
+use skirout::outfit_picker::{what_to_wear, WhatToWearRequest};
+
+let client = ServiceClient::new("http://localhost:8080/api").unwrap();
+
+let response = client
+    .invoke_remote(
+        what_to_wear(),
+        &WhatToWearRequest {
+            temperature_celsius: 25.0,
+            raining: false,
+            _unrecognized: None,
+        },
+        &[],
+    )
+    .unwrap();
+
+if response.sunglasses {
+    println!("Don't forget your sunglasses 😎");
+}`,
+
   go: `import (
     "context"
     "fmt"

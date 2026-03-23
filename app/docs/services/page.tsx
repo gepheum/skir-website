@@ -340,6 +340,29 @@ async def main():
                 </a>
               </td>
             </tr>
+            <tr className="transition-colors hover:bg-muted/50">
+              <td className="p-4 font-medium">Rust</td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-rust-example/blob/main/src/bin/start_service.rs"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Axum
+                </a>
+              </td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-rust-example/blob/main/src/bin/call_service.rs"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Client
+                </a>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>

@@ -132,6 +132,28 @@ print(pointJson);  // [3,4,"P"]
 final restored = Point.serializer.fromJsonCode(pointJson);
 print(restored.label);  // P`,
 
+  rust: `// Import generated types from the module generated from "shapes.skir"
+use skirout::shapes::Point;
+use skir_client::{JsonFlavor, UnrecognizedValues};
+
+// Construct a Point
+let point = Point {
+    x: 3,
+    y: 4,
+    label: "P".to_string(),
+    _unrecognized: None,
+};
+
+// Serialize to dense JSON: compact and allows schema evolution
+let point_json = Point::serializer().to_json(&point, JsonFlavor::Dense);
+println!("{}", point_json);  // [3,4,"P"]
+
+// Deserialize from JSON
+let restored = Point::serializer()
+    .from_json(&point_json, UnrecognizedValues::Drop)
+    .unwrap();
+println!("{}", restored.label);  // P`,
+
   go: `// Import the generated package
 import shapes "github.com/my-org/my-project/skirout/shapes"
 

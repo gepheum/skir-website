@@ -43,6 +43,12 @@ const languageStarters = [
     notes: 'Multiple server frameworks included.',
   },
   {
+    title: 'Rust',
+    href: 'https://github.com/gepheum/skir-rust-example',
+    framework: 'Axum',
+    notes: 'Cargo workspace, async Axum server.',
+  },
+  {
     title: 'TypeScript',
     href: 'https://github.com/gepheum/skir-typescript-example',
     framework: 'Express',

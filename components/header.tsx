@@ -32,6 +32,7 @@ const navigation: NavigationItem[] = [
       { name: 'Java', href: '/docs/java' },
       { name: 'Kotlin', href: '/docs/kotlin' },
       { name: 'Python', href: '/docs/python' },
+      { name: 'Rust', href: '/docs/rust' },
       { name: 'TypeScript', href: '/docs/typescript' },
     ],
   },
