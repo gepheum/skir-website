@@ -19,7 +19,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'Skir - A modern alternative to Protocol Buffer',
   description:
-    'A declarative language for representing data types, constants, and APIs. Define your schema once and generate idiomatic, type-safe code for TypeScript, Python, Java, C++, Kotlin, Dart, Go, and Rust.',
+    'A declarative language for representing data types, constants, and APIs. Define your schema once and generate idiomatic, type-safe code for TypeScript, Python, Java, C++, Kotlin, Dart, Swift, Go, and Rust.',
   keywords: [
     'skir',
     'protocol buffer',
@@ -32,6 +32,7 @@ export const metadata: Metadata = {
     'c++',
     'kotlin',
     'dart',
+    'swift',
     'rust',
     'schema',
     'codegen',

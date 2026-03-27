@@ -36,6 +36,7 @@ const navigation = [
       { title: 'Kotlin', href: '/docs/kotlin' },
       { title: 'Python', href: '/docs/python' },
       { title: 'Rust', href: '/docs/rust' },
+      { title: 'Swift', href: '/docs/swift' },
       { title: 'TypeScript', href: '/docs/typescript' },
     ],
   },

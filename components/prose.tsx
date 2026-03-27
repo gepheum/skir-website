@@ -17,6 +17,7 @@ import json from 'react-syntax-highlighter/dist/esm/languages/hljs/json'
 import kotlin from 'react-syntax-highlighter/dist/esm/languages/hljs/kotlin'
 import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python'
 import rust from 'react-syntax-highlighter/dist/esm/languages/hljs/rust'
+import swift from 'react-syntax-highlighter/dist/esm/languages/hljs/swift'
 import typescript from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript'
 import yaml from 'react-syntax-highlighter/dist/esm/languages/hljs/yaml'
 import { atomOneDark, atomOneLight } from 'react-syntax-highlighter/dist/esm/styles/hljs'
@@ -30,6 +31,7 @@ SyntaxHighlighter.registerLanguage('go', go)
 SyntaxHighlighter.registerLanguage('java', java)
 SyntaxHighlighter.registerLanguage('kotlin', kotlin)
 SyntaxHighlighter.registerLanguage('dart', dart)
+SyntaxHighlighter.registerLanguage('swift', swift)
 SyntaxHighlighter.registerLanguage('rust', rust)
 SyntaxHighlighter.registerLanguage('yaml', yaml)
 SyntaxHighlighter.registerLanguage('bash', bash)

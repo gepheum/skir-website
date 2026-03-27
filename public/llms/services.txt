@@ -127,6 +127,7 @@ async def main():
 | Java | [Spring Boot](https://github.com/gepheum/skir-java-example/blob/main/src/main/java/examples/StartService.java) | [Client](https://github.com/gepheum/skir-java-example/blob/main/src/main/java/examples/CallService.java) |
 | Kotlin | [Ktor](https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/startservice/StartService.kt) | [Client](https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/callservice/CallService.kt) |
 | Dart | [Shelf](https://github.com/gepheum/skir-dart-example/blob/main/bin/start_service.dart) | [Client](https://github.com/gepheum/skir-dart-example/blob/main/bin/call_service.dart) |
+| Swift | [Vapor](https://github.com/gepheum/skir-swift-example/blob/main/Sources/StartService/main.swift) | [Client](https://github.com/gepheum/skir-swift-example/blob/main/Sources/CallService/main.swift) |
 
 ## Why Use Skir Services?
 

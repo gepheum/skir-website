@@ -2,7 +2,7 @@
 
 **Like Protocol Buffers, but better.**
 
-Skir is a declarative language for defining data types, constants, and RPC interfaces. Write your schema once in a `.skir` file and generate idiomatic, type-safe code in TypeScript, Python, Java, C++, Kotlin, Dart, Go, and Rust.
+Skir is a declarative language for defining data types, constants, and RPC interfaces. Write your schema once in a `.skir` file and generate idiomatic, type-safe code in TypeScript, Python, Java, C++, Kotlin, Dart, Swift, Go, and Rust.
 
 - Website: https://skir.build/
 - GitHub: https://github.com/gepheum/skir
@@ -10,7 +10,7 @@ Skir is a declarative language for defining data types, constants, and RPC inter
 ## Key Features
 
 - **Single source of truth** — Define data types and APIs once, share across backend, frontend, and microservices.
-- **Multi-language** — First-class support for TypeScript, Python, C++, Java, Kotlin, Dart, Go, and Rust.
+- **Multi-language** — First-class support for TypeScript, Python, C++, Java, Kotlin, Dart, Swift, Go, and Rust.
 - **Idiomatic code gen** — Generated code feels native to each language.
 - **Effortless serialization** — JSON and binary serialization generated automatically.
 - **Schema evolution** — Built-in rules and checks for backward-compatible schema changes.
@@ -87,5 +87,6 @@ assert(restored == point)
 - Kotlin: https://skir.build/llms/kotlin.txt
 - C++: https://skir.build/llms/cpp.txt
 - Dart: https://skir.build/llms/dart.txt
+- Swift: https://skir.build/llms/swift.txt
 - Go: https://skir.build/llms/go.txt
 - Rust: https://skir.build/llms/rust.txt

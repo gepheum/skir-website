@@ -133,6 +133,24 @@ if (response.sunglasses) {
   print("Don't forget your sunglasses 😎");
 }`,
 
+  swift: `import Foundation
+import MyLib
+import SkirClient
+
+let client = try SkirClient.ServiceClient(serviceUrl: "http://localhost:8080/api")
+
+let response = try await client.invokeRemote(
+  Skir.WhatToWear,
+  request: Skir.WhatToWearRequest.partial(
+    temperatureCelsius: 25,
+    raining: false
+  )
+)
+
+if response.sunglasses {
+  print("Don't forget your sunglasses 😎")
+}`,
+
   rust: `use skir_client::ServiceClient;
 use skirout::outfit_picker::{what_to_wear, WhatToWearRequest};
 

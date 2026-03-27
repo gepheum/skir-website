@@ -13,6 +13,7 @@ Each starter focuses on the same core workflow: setting up Skir, generating code
 - **Kotlin**: https://github.com/gepheum/skir-kotlin-example (Ktor, Gradle Kotlin DSL)
 - **Python**: https://github.com/gepheum/skir-python-example (Flask/FastAPI/Litestar)
 - **Rust**: https://github.com/gepheum/skir-rust-example (Axum, Cargo)
+- **Swift**: https://github.com/gepheum/skir-swift-example (Vapor, SwiftPM)
 - **TypeScript**: https://github.com/gepheum/skir-typescript-example (Express, Node + Browser)
 
 ## Projects and Demos

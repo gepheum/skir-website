@@ -132,6 +132,24 @@ print(pointJson);  // [3,4,"P"]
 final restored = Point.serializer.fromJsonCode(pointJson);
 print(restored.label);  // P`,
 
+  swift: `import Foundation
+import MyLib
+
+// Construct a frozen (immutable) Point
+let point = Shapes_skir.Point(
+  x: 3,
+  y: 4,
+  label: "P"
+)
+
+// Serialize to dense JSON: compact and allows schema evolution
+let pointJson = Shapes_skir.Point.serializer.toJson(point)
+print(pointJson)  // [3,4,"P"]
+
+// Deserialize from JSON
+let restored = try! Shapes_skir.Point.serializer.fromJson(pointJson)
+print(restored.label)  // P`,
+
   rust: `// Import generated types from the module generated from "shapes.skir"
 use skirout::shapes::Point;
 use skir_client::{JsonFlavor, UnrecognizedValues};

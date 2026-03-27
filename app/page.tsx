@@ -240,6 +240,7 @@ export default function HomePage() {
             <LanguageCard name="Java" icon="☕" href="/docs/java" />
             <LanguageCard name="Kotlin" icon="💜" href="/docs/kotlin" />
             <LanguageCard name="Dart" icon="🎯" href="/docs/dart" />
+            <LanguageCard name="Swift" icon="🕊️" href="/docs/swift" />
             <LanguageCard name="Rust" icon="🦀" href="/docs/rust" />
           </div>
         </div>

@@ -12,6 +12,7 @@ import java from 'react-syntax-highlighter/dist/esm/languages/hljs/java'
 import kotlin from 'react-syntax-highlighter/dist/esm/languages/hljs/kotlin'
 import python from 'react-syntax-highlighter/dist/esm/languages/hljs/python'
 import rust from 'react-syntax-highlighter/dist/esm/languages/hljs/rust'
+import swift from 'react-syntax-highlighter/dist/esm/languages/hljs/swift'
 import typescript from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript'
 import { atomOneDark, atomOneLight } from 'react-syntax-highlighter/dist/esm/styles/hljs'
 
@@ -23,9 +24,19 @@ SyntaxHighlighter.registerLanguage('go', go)
 SyntaxHighlighter.registerLanguage('kotlin', kotlin)
 SyntaxHighlighter.registerLanguage('java', java)
 SyntaxHighlighter.registerLanguage('dart', dart)
+SyntaxHighlighter.registerLanguage('swift', swift)
 SyntaxHighlighter.registerLanguage('rust', rust)
 
-export type CodeTabId = 'typescript' | 'python' | 'cpp' | 'go' | 'kotlin' | 'java' | 'dart' | 'rust'
+export type CodeTabId =
+  | 'typescript'
+  | 'python'
+  | 'cpp'
+  | 'go'
+  | 'kotlin'
+  | 'java'
+  | 'dart'
+  | 'swift'
+  | 'rust'
 
 type CodeTab = {
   id: CodeTabId
@@ -43,12 +54,13 @@ type SplitCodeExampleProps = {
 const defaultTabs: CodeTab[] = [
   { id: 'typescript', label: 'TypeScript' },
   { id: 'python', label: 'Python' },
+  { id: 'java', label: 'Java' },
   { id: 'cpp', label: 'C++' },
   { id: 'go', label: 'Go' },
   { id: 'kotlin', label: 'Kotlin' },
-  { id: 'java', label: 'Java' },
-  { id: 'dart', label: 'Dart' },
+  { id: 'swift', label: 'Swift' },
   { id: 'rust', label: 'Rust' },
+  { id: 'dart', label: 'Dart' },
 ]
 
 export function SplitCodeExample({
@@ -101,22 +113,28 @@ export function SplitCodeExample({
         </div>
 
         <div className="w-[55%] flex flex-col">
-          <div className="flex border-b border-border bg-secondary/30">
-            {tabs.map((tab) => (
-              <button
-                type="button"
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={cn(
-                  'px-4 py-3 text-sm font-medium transition-colors',
-                  activeTab === tab.id
-                    ? 'text-primary border-b-2 border-primary bg-card'
-                    : 'text-muted-foreground hover:text-foreground',
-                )}
-              >
-                {tab.label}
-              </button>
-            ))}
+          <div className="relative border-b border-border bg-secondary/30">
+            <div className="overflow-x-auto thin-scrollbar">
+              <div className="flex min-w-max">
+                {tabs.map((tab) => (
+                  <button
+                    type="button"
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={cn(
+                      'shrink-0 px-4 py-3 text-sm font-medium transition-colors whitespace-nowrap',
+                      activeTab === tab.id
+                        ? 'text-primary border-b-2 border-primary bg-card'
+                        : 'text-muted-foreground hover:text-foreground',
+                    )}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-secondary/80 to-transparent" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-secondary/80 to-transparent" />
           </div>
 
           <div className="overflow-x-auto overflow-y-auto flex-1">

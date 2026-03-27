@@ -49,6 +49,12 @@ const languageStarters = [
     notes: 'Cargo workspace, async Axum server.',
   },
   {
+    title: 'Swift',
+    href: 'https://github.com/gepheum/skir-swift-example',
+    framework: 'Vapor',
+    notes: 'SwiftPM package with generated sources under Sources/skirout.',
+  },
+  {
     title: 'TypeScript',
     href: 'https://github.com/gepheum/skir-typescript-example',
     framework: 'Express',

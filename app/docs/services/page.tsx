@@ -317,7 +317,7 @@ async def main():
                 </a>
               </td>
             </tr>
-            <tr className="transition-colors hover:bg-muted/50">
+            <tr className="border-b border-border transition-colors hover:bg-muted/50">
               <td className="p-4 font-medium">Dart</td>
               <td className="p-4 text-muted-foreground">
                 <a
@@ -332,6 +332,29 @@ async def main():
               <td className="p-4 text-muted-foreground">
                 <a
                   href="https://github.com/gepheum/skir-dart-example/blob/main/bin/call_service.dart"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Client
+                </a>
+              </td>
+            </tr>
+            <tr className="border-b border-border transition-colors hover:bg-muted/50">
+              <td className="p-4 font-medium">Swift</td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-swift-example/blob/main/Sources/StartService/main.swift"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Vapor
+                </a>
+              </td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-swift-example/blob/main/Sources/CallService/main.swift"
                   target="_blank"
                   rel="noreferrer"
                   className="underline hover:text-foreground"
