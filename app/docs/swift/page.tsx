@@ -64,10 +64,10 @@ export default function SwiftPage() {
 
       <H3>Referring to generated symbols</H3>
       <P>
-        The Skir code generator places every generated symbol inside a caseless enum named after
-        its .skir file. For example, all types from <InlineCode>path/to/module.skir</InlineCode>{' '}
-        live in <InlineCode>Path_To_Module_skir</InlineCode>. This keeps symbols from different
-        modules unambiguous even when their names collide.
+        The Skir code generator places every generated symbol inside a caseless enum named after its
+        .skir file. For example, all types from <InlineCode>path/to/module.skir</InlineCode> live in{' '}
+        <InlineCode>Path_To_Module_skir</InlineCode>. This keeps symbols from different modules
+        unambiguous even when their names collide.
       </P>
       <P>
         When a name is unique across all modules, a short alias is provided in the generated{' '}
@@ -131,8 +131,7 @@ print(john.name)           // John Doe (john is unchanged)`}</CodeBlock>
         <InlineCode>.unknown</InlineCode> case is added automatically and is the default.
       </P>
       <P>
-        The definition of the <InlineCode>SubscriptionStatus</InlineCode> enum in the .skir file
-        is:
+        The definition of the <InlineCode>SubscriptionStatus</InlineCode> enum in the .skir file is:
       </P>
       <CodeBlock language="skir">{`enum SubscriptionStatus {
   FREE;
@@ -166,8 +165,9 @@ print(describe(john.subscriptionStatus))  // Free user`}</CodeBlock>
 
       <H3>Serialization</H3>
       <P>
-        <InlineCode>User.serializer</InlineCode> returns a <InlineCode>Serializer&lt;User&gt;</InlineCode>{' '}
-        which can serialise and deserialise instances of <InlineCode>User</InlineCode>.
+        <InlineCode>User.serializer</InlineCode> returns a{' '}
+        <InlineCode>Serializer&lt;User&gt;</InlineCode> which can serialise and deserialise
+        instances of <InlineCode>User</InlineCode>.
       </P>
       <CodeBlock language="swift">{`let serializer = Skir.User.serializer
 

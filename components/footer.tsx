@@ -9,15 +9,15 @@ const footerLinks = {
     { name: 'Schema Evolution', href: '/docs/schema-evolution' },
   ],
   languages: [
-    { name: 'TypeScript', href: '/docs/typescript' },
-    { name: 'Python', href: '/docs/python' },
     { name: 'C++', href: '/docs/cpp' },
+    { name: 'Dart', href: '/docs/dart' },
     { name: 'Go', href: '/docs/go' },
     { name: 'Java', href: '/docs/java' },
     { name: 'Kotlin', href: '/docs/kotlin' },
-    { name: 'Dart', href: '/docs/dart' },
-    { name: 'Swift', href: '/docs/swift' },
+    { name: 'Python', href: '/docs/python' },
     { name: 'Rust', href: '/docs/rust' },
+    { name: 'Swift', href: '/docs/swift' },
+    { name: 'TypeScript', href: '/docs/typescript' },
   ],
   resources: [
     {
