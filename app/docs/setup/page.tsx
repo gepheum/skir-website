@@ -18,7 +18,12 @@ export default function GettingStartedPage() {
         <a href="https://nodejs.org" target="_blank" rel="noopener noreferrer">
           Node.js
         </a>{' '}
-        to be installed.
+        or{' '}
+        <a href="https://bun.sh" target="_blank" rel="noopener noreferrer">
+          Bun
+        </a>
+        {' '}to be installed. If you use Bun, replace <code>npx</code> with <code>bunx</code>{' '}
+        in the commands below.
       </p>
 
       <h2>Setting up a project</h2>

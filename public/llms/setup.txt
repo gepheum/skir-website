@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-The Skir compiler requires [Node.js](https://nodejs.org) to be installed.
+The Skir compiler requires [Node.js](https://nodejs.org) or [Bun](https://bun.sh) to be installed. If you use Bun, replace `npx` with `bunx` in the commands below.
 
 ## Setting Up a Project
 
@@ -20,7 +20,7 @@ This creates:
 
 ### Configure code generation
 
-The `skir.yml` file controls how Skir generates code for your project.
+The `skir.yml` file controls how Skir generates code for your project. Here is an example:
 
 ```yaml
 # skir.yml
@@ -44,7 +44,7 @@ Every generator entry has the following properties:
 
 ### Output directory location
 
-Typically, place the skirout directory at the root of your sub-project's source tree. Placement varies by ecosystem:
+Typically, you should place the `skirout` directory at the root of your sub-project's source tree. However, placement varies by ecosystem to ensure idiomatic results:
 - **TypeScript**: Often more convenient to place `skirout` adjacent to the `src` directory.
 - **Java / Kotlin / Python**: Place inside your top-level package (e.g., `src/main/java/com/myproject/skirout`). This ensures generated package names (like `com.myproject.skirout.*`) follow standard naming conventions.
 
@@ -60,9 +60,9 @@ Run Skir code generation before compiling your language-specific source code:
 npx skir gen
 ```
 
-This transpiles your `.skir` files into the target languages specified in your configuration, creating or updating your `skirout` directories.
+This command transpiles your `.skir` files into the target languages specified in your configuration. This creates or updates your `skirout` directories containing the generated source code.
 
-For a more seamless experience, use watch mode:
+For a more seamless experience, consider using watch mode:
 
 ```bash
 npx skir gen --watch
@@ -87,7 +87,7 @@ Use `npx skir format` to format all `.skir` files in your project.
 
 ## Continuous Integration (GitHub)
 
-We recommend adding `skirout` to `.gitignore` and running Skir code generation in your GitHub workflow. GitHub's hosted runners come with Node.js and `npx` pre-installed, so you only need to add one step:
+We recommend adding `skirout` to `.gitignore` and running Skir code generation in your GitHub workflow. GitHub's hosted runners (Ubuntu, Windows, and macOS) come with Node.js and `npx` pre-installed, so you only need to add one step:
 
 ```yaml
 - name: Run Skir codegen
@@ -106,7 +106,7 @@ Optional steps for stricter validation:
   run: npx skir snapshot --ci
 ```
 
-The first step ensures `.skir` files are properly formatted. The second step verifies that you ran `npx skir snapshot` before committing. See the [Schema evolution & compatibility](https://skir.build/docs/schema-evolution) guide for more information about the snapshot command.
+The first step ensures `.skir` files are properly formatted. The second step verifies that you ran `npx skir snapshot` before committing. See the Schema evolution & compatibility guide for more information about the snapshot command.
 
 ## IDE Support
 
