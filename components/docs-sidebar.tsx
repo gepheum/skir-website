@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils'
 import { ChevronDown, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const navigation = [
   {
@@ -46,10 +46,18 @@ const navigation = [
   },
 ]
 
+const COLLAPSED_BY_DEFAULT_SECTIONS = new Set(['Generated code'])
+
 export function DocsSidebar() {
   const pathname = usePathname()
-  const [openSections, setOpenSections] = useState<string[]>(
-    navigation.map((section) => section.title),
+  const [openSections, setOpenSections] = useState<string[]>(() =>
+    navigation
+      .filter(
+        (section) =>
+          !COLLAPSED_BY_DEFAULT_SECTIONS.has(section.title) ||
+          section.items.some((item) => item.href === pathname),
+      )
+      .map((section) => section.title),
   )
 
   const toggleSection = (title: string) => {
@@ -57,6 +65,20 @@ export function DocsSidebar() {
       prev.includes(title) ? prev.filter((t) => t !== title) : [...prev, title],
     )
   }
+
+  useEffect(() => {
+    const activeSection = navigation.find((section) =>
+      section.items.some((item) => item.href === pathname),
+    )
+
+    if (!activeSection) {
+      return
+    }
+
+    setOpenSections((prev) =>
+      prev.includes(activeSection.title) ? prev : [...prev, activeSection.title],
+    )
+  }, [pathname])
 
   return (
     <aside className="hidden md:block w-64 shrink-0">
