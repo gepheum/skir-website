@@ -8,7 +8,7 @@ import { useState } from 'react'
 
 const navigation = [
   {
-    title: 'Getting started',
+    title: 'Quickstart',
     items: [
       { title: 'Introduction', href: '/docs' },
       { title: 'Setup & workflow', href: '/docs/setup' },

@@ -2,17 +2,21 @@
 
 Skir defines a standard for serializing and deserializing data types to JSON and binary. Generated data classes implement this standard for consistent encoding and decoding across all languages.
 
-## Serialization Formats
+## Serialization formats
 
-| Format | Persistable | Space Efficiency | Readability | Notes |
-|---|---|---|---|---|
-| JSON (Dense) | Yes: safe | High | Low | Default choice. Safe for persistence. |
-| JSON (Readable) | No: unsafe | Low | High | Good for debugging. Do NOT use for persistence: renaming fields breaks compatibility. |
-| Binary | Yes: safe | Very High | None | Most compact, fastest in C++. |
+When serializing a data structure, you can choose one of 3 formats:
 
-### JSON, Dense Flavor
+| Format | Persistable | Space efficiency | Readability |
+|---|---|---|---|
+| Dense JSON | Yes (safe) | High | Low |
+| Readable JSON | No (unsafe) | Low | High |
+| Binary | Yes (safe) | Very High | None |
 
-Default choice. Structs are serialized as JSON arrays (field numbers = array indexes). Enum constants are serialized as numbers.
+## Dense JSON
+
+This is the format you should choose in most cases. It is compact and safe for persistence: you can freely rename fields in your schema without breaking compatibility with existing data.
+
+Structs are serialized as JSON arrays, where the field numbers in the index definition match the indexes in the array. Constant variants of enums are serialized as numbers, and wrapper variants are serialized as `[number, value]` arrays.
 
 ```skir
 struct User {
@@ -20,32 +24,39 @@ struct User {
   removed;
   name: string;
   rest_day: Weekday;
+  subscription_status: SubscriptionStatus;
   pets: [Pet];
   nickname: string;
 }
 
 const JOHN_DOE: User = {
-  user_id = 400,
-  name = "John Doe",
-  rest_day = "SUNDAY",
-  pets = [
-    { name = "Fluffy" },
-    { name = "Fido" },
+  user_id: 400,
+  name: "John Doe",
+  rest_day: "SUNDAY",
+  subscription_status: {
+    kind: "premium_since",
+    value: "2027-01-01:00:00:00Z",
+  },
+  pets: [
+    { name: "Fluffy" },
+    { name: "Fido" },
   ],
   nickname = "",
 }
 ```
 
-Dense JSON of `JOHN_DOE`:
+Dense JSON representation of `JOHN_DOE`:
 
 ```json
-[400,0,"John Doe",7,[["Fluffy"],["Fido"]]]
+[400,0,"John Doe",7,[2,1798761600000],[["Fluffy"],["Fido"]]]
 ```
 
-- Removed fields are replaced with zeros
-- Trailing fields with default values are omitted
+- Removed fields are replaced with zeros.
+- Trailing fields with default values are omitted.
 
-#### Dense JSON Encoding Rules
+The output is compact but not human-friendly. If you query a column storing dense JSON directly with a `SELECT`, what comes back is a terse array of numbers and values with no field names in sight. If you need to inspect a value during debugging, the Converter web app can translate dense JSON into readable JSON instantly.
+
+### Dense JSON encoding rules
 
 | Type | Encoded as | Examples |
 |---|---|---|
@@ -61,25 +72,34 @@ Dense JSON of `JOHN_DOE`:
 | `struct` | JSON array. Index = field number. Removed fields = `0`. Trailing defaults omitted. | `[400, 0, "John"]` |
 | `enum` | Constants: integers. Wrappers: `[variant_number, value]` | `1`, `[2, "value"]` |
 
-### JSON, Readable Flavor
+## Readable JSON
 
-Structs as JSON objects, enum constants as strings.
+This format is intended for debugging and human inspection. Structs are serialized as JSON objects and enum constants as strings, making the output easy to read. However, it is not safe for persistence: because Skir allows fields to be renamed, schema evolution will silently break compatibility with old readable JSON data.
 
 ```json
 {
   "user_id": 400,
   "name": "John Doe",
   "rest_day": "SUNDAY",
+  "subscription_status": {
+    "kind": "premium_since",
+    "value": {
+      "unix_millis": 1798761600000,
+      "formatted": "2027-01-01:00:00:00Z"
+    }
+  },
   "pets": [
-    { "name": "Fluffy" },
-    { "name": "Fido" }
+    {
+      "name": "Fluffy"
+    },
+    {
+      "name": "Fido"
+    }
   ]
 }
 ```
 
-**Do not** use for persistence since Skir allows renaming fields.
-
-#### Readable JSON Encoding Rules
+### Readable JSON encoding rules
 
 | Type | Encoded as | Examples |
 |---|---|---|
@@ -95,37 +115,62 @@ Structs as JSON objects, enum constants as strings.
 | `struct` | JSON object with field names. Default values omitted. | `{ "name": "John", "age": 30 }` |
 | `enum` | Constants: strings. Wrappers: `{ "kind": "...", "value": ... }` | `"RED"`, `{ "kind": "rgb", "value": "ff0000" }` |
 
-### Binary Format
+## Binary format
 
-More compact than JSON. Faster serialization/deserialization in C++. All numeric values: little-endian byte order.
+This format is a bit more compact than JSON, and serialization/deserialization can be faster in languages like C++. Only prefer it over JSON when the small performance gain is likely to matter, which should be rare.
 
-#### Binary Encoding Rules
+All numeric values are encoded using little-endian byte order.
 
-| Type | Encoding |
-|---|---|
-| `bool` | `1` for true, `0` for false |
-| `int32` | 0-231: single byte. 232-65535: `0xe8` + uint16. ≥65536: `0xe9` + uint32. -256 to -1: `0xeb` + uint8(val+256). -65536 to -257: `0xec` + uint16(val+65536). ≤-65537: `0xed` + int32. |
-| `int64` | Fits in int32: int32 encoding. Otherwise: `0xee` + 8 bytes. |
-| `hash64` | Fits in uint32: int32 encoding. Otherwise: `0xea` + 8 bytes. |
-| `float32` | 0: `0x00`. Otherwise: `0xf0` + 4 bytes (IEEE 754 LE). |
-| `float64` | 0: `0x00`. Otherwise: `0xf1` + 8 bytes (IEEE 754 LE). |
-| `timestamp` | 0: `0x00`. Otherwise: `0xef` + 8 bytes (int64 millis). |
-| `string` | Empty: `0xf2`. Non-empty: `0xf3` + length (as number) + UTF-8 bytes. |
-| `bytes` | Empty: `0xf4`. Non-empty: `0xf5` + length (as number) + raw bytes. |
-| `T?` | null: `0xff`. Otherwise: value directly. |
-| `[T]` | Length 0-3: `0xf6`-`0xf9`. Length >3: `0xfa` + length. Then items sequentially. |
-| `struct` | Same as array. Index = field number. Removed = `0`. Trailing defaults omitted. |
-| `enum` | Constants: variant number. Wrappers: `0xfb`-`0xfe` (variants 1-4) or `0xf8` + variant number, then value. |
+### Binary encoding rules
+
+| Type | Encoded as | Examples |
+|---|---|---|
+| `bool` | `1` for true, `0` for false | `0x01`, `0x00` |
+| `int32` | `0-231`: single byte `val`; `232-65535`: `0xe8` then `uint16(val)`; `>= 65536`: `0xe9` then `uint32(val)`; `-256 to -1`: `0xeb` then `uint8(val + 256)`; `-65536 to -257`: `0xec` then `uint16(val + 65536)`; `<= -65537`: `0xed` then `int32(val)` | `10 -> 0x0a`, `255 -> 0xe8 0xff 0x00`, `-1 -> 0xeb 0xff` |
+| `int64` | If the value fits in a 32-bit signed integer, use `int32` encoding. Otherwise: marker `0xee` followed by 8 bytes. | |
+| `hash64` | If the value fits in a 32-bit unsigned integer, use `int32` encoding. Otherwise: marker `0xea` followed by 8 bytes. | |
+| `float32` | `0` is encoded as a single byte `0x00`. Otherwise: marker `0xf0` followed by 4 bytes (IEEE 754, little endian). | `0.0 -> 0x00`, `1.5 -> 0xf0 00 00 c0 3f` |
+| `float64` | `0` is encoded as a single byte `0x00`. Otherwise: marker `0xf1` followed by 8 bytes (IEEE 754, little endian). | `0.0 -> 0x00` |
+| `timestamp` | `0` (Epoch) is encoded as a single byte `0x00`. Otherwise: marker `0xef` followed by 8 bytes (int64 millis). | |
+| `string` | Empty string: `0xf2`. Non-empty: marker `0xf3`, then length (encoded as a number), then UTF-8 bytes. | `"Hi" -> 0xf3 0x02 0x48 0x69` |
+| `bytes` | Empty: `0xf4`. Non-empty: marker `0xf5`, then length (encoded as a number), then raw bytes. | |
+| `T?` | `null` is encoded as `0xff`. Otherwise, the value is encoded directly. | `null -> 0xff`, `val -> val_bytes` |
+| `[T]` | Length `0-3`: markers `0xf6`-`0xf9`. Length `> 3`: marker `0xfa` followed by the length. Then items are written sequentially. | `[1, 2] -> 0xf8 ... ...` |
+| `struct` | Same encoding as an array. Array index corresponds to the field number. Removed fields are `0`. Trailing defaults are omitted. | |
+| `enum` | Constant variants are encoded as a number. Wrapper variants use markers `0xfb`-`0xfe` for variant numbers `1-4`, or `0xf8` followed by the variant number, then the value. | |
 
 ## Deserialization
 
-### JSON Flavors
+### JSON flavors
 
-Skir automatically handles both dense and readable flavor during deserialization. No need to specify which.
+When Skir deserializes JSON, it knows how to handle both dense and readable flavor. You do not need to specify which flavor is being used.
 
-### Handling of Zeros
+### Handling of zeros
 
-Both dense JSON and binary use zeros for `removed` fields. Zero is treated as valid input for any type:
-- `string` decodes 0 as `""`
-- Arrays decode 0 as `[]`
-- Optional types (`T?`): 0 decodes as the default value of the underlying type (e.g. `string?` → `""`, not `null`)
+Both the dense JSON and binary formats use zeros to represent `removed` fields to save space. To preserve forward compatibility, zero is treated as a valid input for any type, even non-numerical ones.
+
+- `string` decodes `0` as `""`
+- Arrays decode `0` as `[]`
+- Optional types (`T?`) decode `0` as the default value of the underlying type, for example `string?` decodes `0` as `""`, not `null`
+
+## Converter web app
+
+Skir provides a hosted converter at `skir.build/converter` to convert values across dense JSON, readable JSON, and binary. You can also reach it from the converter icon in the header of the website.
+
+All processing happens locally in the browser. No data entered into the converter leaves the machine.
+
+### Provide a schema
+
+The converter needs a schema, which can be provided in two ways:
+
+1. A type descriptor JSON from generated code. In Python, for example, this can be obtained from `User.serializer.type_descriptor.as_json_code()`. The syntax is similar in other languages.
+
+  A common pattern is to store the type descriptor JSON as metadata next to serialized data so it is available when inspecting a value.
+
+2. A GitHub URL pointing to a specific line where a record is defined in a `.skir` file, for example `https://github.com/gepheum/skir-fantasy-game-example/blob/v1.0.0/skir-src/fantasy_game.skir#L123`.
+
+### Paste a value
+
+Once the schema is loaded, paste the value to inspect. The converter accepts dense JSON, readable JSON, and binary (`base16` or `base64`) and detects the format automatically.
+
+It then shows the value converted to all three formats.

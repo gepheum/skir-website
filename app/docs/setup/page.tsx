@@ -3,14 +3,14 @@ import { NextPageLink } from '@/components/next-page-link'
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
-  title: 'Getting started: setup and workflow - Skir Documentation',
+  title: 'Quickstart: setup and workflow - Skir Documentation',
   description: 'Set up Skir in your project and learn the basic workflow.',
 }
 
 export default function GettingStartedPage() {
   return (
     <Prose>
-      <h1>Getting started: setup and workflow</h1>
+      <h1>Quickstart: setup and workflow</h1>
 
       <h2>Prerequisites</h2>
       <p>

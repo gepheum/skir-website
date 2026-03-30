@@ -16,12 +16,13 @@ import { useState } from 'react'
 type NavigationItem = {
   name: string
   href?: string
+  external?: boolean
   items?: { name: string; href: string }[]
 }
 
 const navigation: NavigationItem[] = [
   { name: 'Docs', href: '/docs' },
-  { name: 'Getting started', href: '/docs/setup' },
+  { name: 'Quickstart', href: '/docs/setup' },
   { name: 'Language reference', href: '/docs/language-reference' },
   {
     name: 'Generated code',
@@ -38,6 +39,22 @@ const navigation: NavigationItem[] = [
     ],
   },
 ]
+
+function ConverterInvaderIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="h-6 w-6">
+      <path
+        d="M6 9V6h2V4h8v2h2v3h2v8h-2v3h-2v-2h-2v2h-4v-2H8v2H6v-3H4V9h2z"
+        fill="white"
+        stroke="black"
+        strokeWidth="1.75"
+        strokeLinejoin="round"
+      />
+      <circle cx="9.5" cy="11.5" r="1.2" fill="black" />
+      <circle cx="14.5" cy="11.5" r="1.2" fill="black" />
+    </svg>
+  )
+}
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -75,6 +92,16 @@ export function Header() {
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
+              ) : item.external ? (
+                <a
+                  key={item.name}
+                  href={item.href!}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {item.name}
+                </a>
               ) : (
                 <Link
                   key={item.name}
@@ -89,16 +116,23 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-4">
+          <Button asChild variant="ghost" size="icon" className="hidden md:flex h-10 w-10">
+            <a
+              href="/converter.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Converter"
+              className="inline-flex items-center justify-center leading-none"
+            >
+              <ConverterInvaderIcon />
+            </a>
+          </Button>
           <ThemeToggle />
           <Button asChild variant="ghost" size="icon" className="hidden md:flex">
             <a href="https://github.com/gepheum/skir" target="_blank" rel="noopener noreferrer">
               <Github className="h-5 w-5" />
               <span className="sr-only">GitHub</span>
             </a>
-          </Button>
-
-          <Button asChild className="hidden md:flex">
-            <Link href="/docs/setup">Get Started</Link>
           </Button>
 
           <Button
@@ -133,6 +167,17 @@ export function Header() {
                     ))}
                   </div>
                 </div>
+              ) : item.external ? (
+                <a
+                  key={item.name}
+                  href={item.href!}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </a>
               ) : (
                 <Link
                   key={item.name}
@@ -145,17 +190,23 @@ export function Header() {
               ),
             )}
             <div className="flex items-center gap-4 pt-4 border-t border-border">
+              <Button asChild variant="outline" size="sm" className="h-10 w-10 p-0">
+                <a
+                  href="converter"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Converter"
+                  className="inline-flex items-center justify-center leading-none"
+                >
+                  <ConverterInvaderIcon />
+                </a>
+              </Button>
               <ThemeToggle />
               <Button asChild variant="outline" size="sm">
                 <a href="https://github.com/gepheum/skir" target="_blank" rel="noopener noreferrer">
                   <Github className="mr-2 h-4 w-4" />
                   GitHub
                 </a>
-              </Button>
-              <Button asChild size="sm">
-                <Link href="/docs/setup" onClick={() => setMobileMenuOpen(false)}>
-                  Get Started
-                </Link>
               </Button>
             </div>
           </div>

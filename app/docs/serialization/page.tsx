@@ -1,3 +1,4 @@
+import { HoverVideo } from '@/components/hover-video'
 import { NextPageLink } from '@/components/next-page-link'
 import { CodeBlock, Prose } from '@/components/prose'
 import {
@@ -35,82 +36,83 @@ export default function SerializationPage() {
               <TableHead className="w-[160px]">Persistable</TableHead>
               <TableHead className="w-[140px]">Space efficiency</TableHead>
               <TableHead className="w-[120px]">Readability</TableHead>
-              <TableHead>Notes</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             <TableRow className="bg-transparent hover:bg-transparent">
-              <TableCell className="font-medium">JSON (Dense)</TableCell>
+              <TableCell className="font-medium">Dense JSON</TableCell>
               <TableCell>Yes (safe)</TableCell>
               <TableCell>High</TableCell>
               <TableCell>Low</TableCell>
-              <TableCell className="whitespace-normal">
-                Default choice. Safe for persistence and offers a good balance between performance
-                and debuggability.
-              </TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
-              <TableCell className="font-medium">JSON (Readable)</TableCell>
+              <TableCell className="font-medium">Readable JSON</TableCell>
               <TableCell>No (unsafe)</TableCell>
               <TableCell>Low</TableCell>
               <TableCell>High</TableCell>
-              <TableCell className="whitespace-normal">
-                Good for debugging. <strong>Do not</strong> use for persistence: schema evolution
-                (e.g. renaming fields) will break compatibility with old data.
-              </TableCell>
             </TableRow>
             <TableRow className="bg-transparent hover:bg-transparent">
               <TableCell className="font-medium">Binary</TableCell>
               <TableCell>Yes (safe)</TableCell>
               <TableCell>Very High</TableCell>
               <TableCell>None</TableCell>
-              <TableCell className="whitespace-normal">
-                Most compact, fastest in languages like C++.
-              </TableCell>
             </TableRow>
           </TableBody>
         </Table>
       </div>
 
-      <h3>JSON, dense flavor</h3>
-      <p>This is the serialization format you should choose in most cases.</p>
+      <h3>Dense JSON</h3>
+      <p>
+        This is the format you should choose in most cases. It is compact and safe for persistence —
+        you can freely rename fields in your schema without breaking compatibility with existing
+        data.
+      </p>
       <p>
         Structs are serialized as JSON arrays, where the field numbers in the index definition match
-        the indexes in the array. Enum constants are serialized as numbers.
+        the indexes in the array. Constant variants of enums are serialized as numbers, wrapper
+        variants are serialized as [number, value] arrays.
       </p>
       <CodeBlock language="skir">{`struct User {
   user_id: int32;
   removed;
   name: string;
   rest_day: Weekday;
+  subscription_status: SubscriptionStatus;
   pets: [Pet];
   nickname: string;
 }
 
 const JOHN_DOE: User = {
-  user_id = 400,
-  name = "John Doe",
-  rest_day = "SUNDAY",
-  pets = [
-    { name = "Fluffy" },
-    { name = "Fido" },
+  user_id: 400,
+  name: "John Doe",
+  rest_day: "SUNDAY",
+  subscription_status: {
+    kind: "premium_since",
+    value: "2027-01-01:00:00:00Z",
+  },
+  pets: [
+    { name: "Fluffy" },
+    { name: "Fido" },
   ],
   nickname = "",
 }`}</CodeBlock>
       <p>
         The dense JSON representation of <code>JOHN_DOE</code> is:
       </p>
-      <CodeBlock language="json">{`[400,0,"John Doe",7,[["Fluffy"],["Fido"]]]`}</CodeBlock>
-      <p>A couple observations:</p>
-      <ul>
-        <li>Removed fields are replaced with zeros</li>
-        <li>
-          Trailing fields with default values (<code>nickname</code> in this example) are omitted
-        </li>
-      </ul>
+      <CodeBlock language="json">{`[400,0,"John Doe",7,[2,1798761600000],[["Fluffy"],["Fido"]]]`}</CodeBlock>
       <p>
-        This format is not very readable, but it's compact and it allows you to rename fields in
-        your struct definition without breaking backward compatibility.
+        Removed fields are replaced with zeros. Trailing fields with default values (
+        <code>nickname</code> in this example) are omitted.
+      </p>
+      <p>
+        The output is compact but not human-friendly — if you query a column storing dense JSON
+        directly with a <code>SELECT</code>, what comes back is a terse array of numbers and values
+        with no field names in sight. If you ever need to inspect a value during debugging, a tool
+        that can come in very handy is the{' '}
+        <a href="#skir-converter-web-app">
+          Converter
+        </a>
+        {' '}web app, which can translate any dense JSON value into readable JSON instantly.
       </p>
 
       <h4>Encoding rules</h4>
@@ -237,8 +239,13 @@ const JOHN_DOE: User = {
         </Table>
       </div>
 
-      <h3>JSON, readable flavor</h3>
-      <p>Structs are serialized as JSON objects, and enum constants are serialized as strings.</p>
+      <h3>Readable JSON</h3>
+      <p>
+        This format is intended for debugging and human inspection. Structs are serialized as JSON
+        objects and enum constants as strings, making the output easy to read. However, it is{' '}
+        <strong>not safe for persistence</strong>: because Skir allows fields to be renamed, schema
+        evolution will silently break compatibility with old readable JSON data.
+      </p>
       <p>
         The readable JSON representation of <code>JOHN_DOE</code> is:
       </p>
@@ -246,17 +253,22 @@ const JOHN_DOE: User = {
   "user_id": 400,
   "name": "John Doe",
   "rest_day": "SUNDAY",
+  "subscription_status": {
+    "kind": "premium_since",
+    "value": {
+      "unix_millis": 1798761600000,
+      "formatted": "2027-01-01:00:00:00Z"
+    }
+  },
   "pets": [
-    { "name": "Fluffy" },
-    { "name": "Fido" }
+    {
+      "name": "Fluffy"
+    },
+    {
+      "name": "Fido"
+    }
   ]
 }`}</CodeBlock>
-
-      <p>
-        This format is more verbose and readable, but it should <strong>not</strong> be used if you
-        need persistence, because Skir allows fields to be renamed in record definitions. In other
-        words, never store a readable JSON on disk or in a database.
-      </p>
 
       <h4>Encoding rules</h4>
 
@@ -632,6 +644,62 @@ const JOHN_DOE: User = {
         For optional types, 0 is decoded as the default value of the underlying type (e.g.{' '}
         <code>string?</code> decodes 0 as <code>""</code>, not <code>null</code>).
       </p>
+
+      <h2 id="skir-converter-web-app">Converter web app</h2>
+      <p>
+        Skir provides a hosted converter at{' '}
+        <a href="/converter.html" target="_blank" rel="noopener noreferrer">
+          skir.build/converter
+        </a>
+        {' '}to convert values across dense JSON, readable JSON, and binary. You can also reach it
+        at any time by clicking the{' '}
+        <img src="/converter-favicon.svg" alt="Converter" className="inline h-[1.1em] w-[1.1em] align-middle" />{' '}
+        button in the header of this website.
+        All processing happens locally in your browser — no data ever leaves your machine.
+      </p>
+
+      <h3>Provide a schema</h3>
+      <p>The converter needs a schema, which you can provide in two ways:</p>
+      <ul>
+        <li>
+          A type descriptor JSON from generated code. In Python, for example, you can get it from{' '}
+          <code>User.serializer.type_descriptor.as_json_code()</code>. The syntax is similar in other languages.
+          <br />
+          A common pattern is to store the type descriptor JSON as metadata next to your serialized
+          data, so it is always at hand when you need to inspect a value.
+        </li>
+        <li>
+          A GitHub URL pointing to a specific line where a record is defined in a <code>.skir</code>{' '}
+          file, for example{' '}
+          <a
+            href="https://github.com/gepheum/skir-fantasy-game-example/blob/v1.0.0/skir-src/fantasy_game.skir#L123"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <code>
+              https://github.com/gepheum/skir-fantasy-game-example/blob/v1.0.0/skir-src/fantasy_game.skir#L123
+            </code>
+          </a>
+          .
+        </li>
+      </ul>
+
+      <h3>Paste a value</h3>
+      <p>
+        Once the schema is loaded, paste the value you want to inspect. The converter accepts dense
+        JSON, readable JSON, and binary (base16 or base64) — it detects the format automatically.
+        It then shows the value converted to all three formats.
+      </p>
+
+      <h3>Demo: schema from GitHub</h3>
+      <div className="not-prose my-6 pt-[2px] max-w-full mx-auto">
+        <HoverVideo src="/skir-converter-github.mp4" />
+      </div>
+
+      <h3>Demo: schema from type descriptor JSON</h3>
+      <div className="not-prose my-6 pt-[2px] max-w-full mx-auto">
+        <HoverVideo src="/skir-converter-type-descriptor.mp4" />
+      </div>
 
       <NextPageLink title="Schema evolution" href="/docs/schema-evolution" />
     </Prose>
