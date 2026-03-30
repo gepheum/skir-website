@@ -12,63 +12,46 @@ export default function SchemaEvolutionPage() {
     <Prose>
       <h1>Schema evolution & compatibility</h1>
       <p>
-        Skir is designed for long-term data persistence and distributed systems. It ensures that
-        your application can evolve its data structures while maintaining compatibility with older
-        data (backward compatibility) and older clients (forward compatibility).
+        Skir includes built-in compatibility checks so you can evolve schemas safely and catch
+        breaking changes before they hit production. It is designed for long-term data persistence
+        and distributed systems, with support for both backward compatibility (new code can read old
+        data) and forward compatibility (old code can read new data when services or clients run
+        different versions).
       </p>
-
-      <h2>Core concepts</h2>
-      <ul>
-        <li>
-          <strong>Backward compatibility</strong>: New code can read old data. This is essential for
-          reading records stored in a database created with an older schema.
-        </li>
-        <li>
-          <strong>Forward compatibility</strong>: Old code can read new data. This is critical in
-          distributed systems where different services or clients may be running different versions
-          of your application.
-        </li>
-      </ul>
 
       <h2>Safe schema changes</h2>
       <p>The following changes are safe and preserve both backward and forward compatibility:</p>
 
-      <h3>Adding fields to a struct</h3>
+      <h3>Adding a field to a struct</h3>
       <p>New code reading old data will use default values for missing fields:</p>
       <ul>
         <li>
-          <strong>Numbers</strong>: <code>0</code>
+          Numbers: <code>0</code>
         </li>
         <li>
-          <strong>Booleans</strong>: <code>false</code>
+          Booleans: <code>false</code>
+        </li>
+        <li>Strings, bytes, arrays: empty</li>
+        <li>Structs: a struct with all fields at their default values</li>
+        <li>
+          Enums: the implicit <code>UNKNOWN</code> variant
         </li>
         <li>
-          <strong>Strings/Bytes</strong>: Empty string/bytes
-        </li>
-        <li>
-          <strong>Arrays</strong>: Empty array <code>[]</code>
-        </li>
-        <li>
-          <strong>Structs</strong>: A struct with all fields at their default values
-        </li>
-        <li>
-          <strong>Enums</strong>: The implicit <code>UNKNOWN</code> variant
-        </li>
-        <li>
-          <strong>Optional types</strong>: <code>null</code>
+          Optional: <code>null</code>
         </li>
       </ul>
 
-      <h3>Adding variants to an enum</h3>
+      <h3>Adding a variant to an enum</h3>
       <p>
         Old code encountering a new variant will treat it as the implicit <code>UNKNOWN</code>{' '}
         variant.
       </p>
 
-      <h3>Renaming types, fields, and variants</h3>
+      <h3>Renaming a type, field, or variant</h3>
       <p>
         Skir uses numeric identifiers (field numbers) in its binary and compact JSON formats, not
-        names. Therefore, renaming any element is safe.
+        names. Therefore, renaming any element is safe. Renaming <code>.skir</code> files or moving
+        symbols across files is also always safe.
       </p>
       <Note type="info">
         <p>
@@ -77,22 +60,14 @@ export default function SchemaEvolutionPage() {
         </p>
       </Note>
 
-      <h3>Changing keyed array keys</h3>
+      <h3>Removing a field or variant</h3>
       <p>
-        You can freely add, remove, or change the key field of a keyed array (the part after{' '}
-        <code>|</code>). For example, changing <code>[User|id]</code> to <code>[User|email]</code>{' '}
-        or <code>[User]</code> is safe. The key annotation is purely a hint for code generation to
-        provide efficient lookup methods—it doesn't affect the serialization format or data
-        compatibility.
+        You must mark the field or variant number as <code>removed</code>. This is permanent: once a
+        number is marked as removed, it cannot be reused. When removing a variant, new code
+        encoutering the old variant will treat it as <code>UNKNOWN</code>.
       </p>
 
-      <h3>Removing fields or variants</h3>
-      <p>
-        You must mark the field or variant number as <code>removed</code> to prevent accidental
-        reuse.
-      </p>
-
-      <h3>Compatible type changes</h3>
+      <h3>Making a compatible type change</h3>
       <p>You can change a type if the new type is backward-compatible with the old one:</p>
       <ul>
         <li>
@@ -114,6 +89,15 @@ export default function SchemaEvolutionPage() {
           <code>A?</code> → <code>B?</code> (if <code>A</code> → <code>B</code> is valid)
         </li>
       </ul>
+
+      <h3>Turning an array into a keyed array</h3>
+      <p>
+        You can freely add, remove, or change the key field of a keyed array (the part after{' '}
+        <code>|</code>). For example, changing <code>[User]</code> to <code>[User|id]</code> or{' '}
+        <code>[User|id]</code> to <code>[User]</code> is safe. The key annotation is purely a hint
+        for code generation to provide efficient lookup methods—it doesn't affect the serialization
+        format or data compatibility.
+      </p>
 
       <h2>Unsafe changes</h2>
       <p>The following changes will break compatibility:</p>
@@ -161,25 +145,57 @@ export default function SchemaEvolutionPage() {
 
       <h3>Tracked types and stable identifiers</h3>
       <p>
-        To track compatibility across renames, Skir needs a stable identifier for your types. You
-        can assign a random integer ID to any struct or enum:
+        To track compatibility across renames, Skir needs a way to identify your types. You can
+        explicitly assign a random integer ID to your top-level types:
       </p>
-      <CodeBlock language="skir">{`// "User" is now tracked by ID 500996846
+      <CodeBlock language="skir">{`// Explicitly tracked by ID 500996846
 struct User(500996846) {
   name: string;
-}`}</CodeBlock>
+  pets: [Pet];
+}
+
+// Implicitly tracked through User, no need to assign an ID
+struct Pet {
+  name: string;
+}
+`}</CodeBlock>
       <p>
         If you rename <code>User</code> to <code>Account</code> but keep the ID{' '}
         <code>500996846</code>, Skir knows it's the same type and will validate the change safely.
       </p>
-      <Note type="tip">
-        <p>
-          Assign stable identifiers to all root types used for storage. Nested types are implicitly
-          tracked through their parents so you don't need to give them a stable identifier.
-          Similarly, the request and response types of methods are automatically tracked as part of
-          the method definition.
-        </p>
-      </Note>
+
+      <h3>Which types to explicitly track</h3>
+      <p>
+        In most projects, only a handful of types need explicit stable identifiers: the top-level
+        records that you store on disk. All records they contain, directly or indirectly, are
+        implicitly tracked through their parents.
+      </p>
+      <p>
+        In the example above, <code>Pet</code> is implicitly tracked through <code>User</code>. If
+        you rename <code>Pet</code> to <code>Animal</code> without changing its structure, Skir will
+        still recognize it as the same type because it is the type of the first field (number{' '}
+        <code>0</code>) of <code>User</code>. But if you then make the following change:
+      </p>
+      <CodeBlock language="skir">{`struct Animal {
+  name: bool;  // Was string
+}
+`}</CodeBlock>
+      <p>
+        The snapshot tool will report a breaking change in <code>Pet</code>/<code>Animal</code>{' '}
+        because <code>string</code> → <code>bool</code> is an incompatible type change.
+      </p>
+      <p>
+        Types used as service method requests and responses are also implicitly tracked through the
+        method number, so you do not need to give them stable IDs.
+      </p>
+      <CodeBlock language="skir">{`method GetUser(GetUserRequest): GetUserResponse = 12345;
+
+// Tracked through GetUser
+struct GetUserRequest { }
+
+// Tracked through GetUser
+struct GetUserResponse { }
+`}</CodeBlock>
 
       <h3>Handling intentional breaking changes</h3>
       <p>
@@ -249,8 +265,7 @@ struct User(500996846) {
         </li>
       </ul>
 
-      <h3>Example</h3>
-      <p>Consider a schema evolution where a field and an enum variant are added:</p>
+      <p>For example, consider a schema evolution where a field and an enum variant are added:</p>
       <CodeBlock language="skir" filename="Version 1">{`struct UserBefore(999) {
   id: int64;
   subscription_status: enum {
@@ -268,7 +283,7 @@ struct User(500996846) {
   name: string;  // Added
 }`}</CodeBlock>
 
-      <h4>Default behavior: drop</h4>
+      <h3>Default behavior: drop</h3>
       <p>By default, unrecognized data is lost during the round-trip.</p>
       <CodeBlock language="typescript">{`// Old code reads and writes the data
 const oldUser = UserBefore.serializer.fromJson(originalJson);
@@ -281,7 +296,7 @@ assert(result.id === 123);
 assert(result.name === "");  // Lost: reset to default
 assert(result.subscriptionStatus.union.kind === "UNKNOWN");  // Lost: became UNKNOWN`}</CodeBlock>
 
-      <h4>Preserve behavior</h4>
+      <h3>Preserve behavior</h3>
       <p>You can configure the deserializer to keep unrecognized values.</p>
       <CodeBlock language="typescript">{`// Old code reads with "keep-unrecognized-values"
 const oldUser = UserBefore.serializer.fromJson(
