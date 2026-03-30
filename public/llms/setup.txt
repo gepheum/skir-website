@@ -1,4 +1,4 @@
-# Getting Started: Setup and Workflow
+# Quickstart: Setup and Workflow
 
 ## Prerequisites
 

@@ -18,7 +18,7 @@ export const metadata = {
 
 const sections = [
   {
-    title: 'Getting Started',
+    title: 'Quickstart',
     description: 'Set up Skir in your project and learn the basic workflow.',
     href: '/docs/setup',
     icon: BookOpen,

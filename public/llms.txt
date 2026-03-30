@@ -60,7 +60,7 @@ assert(restored == point)
 
 ## Detailed Documentation
 
-### Getting Started
+### Quickstart
 - Setup & Workflow: https://skir.build/llms/setup.txt
   - Learn how to initialize a Skir project, configure code generators for multiple languages, and integrate Skir into your build workflow with watch mode and continuous integration.
 - Language Reference: https://skir.build/llms/language-reference.txt
