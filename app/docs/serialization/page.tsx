@@ -108,11 +108,8 @@ const JOHN_DOE: User = {
         The output is compact but not human-friendly — if you query a column storing dense JSON
         directly with a <code>SELECT</code>, what comes back is a terse array of numbers and values
         with no field names in sight. If you ever need to inspect a value during debugging, a tool
-        that can come in very handy is the{' '}
-        <a href="#skir-converter-web-app">
-          Converter
-        </a>
-        {' '}web app, which can translate any dense JSON value into readable JSON instantly.
+        that can come in very handy is the <a href="#skir-converter-web-app">Converter</a> web app,
+        which can translate any dense JSON value into readable JSON instantly.
       </p>
 
       <h4>Encoding rules</h4>
@@ -650,12 +647,16 @@ const JOHN_DOE: User = {
         Skir provides a hosted converter at{' '}
         <a href="/converter.html" target="_blank" rel="noopener noreferrer">
           skir.build/converter
-        </a>
-        {' '}to convert values across dense JSON, readable JSON, and binary. You can also reach it
-        at any time by clicking the{' '}
-        <img src="/converter-favicon.svg" alt="Converter" className="inline h-[1.1em] w-[1.1em] align-middle" />{' '}
-        button in the header of this website.
-        All processing happens locally in your browser — no data ever leaves your machine.
+        </a>{' '}
+        to convert values across dense JSON, readable JSON, and binary. You can also reach it at any
+        time by clicking the{' '}
+        <img
+          src="/converter-favicon.svg"
+          alt="Converter"
+          className="inline h-[1.1em] w-[1.1em] align-middle"
+        />{' '}
+        button in the header of this website. All processing happens locally in your browser — no
+        data ever leaves your machine.
       </p>
 
       <h3>Provide a schema</h3>
@@ -663,10 +664,10 @@ const JOHN_DOE: User = {
       <ul>
         <li>
           A type descriptor JSON from generated code. In Python, for example, you can get it from{' '}
-          <code>User.serializer.type_descriptor.as_json_code()</code>. The syntax is similar in other languages.
-          <br />
-          A common pattern is to store the type descriptor JSON as metadata next to your serialized
-          data, so it is always at hand when you need to inspect a value.
+          <code>User.serializer.type_descriptor.as_json_code()</code>. The syntax is similar in
+          other languages.
+          <br />A common pattern is to store the type descriptor JSON as metadata next to your
+          serialized data, so it is always at hand when you need to inspect a value.
         </li>
         <li>
           A GitHub URL pointing to a specific line where a record is defined in a <code>.skir</code>{' '}
@@ -687,8 +688,8 @@ const JOHN_DOE: User = {
       <h3>Paste a value</h3>
       <p>
         Once the schema is loaded, paste the value you want to inspect. The converter accepts dense
-        JSON, readable JSON, and binary (base16 or base64) — it detects the format automatically.
-        It then shows the value converted to all three formats.
+        JSON, readable JSON, and binary (base16 or base64) — it detects the format automatically. It
+        then shows the value converted to all three formats.
       </p>
 
       <h3>Demo: schema from GitHub</h3>
