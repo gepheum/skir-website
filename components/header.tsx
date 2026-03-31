@@ -116,7 +116,12 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-4">
-          <Button asChild variant="ghost" size="icon" className="hidden md:flex h-10 w-10 rounded-full">
+          <Button
+            asChild
+            variant="ghost"
+            size="icon"
+            className="hidden md:flex h-10 w-10 rounded-full"
+          >
             <a
               href="/converter.html"
               target="_blank"

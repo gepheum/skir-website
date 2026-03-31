@@ -188,8 +188,15 @@
 
   .friendly-grid {
     background-image:
-      linear-gradient(color-mix(in oklab, var(--color-border) 55%, transparent) 1px, transparent 1px),
-      linear-gradient(90deg, color-mix(in oklab, var(--color-border) 55%, transparent) 1px, transparent 1px);
+      linear-gradient(
+        color-mix(in oklab, var(--color-border) 55%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        color-mix(in oklab, var(--color-border) 55%, transparent) 1px,
+        transparent 1px
+      );
     background-size: 32px 32px;
     background-position: center;
     mask-image: radial-gradient(circle at center, black 35%, transparent 85%);

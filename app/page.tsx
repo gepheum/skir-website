@@ -9,13 +9,7 @@ import { ArrowRight, Github as GitHubIcon, Package, Terminal, Zap } from 'lucide
 import Image from 'next/image'
 import Link from 'next/link'
 
-function WaveDivider({
-  colorClass,
-  flip = false,
-}: {
-  colorClass: string
-  flip?: boolean
-}) {
+function WaveDivider({ colorClass, flip = false }: { colorClass: string; flip?: boolean }) {
   return (
     <div
       aria-hidden="true"
@@ -69,7 +63,12 @@ export default function HomePage() {
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="rounded-full bg-transparent text-base">
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="rounded-full bg-transparent text-base"
+              >
                 <a href="https://github.com/gepheum/skir" target="_blank" rel="noopener noreferrer">
                   <GitHubIcon className="mr-2 h-4 w-4" />
                   View on GitHub
