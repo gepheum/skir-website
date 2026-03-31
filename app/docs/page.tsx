@@ -71,7 +71,7 @@ export default function DocsPage() {
   return (
     <div className="max-w-4xl">
       <div className="mb-12">
-        <h1 className="text-4xl font-bold mb-4">Documentation</h1>
+        <h1 className="mb-4 text-4xl font-bold">Documentation</h1>
         <p className="text-lg text-muted-foreground">
           Skir is a declarative language for representing data types, constants, and APIs. Define
           your schema once in a <code className="text-primary font-mono">.skir</code> file and
@@ -87,10 +87,10 @@ export default function DocsPage() {
             <Link
               key={section.href}
               href={section.href}
-              className="group p-6 rounded-lg border border-border bg-card hover:border-primary/50 transition-colors"
+              className="soft-surface group rounded-xl p-6 transition-colors hover:border-primary/40"
             >
-              <div className="flex items-center gap-3 mb-3">
-                <div className="p-2 rounded-md bg-primary/10 text-primary">
+              <div className="mb-3 flex items-center gap-3">
+                <div className="rounded-lg bg-primary/10 p-2 text-primary">
                   <Icon className="h-5 w-5" />
                 </div>
                 <h2 className="font-semibold">{section.title}</h2>
@@ -105,9 +105,9 @@ export default function DocsPage() {
         })}
       </div>
 
-      <div className="p-6 rounded-lg border border-border bg-card">
-        <h2 className="font-semibold mb-2">Supported Languages</h2>
-        <p className="text-sm text-muted-foreground mb-4">
+      <div className="soft-surface rounded-xl p-6">
+        <h2 className="mb-2 font-semibold">Supported Languages</h2>
+        <p className="mb-4 text-sm text-muted-foreground">
           Skir generates idiomatic code for all major programming languages.
         </p>
         <div className="flex flex-wrap gap-2">

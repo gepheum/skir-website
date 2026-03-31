@@ -1,4 +1,5 @@
 import { Github as GitHubIcon } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 const footerLinks = {
@@ -32,24 +33,28 @@ const footerLinks = {
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-card/50">
+    <footer className="border-t border-border bg-card/40">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary text-primary-foreground font-bold">
-                S
-              </div>
+            <Link href="/" className="mb-4 flex items-center gap-3">
+              <Image
+                src="/a-friendly-octopus.svg"
+                alt="Skir"
+                width={36}
+                height={36}
+                className="rounded-full bg-primary/8 p-0.5"
+              />
               <span className="text-xl font-bold">Skir</span>
             </Link>
-            <p className="text-sm text-muted-foreground mb-4">
+            <p className="mb-4 text-sm text-muted-foreground">
               A modern alternative to Protocol Buffer.
             </p>
             <a
               href="https://github.com/gepheum/skir"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
             >
               <GitHubIcon className="h-4 w-4" />
               <span>gepheum/skir</span>
@@ -57,13 +62,13 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Documentation</h3>
+            <h3 className="mb-4 font-semibold">Documentation</h3>
             <ul className="space-y-2">
               {footerLinks.documentation.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {link.name}
                   </Link>
@@ -73,13 +78,13 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Languages</h3>
+            <h3 className="mb-4 font-semibold">Languages</h3>
             <ul className="space-y-2">
               {footerLinks.languages.map((link) => (
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {link.name}
                   </Link>
@@ -89,7 +94,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Resources</h3>
+            <h3 className="mb-4 font-semibold">Resources</h3>
             <ul className="space-y-2">
               {footerLinks.resources.map((link) => (
                 <li key={link.name}>
@@ -98,14 +103,14 @@ export function Footer() {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {link.name}
                     </a>
                   ) : (
                     <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {link.name}
                     </Link>
@@ -116,7 +121,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
+        <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
           <p>Released under the MIT License. Copyright 2024-present Gepheum.</p>
         </div>
       </div>

@@ -60,16 +60,16 @@ export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b border-border/80 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70">
       <nav className="container mx-auto flex h-16 items-center justify-between px-4">
         <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2.5">
             <Image
-              src="/iceberg-32x32.png"
+              src="/octopus.svg"
               alt="Skir"
               width={32}
               height={32}
-              className="rounded-md"
+              className="rounded-full bg-primary/8 p-0.5"
             />
             <span className="text-xl font-bold">Skir</span>
           </Link>
@@ -78,7 +78,7 @@ export function Header() {
             {navigation.map((item) =>
               item.items ? (
                 <DropdownMenu key={item.name}>
-                  <DropdownMenuTrigger className="flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors focus:outline-none cursor-pointer">
+                  <DropdownMenuTrigger className="flex cursor-pointer items-center text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus:outline-none">
                     {item.name}
                     <ChevronDown className="ml-1 h-4 w-4" />
                   </DropdownMenuTrigger>
@@ -98,7 +98,7 @@ export function Header() {
                   href={item.href!}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {item.name}
                 </a>
@@ -106,7 +106,7 @@ export function Header() {
                 <Link
                   key={item.name}
                   href={item.href!}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {item.name}
                 </Link>
@@ -116,7 +116,7 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-4">
-          <Button asChild variant="ghost" size="icon" className="hidden md:flex h-10 w-10">
+          <Button asChild variant="ghost" size="icon" className="hidden md:flex h-10 w-10 rounded-full">
             <a
               href="/converter.html"
               target="_blank"
@@ -128,7 +128,7 @@ export function Header() {
             </a>
           </Button>
           <ThemeToggle />
-          <Button asChild variant="ghost" size="icon" className="hidden md:flex">
+          <Button asChild variant="ghost" size="icon" className="hidden md:flex rounded-full">
             <a href="https://github.com/gepheum/skir" target="_blank" rel="noopener noreferrer">
               <Github className="h-5 w-5" />
               <span className="sr-only">GitHub</span>
@@ -138,7 +138,7 @@ export function Header() {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden"
+            className="rounded-full md:hidden"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -148,18 +148,18 @@ export function Header() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-border bg-background">
-          <div className="container mx-auto px-4 py-4 space-y-4">
+        <div className="border-t border-border bg-background/95 md:hidden">
+          <div className="container mx-auto space-y-4 px-4 py-4">
             {navigation.map((item) =>
               item.items ? (
                 <div key={item.name} className="space-y-3">
                   <div className="text-sm font-medium text-foreground">{item.name}</div>
-                  <div className="pl-4 space-y-3 border-l border-border ml-1">
+                  <div className="ml-1 space-y-3 border-l border-border pl-4">
                     {item.items.map((subItem) => (
                       <Link
                         key={subItem.name}
                         href={subItem.href}
-                        className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        className="block text-sm text-muted-foreground transition-colors hover:text-foreground"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         {subItem.name}
@@ -173,7 +173,7 @@ export function Header() {
                   href={item.href!}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="block text-sm text-muted-foreground transition-colors hover:text-foreground"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}
@@ -182,15 +182,15 @@ export function Header() {
                 <Link
                   key={item.name}
                   href={item.href!}
-                  className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className="block text-sm text-muted-foreground transition-colors hover:text-foreground"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}
                 </Link>
               ),
             )}
-            <div className="flex items-center gap-4 pt-4 border-t border-border">
-              <Button asChild variant="outline" size="sm" className="h-10 w-10 p-0">
+            <div className="flex items-center gap-4 border-t border-border pt-4">
+              <Button asChild variant="outline" size="sm" className="h-10 w-10 rounded-full p-0">
                 <a
                   href="converter"
                   target="_blank"

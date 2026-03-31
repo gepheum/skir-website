@@ -89,7 +89,7 @@ export function DocsSidebar() {
               <button
                 type="button"
                 onClick={() => toggleSection(section.title)}
-                className="flex items-center justify-between w-full text-sm font-semibold text-foreground mb-2 hover:text-primary transition-colors"
+                className="mb-2 flex w-full items-center justify-between text-sm font-semibold text-foreground transition-colors hover:text-primary"
               >
                 {section.title}
                 {openSections.includes(section.title) ? (
@@ -99,13 +99,13 @@ export function DocsSidebar() {
                 )}
               </button>
               {openSections.includes(section.title) && (
-                <ul className="space-y-1 ml-2 border-l border-border pl-4">
+                <ul className="ml-2 space-y-1 border-l border-border pl-4">
                   {section.items.map((item) => (
                     <li key={item.href}>
                       <Link
                         href={item.href}
                         className={cn(
-                          'block text-sm py-1 transition-colors',
+                          'block py-1 text-sm transition-colors',
                           pathname === item.href
                             ? 'text-primary font-medium'
                             : 'text-muted-foreground hover:text-foreground',
