@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'Gepheum' }],
   icons: {
     icon: [{ url: '/octopus.svg', type: 'image/svg+xml' }],
-    apple: [{ url: '/iceberg-apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    apple: [{ url: '/octopus.svg', type: 'image/svg+xml' }],
   },
   openGraph: {
     title: 'Skir - A modern alternative to Protocol Buffer',
