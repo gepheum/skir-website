@@ -39,7 +39,7 @@ export function Footer() {
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="mb-4 flex items-center gap-3">
               <Image
-                src="/a-friendly-octopus.svg"
+                src="/octopus.svg"
                 alt="Skir"
                 width={36}
                 height={36}
