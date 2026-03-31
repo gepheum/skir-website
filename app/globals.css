@@ -5,13 +5,13 @@
 
 /* Light theme */
 :root {
-  --background: oklch(0.968 0.014 95);
+  --background: oklch(0.958 0.016 92);
   --foreground: oklch(0.18 0.015 230);
 
-  --card: oklch(0.985 0.012 95);
+  --card: oklch(0.976 0.014 92);
   --card-foreground: oklch(0.18 0.015 230);
 
-  --popover: oklch(0.985 0.012 95);
+  --popover: oklch(0.976 0.014 92);
   --popover-foreground: oklch(0.18 0.015 230);
 
   --primary: oklch(0.62 0.13 190);
@@ -20,17 +20,17 @@
   --secondary: oklch(0.94 0.03 182);
   --secondary-foreground: oklch(0.18 0.015 230);
 
-  --muted: oklch(0.935 0.017 95);
+  --muted: oklch(0.924 0.019 92);
   --muted-foreground: oklch(0.44 0.015 230);
 
-  --accent: oklch(0.93 0.045 42);
+  --accent: oklch(0.915 0.042 42);
   --accent-foreground: oklch(0.18 0.015 230);
 
   --destructive: oklch(0.55 0.15 27);
   --destructive-foreground: oklch(0.98 0.004 220);
 
   --border: oklch(0.89 0.01 220);
-  --input: oklch(0.9 0.02 95);
+  --input: oklch(0.888 0.018 92);
   --ring: oklch(0.62 0.13 190);
 
   --chart-1: oklch(0.62 0.13 190);
@@ -41,11 +41,11 @@
 
   --radius: 0.8rem;
 
-  --sidebar: oklch(0.972 0.013 95);
+  --sidebar: oklch(0.962 0.015 92);
   --sidebar-foreground: oklch(0.18 0.015 230);
   --sidebar-primary: oklch(0.62 0.13 190);
   --sidebar-primary-foreground: oklch(0.98 0.004 220);
-  --sidebar-accent: oklch(0.935 0.017 95);
+  --sidebar-accent: oklch(0.924 0.019 92);
   --sidebar-accent-foreground: oklch(0.18 0.015 230);
   --sidebar-border: oklch(0.89 0.01 220);
   --sidebar-ring: oklch(0.62 0.13 190);
@@ -149,9 +149,9 @@
   body {
     @apply bg-background text-foreground;
     background-image:
-      radial-gradient(circle at top left, oklch(0.93 0.05 182 / 0.82), transparent 32%),
-      radial-gradient(circle at top right, oklch(0.92 0.06 48 / 0.52), transparent 28%),
-      linear-gradient(180deg, oklch(0.975 0.012 95), oklch(0.955 0.014 95));
+      radial-gradient(circle at top left, oklch(0.91 0.048 182 / 0.78), transparent 32%),
+      radial-gradient(circle at top right, oklch(0.9 0.055 48 / 0.5), transparent 28%),
+      linear-gradient(180deg, oklch(0.965 0.014 92), oklch(0.944 0.016 92));
     min-height: 100vh;
   }
 
