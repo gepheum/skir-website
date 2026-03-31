@@ -31,7 +31,7 @@ export default function HomePage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden px-4 pb-28 pt-24 md:px-5 md:pb-36 md:pt-32">
+      <section className="relative overflow-hidden px-4 pb-22 pt-20 md:px-5 md:pb-28 md:pt-26">
         <div className="absolute inset-0 -z-10">
           <div className="absolute left-1/2 top-0 h-[620px] w-[840px] -translate-x-1/2 rounded-full bg-primary/12 blur-[120px]" />
           <div className="absolute left-8 top-28 h-40 w-40 rounded-full bg-accent/35 blur-3xl" />
@@ -56,7 +56,7 @@ export default function HomePage() {
               generate idiomatic, type-safe code in TypeScript, Python, Java, Go, C++, and more.
             </p>
 
-            <div className="mb-16 flex flex-col justify-center gap-4 sm:flex-row">
+            <div className="mb-12 flex flex-col justify-center gap-4 sm:flex-row">
               <Button asChild size="lg" className="rounded-full px-6 text-base">
                 <Link href="/docs/setup">
                   Get Started
@@ -77,7 +77,7 @@ export default function HomePage() {
             </div>
 
             {/* Quick start terminal */}
-            <div className="mx-auto mb-16 max-w-md">
+            <div className="mx-auto mb-12 max-w-md">
               <div className="soft-surface rounded-lg p-4 font-mono text-sm">
                 <div className="mb-2 flex items-center gap-2 text-muted-foreground">
                   <Terminal className="h-4 w-4" />
@@ -104,7 +104,7 @@ export default function HomePage() {
       </section>
 
       {/* Code Example Section */}
-      <section className="relative overflow-hidden px-4 py-16 md:px-5 md:py-24">
+      <section className="relative overflow-hidden px-4 py-14 md:px-5 md:py-20">
         <WaveDivider colorClass="text-background" flip />
         <div className="container mx-auto">
           <div className="max-w-5xl mx-auto">
@@ -127,7 +127,7 @@ export default function HomePage() {
       </section>
 
       {/* Schema Evolution Section */}
-      <section className="py-16 md:py-24 border-t border-border">
+      <section className="border-t border-border py-14 md:py-20">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="mb-4 text-balance text-3xl font-bold md:text-4xl">
@@ -155,7 +155,7 @@ export default function HomePage() {
       </section>
 
       {/* RPC Example Section */}
-      <section className="py-16 md:py-24 border-t border-border bg-card/30">
+      <section className="border-t border-border bg-card/30 py-14 md:py-20">
         <div className="container mx-auto">
           <div className="mb-12 max-w-6xl mx-auto text-center">
             <h2 className="mb-4 text-balance text-3xl font-bold md:text-4xl">
@@ -174,7 +174,7 @@ export default function HomePage() {
       </section>
 
       {/* Ask Claude Section */}
-      <section className="py-16 md:py-24 border-t border-border bg-card/30">
+      <section className="border-t border-border bg-card/30 py-14 md:py-20">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="mb-8 text-balance text-3xl font-bold md:text-4xl">
@@ -206,9 +206,9 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 md:py-24 border-t border-border">
+      <section className="border-t border-border py-14 md:py-20">
         <div className="container mx-auto">
-          <div className="mb-16 text-center">
+          <div className="mb-12 text-center">
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">More features</h2>
           </div>
 
@@ -247,9 +247,9 @@ export default function HomePage() {
       </section>
 
       {/* Language Support Section */}
-      <section className="py-16 md:py-24 border-t border-border">
+      <section className="border-t border-border py-14 md:py-20">
         <div className="container mx-auto">
-          <div className="mb-16 text-center">
+          <div className="mb-12 text-center">
             <h2 className="mb-4 text-3xl font-bold md:text-4xl">Supported languages</h2>
             <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
               Generate production-ready code for all major programming languages.
@@ -271,7 +271,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 border-t border-border">
+      <section className="border-t border-border py-14 md:py-20">
         <div className="container mx-auto">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="mb-4 text-balance text-3xl font-bold md:text-4xl">

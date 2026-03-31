@@ -11,7 +11,7 @@ export function LanguageCard({ name, icon, href }: LanguageCardProps) {
   return (
     <Link
       href={href}
-      className="soft-surface group flex items-center justify-between rounded-xl p-4 transition-colors hover:border-primary/40 hover:bg-card/80"
+      className="soft-surface group flex cursor-pointer items-center justify-between rounded-xl p-4 transition-colors hover:border-primary/40 hover:bg-card/80"
     >
       <div className="flex items-center gap-3">
         <span

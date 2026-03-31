@@ -122,7 +122,7 @@ export function SplitCodeExample({
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
                     className={cn(
-                      'shrink-0 px-4 py-3 text-sm font-medium transition-colors whitespace-nowrap',
+                      'shrink-0 cursor-pointer whitespace-nowrap px-4 py-3 text-sm font-medium transition-colors',
                       activeTab === tab.id
                         ? 'text-primary border-b-2 border-primary bg-card'
                         : 'text-muted-foreground hover:text-foreground',
