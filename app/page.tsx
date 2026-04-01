@@ -183,15 +183,8 @@ export default function HomePage() {
               Skir has simple guidelines and built-in checks to evolve your schema safely.
             </p>
 
-            <div className="soft-surface mx-auto max-w-[760px] overflow-hidden rounded-xl p-2">
-              <Image
-                src="/schema-evolution.gif"
-                alt="Schema Evolution showing breaking change detection"
-                width={0}
-                height={0}
-                sizes="100vw"
-                className="h-auto w-full rounded-lg"
-              />
+            <div className="mx-auto max-w-[608px]">
+              <HoverVideo src="/schema-evolution.mp4" />
             </div>
           </div>
         </div>
