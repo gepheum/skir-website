@@ -272,12 +272,12 @@ export default function HomePage() {
             />
             <FeatureCard
               icon={<Package className="h-6 w-6" />}
-              title="Built-in package manager"
+              title="GitHub imports"
               description="Stop copying files. Import types directly from any GitHub repository. Share common data structures across projects."
             />
             <FeatureCard
               icon={<Terminal className="h-6 w-6" />} // Using Terminal for Dev Experience
-              title="First-class developer experience"
+              title="First-class IDE support"
               description={
                 <>
                   A powerful{' '}
@@ -293,6 +293,26 @@ export default function HomePage() {
                   code formatting and more.
                 </>
               }
+            />
+            <FeatureCard
+              icon={<SiRust className="h-6 w-6" />}
+              title="Rust-like enums"
+              description={
+                <>
+                  A Skir <code>enum</code> is a set of variants. Each variant can be a simple
+                  constant or carry typed data.
+                </>
+              }
+            />
+            <FeatureCard
+              icon={<Package className="h-6 w-6" />}
+              title="Immutable data types"
+              description="Except in C++, Skir generates deeply immutable types with all fields required at construction time."
+            />
+            <FeatureCard
+              icon={<Terminal className="h-6 w-6" />}
+              title="Easy to extend"
+              description="Code generators are regular NPM modules, so you can add custom ones without hacking the compiler."
             />
           </div>
         </div>
