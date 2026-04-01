@@ -92,17 +92,6 @@ export default function HomePage() {
               </Button>
             </div>
 
-            {/* Quick start terminal */}
-            <div className="mx-auto mb-12 max-w-md">
-              <div className="soft-surface rounded-lg p-4 font-mono text-sm">
-                <div className="mb-2 flex items-center gap-2 text-muted-foreground">
-                  <Terminal className="h-4 w-4" />
-                  <span>Quick Start</span>
-                </div>
-                <code className="text-primary">npx skir init</code>
-              </div>
-            </div>
-
             {/* Quick Example Video */}
             <div className="mx-auto max-w-[1000px]">
               <HoverVideo src="/greet.mp4" />
@@ -244,7 +233,7 @@ export default function HomePage() {
               Ask Claude — or your favorite AI
             </h2>
 
-            <div className="soft-surface mb-6 rounded-xl p-6">
+            <div className="soft-surface mb-6 rounded-xl p-6 max-w-2xl mx-auto">
               <div className="text-muted-foreground mb-2">Prompt:</div>
               <p className="text-lg italic text-foreground">
                 Create a full-stack application with a Kotlin backend and a TypeScript frontend,
@@ -260,7 +249,7 @@ export default function HomePage() {
                   rel="noopener noreferrer"
                 >
                   <GitHubIcon className="mr-2 h-4 w-4" />
-                  See the actual project created with this prompt
+                  Project created with this prompt
                 </a>
               </Button>
             </div>
