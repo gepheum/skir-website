@@ -218,20 +218,19 @@ export default function HomePage() {
       <section className="border-t border-border bg-card/30 py-14 md:py-20">
         <div className="container mx-auto">
           <div className="mb-12 max-w-6xl mx-auto text-center">
-            <h2 className="mb-4 text-balance text-3xl font-bold md:text-4xl">
-              Typesafe RPCs
-            </h2>
+            <h2 className="mb-4 text-balance text-3xl font-bold md:text-4xl">Typesafe RPCs</h2>
             <p className="mx-auto mb-6 max-w-2xl text-lg text-muted-foreground">
-              SkirRPC is a lightweight HTTP protocol for typesafe cross-service or
-              frontend↔backend communication.  It integrates with your existing web framework.
-              Your client and server use the same generated method
-              definitions, so contract mismatches are caught before runtime.
+              SkirRPC is a lightweight HTTP protocol for typesafe cross-service or frontend↔backend
+              communication. It integrates with your existing web framework. Your client and server
+              use the same generated method definitions, so contract mismatches are caught before
+              runtime.
             </p>
           </div>
           <div className="max-w-5xl mx-auto">
             <HoverVideo src="/rpc-studio.mp4" />
             <p className="mt-4 text-center text-sm text-muted-foreground">
-              Every SkirRPC service ships with a built-in studio app for browsing and testing its methods.
+              Every SkirRPC service ships with a built-in studio app for browsing and testing its
+              methods.
             </p>
           </div>
         </div>
