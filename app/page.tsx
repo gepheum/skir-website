@@ -8,6 +8,17 @@ import { Button } from '@/components/ui/button'
 import { ArrowRight, Github as GitHubIcon, Package, Terminal, Zap } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { FaJava } from 'react-icons/fa6'
+import {
+  SiCplusplus,
+  SiDart,
+  SiGo,
+  SiKotlin,
+  SiPython,
+  SiRust,
+  SiSwift,
+  SiTypescript,
+} from 'react-icons/si'
 
 function WaveDivider({ colorClass, flip = false }: { colorClass: string; flip?: boolean }) {
   return (
@@ -257,15 +268,47 @@ export default function HomePage() {
           </div>
 
           <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <LanguageCard name="TypeScript" icon="🟦" href="/docs/typescript" />
-            <LanguageCard name="Python" icon="🐍" href="/docs/python" />
-            <LanguageCard name="C++" icon="⚡" href="/docs/cpp" />
-            <LanguageCard name="Go" icon="🐹" href="/docs/go" />
-            <LanguageCard name="Java" icon="☕" href="/docs/java" />
-            <LanguageCard name="Kotlin" icon="💜" href="/docs/kotlin" />
-            <LanguageCard name="Dart" icon="🎯" href="/docs/dart" />
-            <LanguageCard name="Swift" icon="🕊️" href="/docs/swift" />
-            <LanguageCard name="Rust" icon="🦀" href="/docs/rust" />
+            <LanguageCard
+              name="TypeScript"
+              icon={<SiTypescript className="text-[#3178C6]" />}
+              href="/docs/typescript"
+            />
+            <LanguageCard
+              name="Python"
+              icon={<SiPython className="text-[#3776AB]" />}
+              href="/docs/python"
+            />
+            <LanguageCard
+              name="C++"
+              icon={<SiCplusplus className="text-[#00599C]" />}
+              href="/docs/cpp"
+            />
+            <LanguageCard name="Go" icon={<SiGo className="text-[#00ADD8]" />} href="/docs/go" />
+            <LanguageCard
+              name="Java"
+              icon={<FaJava className="text-[#E76F00]" />}
+              href="/docs/java"
+            />
+            <LanguageCard
+              name="Kotlin"
+              icon={<SiKotlin className="text-[#7F52FF]" />}
+              href="/docs/kotlin"
+            />
+            <LanguageCard
+              name="Dart"
+              icon={<SiDart className="text-[#0175C2]" />}
+              href="/docs/dart"
+            />
+            <LanguageCard
+              name="Swift"
+              icon={<SiSwift className="text-[#F05138]" />}
+              href="/docs/swift"
+            />
+            <LanguageCard
+              name="Rust"
+              icon={<SiRust className="text-[#000000] dark:text-[#DEA584]" />}
+              href="/docs/rust"
+            />
           </div>
         </div>
       </section>
