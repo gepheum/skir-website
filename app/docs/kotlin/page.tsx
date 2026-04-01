@@ -414,7 +414,7 @@ assert(jack.pets === jade.pets)`}</CodeBlock>
       <P>
         <strong>Starting a skir service on an HTTP server</strong> - full example{' '}
         <a
-          href="https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/examples/startservice/StartService.kt"
+          href="https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/startservice/StartService.kt"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -425,7 +425,7 @@ assert(jack.pets === jade.pets)`}</CodeBlock>
       <P>
         <strong>Sending RPCs to a skir service</strong> - full example{' '}
         <a
-          href="https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/examples/callservice/CallService.kt"
+          href="https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/callservice/CallService.kt"
           target="_blank"
           rel="noopener noreferrer"
         >
