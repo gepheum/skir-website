@@ -7,7 +7,6 @@ import { LanguageCard } from '@/components/language-card'
 import { RpcExample } from '@/components/rpc-example'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Github as GitHubIcon, Package, Terminal, Zap } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { FaJava } from 'react-icons/fa6'
 import {

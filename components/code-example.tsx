@@ -2,15 +2,15 @@ import { SplitCodeExample } from '@/components/split-code-example'
 
 const skirCode = `// shapes.skir
 
-struct Point {
-  x: int32;
-  y: int32;
-  label: string;
-}
-
 struct Shape {
   points: [Point];
   /// A short string describing this shape.
+  label: string;
+}
+
+struct Point {
+  x: int32;
+  y: int32;
   label: string;
 }
 
