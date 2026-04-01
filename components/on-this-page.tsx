@@ -93,7 +93,7 @@ export function OnThisPage() {
     return () => observer.disconnect()
   }, [sections])
 
-  if (sections.length === 0 || pathname === '/docs') {
+  if (sections.length === 0 || pathname === '/docs' || pathname === '/docs/examples') {
     return null
   }
 

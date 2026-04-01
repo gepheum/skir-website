@@ -130,6 +130,7 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-4">
+          <ThemeToggle />
           <Button
             asChild
             variant="ghost"
@@ -146,7 +147,6 @@ export function Header() {
               <ConverterInvaderIcon />
             </a>
           </Button>
-          <ThemeToggle />
           <Button asChild variant="ghost" size="icon" className="hidden md:flex rounded-full">
             <a href="https://discord.gg/mruvDuybJ" target="_blank" rel="noopener noreferrer">
               <DiscordIcon />
