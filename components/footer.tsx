@@ -28,6 +28,7 @@ const footerLinks = {
     },
     { name: 'Converter App', href: 'converter', external: true },
     { name: 'GitHub', href: 'https://github.com/gepheum/skir', external: true },
+    { name: 'Discord', href: 'https://discord.gg/mruvDuybJ', external: true },
   ],
 }
 
