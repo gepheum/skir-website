@@ -2,6 +2,7 @@ import { CodeExample } from '@/components/code-example'
 import { FeatureCard } from '@/components/feature-card'
 import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
+import { HoverVideo } from '@/components/hover-video'
 import { LanguageCard } from '@/components/language-card'
 import { RpcExample } from '@/components/rpc-example'
 import { Button } from '@/components/ui/button'
@@ -57,8 +58,8 @@ export default function HomePage() {
             </div>
 
             <h1 className="mb-6 text-balance text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl">
-              The <span className="text-primary">single source of truth</span>
-              <br /> for your data types
+              End-to-end type safety
+              <br /> <span className="text-primary">made easy</span>
             </h1>
 
             <p className="mx-auto mb-10 max-w-2xl text-pretty text-lg text-muted-foreground md:text-xl">
@@ -98,16 +99,9 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Quick Example GIF */}
-            <div className="soft-surface mx-auto max-w-[1000px] overflow-hidden rounded-xl p-2">
-              <Image
-                src="/quick-example.gif"
-                alt="Skir Quick Example showing VS Code editing and code generation"
-                width={0}
-                height={0}
-                sizes="100vw"
-                className="h-auto w-full rounded-lg"
-              />
+            {/* Quick Example Video */}
+            <div className="mx-auto max-w-[1000px]">
+              <HoverVideo src="/greet.mp4" />
             </div>
           </div>
         </div>
@@ -133,6 +127,39 @@ export default function HomePage() {
             </div>
 
             <CodeExample />
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-border py-14 md:py-20">
+        <div className="container mx-auto px-4">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="text-balance text-2xl font-bold md:text-3xl">
+              It&apos;s a fact: AI does better with types
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+              A 2025
+              <a
+                href="https://arxiv.org/pdf/2504.09246?"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 underline decoration-muted-foreground/50 transition-colors hover:text-foreground"
+              >
+                study
+              </a>{' '}
+              reports that nearly 94% of common LLM coding errors are type-related. It helps explain
+              why typed ecosystems such as TypeScript have been gaining momentum relative to dynamic
+              alternatives. Don&apos;t believe it?
+              <a
+                href="https://gemini.google.com/share/ea387c7e27e9"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-1 underline decoration-muted-foreground/50 transition-colors hover:text-foreground"
+              >
+                Ask AI
+              </a>
+              .
+            </p>
           </div>
         </div>
       </section>
