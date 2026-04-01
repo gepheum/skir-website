@@ -276,6 +276,21 @@ export default function HomePage() {
               description="Stop copying files. Import types directly from any GitHub repository. Share common data structures across projects."
             />
             <FeatureCard
+              icon={<SiRust className="h-6 w-6" />}
+              title="Rust-like enums"
+              description={
+                <>
+                  A Skir <code>enum</code> is a set of variants. Each variant can be a simple
+                  constant or carry typed data.
+                </>
+              }
+            />
+            <FeatureCard
+              icon={<Package className="h-6 w-6" />}
+              title="Immutable data types"
+              description="Except in C++, Skir generates deeply immutable types with all fields required at construction time."
+            />
+            <FeatureCard
               icon={<Terminal className="h-6 w-6" />} // Using Terminal for Dev Experience
               title="First-class IDE support"
               description={
@@ -293,21 +308,6 @@ export default function HomePage() {
                   code formatting and more.
                 </>
               }
-            />
-            <FeatureCard
-              icon={<SiRust className="h-6 w-6" />}
-              title="Rust-like enums"
-              description={
-                <>
-                  A Skir <code>enum</code> is a set of variants. Each variant can be a simple
-                  constant or carry typed data.
-                </>
-              }
-            />
-            <FeatureCard
-              icon={<Package className="h-6 w-6" />}
-              title="Immutable data types"
-              description="Except in C++, Skir generates deeply immutable types with all fields required at construction time."
             />
             <FeatureCard
               icon={<Terminal className="h-6 w-6" />}
