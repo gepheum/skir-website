@@ -7,6 +7,7 @@ import { LanguageCard } from '@/components/language-card'
 import { RpcExample } from '@/components/rpc-example'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Github as GitHubIcon, Package, Terminal, Zap } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { FaJava } from 'react-icons/fa6'
 import {
@@ -182,8 +183,33 @@ export default function HomePage() {
               Skir has simple guidelines and built-in checks to evolve your schema safely.
             </p>
 
-            <div className="mx-auto max-w-[608px]">
-              <HoverVideo src="/schema-evolution.mp4" />
+            <div className="mx-auto flex max-w-5xl items-center justify-center gap-2 md:gap-3">
+              <div className="soft-surface w-[45%] overflow-hidden rounded-xl p-2">
+                <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  Before
+                </div>
+                <Image
+                  src="/shapes-before.png"
+                  alt="Schema before evolution changes"
+                  width={0}
+                  height={0}
+                  sizes="(max-width: 768px) 45vw, 420px"
+                  className="h-auto w-full rounded-lg"
+                />
+              </div>
+              <div className="soft-surface w-[45%] overflow-hidden rounded-xl p-2">
+                <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  After
+                </div>
+                <Image
+                  src="/shapes-after.png"
+                  alt="Schema after evolution changes"
+                  width={0}
+                  height={0}
+                  sizes="(max-width: 768px) 45vw, 420px"
+                  className="h-auto w-full rounded-lg"
+                />
+              </div>
             </div>
           </div>
         </div>
