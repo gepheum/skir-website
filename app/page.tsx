@@ -52,10 +52,15 @@ export default function HomePage() {
 
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="soft-surface mb-8 inline-flex items-center gap-2 rounded-full px-4 py-2">
+            <a
+              href="https://github.com/gepheum/skir"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="soft-surface mb-8 inline-flex items-center gap-2 rounded-full px-4 py-2 transition-colors hover:text-foreground"
+            >
               <span className="text-primary font-medium">v1.1</span>
               <span className="text-muted-foreground">A modern alternative to Protocol Buffer</span>
-            </div>
+            </a>
 
             <h1 className="mb-6 text-balance text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl">
               End-to-end type safety
@@ -223,7 +228,7 @@ export default function HomePage() {
               <div className="text-muted-foreground mb-2">Prompt:</div>
               <p className="text-lg italic text-foreground">
                 Create a full-stack application with a Kotlin backend and a TypeScript frontend,
-                connected via Skir (https://skir.build/) for data exchange.
+                connected via Skir for data exchange.
               </p>
             </div>
 
