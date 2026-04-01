@@ -1,6 +1,6 @@
 # Skir
 
-**Like Protocol Buffers, but better.**
+**A modern alternative to Protocol Buffers.**
 
 Skir is a declarative language for defining data types, constants, and RPC interfaces. Write your schema once in a `.skir` file and generate idiomatic, type-safe code in TypeScript, Python, Java, C++, Kotlin, Dart, Swift, Go, and Rust.
 
@@ -11,12 +11,16 @@ Skir is a declarative language for defining data types, constants, and RPC inter
 
 - **Single source of truth** — Define data types and APIs once, share across backend, frontend, and microservices.
 - **Multi-language** — First-class support for TypeScript, Python, C++, Java, Kotlin, Dart, Swift, Go, and Rust.
-- **Idiomatic code gen** — Generated code feels native to each language.
-- **Effortless serialization** — JSON and binary serialization generated automatically.
+- **Idiomatic code generation** — Generated code feels native in each target language.
+- **Serialization to JSON or binary** — Use dense JSON for APIs and storage, readable JSON for debugging, or binary for raw performance.
+- **Rust-like enums** — Variants can be plain constants or carry typed data.
+- **Immutable data types** — Except in C++, generated types are deeply immutable and require all fields at construction time.
 - **Schema evolution** — Built-in rules and checks for backward-compatible schema changes.
-- **End-to-end type-safe RPCs** — Like tRPC, but for every language.
-- **Built-in package manager** — Import types from other GitHub repos.
-- **Easy setup** — `npx skir init`, single YAML config file, watch mode, formatter, VSCode extension.
+- **Type-safe RPC over HTTP** — Share generated method definitions across client and server, and test methods in a built-in SkirRPC studio app.
+- **GitHub imports** — Import and reuse types from other GitHub repositories.
+- **First-class IDE support** — VS Code extension with validation, completion, and formatting.
+- **Easy to extend** — Code generators are regular NPM modules, so custom targets can be added without hacking the compiler.
+- **Easy setup** — `npx skir init`, single YAML config file, watch mode, and formatter.
 
 ## Quick Example
 
