@@ -405,7 +405,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t border-border py-10 md:py-14">
+      <section className="relative overflow-hidden bg-card/30 py-10 md:py-14">
+        <WaveDivider colorClass="text-card/30" flip />
         <div className="container mx-auto">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="mb-3 text-2xl font-semibold md:text-3xl">Join our Discord</h2>
