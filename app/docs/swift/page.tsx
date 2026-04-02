@@ -268,8 +268,8 @@ print(registry.users.findByKey(999) == nil)  // true
 let notFoundOrDefault = registry.users.findByKeyOrDefault(999)
 print(notFoundOrDefault.pets.count)  // 0`}</CodeBlock>
 
-      <H3>Skir services</H3>
-      <H4>Starting a Skir service on an HTTP server</H4>
+      <H3>SkirRPC services</H3>
+      <H4>Starting a SkirRPC service on an HTTP server</H4>
       <P>
         Full example{' '}
         <a
@@ -282,7 +282,7 @@ print(notFoundOrDefault.pets.count)  // 0`}</CodeBlock>
         .
       </P>
 
-      <H4>Sending RPCs to a Skir service</H4>
+      <H4>Sending RPCs to a SkirRPC service</H4>
       <P>
         Full example{' '}
         <a

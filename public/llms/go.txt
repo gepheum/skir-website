@@ -293,7 +293,7 @@ notFound := userRegistry.Users_SearchByUserId(999)
 fmt.Println(notFound.IsPresent()) // false
 ```
 
-### Skir services
+### SkirRPC services
 
 - **Server**: [start-service example](https://github.com/gepheum/skir-go-example/blob/main/cmd/start-service/main.go)
 - **Client**: [call-service example](https://github.com/gepheum/skir-go-example/blob/main/cmd/call-service/main.go)

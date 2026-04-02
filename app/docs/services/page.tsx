@@ -4,7 +4,7 @@ import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
   title: 'Typesafe RPCs - Skir Documentation',
-  description: 'Build typesafe APIs with Skir services.',
+  description: 'Build typesafe APIs with SkirRPC services.',
 }
 
 export default function RpcPage() {
@@ -12,22 +12,22 @@ export default function RpcPage() {
     <Prose>
       <h1>Typesafe RPCs</h1>
       <p>
-        A <strong>Skir service</strong> is a typesafe HTTP API: a server and a client communicate
+        A <strong>SkirRPC service</strong> is a typesafe HTTP API: a server and a client communicate
         using shared Skir data types. Your schema defines each method’s signature (request type and
         response type), and both the server code and the client code refer to those same
         schema-defined signatures—so you get a compile-time guarantee that both sides agree on the
         contract.
       </p>
       <p>
-        Skir services work equally well for communication between microservices, or between a
+        SkirRPC services work equally well for communication between microservices, or between a
         frontend (browser/mobile app) and a backend. The protocol is lightweight and easy to
-        integrate: you can attach a Skir service handler to almost any HTTP server framework.
+        integrate: you can attach a SkirRPC service handler to almost any HTTP server framework.
       </p>
 
       <h2>Core concepts</h2>
       <p>
-        Building a Skir service involves three main steps: defining the API schema, implementing the
-        server logic, and calling the service.
+        Building a SkirRPC service involves three main steps: defining the API schema, implementing
+        the server logic, and calling the service.
       </p>
 
       <h3>API definition</h3>
@@ -120,7 +120,7 @@ from .my_skir_service import service, RequestMeta
 app = FastAPI()
 
 
-# Mount the Skir service into this FastAPI app
+# Mount the SkirRPC service into this FastAPI app
 @app.api_route("/myapi", methods=["GET", "POST"])
 async def myapi(request: Request):
     # 1. Read body
@@ -149,7 +149,7 @@ def extract_meta_from_request(request: Request) -> RequestMeta:
     ...`}</CodeBlock>
 
       <h3>Call the service</h3>
-      <p>Here is how you call a Skir service directly from your application code.</p>
+      <p>Here is how you call a SkirRPC service directly from your application code.</p>
       <p>
         The Skir runtime library provides a <code>ServiceClient</code> class. You point it at your
         server URL, and use it to invoke your generated API methods.
@@ -413,7 +413,7 @@ async def main():
         </table>
       </div>
 
-      <h2>Why use Skir services?</h2>
+      <h2>Why use SkirRPC services?</h2>
       <p>
         In a traditional REST API, the contract between client and server is implicit and fragile.
         If the server changes an endpoint but the client isn't updated, things break at runtime.
@@ -434,7 +434,7 @@ async def main():
                 Traditional API (REST)
               </th>
               <th className="border-b border-border p-4 text-left font-medium">
-                Skir Service (RPC)
+                SkirRPC service (RPC)
               </th>
             </tr>
           </thead>
@@ -494,8 +494,8 @@ async def main():
 
       <h3>RPC Studio</h3>
       <p>
-        Every Skir service comes with a built-in interactive documentation and testing tool called{' '}
-        RPC Studio.
+        Every SkirRPC service comes with a built-in interactive documentation and testing tool
+        called RPC Studio.
       </p>
       <p>
         To access it, simply visit your API endpoint in a browser with the <code>?studio</code>{' '}

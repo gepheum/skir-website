@@ -373,9 +373,9 @@ assert(userRegistry.users.findByKey(43) == evilJane);`}</CodeBlock>
 //   ),
 // )`}</CodeBlock>
 
-      <H3>Skir services</H3>
+      <H3>SkirRPC services</H3>
       <P>
-        <strong>Starting a skir service on an HTTP server</strong> - full example{' '}
+        <strong>Starting a SkirRPC service on an HTTP server</strong> - full example{' '}
         <a
           href="https://github.com/gepheum/skir-dart-example/blob/main/bin/start_service.dart"
           target="_blank"
@@ -386,7 +386,7 @@ assert(userRegistry.users.findByKey(43) == evilJane);`}</CodeBlock>
         .
       </P>
       <P>
-        <strong>Sending RPCs to a skir service</strong> - full example{' '}
+        <strong>Sending RPCs to a SkirRPC service</strong> - full example{' '}
         <a
           href="https://github.com/gepheum/skir-dart-example/blob/main/bin/call_service.dart"
           target="_blank"

@@ -250,7 +250,7 @@ print(TARZAN)
 # User(user_id=123, name='Tarzan', ...)
 ```
 
-### Skir Services
+### SkirRPC services
 
 - **Server**: [Flask](https://github.com/gepheum/skir-python-example/blob/main/start_service_flask.py), [FastAPI](https://github.com/gepheum/skir-python-example/blob/main/start_service_fastapi.py), [Litestar](https://github.com/gepheum/skir-python-example/blob/main/start_service_starlite.py)
 - **Client**: [Example](https://github.com/gepheum/skir-python-example/blob/main/call_service.py)

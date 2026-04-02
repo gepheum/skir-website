@@ -410,9 +410,9 @@ val jack =
 
 assert(jack.pets === jade.pets)`}</CodeBlock>
 
-      <H3>Skir services</H3>
+      <H3>SkirRPC services</H3>
       <P>
-        <strong>Starting a skir service on an HTTP server</strong> - full example{' '}
+        <strong>Starting a SkirRPC service on an HTTP server</strong> - full example{' '}
         <a
           href="https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/startservice/StartService.kt"
           target="_blank"
@@ -423,7 +423,7 @@ assert(jack.pets === jade.pets)`}</CodeBlock>
         .
       </P>
       <P>
-        <strong>Sending RPCs to a skir service</strong> - full example{' '}
+        <strong>Sending RPCs to a SkirRPC service</strong> - full example{' '}
         <a
           href="https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/callservice/CallService.kt"
           target="_blank"

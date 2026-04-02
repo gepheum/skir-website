@@ -352,9 +352,9 @@ assert user_registry.users.find_or_default(100).name == ""
 #   ),
 # )`}</CodeBlock>
 
-      <H3>Skir services</H3>
+      <H3>SkirRPC services</H3>
       <P>
-        <strong>Starting a skir service on an HTTP server</strong> - examples:
+        <strong>Starting a SkirRPC service on an HTTP server</strong> - examples:
       </P>
       <P>
         •{' '}
@@ -387,7 +387,7 @@ assert user_registry.users.find_or_default(100).name == ""
         </a>
       </P>
       <P>
-        <strong>Sending RPCs to a skir service</strong> - full example{' '}
+        <strong>Sending RPCs to a SkirRPC service</strong> - full example{' '}
         <a
           href="https://github.com/gepheum/skir-python-example/blob/main/call_service.py"
           target="_blank"

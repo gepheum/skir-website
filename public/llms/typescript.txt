@@ -279,7 +279,7 @@ console.log(TARZAN);
 // User { userId: 123, name: 'Tarzan', ... }
 ```
 
-## Skir services
+## SkirRPC services
 
 - **Server**: [Express example](https://github.com/gepheum/skir-typescript-example/blob/main/src/server.ts)
 - **Client**: [Client example](https://github.com/gepheum/skir-typescript-example/blob/main/src/client.ts)

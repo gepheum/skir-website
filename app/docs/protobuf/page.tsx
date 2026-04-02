@@ -349,12 +349,12 @@ user = User(
         browser.
       </p>
       <p>
-        Skir services run over standard HTTP and are designed to be embedded into your existing
+        SkirRPC services run over standard HTTP and are designed to be embedded into your existing
         application (Express, Flask, Spring Boot, etc.). This makes them naturally compatible with
         web clients and easy to inspect with standard tools like cURL.
       </p>
       <p>
-        Additionally, every Skir service comes with <strong>Skir Studio</strong> out of the box.
+        Additionally, every SkirRPC service comes with <strong>Skir Studio</strong> out of the box.
         This built-in interactive debugging interface allows you to explore your API and test
         methods directly in your browser, without needing to install or configure any external
         tools.

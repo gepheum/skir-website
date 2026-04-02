@@ -1,9 +1,9 @@
-# Typesafe RPCs with Skir services
+# Typesafe RPCs with SkirRPC services
 
-A **Skir service** is a typesafe HTTP API: a server and a client communicate using shared Skir data types.
+A **SkirRPC service** is a typesafe HTTP API: a server and a client communicate using shared Skir data types.
 Your schema defines each method’s signature (request type and response type), and both the server code and the client code refer to the same schema-defined signatures—so both sides agree on the contract at compile time.
 
-Skir services work equally well for communication between microservices, or between a frontend (browser/mobile app) and a backend. The protocol is lightweight and easy to integrate: you can attach a Skir service handler to almost any HTTP server framework.
+SkirRPC services work equally well for communication between microservices, or between a frontend (browser/mobile app) and a backend. The protocol is lightweight and easy to integrate: you can attach a SkirRPC service handler to almost any HTTP server framework.
 
 ## Core Concepts
 
@@ -129,13 +129,13 @@ async def main():
 | Dart | [Shelf](https://github.com/gepheum/skir-dart-example/blob/main/bin/start_service.dart) | [Client](https://github.com/gepheum/skir-dart-example/blob/main/bin/call_service.dart) |
 | Swift | [Vapor](https://github.com/gepheum/skir-swift-example/blob/main/Sources/StartService/main.swift) | [Client](https://github.com/gepheum/skir-swift-example/blob/main/Sources/CallService/main.swift) |
 
-## Why Use Skir Services?
+## Why Use SkirRPC services?
 
 In a traditional REST API, the contract between client and server is implicit and fragile. Skir enforces the contract at compile time. Both server and client are generated from the same source of truth.
 
 ### Versus Traditional REST APIs
 
-| Feature | REST | Skir Service (RPC) |
+| Feature | REST | SkirRPC service (RPC) |
 |---|---|---|
 | Endpoint | Resource-based (`/users/123`) | Single URL (`/api`) |
 | Operations | Endpoint + HTTP verb | Methods in `.skir` file |
@@ -149,7 +149,7 @@ In a traditional REST API, the contract between client and server is implicit an
 
 ### Skir Studio
 
-Every Skir service comes with Skir Studio, a built-in interactive documentation and testing tool. Visit your API endpoint with `?studio` (e.g., `http://localhost:8000/api?studio`). It lists all methods and lets you send requests and view responses.
+Every SkirRPC service comes with Skir Studio, a built-in interactive documentation and testing tool. Visit your API endpoint with `?studio` (e.g., `http://localhost:8000/api?studio`). It lists all methods and lets you send requests and view responses.
 
 Try the demo:
 

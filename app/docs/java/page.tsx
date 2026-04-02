@@ -372,9 +372,9 @@ assert userRegistry.users().findByKey(100) == null;`}</CodeBlock>
 //   }
 // }`}</CodeBlock>
 
-      <H3>Skir services</H3>
+      <H3>SkirRPC services</H3>
       <P>
-        <strong>Starting a skir service on an HTTP server</strong> - full example{' '}
+        <strong>Starting a SkirRPC service on an HTTP server</strong> - full example{' '}
         <a
           href="https://github.com/gepheum/skir-java-example/blob/main/src/main/java/examples/StartService.java"
           target="_blank"
@@ -385,7 +385,7 @@ assert userRegistry.users().findByKey(100) == null;`}</CodeBlock>
         .
       </P>
       <P>
-        <strong>Sending RPCs to a skir service</strong> - full example{' '}
+        <strong>Sending RPCs to a SkirRPC service</strong> - full example{' '}
         <a
           href="https://github.com/gepheum/skir-java-example/blob/main/src/main/java/examples/CallService.java"
           target="_blank"

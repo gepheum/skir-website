@@ -249,7 +249,7 @@ val jack = User.partial(name = "Jack", pets = jade.pets)
 assert(jack.pets === jade.pets)
 ```
 
-### Skir services
+### SkirRPC services
 
 - **Server**: [Ktor](https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/startservice/StartService.kt)
 - **Client**: [Example](https://github.com/gepheum/skir-kotlin-example/blob/main/src/main/kotlin/callservice/CallService.kt)

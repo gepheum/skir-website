@@ -215,7 +215,7 @@ let fallback = user_registry.users.find_by_key_or_default(999_i32);
 println!("{}", fallback.pets.len()); // 0
 ```
 
-### Skir Services
+### SkirRPC services
 
 - **Server (Axum)**: [start_service.rs](https://github.com/gepheum/skir-rust-example/blob/main/src/bin/start_service.rs)
 - **Client**: [call_service.rs](https://github.com/gepheum/skir-rust-example/blob/main/src/bin/call_service.rs)

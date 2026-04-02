@@ -118,7 +118,7 @@ export default function ExamplesPage() {
       <ul>
         <li>Set up Skir in a project and run code generation.</li>
         <li>Use generated data classes in application code.</li>
-        <li>Start a Skir service on the server side and call it from a client.</li>
+        <li>Start a SkirRPC service on the server side and call it from a client.</li>
         <li>Inspect types at runtime via reflection.</li>
         <li>Optional: write language-specific unit tests.</li>
       </ul>

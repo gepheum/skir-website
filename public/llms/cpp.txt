@@ -227,7 +227,7 @@ const User& tarzan = skirout_user::k_tarzan();
 assert(tarzan.name == "Tarzan");
 ```
 
-### Skir services
+### SkirRPC services
 
 - **Server**: [cpp-httplib](https://github.com/gepheum/skir-cc-example/blob/main/service_start.cc)
 - **Client**: [Example](https://github.com/gepheum/skir-cc-example/blob/main/service_client.cc)

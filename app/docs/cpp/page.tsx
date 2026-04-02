@@ -310,9 +310,9 @@ assert(user_set.size() == 3);`}</CodeBlock>
       <CodeBlock language="cpp">{`const User& tarzan = skirout_user::k_tarzan();
 assert(tarzan.name == "Tarzan");`}</CodeBlock>
 
-      <H3>Skir services</H3>
+      <H3>SkirRPC services</H3>
       <P>
-        <strong>Starting a skir service on an HTTP server</strong> - full example{' '}
+        <strong>Starting a SkirRPC service on an HTTP server</strong> - full example{' '}
         <a
           href="https://github.com/gepheum/skir-cc-example/blob/main/service_start.cc"
           target="_blank"
@@ -323,7 +323,7 @@ assert(tarzan.name == "Tarzan");`}</CodeBlock>
         .
       </P>
       <P>
-        <strong>Sending RPCs to a skir service</strong> - full example{' '}
+        <strong>Sending RPCs to a SkirRPC service</strong> - full example{' '}
         <a
           href="https://github.com/gepheum/skir-cc-example/blob/main/service_client.cc"
           target="_blank"

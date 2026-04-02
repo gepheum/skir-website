@@ -326,9 +326,9 @@ fmt.Println(found2.Get() == evilJohn) // true
 notFound := userRegistry.Users_SearchByUserId(999)
 fmt.Println(notFound.IsPresent()) // false`}</CodeBlock>
 
-      <H3>Skir services</H3>
+      <H3>SkirRPC services</H3>
 
-      <H4>Starting a Skir service on an HTTP server</H4>
+      <H4>Starting a SkirRPC service on an HTTP server</H4>
       <P>
         Full example{' '}
         <a
@@ -341,7 +341,7 @@ fmt.Println(notFound.IsPresent()) // false`}</CodeBlock>
         .
       </P>
 
-      <H4>Sending RPCs to a Skir service</H4>
+      <H4>Sending RPCs to a SkirRPC service</H4>
       <P>
         Full example{' '}
         <a

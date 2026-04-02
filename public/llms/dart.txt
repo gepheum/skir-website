@@ -255,7 +255,7 @@ print(tarzan);
 // User(userId: 123, name: "Tarzan", ...)
 ```
 
-### Skir services
+### SkirRPC services
 
 - **Server**: [Shelf](https://github.com/gepheum/skir-dart-example/blob/main/bin/start_service.dart)
 - **Client**: [Example](https://github.com/gepheum/skir-dart-example/blob/main/bin/call_service.dart)

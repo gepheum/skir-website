@@ -143,4 +143,4 @@ Skir offers three formats:
 
 Protobuf pairs with gRPC (requires special tooling, proxy for browsers).
 
-Skir services run over standard HTTP, embed into existing frameworks (Express, Flask, Spring Boot), work with web clients, and are inspectable with cURL. Every service includes **Skir Studio**, a built-in interactive debugging interface.
+SkirRPC services run over standard HTTP, embed into existing frameworks (Express, Flask, Spring Boot), work with web clients, and are inspectable with cURL. Every service includes **Skir Studio**, a built-in interactive debugging interface.

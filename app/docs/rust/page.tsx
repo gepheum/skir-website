@@ -331,9 +331,9 @@ println!("{}", not_found.is_none()); // true
 let not_found_or_default = user_registry.users.find_by_key_or_default(999_i32);
 println!("{}", not_found_or_default.pets.len()); // 0`}</CodeBlock>
 
-      <H3>Skir services</H3>
+      <H3>SkirRPC services</H3>
 
-      <H4>Starting a Skir service on an HTTP server</H4>
+      <H4>Starting a SkirRPC service on an HTTP server</H4>
       <P>
         Full example{' '}
         <a
@@ -346,7 +346,7 @@ println!("{}", not_found_or_default.pets.len()); // 0`}</CodeBlock>
         .
       </P>
 
-      <H4>Sending RPCs to a Skir service</H4>
+      <H4>Sending RPCs to a SkirRPC service</H4>
       <P>
         Full example{' '}
         <a

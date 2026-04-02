@@ -229,7 +229,7 @@ assert userRegistry.users().findByKey(100) == null;
 System.out.println(Constants.TARZAN);
 ```
 
-### Skir services
+### SkirRPC services
 
 - **Server**: [Spring Boot](https://github.com/gepheum/skir-java-example/blob/main/src/main/java/examples/StartService.java)
 - **Client**: [Example](https://github.com/gepheum/skir-java-example/blob/main/src/main/java/examples/CallService.java)
