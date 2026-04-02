@@ -405,6 +405,23 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="border-t border-border py-10 md:py-14">
+        <div className="container mx-auto">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="mb-3 text-2xl font-semibold md:text-3xl">Join our Discord</h2>
+            <p className="mb-6 text-muted-foreground">
+              Ask questions, share feedback, and get help from the community.
+            </p>
+            <Button asChild variant="outline" className="rounded-full px-6">
+              <a href="https://discord.gg/mruvDuybJ" target="_blank" rel="noopener noreferrer">
+                Join Discord
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   )
