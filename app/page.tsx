@@ -62,8 +62,8 @@ export default function HomePage() {
             </a>
 
             <h1 className="mb-6 text-balance text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl">
-              End-to-end type safety
-              <br /> <span className="text-primary">made easy</span>
+              The single <span className="text-teal-500 dark:text-teal-400">source of truth</span>
+              <br /> for your data types
             </h1>
 
             <p className="mx-auto mb-10 max-w-2xl text-pretty text-lg text-muted-foreground md:text-xl">
@@ -207,7 +207,9 @@ export default function HomePage() {
       <section className="border-t border-border bg-card/30 py-14 md:py-20">
         <div className="container mx-auto">
           <div className="mb-12 max-w-6xl mx-auto text-center">
-            <h2 className="mb-4 text-balance text-3xl font-bold md:text-4xl">SkirRPC</h2>
+            <h2 className="mb-4 text-balance text-3xl font-bold md:text-4xl">
+              End-to-end typesafety with SkirRPC
+            </h2>
             <p className="mx-auto mb-6 max-w-2xl text-lg text-muted-foreground">
               SkirRPC is a lightweight HTTP protocol for typesafe cross-service or frontend↔backend
               communication. It integrates with your existing web framework. Your client and server
