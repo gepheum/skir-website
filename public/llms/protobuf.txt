@@ -4,25 +4,7 @@ If you have used [Protocol Buffers](https://protobuf.dev/) (protobuf), Skir will
 
 ## Language Differences
 
-### Constants
-
-Skir lets you define constants directly in schema files. Complex values (structs, lists, maps, primitives) compile into native code constants in your target language.
-
-```skir
-struct Config {
-  timeout_ms: int32;
-  retries: int32;
-  supported_locales: [string];
-}
-
-const DEFAULT_CONFIG: Config = {
-  timeout_ms = 5000,
-  retries = 3,
-  supported_locales = ["en-US", "ja-JP", "fr-FR"],
-};
-```
-
-### Unified Enums and Oneof
+### Polymorphism
 
 In Protobuf, `enum` represents stateless options and `oneof` represents stateful options. Skir unifies these into Rust-like enums where variants can be stateless or stateful:
 
@@ -53,13 +35,83 @@ enum PokerAction {
 }
 ```
 
-### Implicit UNKNOWN Variant
+### Must all fields be specified at construction time?
 
-The Protobuf Style Guide requires you to manually add an `UNSPECIFIED` value as the first entry of every enum to handle default values safely:
+Protobuf: adding a field to a message does not break existing construction code (new field gets default value).
 
-> The first listed value should be a zero value enum and have the suffix of either `_UNSPECIFIED` or `_UNKNOWN`. This value may be used as an unknown/default value and should be distinct from any of the semantic values you expect to be explicitly set. For more information on the unspecified enum value, see the Proto Best Practices page.
+Skir: aims to raise a **compile-time error** if you add a field but forget to update construction code. Enforces strict constructors so you don't miss any instantiation site.
 
-Skir does this automatically. Every enum in Skir has an implicit `UNKNOWN` variant (with index 0). This serves as the default value and captures unrecognized variants deserialized from newer schema versions.
+```python
+# Protobuf: adding 'email' to User doesn't break this code
+user = User()
+user.id = 123
+user.name = "Alice"
+
+# Skir: static type checkers will error if 'email' is added
+user = User(id=123, name="Alice")  # Error: missing 'email'
+```
+
+If you need to opt out explicitly, Skir also generates a `partial` constructor. This is useful for test fixtures, where updating every constructor call can become cumbersome when fields are added to a `struct`.
+
+```python
+user = User.partial(
+  id=123,
+  # no name
+)
+```
+
+This only applies to explicit construction. When deserializing old data that is missing the new field, both Protobuf and Skir behave similarly: the new field is assigned its default value.
+
+## Schema Evolution: Guidelines vs Guarantees
+
+Protobuf provides guidelines for safe schema evolution but nothing in the toolchain enforces them.
+
+Skir provides **automated enforcement** through `npx skir snapshot`. It analyzes your current schema against a stored snapshot and detects breaking changes before they reach production. Integrated into CI pipelines or pre-commit hooks.
+
+### A note on `buf breaking`
+
+Buf addresses this gap in the Protobuf ecosystem with `buf breaking`, which detects backward-incompatible schema changes. However, it identifies types purely by their fully-qualified name, so renaming a type is treated as a breaking change — the old type is seen as deleted and a new one created.
+
+Skir avoids this by letting you assign a stable numeric identifier to each top-level type (https://skir.build/docs/schema-evolution#tracked-types-and-stable-identifiers). The identifier is meaningless to users — purely internal — so you can rename types freely without breaking compatibility. It also lets Skir automatically track all nested types a top-level type references.
+
+## External Dependencies
+
+Protobuf has no built-in package manager (relies on git submodule, manual copying, or commercial services like `buf`).
+
+Skir includes a built-in, free package manager using GitHub repositories as packages:
+
+1. Define dependencies in `skir.yml` pointing to GitHub repos and tags.
+2. Import types: `import { User } from "@my-org/common-types/user.skir";`
+3. Run `npx skir gen`.
+
+## Serialization
+
+Protobuf has Binary and JSON (Proto3 JSON Mapping).
+
+Skir offers three formats:
+- **JSON (Dense)**: Structs as arrays. Default choice. Compact, evolution-safe, interoperable with databases (e.g., PostgreSQL JSONB).
+- **JSON (Readable)**: Like Protobuf JSON. Good for debugging, unsafe for persistence.
+- **Binary**: Like Protobuf binary. Slightly more compact and performant.
+
+Skir can also serialize schemas themselves, so you can store schema metadata alongside your data. This enables generic tooling that can inspect serialized payloads without hardcoding model types, for example the Skir converter web app: http://localhost:3000/docs/serialization#skir-converter-web-app
+
+### Shared constants
+
+Skir lets you define constants directly in schema files. Complex values (structs, lists, maps, primitives) compile into native code constants in your target language.
+
+```skir
+struct Config {
+  timeout_ms: int32;
+  retries: int32;
+  supported_locales: [string];
+}
+
+const DEFAULT_CONFIG: Config = {
+  timeout_ms = 5000,
+  retries = 3,
+  supported_locales = ["en-US", "ja-JP", "fr-FR"],
+};
+```
 
 ### Keyed Arrays vs Maps
 
@@ -81,6 +133,22 @@ struct UserRegistry {
 
 Serialized as a plain list, but generated code provides O(1) lookups by key.
 
+### SkirRPC vs gRPC
+
+Protobuf pairs with gRPC (requires special tooling, proxy for browsers).
+
+SkirRPC services run over standard HTTP, embed into existing frameworks (Express, Flask, Spring Boot), work with web clients, and are inspectable with cURL. Every service includes **Skir Studio**, a built-in interactive debugging interface.
+
+## Other differences
+
+### Implicit UNKNOWN Variant
+
+The Protobuf Style Guide requires you to manually add an `UNSPECIFIED` value as the first entry of every enum to handle default values safely:
+
+> The first listed value should be a zero value enum and have the suffix of either `_UNSPECIFIED` or `_UNKNOWN`. This value may be used as an unknown/default value and should be distinct from any of the semantic values you expect to be explicitly set. For more information on the unspecified enum value, see the Proto Best Practices page.
+
+Skir does this automatically. Every enum in Skir has an implicit `UNKNOWN` variant (with index 0). This serves as the default value and captures unrecognized variants deserialized from newer schema versions.
+
 ### Field Numbering
 
 In Skir, `struct` field numbers start from 0 and must be sequential (no gaps). In Protobuf, field numbers must be greater than 0 and can be sparse.
@@ -94,57 +162,13 @@ Protobuf imports work like C includes: all symbols from an imported `.proto` fil
 - Protobuf groups methods into `service` blocks; Skir defines methods globally, grouping decided in application code.
 - Protobuf identifies methods by name; Skir uses numeric IDs, making renaming safe.
 
-## Differences in Generated Code
-
-### Adding Fields to a Type
-
-Protobuf: adding a field to a message does not break existing construction code (new field gets default value).
-
-Skir: aims to raise a **compile-time error** if you add a field but forget to update construction code. Enforces strict constructors so you don't miss any instantiation site.
-
-```python
-# Protobuf: adding 'email' to User doesn't break this code
-user = User()
-user.id = 123
-user.name = "Alice"
-
-# Skir: static type checkers will error if 'email' is added
-user = User(id=123, name="Alice")  # Error: missing 'email'
-```
-
-> When deserializing old data missing the new field, both behave similarly: new field gets default value.
-
 ### Immutability
 
-Skir generates two versions of each struct: immutable and mutable. You pick which to use case-by-case. Easy conversion between them with smart copy avoidance. Protobuf typically does not generate immutable types in TypeScript and Python.
+Skir leans toward immutable generated data types, even in languages where this pattern is less common. In Python and TypeScript, it generates two versions of each type: a deeply immutable one and a mutable one, with conversion methods between them. Protobuf typically generates only mutable data classes in these languages.
 
-## Schema Evolution: Guidelines vs Guarantees
+## Final note on Buf
 
-Protobuf provides guidelines for safe schema evolution but nothing in the toolchain enforces them.
+Both Skir and [Buf](https://buf.build/) were created to solve the same fundamental gaps in the Protobuf ecosystem: providing a seamless workflow with integrated dependency management, linting, formatting, and breaking-change detection.
 
-Skir provides **automated enforcement** through `npx skir snapshot`. It analyzes your current schema against a stored snapshot and detects breaking changes before they reach production. Integrated into CI pipelines or pre-commit hooks.
+The difference lies in philosophy. Buf builds the best possible ecosystem around the Protobuf language as it exists today. Skir, however, operates on the belief that Protobuf's core design flaws are significant enough to justify a new language. This mirrors recurring industry "evolution vs. revolution" debates, much like TypeScript vs. Dart or Carbon vs. Rust. While introducing a new language adds adoption cost, one can argue that without moving beyond legacy constraints, meaningful progress in developer experience remains limited.
 
-## External Dependencies
-
-Protobuf has no built-in package manager (relies on git submodule, manual copying, or commercial services like `buf`).
-
-Skir includes a built-in, free package manager using GitHub repositories as packages:
-
-1. Define dependencies in `skir.yml` pointing to GitHub repos and tags.
-2. Import types: `import { User } from "@my-org/common-types/user.skir";`
-3. Run `npx skir gen`.
-
-## Serialization
-
-Protobuf has Binary and JSON (Proto3 JSON Mapping).
-
-Skir offers three formats:
-- **JSON (Dense)**: Structs as arrays. Default choice. Compact, evolution-safe, interoperable with databases (e.g., PostgreSQL JSONB).
-- **JSON (Readable)**: Like Protobuf JSON. Good for debugging, unsafe for persistence.
-- **Binary**: Like Protobuf binary. Slightly more compact and performant.
-
-## RPC Services
-
-Protobuf pairs with gRPC (requires special tooling, proxy for browsers).
-
-SkirRPC services run over standard HTTP, embed into existing frameworks (Express, Flask, Spring Boot), work with web clients, and are inspectable with cURL. Every service includes **Skir Studio**, a built-in interactive debugging interface.
