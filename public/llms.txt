@@ -87,6 +87,14 @@ assert(restored == point)
 - External Dependencies: https://skir.build/llms/dependencies.txt
   - Import and reuse types from other GitHub repositories by configuring dependencies in skir.yml, with support for transitive dependencies and private repositories.
 
+### Extensibility
+- Building Code Generators: https://skir.build/llms/code-generators.txt
+  - Understand the compiler/generator contract, including module input, recordMap lookup, config validation, and expected output files.
+
+### Comparison
+- Skir vs Protobuf: https://skir.build/llms/protobuf.txt
+  - Explore design differences and tradeoffs in language features, generation behavior, serialization, and RPC ergonomics.
+
 ### Language Guides
 - TypeScript: https://skir.build/llms/typescript.txt
 - Python: https://skir.build/llms/python.txt

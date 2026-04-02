@@ -7,6 +7,7 @@ import {
   Package,
   PenTool,
   RefreshCw,
+  Wrench,
   Zap,
 } from 'lucide-react'
 import Link from 'next/link'
@@ -58,6 +59,12 @@ const sections = [
     description: 'Import types from other GitHub repositories.',
     href: '/docs/dependencies',
     icon: Package,
+  },
+  {
+    title: 'Building Code Generators',
+    description: 'Implement custom generators and understand the compiler input/output contract.',
+    href: '/docs/code-generators',
+    icon: Wrench,
   },
   {
     title: 'Best Practices',

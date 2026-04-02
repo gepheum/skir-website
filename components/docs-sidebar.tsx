@@ -41,7 +41,11 @@ const navigation = [
     ],
   },
   {
-    title: 'Comparisons',
+    title: 'Extensibility',
+    items: [{ title: 'Building a generator', href: '/docs/code-generators' }],
+  },
+  {
+    title: 'Comparison',
     items: [{ title: 'Skir vs Protobuf', href: '/docs/protobuf' }],
   },
 ]
