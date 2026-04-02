@@ -395,7 +395,7 @@ export default function HomePage() {
             </p>
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
               <Button asChild size="lg" className="rounded-full px-6">
-                <Link href="/docs/setup">
+                <Link href="/docs">
                   Read the Docs
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>

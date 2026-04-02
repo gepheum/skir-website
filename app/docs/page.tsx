@@ -61,16 +61,22 @@ const sections = [
     icon: Package,
   },
   {
+    title: 'Best Practices',
+    description: 'Practical rules for writing future-proof schemas and robust APIs.',
+    href: '/docs/best-practices',
+    icon: PenTool,
+  },
+  {
     title: 'Building Code Generators',
     description: 'Implement custom generators and understand the compiler input/output contract.',
     href: '/docs/code-generators',
     icon: Wrench,
   },
   {
-    title: 'Best Practices',
-    description: 'Practical rules for writing future-proof schemas and robust APIs.',
-    href: '/docs/best-practices',
-    icon: PenTool,
+    title: 'Protobuf vs Skir',
+    description: 'Compare design choices and trade-offs between Protobuf and Skir.',
+    href: '/docs/protobuf',
+    icon: Globe,
   },
 ]
 

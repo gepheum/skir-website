@@ -10,7 +10,6 @@ const navigation = [
   {
     title: 'Quickstart',
     items: [
-      { title: 'Introduction', href: '/docs' },
       { title: 'Setup & workflow', href: '/docs/setup' },
       { title: 'Project examples', href: '/docs/examples' },
     ],
