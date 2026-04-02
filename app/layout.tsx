@@ -1,3 +1,4 @@
+import { ScrollToTop } from '@/components/scroll-to-top'
 import { ThemeProvider } from '@/components/theme-provider'
 import type { Metadata } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
@@ -73,6 +74,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange
         >
+          <ScrollToTop />
           {children}
         </ThemeProvider>
       </body>
