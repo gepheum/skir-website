@@ -339,9 +339,9 @@ export default function HomePage() {
               title="Key-indexed arrays"
               description={
                 <>
-                  The array type allows you to specify a key field, e.g.{' '}
-                  <code>[User|user_id]</code>. On the wire, this is just like an array, but the
-                  generated code will give you fast key-based lookups.
+                  The array type allows you to specify a key field, e.g. <code>[User|user_id]</code>
+                  . On the wire, this is just like an array, but the generated code will give you
+                  fast key-based lookups.
                 </>
               }
             />
