@@ -400,17 +400,17 @@ struct UserRegistry {
         <a href="https://buf.build/" target="_blank" rel="noopener noreferrer">
           Buf
         </a>{' '}
-        were created to solve the same fundamental gaps in the Protobuf
-        ecosystem: providing a seamless workflow with integrated dependency management, linting,
-        formatting, and breaking-change detection.
+        were created to solve the same fundamental gaps in the Protobuf ecosystem: providing a
+        seamless workflow with integrated dependency management, linting, formatting, and
+        breaking-change detection.
       </p>
       <p>
         The difference lies in philosophy. Buf builds the best possible ecosystem around the
         Protobuf language as it exists today. Skir, however, operates on the belief that
         Protobuf&apos;s core design flaws are significant enough to justify a new language. This
-        mirrors recurring industry "evolution vs. revolution" debates, much like TypeScript vs.
-        Dart or Carbon vs. Rust. While introducing a new language adds adoption cost, one can argue
-        that without moving beyond legacy constraints, meaningful progress in developer experience
+        mirrors recurring industry "evolution vs. revolution" debates, much like TypeScript vs. Dart
+        or Carbon vs. Rust. While introducing a new language adds adoption cost, one can argue that
+        without moving beyond legacy constraints, meaningful progress in developer experience
         remains limited.
       </p>
     </Prose>
