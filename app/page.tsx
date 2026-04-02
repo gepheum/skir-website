@@ -225,38 +225,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Ask Claude Section */}
-      <section className="border-t border-border bg-card/30 py-14 md:py-20">
-        <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="mb-8 text-balance text-3xl font-bold md:text-4xl">
-              Ask Claude — or your favorite AI
-            </h2>
-
-            <div className="soft-surface mb-6 rounded-xl p-6 max-w-2xl mx-auto">
-              <div className="text-muted-foreground mb-2">Prompt:</div>
-              <p className="text-lg italic text-foreground">
-                Create a full-stack application with a Kotlin backend and a TypeScript frontend,
-                connected via Skir for data exchange.
-              </p>
-            </div>
-
-            <div className="flex justify-center">
-              <Button asChild variant="outline" size="lg" className="rounded-full text-base">
-                <a
-                  href="https://github.com/gepheum/skir-lost-and-found-example"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <GitHubIcon className="mr-2 h-4 w-4" />
-                  Project created with this prompt
-                </a>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Features Section */}
       <section className="border-t border-border py-14 md:py-20">
         <div className="container mx-auto">
@@ -291,30 +259,6 @@ export default function HomePage() {
               description="Except in C++, Skir generates deeply immutable types with all fields required at construction time."
             />
             <FeatureCard
-              icon={<Terminal className="h-6 w-6" />} // Using Terminal for Dev Experience
-              title="First-class IDE support"
-              description={
-                <>
-                  A powerful{' '}
-                  <a
-                    href="https://marketplace.visualstudio.com/items?itemName=TylerFibonacci.skir-language"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline decoration-muted-foreground/50 hover:text-foreground transition-colors"
-                  >
-                    VS Code extension
-                  </a>{' '}
-                  with all the features you need. Real-time validation, code completion, automatic
-                  code formatting and more.
-                </>
-              }
-            />
-            <FeatureCard
-              icon={<Terminal className="h-6 w-6" />}
-              title="Easy to extend"
-              description="Code generators are regular NPM modules, so you can add custom ones without hacking the compiler."
-            />
-            <FeatureCard
               icon={<Package className="h-6 w-6" />}
               title="Constants you can share"
               description={
@@ -344,6 +288,30 @@ export default function HomePage() {
                   fast key-based lookups.
                 </>
               }
+            />
+            <FeatureCard
+              icon={<Terminal className="h-6 w-6" />} // Using Terminal for Dev Experience
+              title="First-class IDE support"
+              description={
+                <>
+                  A powerful{' '}
+                  <a
+                    href="https://marketplace.visualstudio.com/items?itemName=TylerFibonacci.skir-language"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-muted-foreground/50 hover:text-foreground transition-colors"
+                  >
+                    VS Code extension
+                  </a>{' '}
+                  with all the features you need. Real-time validation, code completion, automatic
+                  code formatting and more.
+                </>
+              }
+            />
+            <FeatureCard
+              icon={<Terminal className="h-6 w-6" />}
+              title="Easy to extend"
+              description="Code generators are regular NPM modules, so you can add custom ones without hacking the compiler."
             />
           </div>
         </div>
