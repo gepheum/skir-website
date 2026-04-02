@@ -273,15 +273,15 @@ export default function HomePage() {
             <FeatureCard
               icon={<Package className="h-6 w-6" />}
               title="GitHub imports"
-              description="Stop copying files. Import types directly from any GitHub repository. Share common data structures across projects."
+              description="Don't copy files. Import types directly from any GitHub repository. Share common data structures across projects."
             />
             <FeatureCard
               icon={<SiRust className="h-6 w-6" />}
               title="Rust-like enums"
               description={
                 <>
-                  A Skir <code>enum</code> is a set of variants. Each variant can be a simple
-                  constant or carry typed data.
+                  Skir <code>enum</code>s have variants. Each variant can be a simple constant or
+                  carry typed data, giving you a clean way to model polymorphism.
                 </>
               }
             />
@@ -313,6 +313,35 @@ export default function HomePage() {
               icon={<Terminal className="h-6 w-6" />}
               title="Easy to extend"
               description="Code generators are regular NPM modules, so you can add custom ones without hacking the compiler."
+            />
+            <FeatureCard
+              icon={<Package className="h-6 w-6" />}
+              title="Constants you can share"
+              description={
+                <>
+                  Define constants in your <code>.skir</code> files. They ship in generated code,
+                  so services share the same values without runtime config reads.
+                </>
+              }
+            />
+            <FeatureCard
+              icon={<Zap className="h-6 w-6" />}
+              title="Schemas you can serialize"
+              description={
+                <>
+                  Skir schemas can be serialized and deserialized as JSON, enabling advanced
+                  tooling. This powers the studio app and the{' '}
+                  <a
+                    href="https://skir.build/converter.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-muted-foreground/50 hover:text-foreground transition-colors"
+                  >
+                    converter app
+                  </a>
+                  .
+                </>
+              }
             />
           </div>
         </div>
