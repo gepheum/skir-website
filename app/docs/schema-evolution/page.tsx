@@ -329,7 +329,7 @@ assert(result.subscriptionStatus.union.kind === "TRIAL");  // Preserved!`}</Code
         </p>
       </Note>
 
-      <NextPageLink title="Typesafe RPCs" href="/docs/services" />
+      <NextPageLink title="SkirRPC" href="/docs/skirrpc" />
     </Prose>
   )
 }

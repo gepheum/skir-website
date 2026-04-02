@@ -1,4 +1,4 @@
-# Typesafe RPCs with SkirRPC services
+# SkirRPC
 
 A **SkirRPC service** is a typesafe HTTP API: a server and a client communicate using shared Skir data types.
 Your schema defines each method’s signature (request type and response type), and both the server code and the client code refer to the same schema-defined signatures—so both sides agree on the contract at compile time.

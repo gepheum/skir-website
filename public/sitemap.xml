@@ -43,7 +43,7 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://skir.build/docs/services</loc>
+    <loc>https://skir.build/docs/skirrpc</loc>
     <lastmod>2026-02-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -151,7 +151,7 @@
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>https://skir.build/llms/services.txt</loc>
+    <loc>https://skir.build/llms/skirrpc.txt</loc>
     <lastmod>2026-02-08</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>

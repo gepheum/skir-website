@@ -21,7 +21,7 @@ const navigation = [
       { title: 'Language reference', href: '/docs/language-reference' },
       { title: 'Serialization', href: '/docs/serialization' },
       { title: 'Schema evolution', href: '/docs/schema-evolution' },
-      { title: 'Typesafe RPCs', href: '/docs/services' },
+      { title: 'SkirRPC', href: '/docs/skirrpc' },
       { title: 'External dependencies', href: '/docs/dependencies' },
       { title: 'Best practices', href: '/docs/best-practices' },
     ],

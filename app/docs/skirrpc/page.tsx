@@ -3,14 +3,14 @@ import { NextPageLink } from '@/components/next-page-link'
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
-  title: 'Typesafe RPCs - Skir Documentation',
+  title: 'Typesafe APIs with SkirRPC - Skir Documentation',
   description: 'Build typesafe APIs with SkirRPC services.',
 }
 
 export default function RpcPage() {
   return (
     <Prose>
-      <h1>Typesafe RPCs</h1>
+      <h1>Typesafe APIs with SkirRPC</h1>
       <p>
         A <strong>SkirRPC service</strong> is a typesafe HTTP API: a server and a client communicate
         using shared Skir data types. Your schema defines each method’s signature (request type and

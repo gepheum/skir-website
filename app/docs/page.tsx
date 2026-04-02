@@ -49,9 +49,9 @@ const sections = [
     icon: RefreshCw,
   },
   {
-    title: 'Typesafe RPCs',
+    title: 'SkirRPC',
     description: 'Build typesafe APIs with SkirRPC services.',
-    href: '/docs/services',
+    href: '/docs/skirrpc',
     icon: Globe,
   },
   {
