@@ -2,8 +2,7 @@ import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
   title: 'Building a Code Generator - Skir Documentation',
-  description:
-    'Understand the contract between the Skir compiler and custom code generators.',
+  description: 'Understand the contract between the Skir compiler and custom code generators.',
 }
 
 export default function CodeGeneratorsPage() {
@@ -36,10 +35,9 @@ export default function CodeGeneratorsPage() {
       <h2>Dependencies</h2>
       <p>
         Your generator package should depend on <code>skir-internal</code>, because this package
-        defines the public compiler/plugin contract types (for example
-        {" "}<code>CodeGenerator</code>, <code>Module</code>, and
-        {" "}<code>RecordLocation</code>). Most generators also depend on <code>zod</code> for
-        {" "}<code>configType</code> validation.
+        defines the public compiler/plugin contract types (for example <code>CodeGenerator</code>,{' '}
+        <code>Module</code>, and <code>RecordLocation</code>). Most generators also depend on{' '}
+        <code>zod</code> for <code>configType</code> validation.
       </p>
       <CodeBlock language="bash">{`npm i skir-internal zod`}</CodeBlock>
 
@@ -136,9 +134,7 @@ export const GENERATOR = new MyGenerator();`}</CodeBlock>
       </p>
 
       <h2>Output contract</h2>
-      <p>
-        Your generator returns a list of output files:
-      </p>
+      <p>Your generator returns a list of output files:</p>
       <CodeBlock language="typescript">{`interface CodeGeneratorOutput {
   readonly files: readonly {
     readonly path: string;
@@ -150,22 +146,27 @@ export const GENERATOR = new MyGenerator();`}</CodeBlock>
         <code>code</code> is the final file contents.
       </p>
       <p>
-        Generators do not write files to disk directly. They only return the <code>(path, code)</code>{' '}
-        list; the compiler is responsible for materializing those files.
+        Generators do not write files to disk directly. They only return the{' '}
+        <code>(path, code)</code> list; the compiler is responsible for materializing those files.
       </p>
 
       <h2>Scope of this contract</h2>
       <p>
         The compiler/generator contract defines data flow and types. How you map that input into
-        language-specific APIs, classes, or style conventions is generator-specific and intentionally
-        outside this contract.
+        language-specific APIs, classes, or style conventions is generator-specific and
+        intentionally outside this contract.
       </p>
 
       <Note type="info">
         <p>
           A good first step is to inspect an existing generator (for example
-          <a href="https://github.com/gepheum/skir-rust-gen" target="_blank" rel="noopener noreferrer">
-            {' '}skir-rust-gen
+          <a
+            href="https://github.com/gepheum/skir-rust-gen"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {' '}
+            skir-rust-gen
           </a>
           ) and focus on how it consumes <code>modules</code>, <code>recordMap</code>, and{' '}
           <code>config</code>.
