@@ -155,14 +155,18 @@ struct UserRegistry {
       <h3>Field numbering</h3>
       <p>
         In Skir, fields in a <code>struct</code> are numbered starting from 0, and they must use
-        sequential integers (no gaps allowed).
+        sequential integers (no gaps allowed). With Protobuf, field numbers must be greater than 0,
+        and can be sparse (you can skip numbers).
       </p>
+
+      <h3>Imports</h3>
       <p>
-        This contrasts with Protocol Buffers, where field numbers must be greater than or equal to
-        1, and can be sparse (you can skip numbers). Skir&apos;s sequential requirement enables more
-        efficient serialization and deserialization implementations (often just array indexing)
-        compared to the hash map or switch statement approaches often required for sparse field
-        numbers.
+        Protobuf imports work like C includes: importing a <code>.proto</code> file brings all of
+        its symbols into scope without any explicit listing. If you encounter a type like{' '}
+        <code>Foo</code> that is not defined in the current file, you cannot tell which imported
+        file it comes from without opening each one. Skir uses named imports, similar to TypeScript
+        and Python: you explicitly list which names you are importing and from which module, making
+        every dependency immediately traceable.
       </p>
 
       <h3>API definitions</h3>

@@ -83,7 +83,11 @@ Serialized as a plain list, but generated code provides O(1) lookups by key.
 
 ### Field Numbering
 
-In Skir, struct field numbers start from 0 and must be sequential (no gaps). This enables more efficient serialization (array indexing) compared to Protobuf's sparse numbering (hash maps or switch statements).
+In Skir, `struct` field numbers start from 0 and must be sequential (no gaps). In Protobuf, field numbers must be greater than 0 and can be sparse.
+
+### Imports
+
+Protobuf imports work like C includes: all symbols from an imported `.proto` file enter scope with no explicit listing. If you see a type `Foo` that is not defined in the current file, you cannot tell which imported file it comes from without opening each one. Skir uses named imports (like TypeScript and Python), so every dependency is explicitly traceable.
 
 ### API Definitions
 
