@@ -303,6 +303,15 @@ export default function HomePage() {
                   >
                     VS Code extension
                   </a>{' '}
+                  and{' '}
+                  <a
+                    href="https://github.com/gepheum/skir-language-server"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline decoration-muted-foreground/50 hover:text-foreground transition-colors"
+                  >
+                    LSP
+                  </a>{' '}
                   with all the features you need. Real-time validation, code completion, automatic
                   code formatting and more.
                 </>
