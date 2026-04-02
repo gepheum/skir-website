@@ -319,8 +319,8 @@ export default function HomePage() {
               title="Constants you can share"
               description={
                 <>
-                  Define constants in your <code>.skir</code> files. They ship in generated code,
-                  so services share the same values without runtime config reads.
+                  Define constants in your <code>.skir</code> files. They ship in generated code, so
+                  services share the same values without runtime config reads.
                 </>
               }
             />
