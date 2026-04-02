@@ -99,6 +99,13 @@ export default function SchemaEvolutionPage() {
         format or data compatibility.
       </p>
 
+      <h3>Giving a stable identifier to a record</h3>
+      <p>
+        Giving a stable identifier to a record, for example <code>struct Foo(123) {'{...}'}</code>,
+        is safe. Stable identifiers are not used during serialization; they are only used by the
+        snapshot tool to track records across time.
+      </p>
+
       <h2>Unsafe changes</h2>
       <p>The following changes will break compatibility:</p>
       <ul>
