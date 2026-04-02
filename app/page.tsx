@@ -218,7 +218,7 @@ export default function HomePage() {
           <div className="max-w-5xl mx-auto">
             <HoverVideo src="/rpc-studio.mp4" />
             <p className="mt-4 text-center text-sm text-muted-foreground">
-              Every SkirRPC service ships with a built-in studio app for browsing and testing its
+              Every SkirRPC service ships with a built-in Studio app for browsing and testing its
               methods.
             </p>
           </div>
@@ -326,20 +326,22 @@ export default function HomePage() {
             />
             <FeatureCard
               icon={<Zap className="h-6 w-6" />}
-              title="Schemas you can serialize"
+              title="Serializable schemas"
               description={
                 <>
-                  Skir schemas can be serialized and deserialized as JSON, enabling advanced
-                  tooling. This powers the studio app and the{' '}
-                  <a
-                    href="https://skir.build/converter.html"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline decoration-muted-foreground/50 hover:text-foreground transition-colors"
-                  >
-                    converter app
-                  </a>
-                  .
+                  Skir schemas can be serialized and deserialized as JSON. This enables generic
+                  tools, like the Studio app, to understand schema structure.
+                </>
+              }
+            />
+            <FeatureCard
+              icon={<Package className="h-6 w-6" />}
+              title="Key-indexed arrays"
+              description={
+                <>
+                  The array type allows you to specify a key field, e.g.{' '}
+                  <code>[User|user_id]</code>. On the wire, this is just like an array, but the
+                  generated code will give you fast key-based lookups.
                 </>
               }
             />
