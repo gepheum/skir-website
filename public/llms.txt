@@ -20,6 +20,9 @@ Skir is a declarative language for defining data types, constants, and RPC inter
 - **GitHub imports** — Import and reuse types from other GitHub repositories.
 - **First-class IDE support** — VS Code extension with validation, completion, and formatting.
 - **Easy to extend** — Code generators are regular NPM modules, so custom targets can be added without hacking the compiler.
+- **Constants you can share** — Define constants in schemas and ship them in generated code so services share the same values without runtime config.
+- **Serializable schemas** — Skir schemas serialize/deserialize as JSON, enabling tools like the Studio app to understand schema structure.
+- **Key-indexed arrays** — Declare arrays with a key field (e.g. `[User|user_id]`) for compact serialization and fast lookups in generated code.
 - **Easy setup** — `npx skir init`, single YAML config file, watch mode, and formatter.
 
 ## Quick Example
