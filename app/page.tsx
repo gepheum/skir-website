@@ -58,7 +58,7 @@ export default function HomePage() {
               className="soft-surface mb-8 inline-flex items-center gap-2 rounded-full px-4 py-2 transition-colors hover:text-foreground"
             >
               <span className="text-primary font-medium">v1.2</span>
-              <span className="text-muted-foreground">A modern alternative to Protocol Buffer</span>
+              <span className="text-muted-foreground">Like Protobuf, without the pain</span>
             </a>
 
             <h1 className="mb-6 text-balance text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl">

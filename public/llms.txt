@@ -1,6 +1,6 @@
 # Skir
 
-**A modern alternative to Protocol Buffers.**
+**Like Protobuf, without the pain.**
 
 Skir is a declarative language for defining data types, constants, and RPC interfaces. Write your schema once in a `.skir` file and generate idiomatic, type-safe code in TypeScript, Python, Java, C++, Kotlin, Dart, Swift, Go, and Rust.
 

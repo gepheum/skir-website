@@ -18,7 +18,7 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Skir - A modern alternative to Protocol Buffer',
+  title: 'Skir - Like Protobuf, without the pain',
   description:
     'A declarative language for representing data types, constants, and APIs. Define your schema once and generate idiomatic, type-safe code for TypeScript, Python, Java, C++, Kotlin, Dart, Swift, Go, and Rust.',
   keywords: [
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     apple: [{ url: '/octopus-180x180.png', sizes: '180x180', type: 'image/png' }],
   },
   openGraph: {
-    title: 'Skir - A modern alternative to Protocol Buffer',
+    title: 'Skir - Like Protobuf, without the pain',
     description: 'A descriptive language for representing data types, constants, and APIs.',
     type: 'website',
   },

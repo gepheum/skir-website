@@ -48,9 +48,7 @@ export function Footer() {
               />
               <span className="text-xl font-bold">Skir</span>
             </Link>
-            <p className="mb-4 text-sm text-muted-foreground">
-              A modern alternative to Protocol Buffer.
-            </p>
+            <p className="mb-4 text-sm text-muted-foreground">Like Protobuf, without the pain.</p>
             <a
               href="https://github.com/gepheum/skir"
               target="_blank"
