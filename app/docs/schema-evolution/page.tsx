@@ -143,9 +143,7 @@ enum Status {
         <li>
           Deleting a field or variant without marking it as <code>removed</code>.
         </li>
-        <li>
-          Converting a wrapper variant into a constant variant.
-        </li>
+        <li>Converting a wrapper variant into a constant variant.</li>
       </ul>
 
       <h2>Automated compatibility checks</h2>
