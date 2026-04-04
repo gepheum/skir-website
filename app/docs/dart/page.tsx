@@ -42,7 +42,7 @@ export default function DartPage() {
       <P>
         The examples below are for the code generated from{' '}
         <a
-          href="https://github.com/gepheum/skir-dart-example/blob/main/lib/skir_src/user.skir"
+          href="https://github.com/gepheum/skir-dart-example/blob/main/skir-src/user.skir"
           target="_blank"
           rel="noopener noreferrer"
         >

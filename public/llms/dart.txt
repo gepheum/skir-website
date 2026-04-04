@@ -22,7 +22,7 @@ Example project: [skir-dart-example](https://github.com/gepheum/skir-dart-exampl
 
 ## Generated Code Guide
 
-Examples for code generated from [this .skir file](https://github.com/gepheum/skir-dart-example/blob/main/lib/skir_src/user.skir).
+Examples for code generated from [this .skir file](https://github.com/gepheum/skir-dart-example/blob/main/skir-src/user.skir).
 
 ### Referring to Generated Symbols
 
