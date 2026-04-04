@@ -1,6 +1,6 @@
-import { HoverVideo } from '@/components/hover-video'
 import { NextPageLink } from '@/components/next-page-link'
 import { CodeBlock, Note, Prose } from '@/components/prose'
+import Image from 'next/image'
 
 export const metadata = {
   title: 'Schema evolution & compatibility - Skir Documentation',
@@ -99,15 +99,24 @@ export default function SchemaEvolutionPage() {
         format or data compatibility.
       </p>
 
-      <h3>Converting between constant and wrapper variants</h3>
+      <h3>Converting a constant variant into a wrapper variant</h3>
       <p>
         You can safely convert a constant variant into a wrapper variant. New code reading old data
         with constant variants will treat them as wrapper variants around empty values.
       </p>
-      <p>
-        You can also convert a wrapper variant back into a constant variant. The wrapped value of
-        past data will be lost in this conversion.
-      </p>
+      <CodeBlock language="skir">{`// BEFORE
+enum Status {
+  ERROR;
+  OK;
+}
+`}</CodeBlock>
+      <CodeBlock language="skir">{`// AFTER
+enum Status {
+  // When deserializing old data, the string will be empty.
+  error: string;
+  OK;
+}
+`}</CodeBlock>
 
       <h3>Giving a stable identifier to a record</h3>
       <p>
@@ -133,6 +142,9 @@ export default function SchemaEvolutionPage() {
         </li>
         <li>
           Deleting a field or variant without marking it as <code>removed</code>.
+        </li>
+        <li>
+          Converting a wrapper variant into a constant variant.
         </li>
       </ul>
 
@@ -242,8 +254,33 @@ struct GetUserResponse { }
         </a>
         , breaking changes will be highlighted directly in your editor as you type.
       </p>
-      <div className="not-prose my-6 pt-[2px] w-[460px] max-w-full mx-auto">
-        <HoverVideo src="/schema-evolution-check.mp4" />
+      <div className="not-prose mx-auto my-6 flex max-w-5xl items-center justify-center gap-2 pt-[2px] md:gap-3">
+        <div className="soft-surface w-[45%] overflow-hidden rounded-xl p-2">
+          <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            Before
+          </div>
+          <Image
+            src="/shapes-before.png"
+            alt="Schema before evolution changes"
+            width={0}
+            height={0}
+            sizes="(max-width: 768px) 45vw, 420px"
+            className="h-auto w-full rounded-lg"
+          />
+        </div>
+        <div className="soft-surface w-[45%] overflow-hidden rounded-xl p-2">
+          <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            After
+          </div>
+          <Image
+            src="/shapes-after.png"
+            alt="Schema after evolution changes"
+            width={0}
+            height={0}
+            sizes="(max-width: 768px) 45vw, 420px"
+            className="h-auto w-full rounded-lg"
+          />
+        </div>
       </div>
 
       <h3>2. Before release</h3>
