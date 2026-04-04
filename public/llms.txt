@@ -14,7 +14,7 @@ Skir is a declarative language for defining data types, constants, and RPC inter
 - **Idiomatic code generation** — Generated code feels native in each target language.
 - **Serialization to JSON or binary** — Use dense JSON for APIs and storage, readable JSON for debugging, or binary for raw performance.
 - **Rust-like enums** — Variants can be plain constants or carry typed data.
-- **Immutable data types** — Except in C++, generated types are deeply immutable and require all fields at construction time.
+- **Prioritizes immutability** — Except in C++, generated types are deeply immutable and require all fields at construction time.
 - **Schema evolution** — Built-in rules and checks for backward-compatible schema changes.
 - **Type-safe RPC over HTTP** — Share generated method definitions across client and server, and test methods in a built-in SkirRPC studio app.
 - **GitHub imports** — Import and reuse types from other GitHub repositories.
