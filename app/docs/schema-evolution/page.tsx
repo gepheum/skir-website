@@ -105,8 +105,8 @@ export default function SchemaEvolutionPage() {
         with constant variants will treat them as wrapper variants around empty values.
       </p>
       <p>
-        You can also convert a wrapper variant back into a constant variant. The wrapped
-        value of past data will be lost in this conversion.
+        You can also convert a wrapper variant back into a constant variant. The wrapped value of
+        past data will be lost in this conversion.
       </p>
 
       <h3>Giving a stable identifier to a record</h3>
