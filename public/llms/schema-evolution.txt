@@ -46,6 +46,12 @@ You can change a type if the new type is backward-compatible with the old one:
 
 You can freely add, remove, or change the key field of a keyed array (the part after `|`). For example, changing `[User]` to `[User|id]` or `[User|id]` to `[User]` is safe. The key annotation is purely a hint for code generation to provide efficient lookup methods. It does not affect the serialization format or data compatibility.
 
+### Converting between constant and wrapper variants
+
+You can safely convert a constant variant into a wrapper variant. New code reading old data with constant variants will treat them as wrapper variants around empty values.
+
+You can also convert a wrapper variant back into a constant variant. The wrapped value of past data will be lost in this conversion.
+
 ### Giving a stable identifier to a record
 
 Giving a stable identifier to a record, for example `struct Foo(123) {...}`, is safe. Stable identifiers are not used during serialization; they are only used by the snapshot tool to track records across time.
@@ -59,7 +65,6 @@ The following changes will break compatibility:
 - Changing a method's stable identifier.
 - Reusing a `removed` field or variant number.
 - Deleting a field or variant without marking it as `removed`.
-- Changing a constant variant to a wrapper variant or vice-versa.
 
 ## Automated compatibility checks
 

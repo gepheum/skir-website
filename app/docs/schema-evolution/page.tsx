@@ -99,6 +99,16 @@ export default function SchemaEvolutionPage() {
         format or data compatibility.
       </p>
 
+      <h3>Converting between constant and wrapper variants</h3>
+      <p>
+        You can safely convert a constant variant into a wrapper variant. New code reading old data
+        with constant variants will treat them as wrapper variants around empty values.
+      </p>
+      <p>
+        You can also convert a wrapper variant back into a constant variant. The wrapped
+        value of past data will be lost in this conversion.
+      </p>
+
       <h3>Giving a stable identifier to a record</h3>
       <p>
         Giving a stable identifier to a record, for example <code>struct Foo(123) {'{...}'}</code>,
@@ -124,7 +134,6 @@ export default function SchemaEvolutionPage() {
         <li>
           Deleting a field or variant without marking it as <code>removed</code>.
         </li>
-        <li>Changing a constant variant to a wrapper variant or vice-versa.</li>
       </ul>
 
       <h2>Automated compatibility checks</h2>
