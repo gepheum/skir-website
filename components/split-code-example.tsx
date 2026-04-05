@@ -137,7 +137,7 @@ export function SplitCodeExample({
             <div className="pointer-events-none absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-secondary/80 to-transparent" />
           </div>
 
-          <div className="overflow-x-auto overflow-y-auto flex-1">
+          <div key={activeTab} className="overflow-x-auto overflow-y-auto flex-1">
             <SyntaxHighlighter
               language={activeTab}
               style={syntaxTheme}
