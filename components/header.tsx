@@ -75,7 +75,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/80 bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70">
-      <nav className="container mx-auto flex h-16 items-center justify-between px-4">
+      <nav className="container mx-auto flex h-16 items-center justify-between gap-4 px-4">
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-2.5">
             <Image
@@ -130,6 +130,14 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-4">
+          <a
+            href="/llms.txt"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden md:inline-flex items-center text-[10px] font-mono text-muted-foreground hover:text-foreground transition-colors border border-border rounded px-1 py-0.5"
+          >
+            llms.txt
+          </a>
           <ThemeToggle />
           <Button
             asChild
