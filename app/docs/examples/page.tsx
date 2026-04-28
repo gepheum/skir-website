@@ -19,6 +19,12 @@ const languageStarters = [
     notes: 'Dart 3 project with pub dependencies.',
   },
   {
+    title: 'Gleam',
+    href: 'https://github.com/gepheum/skir-gleam-example',
+    framework: 'Wisp',
+    notes: 'Gleam project with generated Skir types and RPC wiring.',
+  },
+  {
     title: 'Go',
     href: 'https://github.com/gepheum/skir-go-example',
     framework: 'net/http',
@@ -59,6 +65,12 @@ const languageStarters = [
     href: 'https://github.com/gepheum/skir-typescript-example',
     framework: 'Express',
     notes: 'Node server + browser client bundle.',
+  },
+  {
+    title: 'Zig',
+    href: 'https://github.com/gepheum/skir-zig-example',
+    framework: 'std.http.Server',
+    notes: 'Zig build workflow with Skir client dependency in build.zig.zon.',
   },
 ]
 

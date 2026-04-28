@@ -364,6 +364,29 @@ async def main():
               </td>
             </tr>
             <tr className="border-b border-border transition-colors hover:bg-muted/50">
+              <td className="p-4 font-medium">Zig</td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-zig-example/blob/main/src/start_service.zig"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  std.http.Server
+                </a>
+              </td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-zig-example/blob/main/src/call_service.zig"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Client
+                </a>
+              </td>
+            </tr>
+            <tr className="border-b border-border transition-colors hover:bg-muted/50">
               <td className="p-4 font-medium">Swift</td>
               <td className="p-4 text-muted-foreground">
                 <a
@@ -386,7 +409,7 @@ async def main():
                 </a>
               </td>
             </tr>
-            <tr className="transition-colors hover:bg-muted/50">
+            <tr className="border-b border-border transition-colors hover:bg-muted/50">
               <td className="p-4 font-medium">Rust</td>
               <td className="p-4 text-muted-foreground">
                 <a
@@ -401,6 +424,29 @@ async def main():
               <td className="p-4 text-muted-foreground">
                 <a
                   href="https://github.com/gepheum/skir-rust-example/blob/main/src/bin/call_service.rs"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Client
+                </a>
+              </td>
+            </tr>
+            <tr className="transition-colors hover:bg-muted/50">
+              <td className="p-4 font-medium">Gleam</td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-gleam-example/blob/main/src/start_service.gleam"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Wisp
+                </a>
+              </td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-gleam-example/blob/main/src/call_service.gleam"
                   target="_blank"
                   rel="noreferrer"
                   className="underline hover:text-foreground"

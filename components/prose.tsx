@@ -154,7 +154,7 @@ export function CodeBlock({ children, language, filename }: CodeBlockProps) {
     setMounted(true)
   }, [])
 
-  // Use light theme by default during SSR to match defaultTheme="light"
+  // Use light theme during SSR for deterministic rendering before hydration.
   const syntaxTheme = !mounted || theme === 'light' ? atomOneLight : atomOneDark
 
   // Use Skir highlighting for Skir code

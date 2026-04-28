@@ -12,6 +12,7 @@ const footerLinks = {
   languages: [
     { name: 'C++', href: '/docs/cpp' },
     { name: 'Dart', href: '/docs/dart' },
+    { name: 'Gleam', href: '/docs/gleam' },
     { name: 'Go', href: '/docs/go' },
     { name: 'Java', href: '/docs/java' },
     { name: 'Kotlin', href: '/docs/kotlin' },
@@ -19,6 +20,7 @@ const footerLinks = {
     { name: 'Rust', href: '/docs/rust' },
     { name: 'Swift', href: '/docs/swift' },
     { name: 'TypeScript', href: '/docs/typescript' },
+    { name: 'Zig', href: '/docs/zig' },
   ],
   resources: [
     {

@@ -27,25 +27,17 @@ SyntaxHighlighter.registerLanguage('dart', dart)
 SyntaxHighlighter.registerLanguage('swift', swift)
 SyntaxHighlighter.registerLanguage('rust', rust)
 
-export type CodeTabId =
-  | 'typescript'
-  | 'python'
-  | 'cpp'
-  | 'go'
-  | 'kotlin'
-  | 'java'
-  | 'dart'
-  | 'swift'
-  | 'rust'
+export type CodeTabId = string
 
 type CodeTab = {
   id: CodeTabId
   label: string
+  language?: string
 }
 
 type SplitCodeExampleProps = {
   skirCode: string
-  codeExamples: Record<CodeTabId, string>
+  codeExamples: Record<string, string>
   tabs?: CodeTab[]
   leftTitle?: string
   initialTab?: CodeTabId
@@ -72,6 +64,7 @@ export function SplitCodeExample({
 }: SplitCodeExampleProps) {
   const fallbackTab = tabs[0]?.id ?? 'typescript'
   const [activeTab, setActiveTab] = useState<CodeTabId>(initialTab ?? fallbackTab)
+  const activeTabConfig = tabs.find((tab) => tab.id === activeTab)
   const [mounted, setMounted] = useState(false)
   const { theme } = useTheme()
 
@@ -79,7 +72,7 @@ export function SplitCodeExample({
     setMounted(true)
   }, [])
 
-  // Use light theme by default during SSR to match defaultTheme="light"
+  // Use light theme during SSR for deterministic rendering before hydration.
   const syntaxTheme = !mounted || theme === 'light' ? atomOneLight : atomOneDark
 
   return (
@@ -139,7 +132,7 @@ export function SplitCodeExample({
 
           <div key={activeTab} className="overflow-x-auto overflow-y-auto flex-1">
             <SyntaxHighlighter
-              language={activeTab}
+              language={activeTabConfig?.language ?? activeTab}
               style={syntaxTheme}
               customStyle={{
                 margin: 0,

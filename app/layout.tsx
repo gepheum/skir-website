@@ -20,7 +20,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'Skir - Like Protobuf, without the pain',
   description:
-    'A declarative language for representing data types, constants, and APIs. Define your schema once and generate idiomatic, type-safe code for TypeScript, Python, Java, C++, Kotlin, Dart, Swift, Go, and Rust.',
+    'A declarative language for representing data types, constants, and APIs. Define your schema once and generate idiomatic, type-safe code for TypeScript, Python, Java, C++, Kotlin, Dart, Swift, Go, Rust, Zig, and Gleam.',
   keywords: [
     'skir',
     'protocol buffer',
@@ -35,6 +35,8 @@ export const metadata: Metadata = {
     'dart',
     'swift',
     'rust',
+    'zig',
+    'gleam',
     'schema',
     'codegen',
   ],

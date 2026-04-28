@@ -30,6 +30,7 @@ const navigation = [
     items: [
       { title: 'C++', href: '/docs/cpp' },
       { title: 'Dart', href: '/docs/dart' },
+      { title: 'Gleam', href: '/docs/gleam' },
       { title: 'Go', href: '/docs/go' },
       { title: 'Java', href: '/docs/java' },
       { title: 'Kotlin', href: '/docs/kotlin' },
@@ -37,6 +38,7 @@ const navigation = [
       { title: 'Rust', href: '/docs/rust' },
       { title: 'Swift', href: '/docs/swift' },
       { title: 'TypeScript', href: '/docs/typescript' },
+      { title: 'Zig', href: '/docs/zig' },
     ],
   },
   {

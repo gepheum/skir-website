@@ -12,12 +12,14 @@ import { FaJava } from 'react-icons/fa6'
 import {
   SiCplusplus,
   SiDart,
+  SiGleam,
   SiGo,
   SiKotlin,
   SiPython,
   SiRust,
   SiSwift,
   SiTypescript,
+  SiZig,
 } from 'react-icons/si'
 
 function WaveDivider({ colorClass, flip = false }: { colorClass: string; flip?: boolean }) {
@@ -108,7 +110,7 @@ export default function HomePage() {
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="mb-4 text-balance text-3xl font-bold md:text-4xl">
-                One schema, nine languages, zero friction
+                One schema, 11 languages, zero friction
               </h2>
               <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
                 One YAML file. One command.
@@ -379,6 +381,12 @@ export default function HomePage() {
               name="Rust"
               icon={<SiRust className="text-[#000000] dark:text-[#DEA584]" />}
               href="/docs/rust"
+            />
+            <LanguageCard name="Zig" icon={<SiZig className="text-[#F7A41D]" />} href="/docs/zig" />
+            <LanguageCard
+              name="Gleam"
+              icon={<SiGleam className="text-[#FFAFF3]" />}
+              href="/docs/gleam"
             />
           </div>
         </div>
