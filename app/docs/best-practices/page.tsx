@@ -290,8 +290,8 @@ struct UserBundle {
   }
 ): enum {
   ok: Product;
-  NOT_FOUND;
-  RETIRED;
+  not_found;
+  retired;
   invalid_product_id: string;
 } = 1000;`}</CodeBlock>
 

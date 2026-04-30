@@ -34,7 +34,7 @@ export default function SchemaEvolutionPage() {
         <li>Strings, bytes, arrays: empty</li>
         <li>Structs: a struct with all fields at their default values</li>
         <li>
-          Enums: the implicit <code>UNKNOWN</code> variant
+          Enums: the implicit <code>unknown</code> variant
         </li>
         <li>
           Optional: <code>null</code>
@@ -43,7 +43,7 @@ export default function SchemaEvolutionPage() {
 
       <h3>Adding a variant to an enum</h3>
       <p>
-        Old code encountering a new variant will treat it as the implicit <code>UNKNOWN</code>{' '}
+        Old code encountering a new variant will treat it as the implicit <code>unknown</code>{' '}
         variant.
       </p>
 
@@ -64,7 +64,7 @@ export default function SchemaEvolutionPage() {
       <p>
         You must mark the field or variant number as <code>removed</code>. This is permanent: once a
         number is marked as removed, it cannot be reused. When removing a variant, new code
-        encoutering the old variant will treat it as <code>UNKNOWN</code>.
+        encoutering the old variant will treat it as <code>unknown</code>.
       </p>
 
       <h3>Making a compatible type change</h3>
@@ -106,15 +106,15 @@ export default function SchemaEvolutionPage() {
       </p>
       <CodeBlock language="skir">{`// BEFORE
 enum Status {
-  ERROR;
-  OK;
+  error;
+  ok;
 }
 `}</CodeBlock>
       <CodeBlock language="skir">{`// AFTER
 enum Status {
   // When deserializing old data, the string will be empty.
   error: string;
-  OK;
+  ok;
 }
 `}</CodeBlock>
 
@@ -320,16 +320,16 @@ struct GetUserResponse { }
       <CodeBlock language="skir" filename="Version 1">{`struct UserBefore(999) {
   id: int64;
   subscription_status: enum {
-    FREE;
-    PREMIUM;
+    free;
+    premium;
   };
 }`}</CodeBlock>
       <CodeBlock language="skir" filename="Version 2">{`struct UserAfter(999) {
   id: int64;
   subscription_status: enum {
-    FREE;
-    PREMIUM;
-    TRIAL;  // Added
+    free;
+    premium;
+    trial;  // Added
   };
   name: string;  // Added
 }`}</CodeBlock>
@@ -345,7 +345,7 @@ const result = UserAfter.serializer.fromJson(roundTrippedJson);
 
 assert(result.id === 123);
 assert(result.name === "");  // Lost: reset to default
-assert(result.subscriptionStatus.union.kind === "UNKNOWN");  // Lost: became UNKNOWN`}</CodeBlock>
+assert(result.subscriptionStatus.union.kind === "unknown");  // Lost: became unknown`}</CodeBlock>
 
       <h3>Preserve behavior</h3>
       <p>You can configure the deserializer to keep unrecognized values.</p>
@@ -361,7 +361,7 @@ const result = UserAfter.serializer.fromJson(roundTrippedJson);
 
 assert(result.id === 123);
 assert(result.name === "Jane");  // Preserved!
-assert(result.subscriptionStatus.union.kind === "TRIAL");  // Preserved!`}</CodeBlock>
+assert(result.subscriptionStatus.union.kind === "trial");  // Preserved!`}</CodeBlock>
 
       <Note type="warning">
         <p>

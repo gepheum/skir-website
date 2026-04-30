@@ -260,7 +260,7 @@ export default function HomePage() {
             <FeatureCard
               icon={<Package className="h-6 w-6" />}
               title="Prioritizes immutability"
-              description="Except in C++, Skir generates deeply immutable types with all fields required at construction time."
+              description="Skir generates deeply immutable types with all fields required at construction time."
             />
             <FeatureCard
               icon={<Package className="h-6 w-6" />}

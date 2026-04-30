@@ -76,7 +76,7 @@ const john = User.create({
       picture: "🐘",
     },
   ],
-  subscriptionStatus: "FREE",
+  subscriptionStatus: "free",
   // foo: "bar",
   // ^ Does not compile: 'foo' is not a field of User
 });
@@ -167,17 +167,17 @@ greet(lylaMut);
         The definition of the <InlineCode>SubscriptionStatus</InlineCode> enum in the .skir file is:
       </P>
       <CodeBlock language="skir">{`enum SubscriptionStatus {
-  FREE;
+  free;
   trial: Trial;
-  PREMIUM;
+  premium;
 }`}</CodeBlock>
 
       <H4>Creating enum values</H4>
-      <CodeBlock language="typescript">{`const johnStatus = SubscriptionStatus.FREE;
-const janeStatus = SubscriptionStatus.PREMIUM;
-const lylaStatus = SubscriptionStatus.create("PREMIUM");
-// ^ same as SubscriptionStatus.PREMIUM
-const jolyStatus = SubscriptionStatus.UNKNOWN;
+      <CodeBlock language="typescript">{`const johnStatus = SubscriptionStatus.free;
+const janeStatus = SubscriptionStatus.premium;
+const lylaStatus = SubscriptionStatus.create("premium");
+// ^ same as SubscriptionStatus.premium
+const jolyStatus = SubscriptionStatus.unknown;
 
 // Use create({kind: ..., value: ...}) for wrapper variants.
 const roniStatus = SubscriptionStatus.create({
@@ -189,9 +189,9 @@ const roniStatus = SubscriptionStatus.create({
 
       <H4>Conditions on enums</H4>
       <CodeBlock language="typescript">{`// Use 'union.kind' to check which variant the enum value holds.
-assert(johnStatus.union.kind === "FREE");
+assert(johnStatus.union.kind === "free");
 
-assert(jolyStatus.union.kind === "UNKNOWN");
+assert(jolyStatus.union.kind === "unknown");
 
 assert(roniStatus.union.kind === "trial");
 // If the enum holds a wrapper variant, you can access the wrapped value through
@@ -201,11 +201,11 @@ assert(roniStatus.union.value.startTime.unixMillis === 1234);
 function getSubscriptionInfoText(status: SubscriptionStatus): string {
   // Pattern matching on enum variants
   switch (status.union.kind) {
-    case "UNKNOWN":
+    case "unknown":
       return "Unknown subscription status";
-    case "FREE":
+    case "free":
       return "Free user";
-    case "PREMIUM":
+    case "premium":
       return "Premium user";
     case "trial":
       // Here the compiler knows that the type of union.value is
@@ -246,7 +246,7 @@ console.log(serializer.toJsonCode(john, "readable"));
 //       "picture": "🐘"
 //     }
 //   ],
-//   "subscription_status": "FREE"
+//   "subscription_status": "free"
 // }
 
 // The dense JSON flavor is the flavor you should pick if you intend to

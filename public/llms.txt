@@ -119,7 +119,9 @@ enum OperationStatus {
 Defines an RPC method signature. The numeric ID (e.g. `= 12345`) is stable across renames and drives routing. No two methods can share the same ID.
 
 ```skir
-method GetUserProfile(GetUserProfileRequest): GetUserProfileResponse = 12345;
+method GetUserProfile(
+  GetUserProfileRequest
+): GetUserProfileResponse = 12345;
 ```
 
 Request and response types can also be defined inline:

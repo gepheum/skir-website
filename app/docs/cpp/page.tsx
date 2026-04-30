@@ -165,7 +165,7 @@ if (jade_status.is_trial()) {
 // One way to do an exhaustive switch on an enum.
 switch (lara_status.kind()) {
   case SubscriptionStatus::kind_type::kUnknown:
-    // UNKNOWN is the default value for an uninitialized SubscriptionStatus.
+    // unknown is the default value for an uninitialized SubscriptionStatus.
     // ...
     break;
   case SubscriptionStatus::kind_type::kFreeConst:

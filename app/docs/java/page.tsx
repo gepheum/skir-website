@@ -82,7 +82,7 @@ final User john =
                     .setPicture("🐘")
                     .build()))
         .setQuote("Coffee is just a socially acceptable form of rage.")
-        .setSubscriptionStatus(SubscriptionStatus.FREE)
+        .setSubscriptionStatus(SubscriptionStatus.free)
         .setUserId(42)
         .build();
 
@@ -126,19 +126,19 @@ assert evilJohn.userId() == 42;`}</CodeBlock>
         The definition of the <InlineCode>SubscriptionStatus</InlineCode> enum in the .skir file is:
       </P>
       <CodeBlock language="skir">{`enum SubscriptionStatus {
-  FREE;
+  free;
   trial: Trial;
-  PREMIUM;
+  premium;
 }`}</CodeBlock>
 
       <H4>Making enum values</H4>
       <CodeBlock language="java">{`final List<SubscriptionStatus> someStatuses =
     List.of(
-        // The UNKNOWN constant is present in all skir enums even if it is not
+        // The unknown constant is present in all skir enums even if it is not
         // declared in the .skir file.
-        SubscriptionStatus.UNKNOWN,
-        SubscriptionStatus.FREE,
-        SubscriptionStatus.PREMIUM,
+        SubscriptionStatus.unknown,
+        SubscriptionStatus.free,
+        SubscriptionStatus.premium,
         // To construct wrapper variants, call the wrap{VariantName} static
         // methods.
         SubscriptionStatus.wrapTrial(
@@ -147,10 +147,10 @@ assert evilJohn.userId() == 42;`}</CodeBlock>
                 .build()));`}</CodeBlock>
 
       <H4>Conditions on enums</H4>
-      <CodeBlock language="java">{`assert john.subscriptionStatus().equals(SubscriptionStatus.FREE);
+      <CodeBlock language="java">{`assert john.subscriptionStatus().equals(SubscriptionStatus.free);
 
-// UNKNOWN is the default value for enums.
-assert jane.subscriptionStatus().equals(SubscriptionStatus.UNKNOWN);
+// unknown is the default value for enums.
+assert jane.subscriptionStatus().equals(SubscriptionStatus.unknown);
 
 final Instant now = Instant.now();
 final SubscriptionStatus trialStatus =
@@ -162,7 +162,7 @@ final SubscriptionStatus trialStatus =
 assert trialStatus.kind() == SubscriptionStatus.Kind.TRIAL_WRAPPER;
 assert trialStatus.asTrial().startTime() == now;
 
-// SubscriptionStatus.FREE.asTrial();
+// SubscriptionStatus.free.asTrial();
 // ^ Runtime error: asTrial() can only be called on a trial wrapper.`}</CodeBlock>
 
       <H4>Branching on enum variants</H4>
@@ -170,10 +170,10 @@ assert trialStatus.asTrial().startTime() == now;
 final Function<SubscriptionStatus, String> getInfoText =
     status ->
         switch (status.kind()) {
-          case FREE_CONST -> "Free user";
-          case PREMIUM_CONST -> "Premium user";
+          case free_const -> "Free user";
+          case premium_const -> "Premium user";
           case TRIAL_WRAPPER -> "On trial since " + status.asTrial().startTime();
-          case UNKNOWN -> "Unknown subscription status";
+          case unknown -> "Unknown subscription status";
           default -> throw new AssertionError("Unreachable");
         };
 
@@ -235,7 +235,7 @@ System.out.println(serializer.toJsonCode(john, JsonFlavor.READABLE));
 //       "picture": "🐘"
 //     }
 //   ],
-//   "subscription_status": "FREE"
+//   "subscription_status": "free"
 // }
 
 // The dense JSON flavor is the flavor you should pick if you intend to

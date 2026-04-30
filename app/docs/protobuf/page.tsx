@@ -50,10 +50,10 @@ message PokerAction {
         (like a standard enum) or stateful (holding data), and you can mix them freely.
       </p>
       <CodeBlock language="skir">{`enum PokerAction {
-  CHECK;           // Stateless variant
+  check;           // Stateless variant
   bet: int32;      // Stateful variant (holds the amount)
-  FOLD;
-  CALL;
+  fold;
+  call;
   raise: int32;
 }`}</CodeBlock>
 
@@ -328,7 +328,7 @@ struct UserRegistry {
 
       <h2>Other differences</h2>
 
-      <h3>Implicit UNKNOWN variant</h3>
+      <h3>Implicit unknown variant</h3>
       <p>
         The{' '}
         <a
@@ -353,7 +353,7 @@ struct UserRegistry {
       </blockquote>
 
       <p>
-        Skir does this automatically. Every enum in Skir has an implicit <code>UNKNOWN</code>{' '}
+        Skir does this automatically. Every enum in Skir has an implicit <code>unknown</code>{' '}
         variant (with index 0). This serves as the default value and captures unrecognized variants
         deserialized from newer schema versions.
       </p>

@@ -114,9 +114,9 @@ io.println(int.to_string(evil_john.user_id))
       <H3>Enum types</H3>
       <P>The definition of the SubscriptionStatus enum in the .skir file is:</P>
       <CodeBlock language="rust" filename="Skir">{`enum SubscriptionStatus {
-  FREE;
+  free;
   trial: Trial;
-  PREMIUM;
+  premium;
 }`}</CodeBlock>
       <P>Skir generates a Gleam custom type for every enum in the .skir file.</P>
 
@@ -183,7 +183,7 @@ io.println(skir_client.to_readable_json_code(serializer, john))
 //   "name": "John Doe",
 //   "quote": "Coffee is just a socially acceptable form of rage.",
 //   "pets": [ ... ],
-//   "subscription_status": "FREE"
+//   "subscription_status": "free"
 // }
 
 // Deserialize from JSON (both dense and readable formats are accepted).

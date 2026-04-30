@@ -175,9 +175,9 @@ greet(mutableLyla);
         The definition of the <InlineCode>SubscriptionStatus</InlineCode> enum in the .skir file is:
       </P>
       <CodeBlock language="skir">{`enum SubscriptionStatus {
-  FREE;
+  free;
   trial: Trial;
-  PREMIUM;
+  premium;
 }`}</CodeBlock>
 
       <H4>Making enum values</H4>
@@ -248,7 +248,7 @@ print(serializer.toJsonCode(john, readableFlavor: true));
 //       "picture": "🐘"
 //     }
 //   ],
-//   "subscription_status": "FREE"
+//   "subscription_status": "free"
 // }
 
 // The dense JSON flavor is the flavor you should pick if you intend to

@@ -78,7 +78,7 @@ john = User(
             picture="🐘",
         ),
     ],
-    subscription_status=SubscriptionStatus.FREE,
+    subscription_status=SubscriptionStatus.free,
     # foo="bar",
     # Does not compile: 'foo' is not a field of User
 )
@@ -168,16 +168,16 @@ greet(lyla_mut)
         The definition of the <InlineCode>SubscriptionStatus</InlineCode> enum in the .skir file is:
       </P>
       <CodeBlock language="skir">{`enum SubscriptionStatus {
-  FREE;
+  free;
   trial: Trial;
-  PREMIUM;
+  premium;
 }`}</CodeBlock>
 
       <H4>Creating enum values</H4>
-      <CodeBlock language="python">{`john_status = SubscriptionStatus.FREE
-jane_status = SubscriptionStatus.PREMIUM
+      <CodeBlock language="python">{`john_status = SubscriptionStatus.free
+jane_status = SubscriptionStatus.premium
 
-joly_status = SubscriptionStatus.UNKNOWN
+joly_status = SubscriptionStatus.unknown
 
 # Use wrap_*() for wrapper variants.
 roni_status = SubscriptionStatus.wrap_trial(
@@ -194,12 +194,12 @@ assert roni_status == SubscriptionStatus.create_trial(
 
       <H4>Pattern matching</H4>
       <CodeBlock language="python">{`# Use 'union.kind' to check which variant the enum value holds.
-assert john_status.union.kind == "FREE"
+assert john_status.union.kind == "free"
 
 # Static type checkers will complain: "RED" not in the enum definition.
 # assert jane_status.union.kind == "RED"
 
-assert joly_status.union.kind == "UNKNOWN"
+assert joly_status.union.kind == "unknown"
 
 assert roni_status.union.kind == "trial"
 # If the enum holds a wrapper variant, you can access the wrapped value through
@@ -209,16 +209,16 @@ assert isinstance(roni_status.union.value, SubscriptionStatus.Trial)
 
 def get_subscription_info_text(status: SubscriptionStatus) -> str:
     # Pattern matching on enum variants
-    if status.union.kind == "UNKNOWN":
+    if status.union.kind == "unknown":
         return "Unknown subscription status"
-    elif status.union.kind == "FREE":
+    elif status.union.kind == "free":
         return "Free user"
     elif status.union.kind == "trial":
         # Here the compiler knows that the type of 'union.value' is
         # 'SubscriptionStatus.Trial'
         trial = status.union.value
         return f"On trial since {trial.start_time}"
-    elif status.union.kind == "PREMIUM":
+    elif status.union.kind == "premium":
         return "Premium user"
 
     # Static type checkers will error if any case is missed.
@@ -258,7 +258,7 @@ print(serializer.to_json_code(john, readable=True))
 #       "picture": "🐘"
 #     }
 #   ],
-#   "subscription_status": "FREE"
+#   "subscription_status": "free"
 # }
 
 # The dense JSON flavor is the flavor you should pick if you intend to

@@ -85,7 +85,7 @@ export default function SerializationPage() {
 const JOHN_DOE: User = {
   user_id: 400,
   name: "John Doe",
-  rest_day: "SUNDAY",
+  rest_day: "sunday",
   subscription_status: {
     kind: "premium_since",
     value: "2027-01-01:00:00:00Z",
@@ -249,7 +249,7 @@ const JOHN_DOE: User = {
       <CodeBlock language="json">{`{
   "user_id": 400,
   "name": "John Doe",
-  "rest_day": "SUNDAY",
+  "rest_day": "sunday",
   "subscription_status": {
     "kind": "premium_since",
     "value": {
@@ -386,7 +386,7 @@ const JOHN_DOE: User = {
                 </ul>
               </TableCell>
               <TableCell className="font-mono text-xs">
-                <div>"RED"</div>
+                <div>"red"</div>
                 <div>{`{ "kind": "rgb", "value": "ff0000" }`}</div>
               </TableCell>
             </TableRow>

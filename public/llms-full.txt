@@ -200,7 +200,7 @@ Enums in Skir are similar to enums in Rust. An enum value is one of several poss
 ```skir
 // Indicates whether an operation succeeded or failed.
 enum OperationStatus {
-  SUCCESS;        // a constant variant
+  success;        // a constant variant
   error: string;  // a wrapper variant
 }
 ```
@@ -219,7 +219,7 @@ struct MoveAction {
 }
 
 enum BoardGameTurn {
-  PASS;
+  pass;
   move: MoveAction;
 }
 ```
@@ -229,7 +229,7 @@ Like the fields of a struct, the variants of an enum have a number, and the numb
 ```skir
 enum ExplicitNumbering {
   // The numbers don't need to be consecutive.
-  FOO = 10;
+  foo = 10;
   bar: string = 2;
 }
 
@@ -237,7 +237,7 @@ enum ImplicitNumbering {
   // Implicit numbering is 1-based.
   // 0 is reserved for the special UNKNOWN variant.
 
-  FOO;          // = 1
+  foo;          // = 1
   bar: string;  // = 2
 }
 ```
@@ -252,7 +252,7 @@ You can define a record (struct or enum) within another record for namespacing.
 
 ```skir
 enum Status {
-  OK;
+  ok;
 
   struct Error {
     message: string;
@@ -282,7 +282,7 @@ struct Notification {
 
   payload: Payload;
   enum Payload {
-    APP_LAUNCH;
+    app_launch;
 
     message: Message;
     struct Message {
@@ -303,7 +303,7 @@ struct Notification {
   }
 
   payload: enum {
-    APP_LAUNCH;
+    app_launch;
     message: struct {
       body: string;
       title: string;
@@ -475,7 +475,7 @@ const SUPPORTED_LOCALES: [string] = [
 ];
 
 // Use strings for enum constant variants.
-const REST_DAY: Weekday = "SUNDAY";
+const REST_DAY: Weekday = "sunday";
 
 // Use { kind: ..., value: ... } for enum wrapper variants.
 const NOT_IMPLEMENTED_ERROR: OperationStatus = {
@@ -499,7 +499,9 @@ struct GetUserProfileResponse {
   profile: UserProfile?;
 }
 
-method GetUserProfile(GetUserProfileRequest): GetUserProfileResponse = 12345;
+method GetUserProfile(
+  GetUserProfileRequest
+): GetUserProfileResponse = 12345;
 ```
 
 The request and response can have any type.
@@ -591,7 +593,7 @@ New code reading old data will use default values for missing fields:
 - Booleans: `false`
 - Strings, bytes, arrays: empty
 - Structs: a struct with all fields at their default values
-- Enums: the implicit `UNKNOWN` variant
+- Enums: the implicit `unknown` variant
 - Optional: `null`
 
 ### Adding a variant to an enum
@@ -630,8 +632,8 @@ You can safely convert a constant variant into a wrapper variant. New code readi
 ```skir
 // BEFORE
 enum Status {
-  ERROR;
-  OK;
+  error;
+  ok;
 }
 ```
 
@@ -640,7 +642,7 @@ enum Status {
 enum Status {
   // When deserializing old data, the string will be empty.
   error: string;
-  OK;
+  ok;
 }
 ```
 
@@ -761,8 +763,8 @@ For example, consider a schema evolution where a field and an enum variant are a
 struct UserBefore(999) {
   id: int64;
   subscription_status: enum {
-    FREE;
-    PREMIUM;
+    free;
+    premium;
   };
 }
 ```
@@ -771,9 +773,9 @@ struct UserBefore(999) {
 struct UserAfter(999) {
   id: int64;
   subscription_status: enum {
-    FREE;
-    PREMIUM;
-    TRIAL;  // Added
+    free;
+    premium;
+    trial;  // Added
   };
   name: string;  // Added
 }
@@ -1512,8 +1514,8 @@ method GetProduct(
 	}
 ): enum {
 	ok: Product;
-	NOT_FOUND;
-	RETIRED;
+	not_found;
+	retired;
 	invalid_product_id: string;
 } = 1000;
 ```
@@ -1590,10 +1592,10 @@ Skir unifies these two concepts into a specific "Rust-like" enum. Variants can b
 
 ```skir
 enum PokerAction {
-  CHECK;           // Stateless variant
+  check;           // Stateless variant
   bet: int32;      // Stateful variant (holds the amount)
-  FOLD;
-  CALL;
+  fold;
+  call;
   raise: int32;
 }
 ```
@@ -2037,9 +2039,9 @@ function greet(user: User.OrMutable) {
 
 ```skir
 enum SubscriptionStatus {
-  FREE;
+  free;
   trial: Trial;
-  PREMIUM;
+  premium;
 }
 ```
 
@@ -2356,9 +2358,9 @@ def greet(user: User.OrMutable):
 
 ```skir
 enum SubscriptionStatus {
-  FREE;
+  free;
   trial: Trial;
-  PREMIUM;
+  premium;
 }
 ```
 
@@ -2615,9 +2617,9 @@ Skir generates a deeply immutable Java class (not a Java enum) for every enum.
 
 ```skir
 enum SubscriptionStatus {
-  FREE;
+  free;
   trial: Trial;
-  PREMIUM;
+  premium;
 }
 ```
 
@@ -3465,9 +3467,9 @@ void greet(User_orMutable user) {
 
 ```skir
 enum SubscriptionStatus {
-  FREE;
+  free;
   trial: Trial;
-  PREMIUM;
+  premium;
 }
 ```
 
@@ -3764,9 +3766,9 @@ The definition of the `SubscriptionStatus` enum in the .skir file is:
 
 ```skir
 enum SubscriptionStatus {
-  FREE;
+  free;
   trial: Trial;
-  PREMIUM;
+  premium;
 }
 ```
 
@@ -4043,9 +4045,9 @@ Skir generates a Go struct type for every enum. Unlike the standard Go `iota` pa
 
 ```skir
 enum SubscriptionStatus {
-  FREE;
+  free;
   trial: Trial;
-  PREMIUM;
+  premium;
 }
 ```
 
@@ -4369,9 +4371,9 @@ Skir generates a Rust enum for every enum. The `Unknown` variant is added automa
 
 ```skir
 enum SubscriptionStatus {
-  FREE;
+  free;
   trial: Trial;
-  PREMIUM;
+  premium;
 }
 ```
 
@@ -4635,9 +4637,9 @@ Skir generates a tagged union for every enum in the .skir file.
 The definition of the `SubscriptionStatus` enum in the .skir file is:
 ```rust
 enum SubscriptionStatus {
-  FREE;
+  free;
   trial: Trial;
-  PREMIUM;
+  premium;
 }
 ```
 
@@ -5022,9 +5024,9 @@ io.println(int.to_string(evil_john.user_id))
 The definition of the `SubscriptionStatus` enum in the .skir file is:
 ```rust
 enum SubscriptionStatus {
-  FREE;
+  free;
   trial: Trial;
-  PREMIUM;
+  premium;
 }
 ```
 

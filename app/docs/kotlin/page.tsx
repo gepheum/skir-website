@@ -85,7 +85,7 @@ val john =
                     picture = "🐘",
                 ),
             ),
-        subscriptionStatus = SubscriptionStatus.FREE,
+        subscriptionStatus = SubscriptionStatus.free,
         // foo = "bar",
         // ^ Does not compile: 'foo' is not a field of User
     )
@@ -207,11 +207,11 @@ greet(lyla)
       </P>
       <CodeBlock language="kotlin">{`val someStatuses =
     listOf(
-        // The UNKNOWN constant is present in all Skir enums even if it is not
+        // The unknown constant is present in all Skir enums even if it is not
         // declared in the .skir file.
-        SubscriptionStatus.UNKNOWN,
-        SubscriptionStatus.FREE,
-        SubscriptionStatus.PREMIUM,
+        SubscriptionStatus.unknown,
+        SubscriptionStatus.free,
+        SubscriptionStatus.premium,
         // Skir generates one subclass {VariantName}Wrapper for every wrapper
         // variant. The constructor of this subclass expects the value to
         // wrap.
@@ -228,10 +228,10 @@ greet(lyla)
     )`}</CodeBlock>
 
       <H4>Conditions on enums</H4>
-      <CodeBlock language="kotlin">{`assert(john.subscriptionStatus == SubscriptionStatus.FREE)
+      <CodeBlock language="kotlin">{`assert(john.subscriptionStatus == SubscriptionStatus.free)
 
-// UNKNOWN is the default value for enums.
-assert(jane.subscriptionStatus == SubscriptionStatus.UNKNOWN)
+// unknown is the default value for enums.
+assert(jane.subscriptionStatus == SubscriptionStatus.unknown)
 
 val now = Instant.now()
 val trialStatus: SubscriptionStatus =
@@ -247,8 +247,8 @@ assert(
       <H4>Branching on enum variants</H4>
       <CodeBlock language="kotlin">{`val getInfoText: (SubscriptionStatus) -> String = {
     when (it) {
-        SubscriptionStatus.FREE -> "Free user"
-        SubscriptionStatus.PREMIUM -> "Premium user"
+        SubscriptionStatus.free -> "Free user"
+        SubscriptionStatus.premium -> "Premium user"
         is SubscriptionStatus.TrialWrapper -> "On trial since \${it.value.startTime}"
         is SubscriptionStatus.Unknown -> "Unknown subscription status"
     }
@@ -283,7 +283,7 @@ println(serializer.toJsonCode(john, JsonFlavor.READABLE))
 //       "picture": "🐘"
 //     }
 //   ],
-//   "subscription_status": "FREE"
+//   "subscription_status": "free"
 // }
 
 // The dense JSON flavor is the flavor you should pick if you intend to

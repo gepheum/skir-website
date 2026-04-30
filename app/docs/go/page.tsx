@@ -118,14 +118,14 @@ fmt.Println(john.Name())       // John Doe (john is unchanged)`}</CodeBlock>
         The definition of the <InlineCode>SubscriptionStatus</InlineCode> enum in the .skir file is:
       </P>
       <CodeBlock language="skir">{`enum SubscriptionStatus {
-  FREE;
+  free;
   trial: Trial;
-  PREMIUM;
+  premium;
 }`}</CodeBlock>
 
       <H4>Making enum values</H4>
       <CodeBlock language="go">{`_ = []user.SubscriptionStatus{
-    // The UNKNOWN constant is present in all Skir enums even if it is not
+    // The unknown constant is present in all Skir enums even if it is not
     // declared in the .skir file.
     user.SubscriptionStatus_unknown(),
     user.SubscriptionStatus_freeConst(),
@@ -218,7 +218,7 @@ fmt.Println(serializer.ToJson(john, skir.Readable{}))
 //       "picture": "🐘"
 //     }
 //   ],
-//   "subscription_status": "FREE"
+//   "subscription_status": "free"
 // }
 
 // Deserialize from JSON (both dense and readable formats are accepted).

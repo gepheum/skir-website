@@ -72,7 +72,7 @@ struct Point {
       </p>
       <CodeBlock language="skir">{`// Indicates whether an operation succeeded or failed.
 enum OperationStatus {
-  SUCCESS;        // a constant variant
+  success;        // a constant variant
   error: string;  // a wrapper variant
 }`}</CodeBlock>
       <p>
@@ -80,13 +80,13 @@ enum OperationStatus {
       </p>
       <ul>
         <li>
-          the <code>SUCCESS</code> constant
+          the <code>success</code> constant
         </li>
         <li>
           an <code>error</code> with a string value
         </li>
         <li>
-          <code>UNKNOWN</code>: a special implicit variant common to all enums
+          <code>unknown</code>: a special implicit variant common to all enums
         </li>
       </ul>
       <p>If you need a variant to hold multiple values, wrap them inside a struct:</p>
@@ -96,7 +96,7 @@ enum OperationStatus {
 }
 
 enum BoardGameTurn {
-  PASS;
+  pass;
   move: MoveAction;
 }`}</CodeBlock>
       <p>
@@ -105,15 +105,15 @@ enum BoardGameTurn {
       </p>
       <CodeBlock language="skir">{`enum ExplicitNumbering {
   // The numbers don't need to be consecutive.
-  FOO = 10;
+  foo = 10;
   bar: string = 2;
 }
 
 enum ImplicitNumbering {
   // Implicit numbering is 1-based.
-  // 0 is reserved for the special UNKNOWN variant.
+  // 0 is reserved for the special unknown variant.
 
-  FOO;          // = 1
+  foo;          // = 1
   bar: string;  // = 2
 }`}</CodeBlock>
       <p>
@@ -134,7 +134,7 @@ enum ImplicitNumbering {
         simply for namespacing, and it can help make your <code>.skir</code> files more organized.
       </p>
       <CodeBlock language="skir">{`enum Status {
-  OK;
+  ok;
 
   struct Error {
     message: string;
@@ -172,7 +172,7 @@ struct Notification {
 
   payload: Payload;
   enum Payload {
-    APP_LAUNCH;
+    app_launch;
 
     message: Message;
     struct Message {
@@ -195,7 +195,7 @@ struct Notification {
   }
 
   payload: enum {
-    APP_LAUNCH;
+    app_launch;
     message: struct {
       body: string;
       title: string;
@@ -375,13 +375,13 @@ if user:
         <code>.kind</code> at the end of the key chain:
       </p>
       <CodeBlock language="skir">{`enum Weekday {
-  MONDAY;
-  TUESDAY;
-  WEDNESDAY;
-  THURSDAY;
-  FRIDAY;
-  SATURDAY;
-  SUNDAY;
+  monday;
+  tuesday;
+  wednesday;
+  thursday;
+  friday;
+  saturday;
+  sunday;
 }
 
 struct WeekdayWorkStatus {
@@ -462,7 +462,9 @@ struct GetUserProfileResponse {
   profile: UserProfile?;
 }
 
-method GetUserProfile(GetUserProfileRequest): GetUserProfileResponse = 12345;`}</CodeBlock>
+method GetUserProfile(
+  GetUserProfileRequest
+): GetUserProfileResponse = 12345;`}</CodeBlock>
       <p>The request and response can have any type.</p>
 
       <h3>Stable identifiers</h3>

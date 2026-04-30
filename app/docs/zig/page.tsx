@@ -120,9 +120,9 @@ std.debug.print("{d}\\n", .{evil_john.user_id});
       <H3>Enum types</H3>
       <P>The definition of the SubscriptionStatus enum in the .skir file is:</P>
       <CodeBlock language="rust" filename="Skir">{`enum SubscriptionStatus {
-  FREE;
+  free;
   trial: Trial;
-  PREMIUM;
+  premium;
 }`}</CodeBlock>
       <P>Skir generates a tagged union for every enum in the .skir file.</P>
 
