@@ -6,6 +6,7 @@ import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
 import cpp from 'react-syntax-highlighter/dist/esm/languages/hljs/cpp'
+import csharp from 'react-syntax-highlighter/dist/esm/languages/hljs/csharp'
 import dart from 'react-syntax-highlighter/dist/esm/languages/hljs/dart'
 import go from 'react-syntax-highlighter/dist/esm/languages/hljs/go'
 import java from 'react-syntax-highlighter/dist/esm/languages/hljs/java'
@@ -19,6 +20,7 @@ import { atomOneDark, atomOneLight } from 'react-syntax-highlighter/dist/esm/sty
 SyntaxHighlighter.registerLanguage('skir', skirLanguage)
 SyntaxHighlighter.registerLanguage('typescript', typescript)
 SyntaxHighlighter.registerLanguage('python', python)
+SyntaxHighlighter.registerLanguage('csharp', csharp)
 SyntaxHighlighter.registerLanguage('cpp', cpp)
 SyntaxHighlighter.registerLanguage('go', go)
 SyntaxHighlighter.registerLanguage('kotlin', kotlin)
@@ -47,6 +49,7 @@ const defaultTabs: CodeTab[] = [
   { id: 'typescript', label: 'TypeScript' },
   { id: 'python', label: 'Python' },
   { id: 'java', label: 'Java' },
+  { id: 'csharp', label: 'C#', language: 'csharp' },
   { id: 'cpp', label: 'C++' },
   { id: 'go', label: 'Go' },
   { id: 'kotlin', label: 'Kotlin' },

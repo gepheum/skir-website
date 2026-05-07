@@ -114,6 +114,25 @@ if (response.sunglasses()) {
   System.out.println("Don't forget your sunglasses 😎");
 }`,
 
+  csharp: `using SkirClient;
+using Skirout_OutfitPicker;
+
+var client = new ServiceClient("http://localhost:8080/api");
+
+var response = client.InvokeRemote(
+  Methods.WhatToWear,
+  new WhatToWearRequest
+  {
+    TemperatureCelsius = 25,
+    Raining = false,
+  }
+);
+
+if (response.Sunglasses)
+{
+  Console.WriteLine("Don't forget your sunglasses 😎");
+}`,
+
   dart: `import 'package:skir_client/skir_client.dart' as skir;
 import 'package:your_project/skirout/outfit_picker.dart';
 

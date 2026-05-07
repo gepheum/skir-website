@@ -13,6 +13,12 @@ const languageStarters = [
     notes: 'CMake + GoogleTest integration.',
   },
   {
+    title: 'C#',
+    href: 'https://github.com/gepheum/skir-csharp-example',
+    framework: 'ASP.NET Core',
+    notes: 'NET 10 project with skir_client NuGet runtime dependency.',
+  },
+  {
     title: 'Dart',
     href: 'https://github.com/gepheum/skir-dart-example',
     framework: 'Shelf',

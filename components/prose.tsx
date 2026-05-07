@@ -10,6 +10,7 @@ import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
 import bash from 'react-syntax-highlighter/dist/esm/languages/hljs/bash'
 import cmake from 'react-syntax-highlighter/dist/esm/languages/hljs/cmake'
 import cpp from 'react-syntax-highlighter/dist/esm/languages/hljs/cpp'
+import csharp from 'react-syntax-highlighter/dist/esm/languages/hljs/csharp'
 import dart from 'react-syntax-highlighter/dist/esm/languages/hljs/dart'
 import go from 'react-syntax-highlighter/dist/esm/languages/hljs/go'
 import java from 'react-syntax-highlighter/dist/esm/languages/hljs/java'
@@ -26,6 +27,7 @@ import { atomOneDark, atomOneLight } from 'react-syntax-highlighter/dist/esm/sty
 SyntaxHighlighter.registerLanguage('skir', skirLanguage)
 SyntaxHighlighter.registerLanguage('typescript', typescript)
 SyntaxHighlighter.registerLanguage('python', python)
+SyntaxHighlighter.registerLanguage('csharp', csharp)
 SyntaxHighlighter.registerLanguage('cpp', cpp)
 SyntaxHighlighter.registerLanguage('go', go)
 SyntaxHighlighter.registerLanguage('java', java)

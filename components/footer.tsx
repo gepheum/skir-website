@@ -11,6 +11,7 @@ const footerLinks = {
   ],
   languages: [
     { name: 'C++', href: '/docs/cpp' },
+    { name: 'C#', href: '/docs/csharp' },
     { name: 'Dart', href: '/docs/dart' },
     { name: 'Gleam', href: '/docs/gleam' },
     { name: 'Go', href: '/docs/go' },

@@ -17,6 +17,7 @@ import {
   SiKotlin,
   SiPython,
   SiRust,
+  SiSharp,
   SiSwift,
   SiTypescript,
   SiZig,
@@ -110,7 +111,7 @@ export default function HomePage() {
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="mb-4 text-balance text-3xl font-bold md:text-4xl">
-                One schema, 11 languages, zero friction
+                One schema, 12 languages, zero friction
               </h2>
               <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
                 One YAML file. One command.
@@ -361,6 +362,11 @@ export default function HomePage() {
               name="Java"
               icon={<FaJava className="text-[#E76F00]" />}
               href="/docs/java"
+            />
+            <LanguageCard
+              name="C#"
+              icon={<SiSharp className="text-[#239120]" />}
+              href="/docs/csharp"
             />
             <LanguageCard
               name="Kotlin"

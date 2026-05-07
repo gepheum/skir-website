@@ -295,6 +295,29 @@ async def main():
               </td>
             </tr>
             <tr className="border-b border-border transition-colors hover:bg-muted/50">
+              <td className="p-4 font-medium">C#</td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-csharp-example/blob/main/StartService.cs"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  ASP.NET Core
+                </a>
+              </td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-csharp-example/blob/main/CallService.cs"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Client
+                </a>
+              </td>
+            </tr>
+            <tr className="border-b border-border transition-colors hover:bg-muted/50">
               <td className="p-4 font-medium">Kotlin</td>
               <td className="p-4 text-muted-foreground">
                 <a
