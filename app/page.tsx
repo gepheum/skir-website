@@ -353,12 +353,6 @@ export default function HomePage() {
               href="/docs/python"
             />
             <LanguageCard
-              name="C++"
-              icon={<SiCplusplus className="text-[#00599C]" />}
-              href="/docs/cpp"
-            />
-            <LanguageCard name="Go" icon={<SiGo className="text-[#00ADD8]" />} href="/docs/go" />
-            <LanguageCard
               name="Java"
               icon={<FaJava className="text-[#E76F00]" />}
               href="/docs/java"
@@ -368,6 +362,12 @@ export default function HomePage() {
               icon={<SiSharp className="text-[#239120]" />}
               href="/docs/csharp"
             />
+            <LanguageCard
+              name="C++"
+              icon={<SiCplusplus className="text-[#00599C]" />}
+              href="/docs/cpp"
+            />
+            <LanguageCard name="Go" icon={<SiGo className="text-[#00ADD8]" />} href="/docs/go" />
             <LanguageCard
               name="Kotlin"
               icon={<SiKotlin className="text-[#7F52FF]" />}
