@@ -52,18 +52,10 @@ const navigation = [
   },
 ]
 
-const COLLAPSED_BY_DEFAULT_SECTIONS = new Set(['Generated code'])
-
 export function DocsSidebar() {
   const pathname = usePathname()
   const [openSections, setOpenSections] = useState<string[]>(() =>
-    navigation
-      .filter(
-        (section) =>
-          !COLLAPSED_BY_DEFAULT_SECTIONS.has(section.title) ||
-          section.items.some((item) => item.href === pathname),
-      )
-      .map((section) => section.title),
+    navigation.map((section) => section.title),
   )
 
   const toggleSection = (title: string) => {
