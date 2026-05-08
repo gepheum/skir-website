@@ -253,7 +253,8 @@ export default function HomePage() {
               title="Polymorphism done right"
               description={
                 <>
-                  Model polymorphism clearly with sum types. Skir lets you attach typed data payloads to individual <code>enum</code> variants.
+                  Model polymorphism clearly with sum types. Skir lets you attach typed data
+                  payloads to individual <code>enum</code> variants.
                 </>
               }
             />
