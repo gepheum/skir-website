@@ -250,18 +250,17 @@ export default function HomePage() {
             />
             <FeatureCard
               icon={<SiRust className="h-6 w-6" />}
-              title="Rust-like enums"
+              title="Polymorphism done right"
               description={
                 <>
-                  Skir <code>enum</code>s have variants. Each variant can be a simple constant or
-                  carry typed data, giving you a clean way to model polymorphism.
+                  Model polymorphism clearly with sum types. Skir lets you attach typed data payloads to individual <code>enum</code> variants.
                 </>
               }
             />
             <FeatureCard
               icon={<Package className="h-6 w-6" />}
               title="Prioritizes immutability"
-              description="Skir generates deeply immutable types with all fields required at construction time."
+              description="Skir generates deeply immutable types with all fields required at construction time, wherever idiomatic in the target language."
             />
             <FeatureCard
               icon={<Package className="h-6 w-6" />}
