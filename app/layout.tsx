@@ -1,14 +1,15 @@
 import { ScrollToTop } from '@/components/scroll-to-top'
 import { ThemeProvider } from '@/components/theme-provider'
 import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import { IBM_Plex_Sans, JetBrains_Mono } from 'next/font/google'
 import React from 'react'
 import './globals.css'
 
-const inter = Inter({
+const ibmPlexSans = IBM_Plex_Sans({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
+  weight: ['400', '500', '600', '700'],
 })
 
 const jetbrainsMono = JetBrains_Mono({
@@ -71,7 +72,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
+      <body className={`${ibmPlexSans.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
