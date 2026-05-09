@@ -141,7 +141,6 @@ export function Header() {
           >
             llms.txt
           </a>
-          <ThemeToggle />
           <Button
             asChild
             variant="ghost"
@@ -170,6 +169,7 @@ export function Header() {
               <span className="sr-only">GitHub</span>
             </a>
           </Button>
+          <ThemeToggle />
 
           <Button
             variant="ghost"
