@@ -159,7 +159,7 @@ export function Header() {
             </a>
           </Button>
           <Button asChild variant="ghost" size="icon" className="hidden md:flex rounded-full">
-            <a href="https://discord.gg/mruvDuybJ" target="_blank" rel="noopener noreferrer">
+            <a href="https://discord.gg/FsKrGwJ9AP" target="_blank" rel="noopener noreferrer">
               <DiscordIcon />
               <span className="sr-only">Discord</span>
             </a>

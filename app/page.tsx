@@ -430,7 +430,7 @@ export default function HomePage() {
               Ask questions, share feedback, and get help from the community.
             </p>
             <Button asChild variant="outline" className="rounded-full px-6">
-              <a href="https://discord.gg/mruvDuybJ" target="_blank" rel="noopener noreferrer">
+              <a href="https://discord.gg/FsKrGwJ9AP" target="_blank" rel="noopener noreferrer">
                 Join Discord
                 <ArrowRight className="ml-2 h-4 w-4" />
               </a>
