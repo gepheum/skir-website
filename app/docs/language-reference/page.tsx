@@ -68,8 +68,8 @@ struct Point {
       <h3>Enums</h3>
       <p>
         Skir enums are sum types. If you've used modern languages like Rust, Swift, or Zig, you're
-        already familiar with this concept. An enum value is one of several possible
-        variants, and each variant can optionally have data associated with it.
+        already familiar with this concept. An enum value is one of several possible variants, and
+        each variant can optionally have data associated with it.
       </p>
       <CodeBlock language="skir">{`// Indicates whether an operation succeeded or failed.
 enum OperationStatus {
