@@ -607,7 +607,7 @@ async def main():
   -d '{"method": "Square", "request": 5.0}' \\
   http://localhost:8000/api`}</CodeBlock>
 
-      <NextPageLink title="External dependencies" href="/docs/dependencies" />
+      <NextPageLink title="Github imports" href="/docs/github-imports" />
     </Prose>
   )
 }

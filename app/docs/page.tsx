@@ -55,9 +55,9 @@ const sections = [
     icon: Globe,
   },
   {
-    title: 'External Dependencies',
+    title: 'Github imports',
     description: 'Import types from other GitHub repositories.',
-    href: '/docs/dependencies',
+    href: '/docs/github-imports',
     icon: Package,
   },
   {

@@ -9,7 +9,7 @@ This file contains the complete consolidated Skir website documentation for LLM 
 3. Schema Evolution
 4. Serialization
 5. SkirRPC
-6. External Dependencies
+6. Github imports
 7. Best Practices
 8. Examples & Projects
 9. Skir vs Protobuf
@@ -1182,9 +1182,9 @@ curl -X POST \
 
 ## Section: dependencies
 
-# External Dependencies
+# Github imports
 
-Skir allows you to import and use types defined in other Skir projects. External dependencies are regular GitHub repositories containing Skir definitions. This is useful for sharing common data structures across multiple repositories.
+Skir allows you to import and use types defined in other Skir projects. Github imports are regular GitHub repositories containing Skir definitions. This is useful for sharing common data structures across multiple repositories.
 
 ## Configuring Dependencies
 
@@ -1657,7 +1657,7 @@ Buf has addressed this gap in the Protobuf ecosystem with its [`buf breaking`](h
 
 Skir avoids this by letting you assign a [stable numeric identifier](https://skir.build/docs/schema-evolution#tracked-types-and-stable-identifiers) to your top-level types. This identifier is a meaningless number, purely internal to the compiler, so you can rename a type freely without breaking compatibility. It also lets Skir automatically track all the nested types a top-level type references, without requiring you to annotate each one manually.
 
-## External dependencies
+## Github imports
 
 Protocol Buffers does not come with a built-in package manager. To share types across multiple Git repositories, developers traditionally have to rely on `git submodule`, manual file copying, or external commercial services like `buf`.
 
