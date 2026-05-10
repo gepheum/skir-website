@@ -105,7 +105,7 @@ struct Point {
 
 ### enum
 
-Rust-like variants. Each variant is either a constant (`SUCCESS;`) or a wrapper carrying a value (`error: string;`). An implicit `UNKNOWN` variant (number 0) always exists.
+Sum types (like in Rust, Swift, or Zig). Each variant is either a constant (`SUCCESS;`) or a wrapper carrying a value (`error: string;`). An implicit `UNKNOWN` variant (number 0) always exists.
 
 ```skir
 enum OperationStatus {

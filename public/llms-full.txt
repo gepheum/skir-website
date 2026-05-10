@@ -195,7 +195,7 @@ struct Point {
 
 ### Enums
 
-Enums in Skir are similar to enums in Rust. An enum value is one of several possible variants, and each variant can optionally have data associated with it.
+Skir enums are sum types. If you've used modern languages like Rust, Swift, or Zig, you're already familiar with this concept. An enum value is one of several possible variants, and each variant can optionally have data associated with it.
 
 ```skir
 // Indicates whether an operation succeeded or failed.
