@@ -41,7 +41,7 @@ export function HoverVideo({ src }: HoverVideoProps) {
 
   return (
     <div
-      className="max-w-[760px] mx-auto rounded-xl overflow-hidden border border-border shadow-2xl relative bg-black"
+      className="max-w-[820px] mx-auto rounded-xl overflow-hidden border border-border shadow-2xl relative bg-black"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

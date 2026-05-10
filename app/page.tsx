@@ -163,7 +163,7 @@ export default function HomePage() {
       {/* Schema Evolution Section */}
       <section className="border-t border-border py-14 md:py-20">
         <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="max-w-5xl mx-auto text-center">
             <h2 className="mb-4 text-balance text-3xl font-bold md:text-4xl">
               Serialize now, deserialize in 100 years
             </h2>
@@ -174,8 +174,8 @@ export default function HomePage() {
               Skir has simple guidelines and built-in checks to evolve your schema safely.
             </p>
 
-            <div className="mx-auto flex max-w-5xl items-center justify-center gap-2 md:gap-3">
-              <div className="soft-surface w-[45%] overflow-hidden rounded-xl p-2">
+            <div className="mx-auto flex max-w-[820px] items-center justify-center gap-2 md:gap-3">
+              <div className="soft-surface w-[48%] overflow-hidden rounded-xl p-2">
                 <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                   Before
                 </div>
@@ -184,11 +184,11 @@ export default function HomePage() {
                   alt="Schema before evolution changes"
                   width={0}
                   height={0}
-                  sizes="(max-width: 768px) 45vw, 420px"
+                  sizes="(max-width: 768px) 48vw, 420px"
                   className="h-auto w-full rounded-lg"
                 />
               </div>
-              <div className="soft-surface w-[45%] overflow-hidden rounded-xl p-2">
+              <div className="soft-surface w-[48%] overflow-hidden rounded-xl p-2">
                 <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                   After
                 </div>
@@ -197,7 +197,7 @@ export default function HomePage() {
                   alt="Schema after evolution changes"
                   width={0}
                   height={0}
-                  sizes="(max-width: 768px) 45vw, 420px"
+                  sizes="(max-width: 768px) 48vw, 420px"
                   className="h-auto w-full rounded-lg"
                 />
               </div>
