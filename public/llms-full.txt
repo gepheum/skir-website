@@ -3641,7 +3641,7 @@ EXPECT_THAT(jade_status, IsTrial(StructIs<SubscriptionStatus::Trial>{
 
 # Dart
 
-Guide for using Skir-generated Dart code. Targets Dart 3.0+.
+Guide for using Skir-generated Dart code. Targets Dart 3.5+.
 
 ## Set Up
 

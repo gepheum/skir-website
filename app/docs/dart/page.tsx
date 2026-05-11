@@ -10,7 +10,7 @@ export default function DartPage() {
   return (
     <Prose>
       <H1>Dart</H1>
-      <P>This guide explains how to use Skir in a Dart project. Targets Dart 3.0 and higher.</P>
+      <P>This guide explains how to use Skir in a Dart project. Targets Dart 3.5 and higher.</P>
 
       <H2>Set up</H2>
       <P>
