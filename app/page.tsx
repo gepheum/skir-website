@@ -261,7 +261,7 @@ export default function HomePage() {
             <FeatureCard
               icon={<Package className="h-6 w-6" />}
               title="Prioritizes immutability"
-              description="Skir generates deeply immutable types with all fields required at construction time, wherever idiomatic in the target language."
+              description="Skir generates deeply immutable types with all fields required at construction time in target languages where that is idiomatic."
             />
             <FeatureCard
               icon={<Package className="h-6 w-6" />}
