@@ -130,9 +130,11 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="mx-auto max-w-3xl text-center">
             <h2 className="text-balance text-2xl font-bold md:text-3xl">
-              It&apos;s a fact: AI does better with types
+              LLMs make 10x fewer mistakes with strong types
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
+              Skir gives your AI coding tools the type information they crave.
+              <br />
               A 2025
               <a
                 href="https://arxiv.org/pdf/2504.09246?"
@@ -141,10 +143,10 @@ export default function HomePage() {
                 className="ml-1 underline decoration-muted-foreground/50 transition-colors hover:text-foreground"
               >
                 study
-              </a>{' '}
-              reports that nearly 94% of common LLM coding errors are type-related. It helps explain
-              why typed ecosystems such as TypeScript have been gaining momentum relative to dynamic
-              alternatives. Don&apos;t believe it?
+              </a>{' '}reports that nearly 94% of common LLM coding errors are type-related, which
+              helps explain why strong typing can drastically reduce mistakes.
+              <br />
+              Don&apos;t believe it?
               <a
                 href="https://gemini.google.com/share/ea387c7e27e9"
                 target="_blank"
