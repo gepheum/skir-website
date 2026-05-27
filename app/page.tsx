@@ -102,12 +102,10 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        <WaveDivider colorClass="text-background" />
       </section>
 
       {/* Code Example Section */}
-      <section className="relative overflow-hidden px-4 py-14 md:px-5 md:py-20">
-        <WaveDivider colorClass="text-background" flip />
+      <section className="relative overflow-hidden border-t border-border px-4 py-14 md:px-5 md:py-20">
         <div className="container mx-auto">
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
@@ -175,7 +173,7 @@ export default function HomePage() {
               Skir has simple guidelines and built-in checks to evolve your schema safely.
             </p>
 
-            <div className="mx-auto flex max-w-[890px] items-center justify-center gap-2 md:gap-3">
+            <div className="mx-auto flex max-w-[980px] items-center justify-center gap-2 md:gap-3">
               <div className="soft-surface w-[48%] overflow-hidden rounded-xl p-2">
                 <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                   Before
@@ -185,7 +183,7 @@ export default function HomePage() {
                   alt="Schema before evolution changes"
                   width={0}
                   height={0}
-                  sizes="(max-width: 768px) 48vw, 460px"
+                  sizes="(max-width: 768px) 48vw, 500px"
                   className="h-auto w-full rounded-lg"
                 />
               </div>
@@ -198,7 +196,7 @@ export default function HomePage() {
                   alt="Schema after evolution changes"
                   width={0}
                   height={0}
-                  sizes="(max-width: 768px) 48vw, 460px"
+                  sizes="(max-width: 768px) 48vw, 500px"
                   className="h-auto w-full rounded-lg"
                 />
               </div>
