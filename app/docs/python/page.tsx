@@ -78,7 +78,7 @@ john = User(
             picture="🐘",
         ),
     ],
-    subscription_status=SubscriptionStatus.free,
+    subscription_status=SubscriptionStatus.FREE,
     # foo="bar",
     # Does not compile: 'foo' is not a field of User
 )
