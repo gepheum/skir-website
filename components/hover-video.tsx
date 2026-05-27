@@ -1,13 +1,15 @@
 'use client'
 
 import { useIsMobile } from '@/hooks/use-mobile'
+import { cn } from '@/lib/utils'
 import { useRef, useState } from 'react'
 
 interface HoverVideoProps {
   src: string
+  className?: string
 }
 
-export function HoverVideo({ src }: HoverVideoProps) {
+export function HoverVideo({ src, className }: HoverVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const isMobile = useIsMobile()
@@ -41,7 +43,10 @@ export function HoverVideo({ src }: HoverVideoProps) {
 
   return (
     <div
-      className="max-w-[820px] mx-auto rounded-xl overflow-hidden border border-border shadow-2xl relative bg-black"
+      className={cn(
+        'mx-auto max-w-[820px] rounded-xl border border-border bg-black shadow-2xl overflow-hidden relative',
+        className,
+      )}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >

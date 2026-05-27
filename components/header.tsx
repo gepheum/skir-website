@@ -96,7 +96,7 @@ export function Header() {
             {navigation.map((item) =>
               item.items ? (
                 <DropdownMenu key={item.name}>
-                  <DropdownMenuTrigger className="flex cursor-pointer items-center text-sm font-medium text-muted-foreground transition-colors hover:text-foreground focus:outline-none">
+                  <DropdownMenuTrigger className="flex cursor-pointer items-center text-base font-medium text-muted-foreground transition-colors hover:text-foreground focus:outline-none">
                     {item.name}
                     <ChevronDown className="ml-1 h-4 w-4" />
                   </DropdownMenuTrigger>
@@ -116,7 +116,7 @@ export function Header() {
                   href={item.href!}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {item.name}
                 </a>
@@ -124,7 +124,7 @@ export function Header() {
                 <Link
                   key={item.name}
                   href={item.href!}
-                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                  className="text-base font-medium text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {item.name}
                 </Link>
@@ -190,13 +190,13 @@ export function Header() {
             {navigation.map((item) =>
               item.items ? (
                 <div key={item.name} className="space-y-3">
-                  <div className="text-sm font-medium text-foreground">{item.name}</div>
+                  <div className="text-base font-medium text-foreground">{item.name}</div>
                   <div className="ml-1 space-y-3 border-l border-border pl-4">
                     {item.items.map((subItem) => (
                       <Link
                         key={subItem.name}
                         href={subItem.href}
-                        className="block text-sm text-muted-foreground transition-colors hover:text-foreground"
+                        className="block text-base text-muted-foreground transition-colors hover:text-foreground"
                         onClick={() => setMobileMenuOpen(false)}
                       >
                         {subItem.name}
@@ -210,7 +210,7 @@ export function Header() {
                   href={item.href!}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  className="block text-base text-muted-foreground transition-colors hover:text-foreground"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}
@@ -219,7 +219,7 @@ export function Header() {
                 <Link
                   key={item.name}
                   href={item.href!}
-                  className="block text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  className="block text-base text-muted-foreground transition-colors hover:text-foreground"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}

@@ -98,7 +98,7 @@ export default function HomePage() {
 
             {/* Quick Example Video */}
             <div className="mx-auto max-w-[1000px]">
-              <HoverVideo src="/greet.mp4" />
+              <HoverVideo src="/greet.mp4" className="max-w-[900px]" />
             </div>
           </div>
         </div>
@@ -175,7 +175,7 @@ export default function HomePage() {
               Skir has simple guidelines and built-in checks to evolve your schema safely.
             </p>
 
-            <div className="mx-auto flex max-w-[820px] items-center justify-center gap-2 md:gap-3">
+            <div className="mx-auto flex max-w-[890px] items-center justify-center gap-2 md:gap-3">
               <div className="soft-surface w-[48%] overflow-hidden rounded-xl p-2">
                 <div className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
                   Before
@@ -185,7 +185,7 @@ export default function HomePage() {
                   alt="Schema before evolution changes"
                   width={0}
                   height={0}
-                  sizes="(max-width: 768px) 48vw, 420px"
+                  sizes="(max-width: 768px) 48vw, 460px"
                   className="h-auto w-full rounded-lg"
                 />
               </div>
@@ -198,7 +198,7 @@ export default function HomePage() {
                   alt="Schema after evolution changes"
                   width={0}
                   height={0}
-                  sizes="(max-width: 768px) 48vw, 420px"
+                  sizes="(max-width: 768px) 48vw, 460px"
                   className="h-auto w-full rounded-lg"
                 />
               </div>
@@ -222,7 +222,7 @@ export default function HomePage() {
             </p>
           </div>
           <div className="max-w-5xl mx-auto">
-            <HoverVideo src="/rpc-studio.mp4" />
+            <HoverVideo src="/rpc-studio.mp4" className="max-w-[900px]" />
             <p className="mt-4 text-center text-sm text-muted-foreground">
               Every SkirRPC service ships with a built-in Studio app for browsing and testing its
               methods.
