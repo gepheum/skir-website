@@ -82,7 +82,7 @@ final User john =
                     .setPicture("🐘")
                     .build()))
         .setQuote("Coffee is just a socially acceptable form of rage.")
-        .setSubscriptionStatus(SubscriptionStatus.free)
+        .setSubscriptionStatus(SubscriptionStatus.FREE)
         .setUserId(42)
         .build();
 
@@ -134,11 +134,11 @@ assert evilJohn.userId() == 42;`}</CodeBlock>
       <H4>Making enum values</H4>
       <CodeBlock language="java">{`final List<SubscriptionStatus> someStatuses =
     List.of(
-        // The unknown constant is present in all skir enums even if it is not
+        // The UNKNOWN constant is present in all skir enums even if it is not
         // declared in the .skir file.
-        SubscriptionStatus.unknown,
-        SubscriptionStatus.free,
-        SubscriptionStatus.premium,
+        SubscriptionStatus.UNKNOWN,
+        SubscriptionStatus.FREE,
+        SubscriptionStatus.PREMIUM,
         // To construct wrapper variants, call the wrap{VariantName} static
         // methods.
         SubscriptionStatus.wrapTrial(
@@ -147,10 +147,10 @@ assert evilJohn.userId() == 42;`}</CodeBlock>
                 .build()));`}</CodeBlock>
 
       <H4>Conditions on enums</H4>
-      <CodeBlock language="java">{`assert john.subscriptionStatus().equals(SubscriptionStatus.free);
+      <CodeBlock language="java">{`assert john.subscriptionStatus().equals(SubscriptionStatus.FREE);
 
-// unknown is the default value for enums.
-assert jane.subscriptionStatus().equals(SubscriptionStatus.unknown);
+// UNKNOWN is the default value for enums.
+assert jane.subscriptionStatus().equals(SubscriptionStatus.UNKNOWN);
 
 final Instant now = Instant.now();
 final SubscriptionStatus trialStatus =
@@ -162,7 +162,7 @@ final SubscriptionStatus trialStatus =
 assert trialStatus.kind() == SubscriptionStatus.Kind.TRIAL_WRAPPER;
 assert trialStatus.asTrial().startTime() == now;
 
-// SubscriptionStatus.free.asTrial();
+// SubscriptionStatus.FREE.asTrial();
 // ^ Runtime error: asTrial() can only be called on a trial wrapper.`}</CodeBlock>
 
       <H4>Branching on enum variants</H4>
@@ -170,10 +170,10 @@ assert trialStatus.asTrial().startTime() == now;
 final Function<SubscriptionStatus, String> getInfoText =
     status ->
         switch (status.kind()) {
-          case free_const -> "Free user";
-          case premium_const -> "Premium user";
+          case FREE_CONST -> "Free user";
+          case PREMIUM_CONST -> "Premium user";
           case TRIAL_WRAPPER -> "On trial since " + status.asTrial().startTime();
-          case unknown -> "Unknown subscription status";
+          case UNKNOWN -> "Unknown subscription status";
           default -> throw new AssertionError("Unreachable");
         };
 
