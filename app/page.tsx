@@ -134,8 +134,7 @@ export default function HomePage() {
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
               Skir gives your AI coding tools the type information they crave.
-              <br />
-              A 2025
+              <br />A 2025
               <a
                 href="https://arxiv.org/pdf/2504.09246?"
                 target="_blank"
@@ -143,8 +142,9 @@ export default function HomePage() {
                 className="ml-1 underline decoration-muted-foreground/50 transition-colors hover:text-foreground"
               >
                 study
-              </a>{' '}reports that nearly 94% of common LLM coding errors are type-related, which
-              helps explain why strong typing can drastically reduce mistakes.
+              </a>{' '}
+              reports that nearly 94% of common LLM coding errors are type-related, which helps
+              explain why strong typing can drastically reduce mistakes.
               <br />
               Don&apos;t believe it?
               <a
