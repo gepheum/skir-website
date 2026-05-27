@@ -630,7 +630,7 @@ async def main():
   -d '{"method": "Square", "request": 5.0}' \\
   http://localhost:8000/api`}</CodeBlock>
 
-      <NextPageLink title="Github imports" href="/docs/github-imports" />
+      <NextPageLink title="GitHub imports" href="/docs/github-imports" />
     </Prose>
   )
 }

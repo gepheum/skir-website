@@ -21,7 +21,7 @@ const navigation = [
       { title: 'Serialization', href: '/docs/serialization' },
       { title: 'Schema evolution', href: '/docs/schema-evolution' },
       { title: 'SkirRPC', href: '/docs/skirrpc' },
-      { title: 'Github imports', href: '/docs/github-imports' },
+      { title: 'GitHub imports', href: '/docs/github-imports' },
       { title: 'Best practices', href: '/docs/best-practices' },
     ],
   },

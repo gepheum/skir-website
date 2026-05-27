@@ -2,15 +2,15 @@ import { NextPageLink } from '@/components/next-page-link'
 import { CodeBlock, Note, Prose } from '@/components/prose'
 
 export const metadata = {
-  title: 'Github imports - Skir Documentation',
+  title: 'GitHub imports - Skir Documentation',
   description:
     'Import types from other GitHub repositories to share common data structures across projects.',
 }
 
-export default function GithubImportsPage() {
+export default function GitHubImportsPage() {
   return (
     <Prose>
-      <h1>Github imports</h1>
+      <h1>GitHub imports</h1>
       <p>
         Skir allows you to import and use types defined in other Skir projects. This is primarily
         useful for sharing common data structures across multiple repositories. External

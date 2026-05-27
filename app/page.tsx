@@ -91,7 +91,7 @@ export default function HomePage() {
               >
                 <a href="https://github.com/gepheum/skir" target="_blank" rel="noopener noreferrer">
                   <GitHubIcon className="mr-2 h-4 w-4" />
-                  View on GitHub
+                  Star us on GitHub
                 </a>
               </Button>
             </div>

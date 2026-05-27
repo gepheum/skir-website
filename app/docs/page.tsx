@@ -55,7 +55,7 @@ const sections = [
     icon: Globe,
   },
   {
-    title: 'Github imports',
+    title: 'GitHub imports',
     description: 'Import types from other GitHub repositories.',
     href: '/docs/github-imports',
     icon: Package,
