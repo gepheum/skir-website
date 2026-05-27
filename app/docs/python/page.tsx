@@ -174,10 +174,10 @@ greet(lyla_mut)
 }`}</CodeBlock>
 
       <H4>Creating enum values</H4>
-      <CodeBlock language="python">{`john_status = SubscriptionStatus.free
-jane_status = SubscriptionStatus.premium
+      <CodeBlock language="python">{`john_status = SubscriptionStatus.FREE
+jane_status = SubscriptionStatus.PREMIUM
 
-joly_status = SubscriptionStatus.unknown
+joly_status = SubscriptionStatus.UNKNOWN
 
 # Use wrap_*() for wrapper variants.
 roni_status = SubscriptionStatus.wrap_trial(
@@ -194,12 +194,12 @@ assert roni_status == SubscriptionStatus.create_trial(
 
       <H4>Pattern matching</H4>
       <CodeBlock language="python">{`# Use 'union.kind' to check which variant the enum value holds.
-assert john_status.union.kind == "free"
+assert john_status.union.kind == "FREE"
 
 # Static type checkers will complain: "RED" not in the enum definition.
 # assert jane_status.union.kind == "RED"
 
-assert joly_status.union.kind == "unknown"
+assert joly_status.union.kind == "UNKNOWN"
 
 assert roni_status.union.kind == "trial"
 # If the enum holds a wrapper variant, you can access the wrapped value through
@@ -209,16 +209,16 @@ assert isinstance(roni_status.union.value, SubscriptionStatus.Trial)
 
 def get_subscription_info_text(status: SubscriptionStatus) -> str:
     # Pattern matching on enum variants
-    if status.union.kind == "unknown":
+    if status.union.kind == "UNKNOWN":
         return "Unknown subscription status"
-    elif status.union.kind == "free":
+    elif status.union.kind == "FREE":
         return "Free user"
     elif status.union.kind == "trial":
         # Here the compiler knows that the type of 'union.value' is
         # 'SubscriptionStatus.Trial'
         trial = status.union.value
         return f"On trial since {trial.start_time}"
-    elif status.union.kind == "premium":
+    elif status.union.kind == "PREMIUM":
         return "Premium user"
 
     # Static type checkers will error if any case is missed.
