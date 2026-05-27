@@ -70,10 +70,11 @@ export default function HomePage() {
             </h1>
 
             <p className="mx-auto mb-10 max-w-2xl text-pretty text-lg text-muted-foreground md:text-xl">
-              Skir is a declarative language for defining data types and APIs.
+              Skir is a modern declarative schema language for data models and APIs.
               <br />
-              Write your schema once in a <code className="text-primary font-mono">.skir</code> file
-              and generate idiomatic, type-safe code in TypeScript, Python, Java, Go, C++, and more.
+              Write once in a <code className="text-primary font-mono">.skir</code> file - instantly
+              generate clean, idiomatic, and fully type-safe code in TypeScript, Python, Java, Go,
+              C++, and more languages.
             </p>
 
             <div className="mb-12 flex flex-col justify-center gap-4 sm:flex-row">
