@@ -341,6 +341,29 @@ async def main():
               </td>
             </tr>
             <tr className="border-b border-border transition-colors hover:bg-muted/50">
+              <td className="p-4 font-medium">MoonBit</td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-moonbit-example/blob/main/src/start_service.mbt"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  moonbit/http
+                </a>
+              </td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/gepheum/skir-moonbit-example/blob/main/src/call_service.mbt"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Client
+                </a>
+              </td>
+            </tr>
+            <tr className="border-b border-border transition-colors hover:bg-muted/50">
               <td className="p-4 font-medium">Dart</td>
               <td className="p-4 text-muted-foreground">
                 <a

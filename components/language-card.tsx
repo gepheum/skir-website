@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 
+import { cn } from '@/lib/utils'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
@@ -7,13 +8,17 @@ interface LanguageCardProps {
   name: string
   icon: ReactNode
   href: string
+  className?: string
 }
 
-export function LanguageCard({ name, icon, href }: LanguageCardProps) {
+export function LanguageCard({ name, icon, href, className }: LanguageCardProps) {
   return (
     <Link
       href={href}
-      className="soft-surface group flex cursor-pointer items-center justify-between rounded-xl p-4 transition-colors hover:border-primary/40 hover:bg-card/80"
+      className={cn(
+        'soft-surface group flex cursor-pointer items-center justify-between rounded-xl p-4 transition-colors hover:border-primary/40 hover:bg-card/80',
+        className,
+      )}
     >
       <div className="flex items-center gap-3">
         <div

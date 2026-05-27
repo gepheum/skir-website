@@ -49,6 +49,12 @@ const languageStarters = [
     notes: 'Gradle Kotlin DSL setup.',
   },
   {
+    title: 'MoonBit',
+    href: 'https://github.com/gepheum/skir-moonbit-example',
+    framework: 'moonbit/http',
+    notes: 'MoonBit package workflow with generated Skir RPC endpoints.',
+  },
+  {
     title: 'Python',
     href: 'https://github.com/gepheum/skir-python-example',
     framework: 'Flask / FastAPI / Litestar',

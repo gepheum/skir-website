@@ -56,6 +56,7 @@ const defaultTabs: CodeTab[] = [
   { id: 'swift', label: 'Swift' },
   { id: 'rust', label: 'Rust' },
   { id: 'dart', label: 'Dart' },
+  { id: 'moonbit', label: 'MoonBit', language: 'plaintext' },
 ]
 
 export function SplitCodeExample({

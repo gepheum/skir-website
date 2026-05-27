@@ -5,7 +5,7 @@ import { Header } from '@/components/header'
 import { HoverVideo } from '@/components/hover-video'
 import { LanguageCard } from '@/components/language-card'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Github as GitHubIcon, Package, Terminal, Zap } from 'lucide-react'
+import { ArrowRight, Github as GitHubIcon, Moon, Package, Terminal, Zap } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaJava } from 'react-icons/fa6'
@@ -61,7 +61,7 @@ export default function HomePage() {
               className="soft-surface mb-8 inline-flex items-center gap-2 rounded-full px-4 py-2 transition-colors hover:text-foreground"
             >
               <span className="text-primary font-medium">v1.2</span>
-              <span className="text-muted-foreground">Like Protobuf, without the pain</span>
+              <span className="text-muted-foreground">Schema language from the future</span>
             </a>
 
             <h1 className="mb-6 text-balance text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl">
@@ -70,9 +70,10 @@ export default function HomePage() {
             </h1>
 
             <p className="mx-auto mb-10 max-w-2xl text-pretty text-lg text-muted-foreground md:text-xl">
-              Skir is a declarative language for defining data types, constants, and APIs. Write
-              your schema once in a <code className="text-primary font-mono">.skir</code> file and
-              generate idiomatic, type-safe code in TypeScript, Python, Java, Go, C++, and more.
+              Skir is a declarative language for defining data types and APIs.
+              <br />
+              Write your schema once in a <code className="text-primary font-mono">.skir</code> file
+              and generate idiomatic, type-safe code in TypeScript, Python, Java, Go, C++, and more.
             </p>
 
             <div className="mb-12 flex flex-col justify-center gap-4 sm:flex-row">
@@ -111,7 +112,7 @@ export default function HomePage() {
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="mb-4 text-balance text-3xl font-bold md:text-4xl">
-                One schema, 12 languages, zero friction
+                One schema, 10+ languages, zero headaches
               </h2>
               <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
                 One YAML file. One command.
@@ -393,6 +394,12 @@ export default function HomePage() {
               name="Gleam"
               icon={<SiGleam className="text-[#FFAFF3]" />}
               href="/docs/gleam"
+            />
+            <LanguageCard
+              name="MoonBit"
+              icon={<Moon className="text-[#F5C84B]" />}
+              href="/docs/moonbit"
+              className="lg:col-start-2"
             />
           </div>
         </div>

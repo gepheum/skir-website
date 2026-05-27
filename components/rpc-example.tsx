@@ -94,6 +94,21 @@ if (response.sunglasses) {
     println("Don't forget your sunglasses 😎")
 }`,
 
+  moonbit: `let client = @client.service_client::new("http://localhost:8080/api")
+
+let response = @client.service_client::invoke_remote(
+  client,
+  @skirout_outfit_picker.what_to_wear_method(),
+  @skirout_outfit_picker.WhatToWearRequest::new(
+    temperature_celsius=25.0,
+    raining=false,
+  ),
+)
+
+if response.sunglasses {
+  println("Don't forget your sunglasses 😎")
+}`,
+
   java: `import build.skir.service.ServiceClient;
 import skirout.outfit_picker.WhatToWearRequest;
 import skirout.outfit_picker.WhatToWearResponse;

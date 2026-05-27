@@ -145,6 +145,38 @@ val isConvex = ServiceClient(
 
 println(isConvex)  // true`,
 
+  moonbit: `// Construc an immutable Shape
+let triangle = @skirout_shapes.Shape::new(
+  points=@client.ImmutVector::from_array([
+    @skirout_shapes.Point::new(x=0, y=0, label="A"),
+    @skirout_shapes.Point::new(x=10, y=0, label="B"),
+    @skirout_shapes.Point::new(x=0, y=10, label="C"),
+  ]),
+  label="ABC",
+)
+
+// Demonstrate round-trip serialization
+let serializer = @skirout_shapes.Shape::serializer()
+let restored = match
+  serializer.from_json_code(
+    serializer.to_dense_json_code(triangle),
+  ) {
+    Ok(value) => value
+    Err(_) => panic()
+  }
+println(restored.label)  // ABC
+
+// Send RPC
+let client = @client_async.ServiceClient::new("http://localhost:8080/api")
+let is_convex = match client.invoke_remote(
+  @skirout_shapes.is_convex_method(),
+  triangle,
+) {
+  Ok(value) => value
+  Err(_) => panic()
+}
+println(is_convex)  // true`,
+
   java: `import java.time.Duration;
 import java.util.List;
 import java.util.Map;
@@ -496,6 +528,7 @@ const tabs = [
   { id: 'rust', label: 'Rust' },
   { id: 'zig', label: 'Zig' },
   { id: 'gleam', label: 'Gleam', language: 'swift' },
+  { id: 'moonbit', label: 'MoonBit', language: 'plaintext' },
 ]
 
 export function CodeExample() {

@@ -86,10 +86,10 @@ export default function DocsPage() {
       <div className="mb-12">
         <h1 className="mb-4 text-4xl font-bold">Documentation</h1>
         <p className="text-lg text-muted-foreground">
-          Skir is a declarative language for representing data types, constants, and APIs. Define
-          your schema once in a <code className="text-primary font-mono">.skir</code> file and
-          generate idiomatic, type-safe code for TypeScript, Python, Java, C#, C++, Kotlin, Dart,
-          Swift, Go, Rust, Zig, and Gleam.
+          Skir is a declarative language for representing data types and APIs. Define your schema
+          once in a <code className="text-primary font-mono">.skir</code> file and generate
+          idiomatic, type-safe code for TypeScript, Python, Java, C#, C++, Kotlin, Dart, Swift, Go,
+          Rust, Zig, Gleam, and MoonBit.
         </p>
       </div>
 
@@ -133,10 +133,11 @@ export default function DocsPage() {
             { name: 'C#', href: '/docs/csharp' },
             { name: 'Kotlin', href: '/docs/kotlin' },
             { name: 'Dart', href: '/docs/dart' },
-            { name: 'Gleam', href: '/docs/gleam' },
             { name: 'Swift', href: '/docs/swift' },
             { name: 'Rust', href: '/docs/rust' },
             { name: 'Zig', href: '/docs/zig' },
+            { name: 'Gleam', href: '/docs/gleam' },
+            { name: 'MoonBit', href: '/docs/moonbit' },
           ].map((lang) => (
             <Link
               key={lang.name}

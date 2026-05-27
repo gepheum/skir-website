@@ -34,6 +34,7 @@ const navigation: NavigationItem[] = [
       { name: 'Go', href: '/docs/go' },
       { name: 'Java', href: '/docs/java' },
       { name: 'Kotlin', href: '/docs/kotlin' },
+      { name: 'MoonBit', href: '/docs/moonbit' },
       { name: 'Python', href: '/docs/python' },
       { name: 'Rust', href: '/docs/rust' },
       { name: 'Swift', href: '/docs/swift' },
@@ -134,7 +135,7 @@ export function Header() {
 
         <div className="flex items-center gap-4">
           <a
-            href="/llms-full.txt"
+            href="/llms.txt"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden md:inline-flex items-center text-[10px] font-mono text-muted-foreground hover:text-foreground transition-colors border border-border rounded px-1 py-0.5"

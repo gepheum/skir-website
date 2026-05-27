@@ -19,9 +19,9 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Skir - Like Protobuf, without the pain',
+  title: 'Skir - Schema language from the future',
   description:
-    'A declarative language for representing data types, constants, and APIs. Define your schema once and generate idiomatic, type-safe code for TypeScript, Python, Java, C#, C++, Kotlin, Dart, Swift, Go, Rust, Zig, and Gleam.',
+    'A declarative language for representing data types and APIs. Define your schema once and generate idiomatic, type-safe code for TypeScript, Python, Java, C#, C++, Kotlin, Dart, Swift, Go, Rust, Zig, Gleam, and MoonBit.',
   keywords: [
     'skir',
     'protocol buffer',
@@ -35,6 +35,7 @@ export const metadata: Metadata = {
     'csharp',
     'c++',
     'kotlin',
+    'moonbit',
     'dart',
     'swift',
     'rust',
@@ -58,8 +59,8 @@ export const metadata: Metadata = {
     apple: [{ url: '/octopus-180x180.png', sizes: '180x180', type: 'image/png' }],
   },
   openGraph: {
-    title: 'Skir - Like Protobuf, without the pain',
-    description: 'A descriptive language for representing data types, constants, and APIs.',
+    title: 'Skir - Schema language from the future',
+    description: 'A descriptive language for representing data types and APIs.',
     type: 'website',
   },
   generator: 'v0.app',

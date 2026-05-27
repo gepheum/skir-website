@@ -17,6 +17,7 @@ const footerLinks = {
     { name: 'Go', href: '/docs/go' },
     { name: 'Java', href: '/docs/java' },
     { name: 'Kotlin', href: '/docs/kotlin' },
+    { name: 'MoonBit', href: '/docs/moonbit' },
     { name: 'Python', href: '/docs/python' },
     { name: 'Rust', href: '/docs/rust' },
     { name: 'Swift', href: '/docs/swift' },
@@ -51,7 +52,7 @@ export function Footer() {
               />
               <span className="text-xl font-bold">Skir</span>
             </Link>
-            <p className="mb-4 text-sm text-muted-foreground">Like Protobuf, without the pain.</p>
+            <p className="mb-4 text-sm text-muted-foreground">Schema language from the future.</p>
             <a
               href="https://github.com/gepheum/skir"
               target="_blank"
