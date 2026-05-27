@@ -235,4 +235,104 @@
   .dark .thin-scrollbar::-webkit-scrollbar-thumb:hover {
     background-color: oklch(0.55 0.01 240 / 0.8);
   }
+
+  .ghibli-example-widget {
+    background: #fff8dc;
+    border-color: #e0e0e0;
+    box-shadow:
+      inset 0 0 0 1px rgb(54 69 79 / 0.08),
+      0 14px 30px rgb(0 0 0 / 0.12);
+  }
+
+  .ghibli-example-widget .split-code-example__schema-pane,
+  .ghibli-example-widget .split-code-example__target-pane {
+    background: #fff8dc;
+    border-color: #d3d3d3;
+  }
+
+  .ghibli-example-widget .split-code-example__schema-title,
+  .ghibli-example-widget .split-code-example__tabs-row {
+    background: #f5f5dc;
+    border-color: #e0e0e0;
+    color: #36454f;
+  }
+
+  .ghibli-example-widget .split-code-example__tab {
+    color: rgb(54 69 79 / 0.65);
+  }
+
+  .ghibli-example-widget .split-code-example__tab[data-active='true'] {
+    background: #fff8dc;
+    color: #36454f;
+    border-bottom-color: #4a7c59;
+  }
+
+  .ghibli-example-widget .split-code-example__tab[data-active='false']:hover {
+    color: #2d5016;
+    background: rgb(135 206 235 / 0.2);
+  }
+
+  .ghibli-example-widget .split-code-example__tabs-fade-left {
+    background-image: linear-gradient(to right, #f5f5dc, transparent);
+  }
+
+  .ghibli-example-widget .split-code-example__tabs-fade-right {
+    background-image: linear-gradient(to left, #f5f5dc, transparent);
+  }
+
+  .ghibli-example-widget .split-code-example__schema-code,
+  .ghibli-example-widget .split-code-example__target-code {
+    background: #fff8dc;
+    color: #36454f;
+  }
+
+  .dark .ghibli-example-widget {
+    background: #191970;
+    border-color: #2f4f4f;
+    box-shadow:
+      inset 0 0 0 1px rgb(245 245 245 / 0.12),
+      0 16px 36px rgb(0 0 0 / 0.34);
+  }
+
+  .dark .ghibli-example-widget .split-code-example__schema-pane,
+  .dark .ghibli-example-widget .split-code-example__target-pane {
+    background: #191970;
+    border-color: #2f4f4f;
+  }
+
+  .dark .ghibli-example-widget .split-code-example__schema-title,
+  .dark .ghibli-example-widget .split-code-example__tabs-row {
+    background: #1c1c3e;
+    border-color: #2f4f4f;
+    color: #f5f5f5;
+  }
+
+  .dark .ghibli-example-widget .split-code-example__tab {
+    color: rgb(245 245 245 / 0.62);
+  }
+
+  .dark .ghibli-example-widget .split-code-example__tab[data-active='true'] {
+    background: #191970;
+    color: #f5f5f5;
+    border-bottom-color: #87ceeb;
+  }
+
+  .dark .ghibli-example-widget .split-code-example__tab[data-active='false']:hover {
+    color: #f5f5f5;
+    background: rgb(135 206 235 / 0.2);
+  }
+
+  .dark .ghibli-example-widget .split-code-example__tabs-fade-left {
+    background-image: linear-gradient(to right, #1c1c3e, transparent);
+  }
+
+  .dark .ghibli-example-widget .split-code-example__tabs-fade-right {
+    background-image: linear-gradient(to left, #1c1c3e, transparent);
+  }
+
+  .dark .ghibli-example-widget .split-code-example__schema-code,
+  .dark .ghibli-example-widget .split-code-example__target-code {
+    background: #191970;
+    color: #f5f5f5;
+  }
 }

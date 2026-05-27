@@ -3,6 +3,7 @@
 import { skirLanguage } from '@/lib/skir-language'
 import { cn } from '@/lib/utils'
 import { useTheme } from 'next-themes'
+import type { CSSProperties } from 'react'
 import { useEffect, useState } from 'react'
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
 import cpp from 'react-syntax-highlighter/dist/esm/languages/hljs/cpp'
@@ -16,6 +17,68 @@ import rust from 'react-syntax-highlighter/dist/esm/languages/hljs/rust'
 import swift from 'react-syntax-highlighter/dist/esm/languages/hljs/swift'
 import typescript from 'react-syntax-highlighter/dist/esm/languages/hljs/typescript'
 import { atomOneDark, atomOneLight } from 'react-syntax-highlighter/dist/esm/styles/hljs'
+
+const ghibliDaySyntax: { [key: string]: CSSProperties } = {
+  hljs: {
+    display: 'block',
+    overflowX: 'auto',
+    background: '#FFF8DC',
+    color: '#36454F',
+  },
+  'hljs-comment': { color: '#8FBC8F', fontStyle: 'italic' },
+  'hljs-quote': { color: '#8FBC8F', fontStyle: 'italic' },
+  'hljs-keyword': { color: '#2D5016', fontWeight: '700' },
+  'hljs-selector-tag': { color: '#2D5016', fontWeight: '700' },
+  'hljs-literal': { color: '#FFB6C1' },
+  'hljs-number': { color: '#FFB6C1' },
+  'hljs-string': { color: '#FFA07A' },
+  'hljs-doctag': { color: '#FFA07A' },
+  'hljs-title': { color: '#87CEEB' },
+  'hljs-section': { color: '#87CEEB' },
+  'hljs-type': { color: '#483D8B', fontWeight: '700' },
+  'hljs-class .hljs-title': { color: '#483D8B', fontWeight: '700' },
+  'hljs-attr': { color: '#8B4513' },
+  'hljs-attribute': { color: '#87CEEB' },
+  'hljs-variable': { color: '#A0522D' },
+  'hljs-template-variable': { color: '#A0522D' },
+  'hljs-name': { color: '#2D5016' },
+  'hljs-tag': { color: '#2D5016' },
+  'hljs-operator': { color: '#696969' },
+  'hljs-punctuation': { color: '#696969' },
+  'hljs-link': { color: '#87CEEB', textDecoration: 'underline' },
+  'hljs-subst': { color: '#36454F' },
+}
+
+const ghibliNightSyntax: { [key: string]: CSSProperties } = {
+  hljs: {
+    display: 'block',
+    overflowX: 'auto',
+    background: '#191970',
+    color: '#F5F5F5',
+  },
+  'hljs-comment': { color: '#8FBC8F', fontStyle: 'italic' },
+  'hljs-quote': { color: '#8FBC8F', fontStyle: 'italic' },
+  'hljs-keyword': { color: '#8FBC8F', fontWeight: '700' },
+  'hljs-selector-tag': { color: '#8FBC8F', fontWeight: '700' },
+  'hljs-literal': { color: '#FFB6C1' },
+  'hljs-number': { color: '#FFB6C1' },
+  'hljs-string': { color: '#FFA07A' },
+  'hljs-doctag': { color: '#FFA07A' },
+  'hljs-title': { color: '#87CEEB' },
+  'hljs-section': { color: '#87CEEB' },
+  'hljs-type': { color: '#6B5B95', fontWeight: '700' },
+  'hljs-class .hljs-title': { color: '#6B5B95', fontWeight: '700' },
+  'hljs-attr': { color: '#B0E0E6' },
+  'hljs-attribute': { color: '#87CEEB' },
+  'hljs-variable': { color: '#D2691E' },
+  'hljs-template-variable': { color: '#D2691E' },
+  'hljs-name': { color: '#8FBC8F' },
+  'hljs-tag': { color: '#8FBC8F' },
+  'hljs-operator': { color: '#A9A9A9' },
+  'hljs-punctuation': { color: '#A9A9A9' },
+  'hljs-link': { color: '#87CEEB', textDecoration: 'underline' },
+  'hljs-subst': { color: '#F5F5F5' },
+}
 
 SyntaxHighlighter.registerLanguage('skir', skirLanguage)
 SyntaxHighlighter.registerLanguage('typescript', typescript)
@@ -43,6 +106,7 @@ type SplitCodeExampleProps = {
   tabs?: CodeTab[]
   leftTitle?: string
   initialTab?: CodeTabId
+  className?: string
 }
 
 const defaultTabs: CodeTab[] = [
@@ -65,28 +129,42 @@ export function SplitCodeExample({
   tabs = defaultTabs,
   leftTitle = '.skir',
   initialTab = 'typescript',
+  className,
 }: SplitCodeExampleProps) {
   const fallbackTab = tabs[0]?.id ?? 'typescript'
   const [activeTab, setActiveTab] = useState<CodeTabId>(initialTab ?? fallbackTab)
   const activeTabConfig = tabs.find((tab) => tab.id === activeTab)
   const [mounted, setMounted] = useState(false)
   const { theme } = useTheme()
+  const isGhibliWidget = className?.includes('ghibli-example-widget') ?? false
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
   // Use light theme during SSR for deterministic rendering before hydration.
-  const syntaxTheme = !mounted || theme === 'light' ? atomOneLight : atomOneDark
+  const resolvedTheme = !mounted || theme === 'light' ? 'light' : 'dark'
+  const syntaxTheme = isGhibliWidget
+    ? resolvedTheme === 'light'
+      ? ghibliDaySyntax
+      : ghibliNightSyntax
+    : resolvedTheme === 'light'
+      ? atomOneLight
+      : atomOneDark
 
   return (
-    <div className="rounded-lg border border-border overflow-hidden bg-card">
+    <div
+      className={cn(
+        'split-code-example rounded-lg border border-border overflow-hidden bg-card',
+        className,
+      )}
+    >
       <div className="flex h-[540px]">
-        <div className="w-[45%] border-r border-border flex flex-col">
-          <div className="px-4 py-3 text-sm font-medium border-b border-border bg-secondary/30 text-primary">
+        <div className="split-code-example__schema-pane w-[45%] border-r border-border flex flex-col">
+          <div className="split-code-example__schema-title px-4 py-3 text-sm font-medium border-b border-border bg-secondary/30 text-primary">
             {leftTitle}
           </div>
-          <div className="overflow-x-auto overflow-y-auto flex-1">
+          <div className="split-code-example__schema-code overflow-x-auto overflow-y-auto flex-1">
             <SyntaxHighlighter
               language="skir"
               style={syntaxTheme}
@@ -95,6 +173,8 @@ export function SplitCodeExample({
                 borderRadius: 0,
                 background: 'transparent',
                 height: '100%',
+                boxSizing: 'border-box',
+                padding: '1rem',
               }}
               codeTagProps={{
                 style: {
@@ -109,8 +189,8 @@ export function SplitCodeExample({
           </div>
         </div>
 
-        <div className="w-[55%] flex flex-col">
-          <div className="relative border-b border-border bg-secondary/30">
+        <div className="split-code-example__target-pane w-[55%] flex flex-col">
+          <div className="split-code-example__tabs-row relative border-b border-border bg-secondary/30">
             <div className="overflow-x-auto thin-scrollbar">
               <div className="flex min-w-max">
                 {tabs.map((tab) => (
@@ -118,8 +198,9 @@ export function SplitCodeExample({
                     type="button"
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
+                    data-active={activeTab === tab.id}
                     className={cn(
-                      'shrink-0 cursor-pointer whitespace-nowrap px-4 py-3 text-sm font-medium transition-colors',
+                      'split-code-example__tab shrink-0 cursor-pointer whitespace-nowrap px-4 py-3 text-sm font-medium transition-colors',
                       activeTab === tab.id
                         ? 'text-primary border-b-2 border-primary bg-card'
                         : 'text-muted-foreground hover:text-foreground',
@@ -130,11 +211,14 @@ export function SplitCodeExample({
                 ))}
               </div>
             </div>
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-secondary/80 to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-secondary/80 to-transparent" />
+            <div className="split-code-example__tabs-fade-left pointer-events-none absolute inset-y-0 left-0 w-6 bg-gradient-to-r from-secondary/80 to-transparent" />
+            <div className="split-code-example__tabs-fade-right pointer-events-none absolute inset-y-0 right-0 w-6 bg-gradient-to-l from-secondary/80 to-transparent" />
           </div>
 
-          <div key={activeTab} className="overflow-x-auto overflow-y-auto flex-1">
+          <div
+            key={activeTab}
+            className="split-code-example__target-code overflow-x-auto overflow-y-auto flex-1"
+          >
             <SyntaxHighlighter
               language={activeTabConfig?.language ?? activeTab}
               style={syntaxTheme}
@@ -143,6 +227,8 @@ export function SplitCodeExample({
                 borderRadius: 0,
                 background: 'transparent',
                 height: '100%',
+                boxSizing: 'border-box',
+                padding: '1rem',
               }}
               codeTagProps={{
                 style: {

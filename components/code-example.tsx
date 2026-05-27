@@ -491,5 +491,12 @@ const tabs = [
 ]
 
 export function CodeExample() {
-  return <SplitCodeExample skirCode={skirCode} codeExamples={codeExamples} tabs={tabs} />
+  return (
+    <SplitCodeExample
+      skirCode={skirCode}
+      codeExamples={codeExamples}
+      tabs={tabs}
+      className="ghibli-example-widget"
+    />
+  )
 }
