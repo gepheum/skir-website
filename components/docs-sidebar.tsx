@@ -26,6 +26,14 @@ const navigation = [
     ],
   },
   {
+    title: 'Extensibility',
+    items: [{ title: 'Building a generator', href: '/docs/code-generators' }],
+  },
+  {
+    title: 'Comparison',
+    items: [{ title: 'Skir vs Protobuf', href: '/docs/protobuf' }],
+  },
+  {
     title: 'Generated code',
     items: [
       { title: 'C++', href: '/docs/cpp' },
@@ -42,14 +50,6 @@ const navigation = [
       { title: 'TypeScript', href: '/docs/typescript' },
       { title: 'Zig', href: '/docs/zig' },
     ],
-  },
-  {
-    title: 'Extensibility',
-    items: [{ title: 'Building a generator', href: '/docs/code-generators' }],
-  },
-  {
-    title: 'Comparison',
-    items: [{ title: 'Skir vs Protobuf', href: '/docs/protobuf' }],
   },
 ]
 
