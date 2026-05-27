@@ -76,7 +76,7 @@ const john = User.create({
       picture: "🐘",
     },
   ],
-  subscriptionStatus: "free",
+  subscriptionStatus: "FREE",
   // foo: "bar",
   // ^ Does not compile: 'foo' is not a field of User
 });
@@ -173,11 +173,11 @@ greet(lylaMut);
 }`}</CodeBlock>
 
       <H4>Creating enum values</H4>
-      <CodeBlock language="typescript">{`const johnStatus = SubscriptionStatus.free;
-const janeStatus = SubscriptionStatus.premium;
-const lylaStatus = SubscriptionStatus.create("premium");
-// ^ same as SubscriptionStatus.premium
-const jolyStatus = SubscriptionStatus.unknown;
+      <CodeBlock language="typescript">{`const johnStatus = SubscriptionStatus.FREE;
+const janeStatus = SubscriptionStatus.PREMIUM;
+const lylaStatus = SubscriptionStatus.create("PREMIUM");
+// ^ same as SubscriptionStatus.PREMIUM
+const jolyStatus = SubscriptionStatus.UNKNOWN;
 
 // Use create({kind: ..., value: ...}) for wrapper variants.
 const roniStatus = SubscriptionStatus.create({
@@ -189,11 +189,11 @@ const roniStatus = SubscriptionStatus.create({
 
       <H4>Conditions on enums</H4>
       <CodeBlock language="typescript">{`// Use 'union.kind' to check which variant the enum value holds.
-assert(johnStatus.union.kind === "free");
+assert(johnStatus.union.kind === "FREE");
 
-assert(jolyStatus.union.kind === "unknown");
+assert(jolyStatus.union.kind === "UNKNOWN");
 
-assert(roniStatus.union.kind === "trial");
+assert(roniStatus.union.kind === "TRIAL");
 // If the enum holds a wrapper variant, you can access the wrapped value through
 // 'union.value'.
 assert(roniStatus.union.value.startTime.unixMillis === 1234);
@@ -201,11 +201,11 @@ assert(roniStatus.union.value.startTime.unixMillis === 1234);
 function getSubscriptionInfoText(status: SubscriptionStatus): string {
   // Pattern matching on enum variants
   switch (status.union.kind) {
-    case "unknown":
+    case "UNKNOWN":
       return "Unknown subscription status";
-    case "free":
+    case "FREE":
       return "Free user";
-    case "premium":
+    case "PREMIUM":
       return "Premium user";
     case "trial":
       // Here the compiler knows that the type of union.value is
