@@ -193,7 +193,7 @@ assert(johnStatus.union.kind === "FREE");
 
 assert(jolyStatus.union.kind === "UNKNOWN");
 
-assert(roniStatus.union.kind === "TRIAL");
+assert(roniStatus.union.kind === "trial");
 // If the enum holds a wrapper variant, you can access the wrapped value through
 // 'union.value'.
 assert(roniStatus.union.value.startTime.unixMillis === 1234);
