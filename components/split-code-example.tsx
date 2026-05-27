@@ -3,7 +3,7 @@
 import { skirLanguage } from '@/lib/skir-language'
 import { cn } from '@/lib/utils'
 import { useTheme } from 'next-themes'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
 import cpp from 'react-syntax-highlighter/dist/esm/languages/hljs/cpp'
 import csharp from 'react-syntax-highlighter/dist/esm/languages/hljs/csharp'
@@ -72,11 +72,27 @@ export function SplitCodeExample({
   const [activeTab, setActiveTab] = useState<CodeTabId>(initialTab ?? fallbackTab)
   const activeTabConfig = tabs.find((tab) => tab.id === activeTab)
   const [mounted, setMounted] = useState(false)
+  const tabsScrollRef = useRef<HTMLDivElement | null>(null)
   const { theme } = useTheme()
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  useEffect(() => {
+    const tabsScrollEl = tabsScrollRef.current
+    if (!tabsScrollEl) {
+      return
+    }
+
+    // Start with the tabs scrolled all the way to the right.
+    const scrollToMaxRight = () => {
+      tabsScrollEl.scrollLeft = tabsScrollEl.scrollWidth
+    }
+
+    scrollToMaxRight()
+    requestAnimationFrame(scrollToMaxRight)
+  }, [tabs.length])
 
   // Use light theme during SSR for deterministic rendering before hydration.
   const resolvedTheme = !mounted || theme === 'light' ? 'light' : 'dark'
@@ -121,7 +137,7 @@ export function SplitCodeExample({
 
         <div className="split-code-example__target-pane w-[55%] flex flex-col">
           <div className="split-code-example__tabs-row relative border-b border-border bg-secondary/30">
-            <div className="overflow-x-auto thin-scrollbar">
+            <div ref={tabsScrollRef} className="overflow-x-auto thin-scrollbar">
               <div className="flex min-w-max">
                 {tabs.map((tab) => (
                   <button
@@ -132,7 +148,7 @@ export function SplitCodeExample({
                     className={cn(
                       'split-code-example__tab shrink-0 cursor-pointer whitespace-nowrap px-4 py-3 text-sm font-medium transition-colors',
                       activeTab === tab.id
-                        ? 'text-primary border-b-2 border-primary bg-card'
+                        ? 'text-primary bg-card'
                         : 'text-muted-foreground hover:text-foreground',
                     )}
                   >

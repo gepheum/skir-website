@@ -268,7 +268,7 @@
   .site-example-widget .split-code-example__tab[data-active='true'] {
     background: color-mix(in oklab, var(--color-card) 94%, var(--color-background) 6%);
     color: var(--color-foreground);
-    border-bottom-color: var(--color-primary);
+    box-shadow: inset 0 -2px 0 var(--color-primary);
   }
 
   .site-example-widget .split-code-example__tab[data-active='false']:hover {
@@ -330,7 +330,7 @@
   .dark .site-example-widget .split-code-example__tab[data-active='true'] {
     background: color-mix(in oklab, var(--color-card) 92%, var(--color-background) 8%);
     color: var(--color-foreground);
-    border-bottom-color: var(--color-primary);
+    box-shadow: inset 0 -2px 0 var(--color-primary);
   }
 
   .dark .site-example-widget .split-code-example__tab[data-active='false']:hover {

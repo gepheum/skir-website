@@ -475,19 +475,19 @@ io.println(float.to_string(area)) // 50.0`,
 }
 
 const tabs = [
-  { id: 'typescript', label: 'TypeScript' },
-  { id: 'python', label: 'Python' },
-  { id: 'java', label: 'Java' },
   { id: 'csharp', label: 'C#', language: 'csharp' },
   { id: 'cpp', label: 'C++' },
-  { id: 'go', label: 'Go' },
-  { id: 'kotlin', label: 'Kotlin' },
   { id: 'dart', label: 'Dart' },
-  { id: 'swift', label: 'Swift' },
-  { id: 'rust', label: 'Rust' },
-  { id: 'zig', label: 'Zig' },
   { id: 'gleam', label: 'Gleam', language: 'swift' },
+  { id: 'go', label: 'Go' },
+  { id: 'java', label: 'Java' },
+  { id: 'kotlin', label: 'Kotlin' },
   { id: 'moonbit', label: 'MoonBit', language: 'plaintext' },
+  { id: 'python', label: 'Python' },
+  { id: 'rust', label: 'Rust' },
+  { id: 'swift', label: 'Swift' },
+  { id: 'typescript', label: 'TypeScript' },
+  { id: 'zig', label: 'Zig' },
 ]
 
 export function CodeExample() {
@@ -496,6 +496,7 @@ export function CodeExample() {
       skirCode={skirCode}
       codeExamples={codeExamples}
       tabs={tabs}
+      initialTab="typescript"
       className="site-example-widget"
     />
   )
