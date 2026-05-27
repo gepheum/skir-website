@@ -236,103 +236,127 @@
     background-color: oklch(0.55 0.01 240 / 0.8);
   }
 
-  .ghibli-example-widget {
-    background: #fff8dc;
-    border-color: #e0e0e0;
+  .site-example-widget {
+    background: linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--color-card) 93%, white 7%),
+      color-mix(in oklab, var(--color-card) 86%, var(--color-secondary) 14%)
+    );
+    border-color: color-mix(in oklab, var(--color-border) 92%, white 8%);
     box-shadow:
-      inset 0 0 0 1px rgb(54 69 79 / 0.08),
-      0 14px 30px rgb(0 0 0 / 0.12);
+      inset 0 0 0 1px color-mix(in oklab, var(--color-border) 70%, white 30%),
+      0 14px 30px color-mix(in oklab, var(--color-primary) 10%, transparent);
   }
 
-  .ghibli-example-widget .split-code-example__schema-pane,
-  .ghibli-example-widget .split-code-example__target-pane {
-    background: #fff8dc;
-    border-color: #d3d3d3;
+  .site-example-widget .split-code-example__schema-pane,
+  .site-example-widget .split-code-example__target-pane {
+    background: color-mix(in oklab, var(--color-card) 92%, var(--color-background) 8%);
+    border-color: color-mix(in oklab, var(--color-border) 88%, white 12%);
   }
 
-  .ghibli-example-widget .split-code-example__schema-title,
-  .ghibli-example-widget .split-code-example__tabs-row {
-    background: #f5f5dc;
-    border-color: #e0e0e0;
-    color: #36454f;
+  .site-example-widget .split-code-example__schema-title,
+  .site-example-widget .split-code-example__tabs-row {
+    background: color-mix(in oklab, var(--color-secondary) 74%, var(--color-card) 26%);
+    border-color: color-mix(in oklab, var(--color-border) 88%, white 12%);
+    color: var(--color-foreground);
   }
 
-  .ghibli-example-widget .split-code-example__tab {
-    color: rgb(54 69 79 / 0.65);
+  .site-example-widget .split-code-example__tab {
+    color: color-mix(in oklab, var(--color-foreground) 64%, transparent);
   }
 
-  .ghibli-example-widget .split-code-example__tab[data-active='true'] {
-    background: #fff8dc;
-    color: #36454f;
-    border-bottom-color: #4a7c59;
+  .site-example-widget .split-code-example__tab[data-active='true'] {
+    background: color-mix(in oklab, var(--color-card) 94%, var(--color-background) 6%);
+    color: var(--color-foreground);
+    border-bottom-color: var(--color-primary);
   }
 
-  .ghibli-example-widget .split-code-example__tab[data-active='false']:hover {
-    color: #2d5016;
-    background: rgb(135 206 235 / 0.2);
+  .site-example-widget .split-code-example__tab[data-active='false']:hover {
+    color: var(--color-foreground);
+    background: color-mix(in oklab, var(--color-primary) 14%, transparent);
   }
 
-  .ghibli-example-widget .split-code-example__tabs-fade-left {
-    background-image: linear-gradient(to right, #f5f5dc, transparent);
+  .site-example-widget .split-code-example__tabs-fade-left {
+    background-image: linear-gradient(
+      to right,
+      color-mix(in oklab, var(--color-secondary) 74%, var(--color-card) 26%),
+      transparent
+    );
   }
 
-  .ghibli-example-widget .split-code-example__tabs-fade-right {
-    background-image: linear-gradient(to left, #f5f5dc, transparent);
+  .site-example-widget .split-code-example__tabs-fade-right {
+    background-image: linear-gradient(
+      to left,
+      color-mix(in oklab, var(--color-secondary) 74%, var(--color-card) 26%),
+      transparent
+    );
   }
 
-  .ghibli-example-widget .split-code-example__schema-code,
-  .ghibli-example-widget .split-code-example__target-code {
-    background: #fff8dc;
-    color: #36454f;
+  .site-example-widget .split-code-example__schema-code,
+  .site-example-widget .split-code-example__target-code {
+    background: color-mix(in oklab, var(--color-card) 92%, var(--color-background) 8%);
+    color: var(--color-foreground);
   }
 
-  .dark .ghibli-example-widget {
-    background: #191970;
-    border-color: #2f4f4f;
+  .dark .site-example-widget {
+    background: linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--color-card) 90%, black 10%),
+      color-mix(in oklab, var(--color-card) 76%, var(--color-secondary) 24%)
+    );
+    border-color: color-mix(in oklab, var(--color-border) 88%, black 12%);
     box-shadow:
-      inset 0 0 0 1px rgb(245 245 245 / 0.12),
-      0 16px 36px rgb(0 0 0 / 0.34);
+      inset 0 0 0 1px color-mix(in oklab, var(--color-border) 85%, white 15%),
+      0 18px 40px rgb(0 0 0 / 0.36);
   }
 
-  .dark .ghibli-example-widget .split-code-example__schema-pane,
-  .dark .ghibli-example-widget .split-code-example__target-pane {
-    background: #191970;
-    border-color: #2f4f4f;
+  .dark .site-example-widget .split-code-example__schema-pane,
+  .dark .site-example-widget .split-code-example__target-pane {
+    background: color-mix(in oklab, var(--color-card) 88%, var(--color-background) 12%);
+    border-color: color-mix(in oklab, var(--color-border) 86%, black 14%);
   }
 
-  .dark .ghibli-example-widget .split-code-example__schema-title,
-  .dark .ghibli-example-widget .split-code-example__tabs-row {
-    background: #1c1c3e;
-    border-color: #2f4f4f;
-    color: #f5f5f5;
+  .dark .site-example-widget .split-code-example__schema-title,
+  .dark .site-example-widget .split-code-example__tabs-row {
+    background: color-mix(in oklab, var(--color-secondary) 64%, var(--color-card) 36%);
+    border-color: color-mix(in oklab, var(--color-border) 86%, black 14%);
+    color: var(--color-foreground);
   }
 
-  .dark .ghibli-example-widget .split-code-example__tab {
-    color: rgb(245 245 245 / 0.62);
+  .dark .site-example-widget .split-code-example__tab {
+    color: color-mix(in oklab, var(--color-foreground) 68%, transparent);
   }
 
-  .dark .ghibli-example-widget .split-code-example__tab[data-active='true'] {
-    background: #191970;
-    color: #f5f5f5;
-    border-bottom-color: #87ceeb;
+  .dark .site-example-widget .split-code-example__tab[data-active='true'] {
+    background: color-mix(in oklab, var(--color-card) 92%, var(--color-background) 8%);
+    color: var(--color-foreground);
+    border-bottom-color: var(--color-primary);
   }
 
-  .dark .ghibli-example-widget .split-code-example__tab[data-active='false']:hover {
-    color: #f5f5f5;
-    background: rgb(135 206 235 / 0.2);
+  .dark .site-example-widget .split-code-example__tab[data-active='false']:hover {
+    color: var(--color-foreground);
+    background: color-mix(in oklab, var(--color-primary) 18%, transparent);
   }
 
-  .dark .ghibli-example-widget .split-code-example__tabs-fade-left {
-    background-image: linear-gradient(to right, #1c1c3e, transparent);
+  .dark .site-example-widget .split-code-example__tabs-fade-left {
+    background-image: linear-gradient(
+      to right,
+      color-mix(in oklab, var(--color-secondary) 64%, var(--color-card) 36%),
+      transparent
+    );
   }
 
-  .dark .ghibli-example-widget .split-code-example__tabs-fade-right {
-    background-image: linear-gradient(to left, #1c1c3e, transparent);
+  .dark .site-example-widget .split-code-example__tabs-fade-right {
+    background-image: linear-gradient(
+      to left,
+      color-mix(in oklab, var(--color-secondary) 64%, var(--color-card) 36%),
+      transparent
+    );
   }
 
-  .dark .ghibli-example-widget .split-code-example__schema-code,
-  .dark .ghibli-example-widget .split-code-example__target-code {
-    background: #191970;
-    color: #f5f5f5;
+  .dark .site-example-widget .split-code-example__schema-code,
+  .dark .site-example-widget .split-code-example__target-code {
+    background: color-mix(in oklab, var(--color-card) 88%, var(--color-background) 12%);
+    color: var(--color-foreground);
   }
 }

@@ -496,7 +496,7 @@ export function CodeExample() {
       skirCode={skirCode}
       codeExamples={codeExamples}
       tabs={tabs}
-      className="ghibli-example-widget"
+      className="site-example-widget"
     />
   )
 }
