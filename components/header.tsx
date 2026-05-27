@@ -103,7 +103,7 @@ export function Header() {
                   <DropdownMenuContent align="start">
                     {item.items.map((subItem) => (
                       <Link key={subItem.name} href={subItem.href}>
-                        <DropdownMenuItem className="cursor-pointer">
+                        <DropdownMenuItem className="cursor-pointer text-base font-medium text-muted-foreground transition-colors data-[highlighted]:bg-primary/16 data-[highlighted]:text-foreground">
                           {subItem.name}
                         </DropdownMenuItem>
                       </Link>
