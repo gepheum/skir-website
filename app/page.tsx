@@ -4,8 +4,9 @@ import { Footer } from '@/components/footer'
 import { Header } from '@/components/header'
 import { HoverVideo } from '@/components/hover-video'
 import { LanguageCard } from '@/components/language-card'
+import { CopyCommandButton } from '@/components/copy-command-button'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Github as GitHubIcon, Moon, Package, Terminal, Zap } from 'lucide-react'
+import { ArrowRight, Moon, Package, Terminal, Zap } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FaJava } from 'react-icons/fa6'
@@ -61,7 +62,7 @@ export default function HomePage() {
               className="soft-surface mb-8 inline-flex items-center gap-2 rounded-full px-4 py-2 transition-colors hover:text-foreground"
             >
               <span className="text-primary font-medium">v1.2</span>
-              <span className="text-muted-foreground">Schema language from the future</span>
+              <span className="text-muted-foreground">Protobuf reimagined for today</span>
             </a>
 
             <h1 className="mb-6 text-balance text-3xl font-bold tracking-tight md:text-5xl lg:text-6xl">
@@ -84,17 +85,7 @@ export default function HomePage() {
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="rounded-full bg-transparent text-base"
-              >
-                <a href="https://github.com/gepheum/skir" target="_blank" rel="noopener noreferrer">
-                  <GitHubIcon className="mr-2 h-4 w-4" />
-                  View on GitHub
-                </a>
-              </Button>
+              <CopyCommandButton />
             </div>
 
             {/* Quick Example Video */}
