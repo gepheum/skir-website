@@ -106,8 +106,8 @@ export function OnThisPage() {
               <a
                 href={`#${section.id}`}
                 className={cn(
-                  'block transition-colors hover:text-foreground',
-                  activeId === section.id ? 'text-primary font-medium' : 'text-muted-foreground',
+                  'block font-medium transition-colors hover:text-foreground',
+                  activeId === section.id ? 'text-primary' : 'text-muted-foreground',
                   section.level === 3 && 'pl-4',
                   section.level === 4 && 'pl-8',
                 )}
