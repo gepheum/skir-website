@@ -123,6 +123,15 @@ const projects = [
     backend: 'TypeScript (Express)',
     frontend: 'RPC Studio',
   },
+  {
+    title: 'Hello Skir Flutter',
+    href: 'https://github.com/gepheum/hello-skir-flutter',
+    description:
+      'Mobile application built with Flutter, communicating with a Bun backend via SkirRPC.',
+    type: 'End-to-end mobile app',
+    backend: 'TypeScript (Bun)',
+    frontend: 'Flutter',
+  },
 ]
 
 export default function ExamplesPage() {

@@ -1559,6 +1559,8 @@ Complete applications and specialized projects showing Skir in real usage.
   - Standalone schema repository intended to be imported as a dependency.
 - **RPC Studio demo** (Service demo): https://github.com/gepheum/skir-studio-demo
   - TypeScript geometry service highlighting RPC Studio.
+- **Hello Skir Flutter** (End-to-end mobile app): https://github.com/gepheum/hello-skir-flutter
+  - Mobile application built with Flutter, communicating with a Bun backend via SkirRPC.
 
 ---
 
