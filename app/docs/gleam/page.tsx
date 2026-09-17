@@ -21,6 +21,12 @@ export default function GleamPage() {
   outDir: ./src/skirout
   config: {}`}</CodeBlock>
 
+      <P>Or if you prefer not to place <InlineCode>skirout</InlineCode> directly under <InlineCode>src</InlineCode>:</P>
+      <CodeBlock language="yaml">{`- mod: skir-gleam-gen
+  outDir: ./src/generated/skirout
+  config:
+    importPathToSkirout: generated/skirout`}</CodeBlock>
+
       <P>
         The generated Gleam code has a runtime dependency on <InlineCode>skir_client</InlineCode>.
         Add it to your project with:

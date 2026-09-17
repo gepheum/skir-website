@@ -5500,6 +5500,14 @@ In your `skir.yml` file, add the following snippet under `generators`:
     config: {}
 ```
 
+Or if you prefer not to place `skirout` directly under `src`:
+```yaml
+  - mod: skir-gleam-gen
+    outDir: ./src/generated/skirout
+    config:
+      importPathToSkirout: generated/skirout
+```
+
 The generated Gleam code has a runtime dependency on `skir_client`. Add it to your project with:
 
 ```shell
