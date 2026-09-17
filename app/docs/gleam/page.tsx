@@ -21,7 +21,10 @@ export default function GleamPage() {
   outDir: ./src/skirout
   config: {}`}</CodeBlock>
 
-      <P>Or if you prefer not to place <InlineCode>skirout</InlineCode> directly under <InlineCode>src</InlineCode>:</P>
+      <P>
+        Or if you prefer not to place <InlineCode>skirout</InlineCode> directly under{' '}
+        <InlineCode>src</InlineCode>:
+      </P>
       <CodeBlock language="yaml">{`- mod: skir-gleam-gen
   outDir: ./src/generated/skirout
   config:
