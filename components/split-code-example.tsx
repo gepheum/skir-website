@@ -8,6 +8,7 @@ import { Light as SyntaxHighlighter } from 'react-syntax-highlighter'
 import cpp from 'react-syntax-highlighter/dist/esm/languages/hljs/cpp'
 import csharp from 'react-syntax-highlighter/dist/esm/languages/hljs/csharp'
 import dart from 'react-syntax-highlighter/dist/esm/languages/hljs/dart'
+import elixir from 'react-syntax-highlighter/dist/esm/languages/hljs/elixir'
 import go from 'react-syntax-highlighter/dist/esm/languages/hljs/go'
 import java from 'react-syntax-highlighter/dist/esm/languages/hljs/java'
 import kotlin from 'react-syntax-highlighter/dist/esm/languages/hljs/kotlin'
@@ -26,6 +27,7 @@ SyntaxHighlighter.registerLanguage('go', go)
 SyntaxHighlighter.registerLanguage('kotlin', kotlin)
 SyntaxHighlighter.registerLanguage('java', java)
 SyntaxHighlighter.registerLanguage('dart', dart)
+SyntaxHighlighter.registerLanguage('elixir', elixir)
 SyntaxHighlighter.registerLanguage('swift', swift)
 SyntaxHighlighter.registerLanguage('rust', rust)
 
@@ -58,6 +60,7 @@ const defaultTabs: CodeTab[] = [
   { id: 'rust', label: 'Rust' },
   { id: 'dart', label: 'Dart' },
   { id: 'moonbit', label: 'MoonBit', language: 'plaintext' },
+  { id: 'elixir', label: 'Elixir' },
 ]
 
 export function SplitCodeExample({

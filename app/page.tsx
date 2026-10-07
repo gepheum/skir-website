@@ -13,6 +13,7 @@ import { FaJava } from 'react-icons/fa6'
 import {
   SiCplusplus,
   SiDart,
+  SiElixir,
   SiGleam,
   SiGo,
   SiKotlin,
@@ -388,10 +389,14 @@ export default function HomePage() {
               href="/docs/gleam"
             />
             <LanguageCard
+              name="Elixir"
+              icon={<SiElixir className="text-[#4B275F] dark:text-[#B99ACD]" />}
+              href="/docs/elixir"
+            />
+            <LanguageCard
               name="MoonBit"
               icon={<Moon className="text-[#F5C84B]" />}
               href="/docs/moonbit"
-              className="lg:col-start-2"
             />
           </div>
         </div>

@@ -12,6 +12,7 @@ import cmake from 'react-syntax-highlighter/dist/esm/languages/hljs/cmake'
 import cpp from 'react-syntax-highlighter/dist/esm/languages/hljs/cpp'
 import csharp from 'react-syntax-highlighter/dist/esm/languages/hljs/csharp'
 import dart from 'react-syntax-highlighter/dist/esm/languages/hljs/dart'
+import elixir from 'react-syntax-highlighter/dist/esm/languages/hljs/elixir'
 import go from 'react-syntax-highlighter/dist/esm/languages/hljs/go'
 import java from 'react-syntax-highlighter/dist/esm/languages/hljs/java'
 import json from 'react-syntax-highlighter/dist/esm/languages/hljs/json'
@@ -33,6 +34,7 @@ SyntaxHighlighter.registerLanguage('go', go)
 SyntaxHighlighter.registerLanguage('java', java)
 SyntaxHighlighter.registerLanguage('kotlin', kotlin)
 SyntaxHighlighter.registerLanguage('dart', dart)
+SyntaxHighlighter.registerLanguage('elixir', elixir)
 SyntaxHighlighter.registerLanguage('swift', swift)
 SyntaxHighlighter.registerLanguage('rust', rust)
 SyntaxHighlighter.registerLanguage('yaml', yaml)

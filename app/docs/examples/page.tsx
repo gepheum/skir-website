@@ -25,6 +25,12 @@ const languageStarters = [
     notes: 'Dart 3 project with pub dependencies.',
   },
   {
+    title: 'Elixir',
+    href: 'https://github.com/mishmish-dev/skir-elixir-example',
+    framework: 'Plug + Bandit',
+    notes: 'Mix project with Elixir and TypeScript RPC clients.',
+  },
+  {
     title: 'Gleam',
     href: 'https://github.com/gepheum/skir-gleam-example',
     framework: 'Wisp',
