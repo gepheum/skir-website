@@ -298,9 +298,8 @@ enum DecisionTree {
   node: DecisionNode;
 }`}</CodeBlock>
       <p>
-        Recursive types represent finite values, such as trees. How generated code prevents cyclic
-        values depends on the target language. Elixir uses immutable values, which cannot form
-        reference cycles.
+        To safeguard against infinite recursion, the generated code in all supported languages has
+        compile-time constraints to prevent an instance of a recursive type from containing itself.
       </p>
 
       <h2>Data types</h2>
