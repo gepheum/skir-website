@@ -478,7 +478,7 @@ async def main():
                 </a>
               </td>
             </tr>
-            <tr className="transition-colors hover:bg-muted/50">
+            <tr className="border-b border-border transition-colors hover:bg-muted/50">
               <td className="p-4 font-medium">Gleam</td>
               <td className="p-4 text-muted-foreground">
                 <a
@@ -493,6 +493,29 @@ async def main():
               <td className="p-4 text-muted-foreground">
                 <a
                   href="https://github.com/gepheum/skir-gleam-example/blob/main/src/call_service.gleam"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Client
+                </a>
+              </td>
+            </tr>
+            <tr className="transition-colors hover:bg-muted/50">
+              <td className="p-4 font-medium">Elixir</td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/mishmish-dev/skir-elixir-example/blob/main/lib/skir_example/router.ex"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-foreground"
+                >
+                  Plug + Bandit
+                </a>
+              </td>
+              <td className="p-4 text-muted-foreground">
+                <a
+                  href="https://github.com/mishmish-dev/skir-elixir-example/blob/main/scripts/call_service.exs"
                   target="_blank"
                   rel="noreferrer"
                   className="underline hover:text-foreground"

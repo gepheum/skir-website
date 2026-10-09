@@ -30,6 +30,7 @@ const navigation: NavigationItem[] = [
       { name: 'C++', href: '/docs/cpp' },
       { name: 'C#', href: '/docs/csharp' },
       { name: 'Dart', href: '/docs/dart' },
+      { name: 'Elixir', href: '/docs/elixir' },
       { name: 'Gleam', href: '/docs/gleam' },
       { name: 'Go', href: '/docs/go' },
       { name: 'Java', href: '/docs/java' },

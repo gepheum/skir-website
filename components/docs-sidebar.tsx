@@ -39,6 +39,7 @@ const navigation = [
       { title: 'C++', href: '/docs/cpp' },
       { title: 'C#', href: '/docs/csharp' },
       { title: 'Dart', href: '/docs/dart' },
+      { title: 'Elixir', href: '/docs/elixir' },
       { title: 'Gleam', href: '/docs/gleam' },
       { title: 'Go', href: '/docs/go' },
       { title: 'Java', href: '/docs/java' },

@@ -231,6 +231,24 @@ if err != nil {
 if response.Sunglasses() {
     fmt.Println("Don't forget your sunglasses 😎")
 }`,
+
+  elixir: `alias Skir.Generated.OutfitPickerSkir
+alias OutfitPickerSkir.WhatToWearRequest
+
+client = Skir.RPC.ServiceClient.new!("http://localhost:8080/api")
+
+{:ok, response} =
+  OutfitPickerSkir.what_to_wear(
+    client,
+    WhatToWearRequest.new(
+      temperature_celsius: 25.0,
+      raining: false
+    )
+  )
+
+if response.sunglasses do
+  IO.puts("Don't forget your sunglasses 😎")
+end`,
 }
 
 export function RpcExample() {

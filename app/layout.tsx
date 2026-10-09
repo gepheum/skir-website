@@ -21,7 +21,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'Skir - Schema language from the future',
   description:
-    'A declarative language for representing data types and APIs. Define your schema once and generate idiomatic, type-safe code for TypeScript, Python, Java, C#, C++, Kotlin, Dart, Swift, Go, Rust, Zig, Gleam, and MoonBit.',
+    'A declarative language for representing data types and APIs. Define your schema once and generate idiomatic, type-safe code for TypeScript, Python, Java, C#, C++, Kotlin, Dart, Swift, Go, Rust, Zig, Gleam, MoonBit, and Elixir.',
   keywords: [
     'skir',
     'protocol buffer',
@@ -41,6 +41,7 @@ export const metadata: Metadata = {
     'rust',
     'zig',
     'gleam',
+    'elixir',
     'schema',
     'codegen',
   ],
