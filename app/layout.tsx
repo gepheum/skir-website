@@ -19,7 +19,7 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Skir - Schema language from the future',
+  title: 'Skir - Types that travel',
   description:
     'A declarative language for representing data types and APIs. Define your schema once and generate idiomatic, type-safe code for TypeScript, Python, Java, C#, C++, Kotlin, Dart, Swift, Go, Rust, Zig, Gleam, MoonBit, and Elixir.',
   keywords: [
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     apple: [{ url: '/octopus-180x180.png', sizes: '180x180', type: 'image/png' }],
   },
   openGraph: {
-    title: 'Skir - Schema language from the future',
+    title: 'Skir - Types that travel',
     description: 'A descriptive language for representing data types and APIs.',
     type: 'website',
   },

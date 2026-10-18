@@ -53,7 +53,7 @@ export function Footer() {
               />
               <span className="text-xl font-bold">Skir</span>
             </Link>
-            <p className="mb-4 text-sm text-muted-foreground">Schema language from the future.</p>
+            <p className="mb-4 text-sm text-muted-foreground">Types that travel.</p>
             <a
               href="https://github.com/gepheum/skir"
               target="_blank"
